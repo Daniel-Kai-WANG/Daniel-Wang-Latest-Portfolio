@@ -1,6 +1,13 @@
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
-import { PetalIcon, PlaneIcon, SnowflakeIcon, SparkIcon } from '../common/Icons'
+import {
+  JellyfishIcon,
+  MusicNoteIcon,
+  PetalIcon,
+  PlaneIcon,
+  SnowflakeIcon,
+  SparkIcon,
+} from '../common/Icons'
 
 export function ResumeUnavailableSection() {
   const { theme } = useTheme()
@@ -114,9 +121,9 @@ export function ResumeUnavailableSection() {
                     shows the work, context, and delivery range.
                   </p>
                   <div className="mt-4 flex items-center gap-2 text-sm text-fuchsia-100/80">
-                    <SnowflakeIcon className="size-4 text-cyan-200" />
-                    <PetalIcon className="size-4 text-fuchsia-300" />
-                    Winter-show glow, sakura confetti mood.
+                    <MusicNoteIcon className="size-4 text-fuchsia-200" />
+                    <JellyfishIcon className="size-4 text-cyan-200" />
+                    Midnight-set shimmer with jellyfish drift.
                   </div>
                 </div>
               </div>

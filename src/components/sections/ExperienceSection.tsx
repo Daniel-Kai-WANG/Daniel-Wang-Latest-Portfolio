@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { experiences } from '../../data/experience'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
+import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function ExperienceSection() {
@@ -69,13 +70,16 @@ export function ExperienceSection() {
                 }}
               />
               {theme === 'light' ? (
-                <div className="absolute right-6 top-6 flex gap-2 opacity-80">
-                  <div className="size-5 rounded-full bg-white/90" />
-                  <div className="mt-2 size-7 rounded-full bg-sky-100/90" />
-                  <div className="size-4 rounded-full bg-white/80" />
+                <div className="absolute right-6 top-6 flex items-start gap-2 opacity-80">
+                  <PetalIcon className="size-5 rotate-[-14deg] text-rose-300/80" />
+                  <SnowflakeIcon className="mt-1 size-5 text-sky-200/70" />
+                  <PetalIcon className="size-4 rotate-[12deg] text-pink-200/70" />
                 </div>
               ) : (
-                <div className="absolute right-5 top-5 h-24 w-24 rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-fuchsia-400/15 via-transparent to-cyan-300/10" />
+                <div className="absolute right-5 top-5 flex items-start gap-2">
+                  <MusicNoteIcon className="size-5 rotate-[10deg] text-fuchsia-200/55" />
+                  <JellyfishIcon className="size-8 text-cyan-200/40" />
+                </div>
               )}
 
               <div className="relative">

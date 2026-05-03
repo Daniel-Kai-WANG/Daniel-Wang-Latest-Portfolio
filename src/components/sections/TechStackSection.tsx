@@ -1,7 +1,7 @@
 import { skillCategories } from '../../data/skills'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
-import { PetalIcon, SnowflakeIcon, WaveformIcon } from '../common/Icons'
+import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function TechStackSection() {
@@ -51,8 +51,8 @@ export function TechStackSection() {
                     </div>
                   ) : (
                     <div className="relative h-14 w-16">
-                      <WaveformIcon className="absolute right-0 top-3 h-8 w-16 text-fuchsia-200/40" />
-                      <SnowflakeIcon className="absolute left-0 top-0 size-4 text-cyan-100/65" />
+                      <MusicNoteIcon className="absolute right-0 top-2 size-5 rotate-[10deg] text-fuchsia-200/55" />
+                      <JellyfishIcon className="absolute left-0 top-2 size-7 text-cyan-100/50" />
                     </div>
                   )}
                 </div>

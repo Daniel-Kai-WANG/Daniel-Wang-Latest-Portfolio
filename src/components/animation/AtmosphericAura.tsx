@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { PetalIcon, SnowflakeIcon } from '../common/Icons'
+import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
 import { useTheme } from '../../hooks/useTheme'
 
 const petals = [
@@ -18,6 +18,20 @@ const snowflakes = [
   { left: '57%', size: 16, delay: 3, duration: 17 },
   { left: '74%', size: 20, delay: 7, duration: 19 },
   { left: '86%', size: 12, delay: 4, duration: 15 },
+]
+
+const notes = [
+  { left: '10%', size: 18, delay: 0, duration: 14 },
+  { left: '24%', size: 22, delay: 4, duration: 18 },
+  { left: '48%', size: 16, delay: 2, duration: 15 },
+  { left: '66%', size: 20, delay: 6, duration: 17 },
+  { left: '84%', size: 18, delay: 3, duration: 16 },
+]
+
+const jellyfish = [
+  { left: '14%', size: 46, delay: 1, duration: 16 },
+  { left: '52%', size: 54, delay: 4, duration: 18 },
+  { left: '78%', size: 42, delay: 2, duration: 15 },
 ]
 
 export function AtmosphericAura() {
@@ -57,6 +71,7 @@ export function AtmosphericAura() {
       />
 
       {!reduceMotion &&
+        theme === 'light' &&
         petals.map((petal, index) => (
           <motion.div
             key={`petal-${petal.left}`}
@@ -64,7 +79,7 @@ export function AtmosphericAura() {
             style={{ left: petal.left }}
             initial={{ opacity: 0, y: '-8vh' }}
             animate={{
-              opacity: theme === 'light' ? [0, 0.95, 0.9, 0] : [0, 0.5, 0.4, 0],
+              opacity: [0, 0.95, 0.9, 0],
               y: ['-8vh', '108vh'],
               x: [0, 26, -14, 18, -10],
               rotate: [0, 130, 220, 320],
@@ -77,7 +92,7 @@ export function AtmosphericAura() {
             }}
           >
             <PetalIcon
-              className={theme === 'light' ? 'text-rose-300/90' : 'text-fuchsia-300/55'}
+              className="text-rose-300/90"
               style={{
                 width: `${petal.size}px`,
                 height: `${petal.size}px`,
@@ -88,6 +103,7 @@ export function AtmosphericAura() {
         ))}
 
       {!reduceMotion &&
+        theme === 'light' &&
         snowflakes.map((flake, index) => (
           <motion.div
             key={`flake-${flake.left}`}
@@ -95,7 +111,7 @@ export function AtmosphericAura() {
             style={{ left: flake.left }}
             initial={{ opacity: 0, y: '-6vh' }}
             animate={{
-              opacity: theme === 'light' ? [0, 0.35, 0.3, 0] : [0, 0.78, 0.6, 0],
+              opacity: [0, 0.35, 0.3, 0],
               y: ['-6vh', '106vh'],
               x: [0, 8, -6, 10],
               rotate: [0, 90, 180, 360],
@@ -108,10 +124,74 @@ export function AtmosphericAura() {
             }}
           >
             <SnowflakeIcon
-              className={theme === 'light' ? 'text-sky-200/60' : 'text-cyan-100/80'}
+              className="text-sky-200/60"
               style={{
                 width: `${flake.size}px`,
                 height: `${flake.size}px`,
+              }}
+            />
+          </motion.div>
+        ))}
+
+      {!reduceMotion &&
+        theme === 'dark' &&
+        notes.map((note, index) => (
+          <motion.div
+            key={`note-${note.left}`}
+            className="absolute top-[8%]"
+            style={{ left: note.left }}
+            initial={{ opacity: 0, y: '4vh' }}
+            animate={{
+              opacity: [0, 0.7, 0.52, 0],
+              y: ['4vh', '-10vh'],
+              x: [0, 14, -10, 8],
+              rotate: [0, -10, 12, -8],
+            }}
+            transition={{
+              duration: note.duration,
+              delay: note.delay + index * 0.45,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          >
+            <MusicNoteIcon
+              className="text-fuchsia-200/70"
+              style={{
+                width: `${note.size}px`,
+                height: `${note.size}px`,
+                filter: index % 2 === 0 ? 'drop-shadow(0 0 10px rgba(255,79,216,0.24))' : 'none',
+              }}
+            />
+          </motion.div>
+        ))}
+
+      {!reduceMotion &&
+        theme === 'dark' &&
+        jellyfish.map((item, index) => (
+          <motion.div
+            key={`jelly-${item.left}`}
+            className="absolute bottom-[-6%]"
+            style={{ left: item.left }}
+            initial={{ opacity: 0, y: '8vh' }}
+            animate={{
+              opacity: [0, 0.32, 0.24, 0],
+              y: ['8vh', '-52vh'],
+              x: [0, 18, -12, 14],
+              rotate: [0, 4, -4, 3],
+            }}
+            transition={{
+              duration: item.duration,
+              delay: item.delay + index * 0.8,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          >
+            <JellyfishIcon
+              className="text-cyan-200/55"
+              style={{
+                width: `${item.size}px`,
+                height: `${item.size}px`,
+                filter: 'drop-shadow(0 0 18px rgba(34,211,238,0.18))',
               }}
             />
           </motion.div>

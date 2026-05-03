@@ -4,11 +4,12 @@ import { profile } from '../../data/profile'
 import { useTheme } from '../../hooks/useTheme'
 import {
   ArrowUpRightIcon,
+  JellyfishIcon,
+  MusicNoteIcon,
   PetalIcon,
   PlaneIcon,
   SnowflakeIcon,
   SparkIcon,
-  WaveformIcon,
 } from '../common/Icons'
 
 function WorkflowPanel() {
@@ -59,7 +60,7 @@ function WorkflowPanel() {
             {theme === 'light' ? (
               <PlaneIcon className="size-5 text-[var(--color-secondary)]" />
             ) : (
-              <SparkIcon className="size-5 text-[var(--color-primary)]" />
+              <MusicNoteIcon className="size-5 text-[var(--color-primary)]" />
             )}
           </div>
         </div>
@@ -132,7 +133,7 @@ function WorkflowPanel() {
               {theme === 'light' ? (
                 <PlaneIcon className="size-4 -rotate-12 text-[var(--color-secondary)]" />
               ) : (
-                <SparkIcon className="size-4 text-[var(--color-primary)]" />
+                <MusicNoteIcon className="size-4 text-[var(--color-primary)]" />
               )}
             </motion.div>
           )}
@@ -252,10 +253,10 @@ export function HeroSection() {
         </>
       ) : (
         <>
-          <div className="absolute left-10 top-8 h-40 w-20 rotate-[12deg] bg-gradient-to-b from-fuchsia-400/30 to-transparent blur-2xl" />
-          <div className="absolute right-16 top-10 h-48 w-16 -rotate-[18deg] bg-gradient-to-b from-cyan-300/28 to-transparent blur-2xl" />
-          <WaveformIcon className="absolute bottom-10 right-10 h-10 w-24 text-fuchsia-200/45" />
-          <SnowflakeIcon className="absolute left-8 top-12 size-5 text-cyan-100/70" />
+          <MusicNoteIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-fuchsia-200/70" />
+          <MusicNoteIcon className="absolute right-12 top-20 size-5 rotate-[14deg] text-fuchsia-100/55" />
+          <JellyfishIcon className="absolute bottom-8 right-8 size-12 text-cyan-200/40" />
+          <JellyfishIcon className="absolute left-10 top-24 size-8 text-cyan-100/45" />
         </>
       )}
 
@@ -281,8 +282,8 @@ export function HeroSection() {
               </>
             ) : (
               <>
-                <SnowflakeIcon className="size-4 text-cyan-200" />
-                K-pop stage energy with winter air, gloss, and midnight bloom.
+                <MusicNoteIcon className="size-4 text-fuchsia-200" />
+                K-pop stage energy with drifting jellyfish glow and midnight rhythm.
               </>
             )}
           </p>

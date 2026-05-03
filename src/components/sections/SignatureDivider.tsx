@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useTheme } from '../../hooks/useTheme'
-import { PetalIcon, SnowflakeIcon, WaveformIcon } from '../common/Icons'
+import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
 
 export function SignatureDivider() {
   const { theme } = useTheme()
@@ -20,18 +20,24 @@ export function SignatureDivider() {
             color: 'var(--pill-text)',
           }}
         >
-          <PetalIcon className="size-4" />
-          Sakura-coded
+          {theme === 'light' ? <PetalIcon className="size-4" /> : <MusicNoteIcon className="size-4" />}
+          {theme === 'light' ? 'Sakura-coded' : 'Rhythm-coded'}
         </span>
-        <WaveformIcon
-          className={theme === 'light' ? 'h-7 w-16 text-sky-400/60' : 'h-7 w-16 text-fuchsia-300/60'}
-        />
+        {theme === 'light' ? (
+          <SnowflakeIcon className="size-5 text-sky-300/70" />
+        ) : (
+          <JellyfishIcon className="size-7 text-cyan-200/55" />
+        )}
         <span className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">
-          Full-stack delivery with stage-grade motion
+          {theme === 'light'
+            ? 'Full-stack delivery with sakura-snow motion'
+            : 'Full-stack delivery with midnight-stage drift'}
         </span>
-        <WaveformIcon
-          className={theme === 'light' ? 'h-7 w-16 text-rose-300/60' : 'h-7 w-16 text-cyan-200/60'}
-        />
+        {theme === 'light' ? (
+          <PetalIcon className="size-5 text-rose-300/75" />
+        ) : (
+          <MusicNoteIcon className="size-5 text-fuchsia-200/60" />
+        )}
         <span
           className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-bold uppercase tracking-[0.22em]"
           style={{
@@ -40,8 +46,8 @@ export function SignatureDivider() {
             color: 'var(--pill-text)',
           }}
         >
-          <SnowflakeIcon className="size-4" />
-          Winter-lit
+          {theme === 'light' ? <SnowflakeIcon className="size-4" /> : <JellyfishIcon className="size-4" />}
+          {theme === 'light' ? 'Winter-lit' : 'Jelly-lit'}
         </span>
       </motion.div>
     </div>
