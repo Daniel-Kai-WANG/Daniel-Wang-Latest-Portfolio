@@ -12,8 +12,10 @@ Built a single-page portfolio for Daniel Wang positioned as a Full-Stack Develop
 - Added the requested folder structure for data, layout, sections, animation, hooks, lib, styles, scripts, docs, and QR output.
 
 ## 3. Branch Workflow Used
-- Planned workflow: `main -> staging -> feature/* -> staging`.
-- Local implementation is prepared to support the requested branch strategy.
+- Local git repository initialized.
+- `main` branch created for the root commit.
+- `staging` branch created as the active follow-up branch.
+- Planned ongoing workflow remains `main -> staging -> feature/* -> staging`.
 - Manual GitHub repository creation is still required because GitHub CLI is not installed in this environment.
 
 ## 4. Features Completed
@@ -43,7 +45,8 @@ Added email, LinkedIn, portfolio archive, and Brisbane location in a responsive 
 
 ### Deployment and QR Code
 Added a GitHub Pages workflow and `scripts/generate-qr.mjs`.
-QR images still need to be generated after the live deployment URL is confirmed.
+Generated provisional QR images for the anticipated GitHub Pages URL:
+`https://daniel-kai-wang.github.io/daniel-ai-workflow-portfolio/`
 
 ## 5. Animation / Visual Effects Added
 - Section fade-up reveal on scroll.
@@ -65,18 +68,19 @@ QR images still need to be generated after the live deployment URL is confirmed.
 | qrcode | QR generation | Mature QR code package for generating deployment QR images | `npm view qrcode version time.modified description` -> modified `2025-11-13` |
 
 ## 7. Validation Results
-- `npm run typecheck`: pending final verification
-- `npm run build`: pending final verification
-- `npm run lint`: pending final verification
-- Desktop manual check: pending
+- `npm run typecheck`: passed
+- `npm run build`: passed
+- `npm run lint`: passed
+- Desktop manual check: partial
 - Tablet manual check: pending
 - Mobile manual check: pending
-- Theme toggle check: pending
-- QR scan check: pending until deployment URL exists
+- Theme toggle check: partial DOM-level verification in local browser
+- QR scan check: not verified against a live deployed URL yet
 
 ## 8. Known Issues
 - GitHub repository creation and live deployment were not completed automatically because GitHub CLI is unavailable.
-- QR files are not generated yet because the final live URL has not been confirmed.
+- The generated QR files are based on the expected GitHub Pages URL and still need real deployment verification.
+- Browser-plugin screenshots in Arc did not faithfully show the rendered hero, so visual verification relied partly on DOM inspection rather than a full screenshot pass.
 
 ## 9. Next Recommended Steps
 - Run validation commands and browser-based responsive checks.
