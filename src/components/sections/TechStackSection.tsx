@@ -1,6 +1,7 @@
 import { skillCategories } from '../../data/skills'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
+import { PetalIcon, SnowflakeIcon, WaveformIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function TechStackSection() {
@@ -42,6 +43,20 @@ export function TechStackSection() {
               />
 
               <div className="relative">
+                <div className="absolute right-0 top-0">
+                  {theme === 'light' ? (
+                    <div className="relative h-14 w-14">
+                      <PetalIcon className="absolute left-2 top-1 size-5 rotate-[-20deg] text-rose-300/80" />
+                      <SnowflakeIcon className="absolute right-0 top-5 size-4 text-sky-200/70" />
+                    </div>
+                  ) : (
+                    <div className="relative h-14 w-16">
+                      <WaveformIcon className="absolute right-0 top-3 h-8 w-16 text-fuchsia-200/40" />
+                      <SnowflakeIcon className="absolute left-0 top-0 size-4 text-cyan-100/65" />
+                    </div>
+                  )}
+                </div>
+
                 <div
                   className="inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
                   style={{

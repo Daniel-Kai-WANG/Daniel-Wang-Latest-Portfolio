@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from 'react'
+import { AtmosphericAura } from '../animation/AtmosphericAura'
 import { useTheme } from '../../hooks/useTheme'
 import { Navbar } from './Navbar'
 
@@ -7,14 +8,15 @@ export function PageShell({ children }: PropsWithChildren) {
 
   return (
     <div id="top" className="relative isolate overflow-hidden">
+      <AtmosphericAura />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[28rem]">
         <div
           className="absolute left-[-8%] top-10 h-48 w-48 rounded-full blur-3xl"
           style={{
             background:
               theme === 'light'
-                ? 'rgba(56, 189, 248, 0.24)'
-                : 'rgba(255, 79, 216, 0.16)',
+                ? 'rgba(255, 190, 220, 0.2)'
+                : 'rgba(255, 79, 216, 0.18)',
           }}
         />
         <div
@@ -22,8 +24,8 @@ export function PageShell({ children }: PropsWithChildren) {
           style={{
             background:
               theme === 'light'
-                ? 'rgba(37, 99, 235, 0.18)'
-                : 'rgba(124, 92, 255, 0.2)',
+                ? 'rgba(186, 230, 253, 0.22)'
+                : 'rgba(124, 92, 255, 0.24)',
           }}
         />
       </div>

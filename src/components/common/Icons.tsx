@@ -111,3 +111,47 @@ export function LocationIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function PetalIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M12.2 3.2c2.7 0 4.8 2.1 4.8 4.7 0 1.8-1 3.3-2.6 4.8-1.2 1.1-1.8 2.3-2 4.1-.2-1.8-.8-3-2-4.1-1.6-1.5-2.6-3-2.6-4.8 0-2.6 2.1-4.7 4.4-4.7Z"
+        fill="currentColor"
+      />
+      <path
+        d="M12.2 16.8c.7 1.7 1.9 2.9 3.7 3.7-1.3.4-2.6.3-3.7-.4-1.1.7-2.4.8-3.7.4 1.8-.8 3-2 3.7-3.7Z"
+        fill="currentColor"
+        opacity="0.72"
+      />
+    </svg>
+  )
+}
+
+export function SnowflakeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M12 3v18M5.5 6.8 18.5 17.2M18.5 6.8 5.5 17.2M8.8 5.2 12 8.5l3.2-3.3M8.8 18.8 12 15.5l3.2 3.3M4.8 12H9m10.2 0H15"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  )
+}
+
+export function WaveformIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 48 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M2 12h4l3-7 6 14 5-11 4 8 4-10 5 12 5-8h6"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.2"
+      />
+    </svg>
+  )
+}

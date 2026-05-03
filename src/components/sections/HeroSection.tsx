@@ -1,7 +1,15 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { useState } from 'react'
 import { profile } from '../../data/profile'
 import { useTheme } from '../../hooks/useTheme'
-import { ArrowUpRightIcon, PlaneIcon, SparkIcon } from '../common/Icons'
+import {
+  ArrowUpRightIcon,
+  PetalIcon,
+  PlaneIcon,
+  SnowflakeIcon,
+  SparkIcon,
+  WaveformIcon,
+} from '../common/Icons'
 
 function WorkflowPanel() {
   const { theme } = useTheme()
@@ -178,19 +186,36 @@ function WorkflowPanel() {
 
 export function HeroSection() {
   const { theme } = useTheme()
+  const [glow, setGlow] = useState({ x: 24, y: 20 })
 
   return (
     <section
       className="relative overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
+      onPointerMove={(event) => {
+        const rect = event.currentTarget.getBoundingClientRect()
+        setGlow({
+          x: ((event.clientX - rect.left) / rect.width) * 100,
+          y: ((event.clientY - rect.top) / rect.height) * 100,
+        })
+      }}
       style={{
         background:
           theme === 'light'
-            ? 'linear-gradient(180deg, rgba(255,255,255,0.86), rgba(234,246,255,0.66))'
-            : 'linear-gradient(180deg, rgba(18,19,28,0.86), rgba(15,17,32,0.74))',
+            ? 'linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,243,249,0.78), rgba(234,246,255,0.7))'
+            : 'linear-gradient(180deg, rgba(18,19,28,0.86), rgba(25,16,39,0.76), rgba(15,17,32,0.74))',
         borderColor: 'var(--color-border)',
         boxShadow: 'var(--surface-shadow)',
       }}
     >
+      <div
+        className="absolute inset-0 opacity-90"
+        style={{
+          background:
+            theme === 'light'
+              ? `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(255,214,235,0.28), transparent 34%)`
+              : `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(255,79,216,0.18), transparent 30%)`,
+        }}
+      />
       <div
         className="absolute left-[-4rem] top-[-2rem] h-40 w-40 rounded-full blur-3xl"
         style={{
@@ -209,6 +234,30 @@ export function HeroSection() {
               : 'rgba(124, 92, 255, 0.18)',
         }}
       />
+      <div
+        className="absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            theme === 'light'
+              ? 'linear-gradient(90deg, transparent, rgba(246,168,200,0.8), rgba(186,230,253,0.9), transparent)'
+              : 'linear-gradient(90deg, transparent, rgba(255,79,216,0.8), rgba(34,211,238,0.8), transparent)',
+        }}
+      />
+
+      {theme === 'light' ? (
+        <>
+          <PetalIcon className="absolute left-8 top-10 size-7 rotate-[-18deg] text-rose-300/90" />
+          <PetalIcon className="absolute right-16 top-20 size-5 rotate-[12deg] text-pink-300/80" />
+          <SnowflakeIcon className="absolute right-8 top-10 size-5 text-sky-200/70" />
+        </>
+      ) : (
+        <>
+          <div className="absolute left-10 top-8 h-40 w-20 rotate-[12deg] bg-gradient-to-b from-fuchsia-400/30 to-transparent blur-2xl" />
+          <div className="absolute right-16 top-10 h-48 w-16 -rotate-[18deg] bg-gradient-to-b from-cyan-300/28 to-transparent blur-2xl" />
+          <WaveformIcon className="absolute bottom-10 right-10 h-10 w-24 text-fuchsia-200/45" />
+          <SnowflakeIcon className="absolute left-8 top-12 size-5 text-cyan-100/70" />
+        </>
+      )}
 
       <div className="relative grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div>
@@ -223,6 +272,20 @@ export function HeroSection() {
             <SparkIcon className="size-4" />
             {profile.badge}
           </div>
+
+          <p className="mt-5 flex items-center gap-2 text-sm font-medium text-[var(--color-muted)]">
+            {theme === 'light' ? (
+              <>
+                <PetalIcon className="size-4 text-rose-300" />
+                Spring-sky clarity with sakura drift and ice-light highlights.
+              </>
+            ) : (
+              <>
+                <SnowflakeIcon className="size-4 text-cyan-200" />
+                K-pop stage energy with winter air, gloss, and midnight bloom.
+              </>
+            )}
+          </p>
 
           <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[0.98] tracking-[-0.06em] text-[var(--color-text)] sm:text-5xl lg:text-[4.3rem]">
             {profile.headline}

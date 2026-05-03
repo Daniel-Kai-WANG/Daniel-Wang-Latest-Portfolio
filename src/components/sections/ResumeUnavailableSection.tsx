@@ -1,6 +1,6 @@
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
-import { PlaneIcon, SparkIcon } from '../common/Icons'
+import { PetalIcon, PlaneIcon, SnowflakeIcon, SparkIcon } from '../common/Icons'
 
 export function ResumeUnavailableSection() {
   const { theme } = useTheme()
@@ -87,6 +87,11 @@ export function ResumeUnavailableSection() {
                     <div className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-slate-800">
                       Work is still very much active.
                     </div>
+                    <div className="mt-3 flex items-center gap-2 text-sm text-slate-500">
+                      <PetalIcon className="size-4 text-rose-300" />
+                      <SnowflakeIcon className="size-4 text-sky-300" />
+                      Sakura breeze outside, shipping energy still on.
+                    </div>
                   </div>
                   <PlaneIcon className="size-10 rotate-12 text-sky-500" />
                 </div>
@@ -108,6 +113,11 @@ export function ResumeUnavailableSection() {
                     The downloadable file is off-stage for cleanup, but the live portfolio still
                     shows the work, context, and delivery range.
                   </p>
+                  <div className="mt-4 flex items-center gap-2 text-sm text-fuchsia-100/80">
+                    <SnowflakeIcon className="size-4 text-cyan-200" />
+                    <PetalIcon className="size-4 text-fuchsia-300" />
+                    Winter-show glow, sakura confetti mood.
+                  </div>
                 </div>
               </div>
             )}
