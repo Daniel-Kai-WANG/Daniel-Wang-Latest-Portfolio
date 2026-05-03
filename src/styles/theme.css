@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  --font-body: 'Manrope';
+  --font-display: 'Space Grotesk';
+  --font-mono: 'SFMono-Regular';
+
+  --color-background: #f5fbff;
+  --color-surface: rgba(255, 255, 255, 0.88);
+  --color-surface-elevated: rgba(255, 255, 255, 0.74);
+  --color-surface-muted: #eaf6ff;
+  --color-text: #17324d;
+  --color-muted: #5d7892;
+  --color-primary: #38bdf8;
+  --color-secondary: #2563eb;
+  --color-warm: #fdba74;
+  --color-border: rgba(189, 231, 255, 0.88);
+  --surface-shadow: 0 30px 70px rgba(27, 88, 140, 0.12);
+  --page-background:
+    linear-gradient(180deg, #f8fcff 0%, #edf8ff 48%, #f8fcff 100%);
+  --page-orb-a: rgba(56, 189, 248, 0.18);
+  --page-orb-b: rgba(37, 99, 235, 0.14);
+  --page-orb-c: rgba(253, 186, 116, 0.12);
+  --hero-grid: rgba(23, 50, 77, 0.08);
+  --soft-accent: rgba(56, 189, 248, 0.14);
+  --soft-accent-strong: rgba(37, 99, 235, 0.2);
+  --timeline-line: rgba(37, 99, 235, 0.2);
+  --pill-background: rgba(255, 255, 255, 0.72);
+  --pill-text: #1f4f7d;
+  --pill-border: rgba(102, 186, 246, 0.34);
+  --hero-panel-background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(234, 246, 255, 0.9));
+}
+
+:root[data-theme='dark'] {
+  --color-background: #09090f;
+  --color-surface: rgba(18, 19, 28, 0.84);
+  --color-surface-elevated: rgba(20, 22, 34, 0.78);
+  --color-surface-muted: rgba(124, 92, 255, 0.08);
+  --color-text: #f8fafc;
+  --color-muted: #b7bdd1;
+  --color-primary: #ff4fd8;
+  --color-secondary: #7c5cff;
+  --color-warm: #ff8a3d;
+  --color-border: rgba(255, 255, 255, 0.14);
+  --surface-shadow: 0 34px 90px rgba(2, 3, 10, 0.56);
+  --page-background:
+    linear-gradient(180deg, #09090f 0%, #0f1120 48%, #09090f 100%);
+  --page-orb-a: rgba(255, 79, 216, 0.14);
+  --page-orb-b: rgba(124, 92, 255, 0.16);
+  --page-orb-c: rgba(34, 211, 238, 0.1);
+  --hero-grid: rgba(255, 255, 255, 0.06);
+  --soft-accent: rgba(255, 79, 216, 0.16);
+  --soft-accent-strong: rgba(124, 92, 255, 0.24);
+  --timeline-line: rgba(255, 255, 255, 0.08);
+  --pill-background: rgba(255, 255, 255, 0.06);
+  --pill-text: #f6dbff;
+  --pill-border: rgba(255, 255, 255, 0.12);
+  --hero-panel-background:
+    linear-gradient(155deg, rgba(20, 22, 35, 0.96), rgba(25, 15, 46, 0.82));
+}
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+body,
+a,
+button,
+svg,
+div,
+section,
+article,
+span {
+  transition:
+    background-color 700ms ease,
+    border-color 700ms ease,
+    color 700ms ease,
+    box-shadow 700ms ease,
+    transform 700ms ease,
+    opacity 700ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body,
+  a,
+  button,
+  svg,
+  div,
+  section,
+  article,
+  span {
+    transition-duration: 0ms;
+  }
+}

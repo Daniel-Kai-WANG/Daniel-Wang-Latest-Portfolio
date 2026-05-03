@@ -1,0 +1,81 @@
+import type { ExperienceItem } from '../types/content'
+
+export const experiences: ExperienceItem[] = [
+  {
+    company: 'Actualisation',
+    role: 'Full Stack Developer',
+    date: '12/2025 – Current',
+    location: 'Brisbane, QLD',
+    metric: '3 enterprise client custom solutions delivered',
+    highlights: [
+      'Build and maintain client-specific product customisations for the Agentic AI Team platform.',
+      'Translate Figma concepts into production-ready interfaces with layered interactions and stable UX logic.',
+      'Design backend APIs and MongoDB data models for reliable Node.js service integrations.',
+      'Independently designed and launched the company website in HubSpot with embedded HTML and custom scripts.',
+    ],
+    tech: ['React.js', 'TypeScript', 'Node.js', 'MongoDB', 'RESTful API', 'HubSpot', 'GitHub'],
+  },
+  {
+    company: 'Golf Wizard Co.',
+    role: 'Mobile App Developer Freelancer',
+    date: '10/2025 – Current',
+    location: 'Brisbane, QLD',
+    metric: '400+ active users across iOS and Android',
+    highlights: [
+      'Delivered Phase 1 of a React Native app and released it to Google Play and the App Store.',
+      'Ran iOS TestFlight and Android device validation to improve cross-device stability.',
+      'Refactored legacy front-end code with React Hooks to reduce UI freezes and improve rendering.',
+    ],
+    tech: ['React Native', 'TypeScript', 'Jira', 'GitHub', 'Android Studio', 'Xcode', 'Postman'],
+  },
+  {
+    company: 'Digital 8',
+    role: 'Full Stack Developer',
+    date: '09/2024 – 09/2025',
+    location: 'Brisbane, QLD',
+    metric: '15 projects across web, mobile, and backend systems',
+    highlights: [
+      'Worked across React, React Native, Expo, Laravel, and backend delivery for both new builds and legacy upgrades.',
+      'Modernised a six-year-old system and migrated 61 mobile pages with 95% feature parity.',
+      'Relaunched the admin portal, shipped new features, and contributed to Firebase push notification integration.',
+    ],
+    tech: [
+      'React.js',
+      'TypeScript',
+      'Next.js',
+      'React Native',
+      'Expo',
+      'Laravel',
+      'KendoReact',
+      'Tailwind CSS',
+      'GitLab',
+      'GitHub',
+    ],
+  },
+  {
+    company: 'Easy Skill',
+    role: 'IT Developer Intern',
+    date: '04/2024 – 07/2024',
+    location: 'Brisbane, QLD',
+    metric: '60% fewer requests and 90-second load-time improvement',
+    highlights: [
+      'Built the front-end technical framework around Boond Manager API-based payslip generation.',
+      'Contributed to backend modular services, database construction, and workflow planning.',
+      'Reduced web requests by 60% and improved load speed enough to ship one week ahead of schedule.',
+    ],
+    tech: ['React.js', 'TypeScript', 'Nest.js', 'Axios', 'Tailwind CSS', 'GitHub'],
+  },
+  {
+    company: 'Phonely',
+    role: 'Front End Developer Intern',
+    date: '12/2023 – 02/2024',
+    location: 'Melbourne, VIC',
+    metric: 'Real-time dashboard and AI call-record message page delivered',
+    highlights: [
+      'Collaborated on website data retrieval, rendering, and early-state data simulation.',
+      'Delivered a real-time dashboard for user statistics and a message page for AI-driven call records.',
+      'Partnered with backend teammates during integration and solution planning.',
+    ],
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'GitHub'],
+  },
+]
