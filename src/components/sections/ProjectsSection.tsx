@@ -46,15 +46,14 @@ export function ProjectsSection() {
                       : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(34,211,238,0.04))',
                 }}
               />
-              <motion.div
-                className="absolute left-[-20%] top-0 h-full w-1/3 -skew-x-12"
-                animate={{ x: ['-120%', '360%'] }}
-                transition={{ duration: 6.6, ease: 'linear', repeat: Infinity, repeatDelay: 2.8 }}
+              <div
+                className="sheen-pass"
                 style={{
+                  animationDuration: theme === 'light' ? '7.2s' : '6s',
                   background:
                     theme === 'light'
-                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.36), transparent)'
-                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.58), rgba(214,244,255,0.34), transparent)'
+                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.16), rgba(255,79,216,0.12), transparent)',
                 }}
               />
               <div

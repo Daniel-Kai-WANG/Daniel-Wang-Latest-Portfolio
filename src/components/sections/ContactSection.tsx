@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { profile } from '../../data/profile'
+import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
@@ -16,6 +17,8 @@ const iconByLabel = {
 }
 
 export function ContactSection() {
+  const { theme } = useTheme()
+
   return (
     <Reveal>
       <section
@@ -70,10 +73,14 @@ export function ContactSection() {
                 >
                   <ThemeShiftBackdrop variant="card" />
                   <div
-                    className="absolute inset-y-0 left-[-24%] w-1/3 -skew-x-12 opacity-70"
+                    className="sheen-pass"
                     style={{
+                      animationDuration: '7.6s',
+                      animationDelay: '0.3s',
                       background:
-                        'linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent)',
+                        theme === 'light'
+                          ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.42), rgba(214,244,255,0.16), transparent)'
+                          : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(34,211,238,0.08), transparent)',
                     }}
                   />
                   <div
@@ -107,6 +114,16 @@ export function ContactSection() {
               }}
             >
               <ThemeShiftBackdrop variant="card" />
+              <div
+                className="sheen-pass"
+                style={{
+                  animationDuration: '8.2s',
+                  background:
+                    theme === 'light'
+                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), rgba(255,228,239,0.18), transparent)'
+                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(255,79,216,0.08), transparent)',
+                }}
+              />
               <div className="relative z-10">
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
                   Best fit

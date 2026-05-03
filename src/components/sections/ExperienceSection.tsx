@@ -36,20 +36,15 @@ export function ExperienceSection() {
               style={{ transformStyle: 'preserve-3d' }}
             >
               <ThemeShiftBackdrop variant="card" />
-              <motion.div
-                className="absolute inset-y-0 left-[-32%] w-1/3 -skew-x-12"
-                animate={{ x: ['-140%', '300%'] }}
-                transition={{
-                  duration: theme === 'light' ? 7.4 : 5.8,
-                  ease: 'linear',
-                  repeat: Infinity,
-                  repeatDelay: theme === 'light' ? 4 : 3,
-                }}
+              <div
+                className="sheen-pass"
                 style={{
+                  animationDuration: theme === 'light' ? '7.8s' : '6.4s',
+                  animationDelay: `${index * 0.28}s`,
                   background:
                     theme === 'light'
-                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.36), transparent)'
-                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.58), rgba(255,228,239,0.36), transparent)'
+                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.16), rgba(34,211,238,0.1), transparent)',
                 }}
               />
               <div
