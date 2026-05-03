@@ -3,11 +3,11 @@
 purpose: Daniel Wang portfolio; full-stack + AI workflow positioning in a single-page experience.
 stack: Vite, React, TypeScript, Tailwind CSS, Framer Motion, clsx, tailwind-merge.
 branches: main -> staging -> feature/* -> staging.
-themes: light=spring sky + sakura + snow-light; dark=K-pop stage + winter-night gloss, still toned down for professional use.
+themes: light=sakura + snowfall sky; dark=K-pop midnight stage + jellyfish drift + music-note accents.
 content_source: resume-derived data in src/data/profile.ts, src/data/experience.ts, src/data/projects.ts, src/data/skills.ts.
 features:
-- floating navbar
-- custom celestial pull-toggle with localStorage persistence
+- fixed floating navbar
+- horizontal 3D theme toggle with localStorage persistence
 - hero workflow section
 - signature divider between hero and experience
 - experience journey
@@ -29,6 +29,7 @@ components:
 - theme/ThemeProvider
 - theme/ThemeToggle
 - animation/AtmosphericAura
+- animation/ThemeShiftBackdrop
 - animation/Reveal
 - sections/HeroSection
 - sections/ExperienceSection
@@ -44,13 +45,14 @@ data_map:
 - skills: grouped stack categories
 animation:
 - global reveal
-- global sakura petal drift and snow fall
-- custom pull-trigger moon-drop / sun-rise transition
+- global sakura petal drift and snow fall in light mode
+- floating music notes and jellyfish drift in dark mode
+- block-level sunrise / moonrise transition backdrops during theme switch
 - hero mouse-reactive glow and themed accents
 - signature divider loop motion
 - light: floating cards, sky-route motion, soft gradient orbs, spring-air highlights
-- dark: restrained glow, workflow pulse, stage beams, premium stage-card shimmer
-- hover tilt/lift and sweep-light passes on key cards
+- dark: restrained glow, workflow pulse, jellyfish-stage atmosphere
+- hover tilt/lift and lighter CSS sheen passes on key cards
 future:
 - connect real public project links when available
 - generate and verify QR after live deployment exists

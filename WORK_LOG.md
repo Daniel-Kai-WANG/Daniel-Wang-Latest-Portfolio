@@ -20,18 +20,23 @@ Built a single-page portfolio for Daniel Wang positioned as a Full-Stack Develop
   - `feature/celestial-pull-toggle`
   - `feature/signature-motion-effects`
   - `feature/update-work-log`
+  - `feature/pin-floating-nav`
+  - `feature/refresh-theme-motifs`
+  - `feature/3d-toggle-shift-backdrop`
+  - `feature/smooth-sheen-effects`
+  - `feature/sync-theme-docs`
 - Planned ongoing workflow remains `main -> staging -> feature/* -> staging`.
 - Manual GitHub repository creation is still required because GitHub CLI is not installed in this environment.
 
 ## 4. Features Completed
 ### Light Theme Base
-Implemented the page shell, floating navigation, theme tokens, responsive container system, and data-driven content structure.
+Implemented the page shell, fixed floating navigation, theme tokens, responsive container system, and data-driven content structure.
 
 ### Theme Toggle
-Replaced the basic slider with a custom celestial pull-toggle. Users pull a hanging charm downward to trigger the theme change, while the moon drops and the sun rises inside the switch chamber. The interaction keeps keyboard support and `localStorage` persistence.
+Replaced the earlier toggle with a horizontal 3D capsule switch. Clicking the control rotates the active thumb across the track and flips the mood from dawn to midnight while keeping keyboard support and `localStorage` persistence.
 
 ### Hero Section
-Built the hero with the exact badge, heading, subtitle, stats, CTA links, and a themed workflow panel. Added a mouse-reactive glow field plus more personal K-pop / sakura / snow visual storytelling.
+Built the hero with the exact badge, heading, subtitle, stats, CTA links, and a themed workflow panel. Added a mouse-reactive glow field plus more personal sakura / snow storytelling in light mode and music-note / jellyfish storytelling in dark mode.
 
 ### Experience Journey
 Added all five experience entries from the resume using cloud-like cards in light mode and glossy stage-inspired cards in dark mode.
@@ -56,28 +61,32 @@ Generated provisional QR images for the anticipated GitHub Pages URL:
 ### Personal Theme Enhancements
 Expanded the visual direction so both themes feel more specific to Daniel instead of generic light/dark styling:
 - Light mode now mixes spring-sky clarity, drifting sakura petals, and crisp snow-light accents.
-- Dark mode now mixes K-pop concert polish, glossy stage lighting, neon-magazine energy, and cold winter atmosphere.
+- Dark mode now mixes K-pop concert polish, glossy stage lighting, floating music notes, and jellyfish-like midnight drift.
 - Shared atmospheric effects keep both modes visually related rather than feeling like two separate websites.
 
 ### Signature Motion Effects
 Added a stronger motion language inspired by high-quality animated portfolio sites while keeping the site readable and performant:
-- a global atmospheric layer with drifting sakura petals and falling snow
+- a global atmospheric layer with drifting sakura petals and falling snow in light mode
+- floating music notes and jellyfish in dark mode
 - a custom section divider with looping motion
 - mouse-reactive hero lighting
+- sunrise / moonrise transition backdrops behind major blocks during theme switching
 - hover tilt and lift on experience, project, and contact cards
-- sweeping highlight passes across premium cards
-- subtle stage beams and aura glows in dark mode
+- lighter CSS-based sweeping highlight passes across premium cards
+- a calmer dark-mode glow treatment to reduce perceived lag
 
 ## 5. Animation / Visual Effects Added
 - Section fade-up reveal on scroll.
 - Gentle workflow motion in the hero panel.
 - Floating sky-mode ambient orbs and soft card depth.
 - Global sakura drift and snowflake fall through the page shell.
+- Floating music notes and jellyfish drift in dark mode.
 - Mouse-reactive hero glow that follows pointer movement.
-- Custom pull-trigger moon/sun theme transition.
+- Horizontal 3D theme toggle.
+- Per-block sunrise / moonrise transition during theme changes.
 - Restrained dark-mode glow and stage-beam atmosphere for a premium stage feel.
 - Hover tilt and lift behavior on experience, project, and contact cards.
-- Sweep-light passes across premium cards.
+- CSS-based sweep-light passes across premium cards in both light and dark themes.
 - Motion divider band between hero and experience sections.
 - Smooth theme transition timing across surfaces and borders.
 
