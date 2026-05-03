@@ -1,7 +1,8 @@
+import { motion } from 'framer-motion'
 import { projects } from '../../data/projects'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
-import { ArrowUpRightIcon } from '../common/Icons'
+import { ArrowUpRightIcon, WaveformIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function ProjectsSection() {
@@ -17,17 +18,39 @@ export function ProjectsSection() {
 
         <div className="mt-8 grid gap-5 xl:grid-cols-2">
           {projects.map((project) => (
-            <article
+            <motion.article
               key={project.title}
               className="relative overflow-hidden rounded-[2rem] border p-6"
-              style={{
-                borderColor: 'var(--color-border)',
-                background:
-                  theme === 'light'
-                    ? 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(240,249,255,0.86))'
-                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(34,211,238,0.04))',
+              whileHover={{
+                y: -10,
+                scale: 1.012,
+                rotateX: theme === 'light' ? 2 : 3,
+                rotateY: theme === 'light' ? -2 : 2,
               }}
+              transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+              style={{ transformStyle: 'preserve-3d' }}
             >
+              <div
+                className="absolute inset-0"
+                style={{
+                  borderColor: 'var(--color-border)',
+                  background:
+                    theme === 'light'
+                      ? 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(240,249,255,0.86))'
+                      : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(34,211,238,0.04))',
+                }}
+              />
+              <motion.div
+                className="absolute left-[-20%] top-0 h-full w-1/3 -skew-x-12"
+                animate={{ x: ['-120%', '360%'] }}
+                transition={{ duration: 6.6, ease: 'linear', repeat: Infinity, repeatDelay: 2.8 }}
+                style={{
+                  background:
+                    theme === 'light'
+                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.36), transparent)'
+                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+                }}
+              />
               <div
                 className="absolute inset-x-0 top-0 h-1"
                 style={{
@@ -39,6 +62,9 @@ export function ProjectsSection() {
               />
 
               <div className="relative">
+                <WaveformIcon
+                  className={theme === 'light' ? 'absolute right-0 top-0 h-8 w-16 text-sky-300/40' : 'absolute right-0 top-0 h-8 w-16 text-fuchsia-300/35'}
+                />
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <span
                     className="inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
@@ -114,7 +140,7 @@ export function ProjectsSection() {
                   </span>
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </section>

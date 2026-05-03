@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { profile } from '../../data/profile'
 import { Reveal } from '../animation/Reveal'
 import {
@@ -50,30 +51,48 @@ export function ContactSection() {
               const Icon = iconByLabel[link.label as keyof typeof iconByLabel] ?? LinkIcon
 
               return (
-                <a
+                <motion.a
                   key={link.label}
                   href={link.href}
                   target={link.href.startsWith('http') ? '_blank' : undefined}
                   rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="group rounded-[1.8rem] border p-5 transition-transform hover:-translate-y-1"
-                  style={{
-                    borderColor: 'var(--color-border)',
-                    background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
+                  className="group relative overflow-hidden rounded-[1.8rem] border p-5 transition-transform hover:-translate-y-1"
+                  whileHover={{
+                    y: -8,
+                    scale: 1.01,
+                    rotateX: 3,
+                    rotateY: -3,
                   }}
+                  transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+                  style={{ transformStyle: 'preserve-3d' }}
                 >
-                  <div className="flex items-center justify-between">
+                  <div
+                    className="absolute inset-y-0 left-[-24%] w-1/3 -skew-x-12 opacity-70"
+                    style={{
+                      background:
+                        'linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent)',
+                    }}
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      borderColor: 'var(--color-border)',
+                      background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
+                    }}
+                  />
+                  <div className="relative flex items-center justify-between">
                     <div className="flex size-11 items-center justify-center rounded-2xl bg-[var(--soft-accent)] text-[var(--color-text)]">
                       <Icon className="size-5" />
                     </div>
                     <ArrowUpRightIcon className="size-4 text-[var(--color-muted)] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </div>
-                  <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                  <p className="relative mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
                     {link.label}
                   </p>
-                  <p className="mt-2 text-sm font-semibold leading-6 text-[var(--color-text)]">
+                  <p className="relative mt-2 text-sm font-semibold leading-6 text-[var(--color-text)]">
                     {link.value}
                   </p>
-                </a>
+                </motion.a>
               )
             })}
 

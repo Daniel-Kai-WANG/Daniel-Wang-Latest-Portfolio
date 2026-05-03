@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { experiences } from '../../data/experience'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
@@ -16,17 +17,44 @@ export function ExperienceSection() {
 
         <div className="mt-8 grid gap-5 lg:grid-cols-2">
           {experiences.map((item, index) => (
-            <article
+            <motion.article
               key={`${item.company}-${item.date}`}
               className="relative overflow-hidden rounded-[2rem] border px-5 py-5 sm:px-6"
-              style={{
-                borderColor: 'var(--color-border)',
-                background:
-                  theme === 'light'
-                    ? 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(240,249,255,0.9))'
-                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(124,92,255,0.06))',
+              whileHover={{
+                y: -8,
+                scale: 1.01,
+                rotateX: theme === 'light' ? 2 : 3,
+                rotateY: theme === 'light' ? -2 : 2,
               }}
+              transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+              style={{ transformStyle: 'preserve-3d' }}
             >
+              <motion.div
+                className="absolute inset-y-0 left-[-32%] w-1/3 -skew-x-12"
+                animate={{ x: ['-140%', '300%'] }}
+                transition={{
+                  duration: theme === 'light' ? 7.4 : 5.8,
+                  ease: 'linear',
+                  repeat: Infinity,
+                  repeatDelay: theme === 'light' ? 4 : 3,
+                }}
+                style={{
+                  background:
+                    theme === 'light'
+                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.36), transparent)'
+                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+                }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  borderColor: 'var(--color-border)',
+                  background:
+                    theme === 'light'
+                      ? 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(240,249,255,0.9))'
+                      : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(124,92,255,0.06))',
+                }}
+              />
               <div
                 className="absolute right-4 top-4 h-20 w-20 rounded-full blur-2xl"
                 style={{
@@ -110,7 +138,7 @@ export function ExperienceSection() {
                   ))}
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </section>
