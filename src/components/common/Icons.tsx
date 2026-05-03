@@ -155,3 +155,38 @@ export function WaveformIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function MusicNoteIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M14 4.5v10.1a3.5 3.5 0 1 1-1.6-2.9V7.2l7-1.7v7.1a3.5 3.5 0 1 1-1.6-2.9V3.5L14 4.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+export function JellyfishIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M12 4c4.2 0 7 2.6 7 5.8 0 2.6-1.9 4.6-4.7 5.4H9.7C6.9 14.4 5 12.4 5 9.8 5 6.6 7.8 4 12 4Z"
+        fill="currentColor"
+      />
+      <path
+        d="M9 15.4c.4 1.1.3 2.2-.2 3.2m3.2-3.2c.5 1.3.5 2.6 0 3.9m3-3.9c.7 1.1.8 2.3.4 3.6"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M7.4 10.2c1.2.8 3 .7 4.6-.1 1.6.8 3.4.9 4.6.1"
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeOpacity="0.42"
+        strokeWidth="1.2"
+      />
+    </svg>
+  )
+}

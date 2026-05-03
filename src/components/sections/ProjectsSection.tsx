@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { projects } from '../../data/projects'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
-import { ArrowUpRightIcon, WaveformIcon } from '../common/Icons'
+import { ArrowUpRightIcon, JellyfishIcon, MusicNoteIcon, SnowflakeIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function ProjectsSection() {
@@ -62,9 +62,14 @@ export function ProjectsSection() {
               />
 
               <div className="relative">
-                <WaveformIcon
-                  className={theme === 'light' ? 'absolute right-0 top-0 h-8 w-16 text-sky-300/40' : 'absolute right-0 top-0 h-8 w-16 text-fuchsia-300/35'}
-                />
+                {theme === 'light' ? (
+                  <SnowflakeIcon className="absolute right-1 top-1 size-5 text-sky-300/50" />
+                ) : (
+                  <div className="absolute right-0 top-0 flex items-start gap-2">
+                    <MusicNoteIcon className="size-5 rotate-[12deg] text-fuchsia-300/50" />
+                    <JellyfishIcon className="size-7 text-cyan-200/40" />
+                  </div>
+                )}
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <span
                     className="inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
