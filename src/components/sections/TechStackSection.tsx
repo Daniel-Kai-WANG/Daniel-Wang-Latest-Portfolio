@@ -1,6 +1,7 @@
 import { skillCategories } from '../../data/skills'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
+import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
@@ -9,13 +10,17 @@ export function TechStackSection() {
 
   return (
     <Reveal>
-      <section id="stack" className="section-frame px-5 py-8 sm:px-8 sm:py-10 lg:px-10">
+      <section
+        id="stack"
+        className="section-frame relative overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
+      >
+        <ThemeShiftBackdrop />
         <SectionHeading
           title="Tech stack system"
           description="A grouped toolkit covering product surfaces, backend delivery, infrastructure touchpoints, and workflow thinking that keeps AI-assisted builds grounded."
         />
 
-        <div className="mt-8 grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="relative z-10 mt-8 grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
           {skillCategories.map((category, index) => (
             <article
               key={category.title}
@@ -28,6 +33,7 @@ export function TechStackSection() {
                     : 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(124,92,255,0.05))',
               }}
             >
+              <ThemeShiftBackdrop variant="card" />
               <div
                 className="absolute right-4 top-4 h-16 w-16 rounded-full blur-2xl"
                 style={{
@@ -42,7 +48,7 @@ export function TechStackSection() {
                 }}
               />
 
-              <div className="relative">
+              <div className="relative z-10">
                 <div className="absolute right-0 top-0">
                   {theme === 'light' ? (
                     <div className="relative h-14 w-14">

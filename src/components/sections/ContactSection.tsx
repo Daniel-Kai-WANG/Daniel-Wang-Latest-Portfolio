@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { profile } from '../../data/profile'
 import { Reveal } from '../animation/Reveal'
+import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   ArrowUpRightIcon,
   LinkIcon,
@@ -19,7 +20,7 @@ export function ContactSection() {
     <Reveal>
       <section
         id="contact"
-        className="overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
+        className="relative overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
         style={{
           background:
             'linear-gradient(135deg, color-mix(in srgb, var(--color-surface) 92%, transparent), color-mix(in srgb, var(--color-surface-muted) 72%, transparent))',
@@ -27,8 +28,9 @@ export function ContactSection() {
           boxShadow: 'var(--surface-shadow)',
         }}
       >
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-          <div>
+        <ThemeShiftBackdrop />
+        <div className="relative z-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+          <div className="relative z-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
               Contact CTA
             </p>
@@ -46,7 +48,7 @@ export function ContactSection() {
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="relative z-10 grid gap-4 md:grid-cols-2">
             {profile.contactLinks.map((link) => {
               const Icon = iconByLabel[link.label as keyof typeof iconByLabel] ?? LinkIcon
 
@@ -66,6 +68,7 @@ export function ContactSection() {
                   transition={{ type: 'spring', stiffness: 220, damping: 18 }}
                   style={{ transformStyle: 'preserve-3d' }}
                 >
+                  <ThemeShiftBackdrop variant="card" />
                   <div
                     className="absolute inset-y-0 left-[-24%] w-1/3 -skew-x-12 opacity-70"
                     style={{
@@ -97,20 +100,23 @@ export function ContactSection() {
             })}
 
             <div
-              className="rounded-[1.8rem] border p-5 md:col-span-2"
+              className="relative overflow-hidden rounded-[1.8rem] border p-5 md:col-span-2"
               style={{
                 borderColor: 'var(--color-border)',
                 background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
               }}
             >
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                Best fit
-              </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-text)]">
-                Teams that need a developer who can move between front-end polish, mobile delivery,
-                backend wiring, CMS practicality, and structured AI workflow thinking without losing
-                clarity.
-              </p>
+              <ThemeShiftBackdrop variant="card" />
+              <div className="relative z-10">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                  Best fit
+                </p>
+                <p className="mt-3 text-sm leading-7 text-[var(--color-text)]">
+                  Teams that need a developer who can move between front-end polish, mobile delivery,
+                  backend wiring, CMS practicality, and structured AI workflow thinking without losing
+                  clarity.
+                </p>
+              </div>
             </div>
           </div>
         </div>
