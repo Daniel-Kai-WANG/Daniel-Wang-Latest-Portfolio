@@ -72,4 +72,37 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .sheen-pass {
+    position: absolute;
+    inset-block: -8%;
+    left: -38%;
+    width: 30%;
+    transform: skewX(-16deg);
+    animation-name: sheen-pass;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform, opacity;
+  }
+}
+
+@keyframes sheen-pass {
+  0% {
+    transform: translateX(-180%) skewX(-16deg);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.72;
+  }
+
+  26% {
+    opacity: 0.26;
+  }
+
+  44%,
+  100% {
+    transform: translateX(430%) skewX(-16deg);
+    opacity: 0;
+  }
 }

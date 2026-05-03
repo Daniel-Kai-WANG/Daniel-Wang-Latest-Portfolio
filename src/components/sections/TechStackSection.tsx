@@ -35,6 +35,17 @@ export function TechStackSection() {
             >
               <ThemeShiftBackdrop variant="card" />
               <div
+                className="sheen-pass"
+                style={{
+                  animationDuration: theme === 'light' ? '8.1s' : '6.8s',
+                  animationDelay: `${index * 0.22}s`,
+                  background:
+                    theme === 'light'
+                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.52), rgba(214,244,255,0.28), transparent)'
+                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(34,211,238,0.08), transparent)',
+                }}
+              />
+              <div
                 className="absolute right-4 top-4 h-16 w-16 rounded-full blur-2xl"
                 style={{
                   background:

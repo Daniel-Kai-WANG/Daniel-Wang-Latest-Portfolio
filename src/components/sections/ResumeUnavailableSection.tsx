@@ -68,6 +68,16 @@ export function ResumeUnavailableSection() {
           >
             <ThemeShiftBackdrop variant="card" />
             <div
+              className="sheen-pass"
+              style={{
+                animationDuration: theme === 'light' ? '8.6s' : '6.8s',
+                background:
+                  theme === 'light'
+                    ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.52), rgba(214,244,255,0.28), transparent)'
+                    : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.16), rgba(255,79,216,0.1), transparent)',
+              }}
+            />
+            <div
               className="absolute right-[-1rem] top-[-1rem] h-24 w-24 rounded-full blur-3xl"
               style={{
                 background:
