@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { experiences } from '../../data/experience'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
+import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
@@ -10,13 +11,17 @@ export function ExperienceSection() {
 
   return (
     <Reveal>
-      <section id="experience" className="section-frame px-5 py-8 sm:px-8 sm:py-10 lg:px-10">
+      <section
+        id="experience"
+        className="section-frame relative overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
+      >
+        <ThemeShiftBackdrop />
         <SectionHeading
           title="Experience journey"
           description="A hands-on path through web products, mobile releases, legacy upgrades, CMS implementation, and workflow-heavy delivery."
         />
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-2">
+        <div className="relative z-10 mt-8 grid gap-5 lg:grid-cols-2">
           {experiences.map((item, index) => (
             <motion.article
               key={`${item.company}-${item.date}`}
@@ -30,6 +35,7 @@ export function ExperienceSection() {
               transition={{ type: 'spring', stiffness: 220, damping: 18 }}
               style={{ transformStyle: 'preserve-3d' }}
             >
+              <ThemeShiftBackdrop variant="card" />
               <motion.div
                 className="absolute inset-y-0 left-[-32%] w-1/3 -skew-x-12"
                 animate={{ x: ['-140%', '300%'] }}
@@ -82,7 +88,7 @@ export function ExperienceSection() {
                 </div>
               )}
 
-              <div className="relative">
+              <div className="relative z-10">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">

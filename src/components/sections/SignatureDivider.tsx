@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion'
 import { useTheme } from '../../hooks/useTheme'
+import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
 
 export function SignatureDivider() {
   const { theme } = useTheme()
 
   return (
-    <div className="overflow-hidden rounded-[1.8rem] border px-4 py-3 sm:px-5">
+    <div className="relative overflow-hidden rounded-[1.8rem] border px-4 py-3 sm:px-5">
+      <ThemeShiftBackdrop variant="card" />
       <motion.div
-        className="flex items-center gap-3 whitespace-nowrap"
+        className="relative z-10 flex items-center gap-3 whitespace-nowrap"
         animate={{ x: ['0%', '-8%', '0%'] }}
         transition={{ duration: 9, ease: 'easeInOut', repeat: Infinity }}
       >

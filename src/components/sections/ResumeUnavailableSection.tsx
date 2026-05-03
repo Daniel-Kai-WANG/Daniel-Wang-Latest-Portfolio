@@ -1,5 +1,6 @@
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
+import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   JellyfishIcon,
   MusicNoteIcon,
@@ -14,9 +15,10 @@ export function ResumeUnavailableSection() {
 
   return (
     <Reveal>
-      <section className="section-frame overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div>
+      <section className="section-frame relative overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10">
+        <ThemeShiftBackdrop />
+        <div className="relative z-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="relative z-10">
             <h2 className="font-display text-3xl font-bold tracking-[-0.05em] text-[var(--color-text)] sm:text-4xl">
               Resume temporarily out of office.
             </h2>
@@ -64,6 +66,7 @@ export function ResumeUnavailableSection() {
                   : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(124,92,255,0.07))',
             }}
           >
+            <ThemeShiftBackdrop variant="card" />
             <div
               className="absolute right-[-1rem] top-[-1rem] h-24 w-24 rounded-full blur-3xl"
               style={{
@@ -75,7 +78,7 @@ export function ResumeUnavailableSection() {
             />
 
             {theme === 'light' ? (
-              <div className="relative space-y-5">
+              <div className="relative z-10 space-y-5">
                 <div className="flex items-center gap-3">
                   <div className="flex gap-2">
                     <div className="size-10 rounded-full bg-white" />
@@ -104,7 +107,7 @@ export function ResumeUnavailableSection() {
                 </div>
               </div>
             ) : (
-              <div className="relative space-y-5">
+              <div className="relative z-10 space-y-5">
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-fuchsia-200">
                   <SparkIcon className="size-4" />
                   Resume is backstage — coming back soon

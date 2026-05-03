@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { projects } from '../../data/projects'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
+import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { ArrowUpRightIcon, JellyfishIcon, MusicNoteIcon, SnowflakeIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
@@ -10,13 +11,17 @@ export function ProjectsSection() {
 
   return (
     <Reveal>
-      <section id="projects" className="section-frame px-5 py-8 sm:px-8 sm:py-10 lg:px-10">
+      <section
+        id="projects"
+        className="section-frame relative overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
+      >
+        <ThemeShiftBackdrop />
         <SectionHeading
           title="Featured projects"
           description="Selected delivery stories that show how product thinking, implementation detail, and workflow structure come together in production work."
         />
 
-        <div className="mt-8 grid gap-5 xl:grid-cols-2">
+        <div className="relative z-10 mt-8 grid gap-5 xl:grid-cols-2">
           {projects.map((project) => (
             <motion.article
               key={project.title}
@@ -30,6 +35,7 @@ export function ProjectsSection() {
               transition={{ type: 'spring', stiffness: 220, damping: 18 }}
               style={{ transformStyle: 'preserve-3d' }}
             >
+              <ThemeShiftBackdrop variant="card" />
               <div
                 className="absolute inset-0"
                 style={{
@@ -61,7 +67,7 @@ export function ProjectsSection() {
                 }}
               />
 
-              <div className="relative">
+              <div className="relative z-10">
                 {theme === 'light' ? (
                   <SnowflakeIcon className="absolute right-1 top-1 size-5 text-sky-300/50" />
                 ) : (

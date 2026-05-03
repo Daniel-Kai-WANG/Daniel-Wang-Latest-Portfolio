@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { profile } from '../../data/profile'
 import { useTheme } from '../../hooks/useTheme'
+import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   ArrowUpRightIcon,
   JellyfishIcon,
@@ -26,6 +27,7 @@ function WorkflowPanel() {
         boxShadow: 'var(--surface-shadow)',
       }}
     >
+      <ThemeShiftBackdrop variant="card" />
       <div className="absolute inset-0 opacity-50 [background-size:24px_24px] bg-hero-grid" />
       <div
         className="absolute right-4 top-4 size-28 rounded-full blur-3xl"
@@ -36,7 +38,7 @@ function WorkflowPanel() {
               : 'rgba(255, 79, 216, 0.18)',
         }}
       />
-      <div className="relative">
+      <div className="relative z-10">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
@@ -208,6 +210,7 @@ export function HeroSection() {
         boxShadow: 'var(--surface-shadow)',
       }}
     >
+      <ThemeShiftBackdrop />
       <div
         className="absolute inset-0 opacity-90"
         style={{
@@ -260,7 +263,7 @@ export function HeroSection() {
         </>
       )}
 
-      <div className="relative grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+      <div className="relative z-10 grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div>
           <div
             className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold"

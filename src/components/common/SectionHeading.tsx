@@ -12,7 +12,7 @@ export function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <div className={cn('max-w-2xl', className)}>
+    <div className={cn('relative z-10 max-w-2xl', className)}>
       <h2 className="font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-4xl">
         {title}
       </h2>
