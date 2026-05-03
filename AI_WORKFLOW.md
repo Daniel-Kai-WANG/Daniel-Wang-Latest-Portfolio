@@ -3,12 +3,13 @@
 purpose: Daniel Wang portfolio; full-stack + AI workflow positioning in a single-page experience.
 stack: Vite, React, TypeScript, Tailwind CSS, Framer Motion, clsx, tailwind-merge.
 branches: main -> staging -> feature/* -> staging.
-themes: light=sky/clouds; dark=music-stage/glossy neon, toned down for professional use.
+themes: light=spring sky + sakura + snow-light; dark=K-pop stage + winter-night gloss, still toned down for professional use.
 content_source: resume-derived data in src/data/profile.ts, src/data/experience.ts, src/data/projects.ts, src/data/skills.ts.
 features:
 - floating navbar
-- sun/moon theme toggle with localStorage persistence
+- custom celestial pull-toggle with localStorage persistence
 - hero workflow section
+- signature divider between hero and experience
 - experience journey
 - tech stack system
 - featured projects
@@ -27,6 +28,7 @@ components:
 - layout/Navbar
 - theme/ThemeProvider
 - theme/ThemeToggle
+- animation/AtmosphericAura
 - animation/Reveal
 - sections/HeroSection
 - sections/ExperienceSection
@@ -34,6 +36,7 @@ components:
 - sections/ProjectsSection
 - sections/ResumeUnavailableSection
 - sections/ContactSection
+- sections/SignatureDivider
 data_map:
 - profile: hero copy, nav, workflow steps, contact links
 - experience: timeline cards
@@ -41,8 +44,13 @@ data_map:
 - skills: grouped stack categories
 animation:
 - global reveal
-- light: floating cards, sky-route motion, soft gradient orbs
-- dark: restrained glow, workflow pulse, premium stage-card shimmer
+- global sakura petal drift and snow fall
+- custom pull-trigger moon-drop / sun-rise transition
+- hero mouse-reactive glow and themed accents
+- signature divider loop motion
+- light: floating cards, sky-route motion, soft gradient orbs, spring-air highlights
+- dark: restrained glow, workflow pulse, stage beams, premium stage-card shimmer
+- hover tilt/lift and sweep-light passes on key cards
 future:
 - connect real public project links when available
 - generate and verify QR after live deployment exists
