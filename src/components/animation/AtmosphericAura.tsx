@@ -1,0 +1,144 @@
+import { motion, useReducedMotion } from 'framer-motion'
+import { PetalIcon, SnowflakeIcon } from '../common/Icons'
+import { useTheme } from '../../hooks/useTheme'
+
+const petals = [
+  { left: '8%', size: 20, delay: 0, duration: 18 },
+  { left: '18%', size: 26, delay: 2, duration: 21 },
+  { left: '33%', size: 18, delay: 4, duration: 17 },
+  { left: '62%', size: 24, delay: 1, duration: 20 },
+  { left: '78%', size: 16, delay: 5, duration: 19 },
+  { left: '90%', size: 22, delay: 3, duration: 22 },
+]
+
+const snowflakes = [
+  { left: '12%', size: 14, delay: 1, duration: 16 },
+  { left: '28%', size: 18, delay: 5, duration: 18 },
+  { left: '46%', size: 12, delay: 0, duration: 14 },
+  { left: '57%', size: 16, delay: 3, duration: 17 },
+  { left: '74%', size: 20, delay: 7, duration: 19 },
+  { left: '86%', size: 12, delay: 4, duration: 15 },
+]
+
+export function AtmosphericAura() {
+  const { theme } = useTheme()
+  const reduceMotion = useReducedMotion()
+
+  return (
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div
+        className="absolute inset-x-0 top-0 h-[42rem]"
+        style={{
+          background:
+            theme === 'light'
+              ? 'linear-gradient(180deg, rgba(255,214,235,0.16), transparent 32%)'
+              : 'linear-gradient(180deg, rgba(255,79,216,0.09), transparent 28%)',
+        }}
+      />
+
+      <div
+        className="absolute inset-y-0 right-[-10%] w-[30rem] blur-3xl"
+        style={{
+          background:
+            theme === 'light'
+              ? 'radial-gradient(circle, rgba(255,190,220,0.16), transparent 58%)'
+              : 'radial-gradient(circle, rgba(124,92,255,0.18), transparent 60%)',
+        }}
+      />
+
+      <div
+        className="absolute left-[-8%] top-[20%] h-80 w-80 rounded-full blur-3xl"
+        style={{
+          background:
+            theme === 'light'
+              ? 'rgba(208, 235, 255, 0.28)'
+              : 'rgba(34, 211, 238, 0.11)',
+        }}
+      />
+
+      {!reduceMotion &&
+        petals.map((petal, index) => (
+          <motion.div
+            key={`petal-${petal.left}`}
+            className="absolute top-[-10%]"
+            style={{ left: petal.left }}
+            initial={{ opacity: 0, y: '-8vh' }}
+            animate={{
+              opacity: theme === 'light' ? [0, 0.95, 0.9, 0] : [0, 0.5, 0.4, 0],
+              y: ['-8vh', '108vh'],
+              x: [0, 26, -14, 18, -10],
+              rotate: [0, 130, 220, 320],
+            }}
+            transition={{
+              duration: petal.duration,
+              delay: petal.delay,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+          >
+            <PetalIcon
+              className={theme === 'light' ? 'text-rose-300/90' : 'text-fuchsia-300/55'}
+              style={{
+                width: `${petal.size}px`,
+                height: `${petal.size}px`,
+                filter: index % 2 === 0 ? 'blur(0px)' : 'blur(0.2px)',
+              }}
+            />
+          </motion.div>
+        ))}
+
+      {!reduceMotion &&
+        snowflakes.map((flake, index) => (
+          <motion.div
+            key={`flake-${flake.left}`}
+            className="absolute top-[-6%]"
+            style={{ left: flake.left }}
+            initial={{ opacity: 0, y: '-6vh' }}
+            animate={{
+              opacity: theme === 'light' ? [0, 0.35, 0.3, 0] : [0, 0.78, 0.6, 0],
+              y: ['-6vh', '106vh'],
+              x: [0, 8, -6, 10],
+              rotate: [0, 90, 180, 360],
+            }}
+            transition={{
+              duration: flake.duration,
+              delay: flake.delay + index * 0.35,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+          >
+            <SnowflakeIcon
+              className={theme === 'light' ? 'text-sky-200/60' : 'text-cyan-100/80'}
+              style={{
+                width: `${flake.size}px`,
+                height: `${flake.size}px`,
+              }}
+            />
+          </motion.div>
+        ))}
+
+      {!reduceMotion && theme === 'dark' && (
+        <>
+          <motion.div
+            className="absolute left-[10%] top-[-8rem] h-[32rem] w-24 rotate-[12deg] blur-2xl"
+            animate={{ opacity: [0.22, 0.38, 0.22], x: [0, 26, 0] }}
+            transition={{ duration: 7.2, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(255,79,216,0.38), rgba(255,79,216,0))',
+            }}
+          />
+          <motion.div
+            className="absolute right-[12%] top-[-10rem] h-[34rem] w-24 -rotate-[16deg] blur-2xl"
+            animate={{ opacity: [0.16, 0.34, 0.16], x: [0, -24, 0] }}
+            transition={{ duration: 8.4, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(34,211,238,0.34), rgba(34,211,238,0))',
+            }}
+          />
+        </>
+      )}
+    </div>
+  )
+}

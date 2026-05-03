@@ -14,22 +14,24 @@
   --color-primary: #38bdf8;
   --color-secondary: #2563eb;
   --color-warm: #fdba74;
+  --color-petal: #f6a8c8;
+  --color-snow: #dff3ff;
   --color-border: rgba(189, 231, 255, 0.88);
   --surface-shadow: 0 30px 70px rgba(27, 88, 140, 0.12);
   --page-background:
-    linear-gradient(180deg, #f8fcff 0%, #edf8ff 48%, #f8fcff 100%);
-  --page-orb-a: rgba(56, 189, 248, 0.18);
+    linear-gradient(180deg, #fffafc 0%, #edf7ff 26%, #f6fbff 62%, #fbfeff 100%);
+  --page-orb-a: rgba(246, 168, 200, 0.16);
   --page-orb-b: rgba(37, 99, 235, 0.14);
-  --page-orb-c: rgba(253, 186, 116, 0.12);
+  --page-orb-c: rgba(223, 243, 255, 0.2);
   --hero-grid: rgba(23, 50, 77, 0.08);
   --soft-accent: rgba(56, 189, 248, 0.14);
   --soft-accent-strong: rgba(37, 99, 235, 0.2);
   --timeline-line: rgba(37, 99, 235, 0.2);
   --pill-background: rgba(255, 255, 255, 0.72);
-  --pill-text: #1f4f7d;
-  --pill-border: rgba(102, 186, 246, 0.34);
+  --pill-text: #7a3e63;
+  --pill-border: rgba(246, 168, 200, 0.26);
   --hero-panel-background:
-    linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(234, 246, 255, 0.9));
+    linear-gradient(150deg, rgba(255, 255, 255, 0.94), rgba(243, 233, 246, 0.78), rgba(234, 246, 255, 0.88));
 }
 
 :root[data-theme='dark'] {
@@ -42,22 +44,24 @@
   --color-primary: #ff4fd8;
   --color-secondary: #7c5cff;
   --color-warm: #ff8a3d;
+  --color-petal: #ff8dc8;
+  --color-snow: #d6f6ff;
   --color-border: rgba(255, 255, 255, 0.14);
   --surface-shadow: 0 34px 90px rgba(2, 3, 10, 0.56);
   --page-background:
-    linear-gradient(180deg, #09090f 0%, #0f1120 48%, #09090f 100%);
+    linear-gradient(180deg, #07070d 0%, #111225 34%, #171025 68%, #080910 100%);
   --page-orb-a: rgba(255, 79, 216, 0.14);
   --page-orb-b: rgba(124, 92, 255, 0.16);
-  --page-orb-c: rgba(34, 211, 238, 0.1);
+  --page-orb-c: rgba(214, 246, 255, 0.12);
   --hero-grid: rgba(255, 255, 255, 0.06);
   --soft-accent: rgba(255, 79, 216, 0.16);
   --soft-accent-strong: rgba(124, 92, 255, 0.24);
   --timeline-line: rgba(255, 255, 255, 0.08);
   --pill-background: rgba(255, 255, 255, 0.06);
-  --pill-text: #f6dbff;
+  --pill-text: #ffd6ef;
   --pill-border: rgba(255, 255, 255, 0.12);
   --hero-panel-background:
-    linear-gradient(155deg, rgba(20, 22, 35, 0.96), rgba(25, 15, 46, 0.82));
+    linear-gradient(155deg, rgba(20, 22, 35, 0.96), rgba(28, 14, 44, 0.88), rgba(13, 25, 43, 0.82));
 }
 
 :root,
