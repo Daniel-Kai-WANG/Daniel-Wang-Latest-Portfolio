@@ -167,6 +167,23 @@ export function MusicNoteIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+export function StarSparkIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z"
+        fill="currentColor"
+      />
+      <path
+        d="M18.5 4.5v2M17.5 5.5h2M6 17v3M4.5 18.5h3"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  )
+}
+
 export function JellyfishIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>

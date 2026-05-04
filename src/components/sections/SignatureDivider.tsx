@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useTheme } from '../../hooks/useTheme'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
+import { JellyfishIcon, PetalIcon, SnowflakeIcon, StarSparkIcon } from '../common/Icons'
 
 export function SignatureDivider() {
   const { theme } = useTheme()
@@ -22,8 +22,8 @@ export function SignatureDivider() {
             color: 'var(--pill-text)',
           }}
         >
-          {theme === 'light' ? <PetalIcon className="size-4" /> : <MusicNoteIcon className="size-4" />}
-          {theme === 'light' ? 'Sakura-coded' : 'Rhythm-coded'}
+          {theme === 'light' ? <PetalIcon className="size-4" /> : <StarSparkIcon className="size-4" />}
+          {theme === 'light' ? 'Sakura-coded' : 'Glow-coded'}
         </span>
         {theme === 'light' ? (
           <SnowflakeIcon className="size-5 text-sky-300/70" />
@@ -38,7 +38,7 @@ export function SignatureDivider() {
         {theme === 'light' ? (
           <PetalIcon className="size-5 text-rose-300/75" />
         ) : (
-          <MusicNoteIcon className="size-5 text-fuchsia-200/60" />
+          <StarSparkIcon className="size-5 text-fuchsia-200/60" />
         )}
         <span
           className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-bold uppercase tracking-[0.22em]"

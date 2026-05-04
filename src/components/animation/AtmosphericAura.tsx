@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
+import { JellyfishIcon, PetalIcon, SnowflakeIcon, StarSparkIcon } from '../common/Icons'
 import { useTheme } from '../../hooks/useTheme'
 
 const petals = [
@@ -20,7 +20,7 @@ const snowflakes = [
   { left: '86%', size: 12, delay: 4, duration: 15 },
 ]
 
-const notes = [
+const sparks = [
   { left: '10%', size: 18, delay: 0, duration: 14 },
   { left: '24%', size: 22, delay: 4, duration: 18 },
   { left: '48%', size: 16, delay: 2, duration: 15 },
@@ -135,30 +135,31 @@ export function AtmosphericAura() {
 
       {!reduceMotion &&
         theme === 'dark' &&
-        notes.map((note, index) => (
+        sparks.map((spark, index) => (
           <motion.div
-            key={`note-${note.left}`}
+            key={`spark-${spark.left}`}
             className="absolute top-[8%]"
-            style={{ left: note.left }}
+            style={{ left: spark.left }}
             initial={{ opacity: 0, y: '4vh' }}
             animate={{
               opacity: [0, 0.7, 0.52, 0],
               y: ['4vh', '-10vh'],
               x: [0, 14, -10, 8],
-              rotate: [0, -10, 12, -8],
+              rotate: [0, -8, 14, -10],
+              scale: [0.88, 1.08, 0.92, 1],
             }}
             transition={{
-              duration: note.duration,
-              delay: note.delay + index * 0.45,
+              duration: spark.duration,
+              delay: spark.delay + index * 0.45,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
           >
-            <MusicNoteIcon
+            <StarSparkIcon
               className="text-fuchsia-200/70"
               style={{
-                width: `${note.size}px`,
-                height: `${note.size}px`,
+                width: `${spark.size}px`,
+                height: `${spark.size}px`,
                 filter: index % 2 === 0 ? 'drop-shadow(0 0 10px rgba(255,79,216,0.24))' : 'none',
               }}
             />
