@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { projects } from '../../data/projects'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
@@ -8,7 +9,11 @@ import { SectionHeading } from '../common/SectionHeading'
 
 export function ProjectsSection() {
   const { theme } = useTheme()
-  const [featured, ...secondaryProjects] = projects
+  const [activeIndex, setActiveIndex] = useState(0)
+  const activeProject = projects[activeIndex]
+  const previewProjects = projects
+    .map((project, index) => ({ project, index }))
+    .filter(({ index }) => index !== activeIndex)
 
   return (
     <Reveal>
@@ -21,193 +26,205 @@ export function ProjectsSection() {
         <div className="relative z-10">
           <SectionHeading
             title="Featured projects"
-            description="A more editorial case-study layout showing one headline build and a supporting stack of delivery stories instead of four identical project cards."
+            description="One project stays in active focus on the left, while the other stories rest as compact previews on the right until you call them forward."
           />
 
-          <div className="mt-8 grid gap-5 xl:grid-cols-[1.15fr_0.85fr]">
-            <motion.article
-              className="relative overflow-hidden rounded-[2.2rem] border p-6 sm:p-7"
-              whileHover={{
-                y: -8,
-                scale: 1.008,
-                rotateX: theme === 'light' ? 2 : 3,
-                rotateY: theme === 'light' ? -2 : 2,
-              }}
-              transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              <ThemeShiftBackdrop variant="card" />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    theme === 'light'
-                      ? 'linear-gradient(135deg, rgba(255,255,255,0.94), rgba(245,251,255,0.9), rgba(255,244,248,0.82))'
-                      : 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(34,211,238,0.05), rgba(124,92,255,0.08))',
+          <div className="mt-8 grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
+            <AnimatePresence mode="wait">
+              <motion.article
+                key={activeProject.title}
+                initial={{ opacity: 0, y: 18, scale: 0.985 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -14, scale: 0.985 }}
+                transition={{ duration: 0.36, ease: 'easeOut' }}
+                className="relative overflow-hidden rounded-[2.2rem] border p-6 sm:p-7"
+                whileHover={{
+                  y: -8,
+                  scale: 1.008,
+                  rotateX: theme === 'light' ? 2 : 3,
+                  rotateY: theme === 'light' ? -2 : 2,
                 }}
-              />
-              <div
-                className="sheen-pass"
-                style={{
-                  animationDuration: theme === 'light' ? '7.4s' : '6.2s',
-                  background:
-                    theme === 'light'
-                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), rgba(214,244,255,0.3), transparent)'
-                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.16), rgba(124,92,255,0.12), transparent)',
-                }}
-              />
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <ThemeShiftBackdrop variant="card" />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      theme === 'light'
+                        ? 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(242,249,255,0.92), rgba(255,242,247,0.84))'
+                        : 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(34,211,238,0.05), rgba(124,92,255,0.08))',
+                  }}
+                />
+                <div
+                  className="sheen-pass"
+                  style={{
+                    animationDuration: theme === 'light' ? '7.2s' : '6s',
+                    background:
+                      theme === 'light'
+                        ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.62), rgba(214,244,255,0.28), transparent)'
+                        : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(124,92,255,0.14), transparent)',
+                  }}
+                />
 
-              <div className="relative z-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-                <div className="flex flex-col justify-between gap-6">
-                  <div>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span
-                        className="inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
-                        style={{
-                          borderColor: 'var(--pill-border)',
-                          background: 'var(--pill-background)',
-                          color: 'var(--pill-text)',
-                        }}
-                      >
-                        {featured.tag}
-                      </span>
-                      <span className="text-sm font-semibold text-[var(--color-muted)]">
-                        {featured.status}
-                      </span>
-                    </div>
-
-                    <h3 className="mt-5 font-display text-[2.2rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)] sm:text-[2.6rem]">
-                      {featured.title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-7 text-[var(--color-muted)]">
-                      {featured.description}
-                    </p>
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {[
-                      { value: '01', label: 'headline case' },
-                      { value: '3', label: 'core wins' },
-                      { value: '5', label: 'tooling layers' },
-                    ].map((item) => (
-                      <div
-                        key={item.label}
-                        className="rounded-[1.3rem] border px-3 py-4"
-                        style={{
-                          borderColor: 'var(--pill-border)',
-                          background: 'var(--pill-background)',
-                        }}
-                      >
-                        <div className="font-display text-2xl font-bold tracking-[-0.05em] text-[var(--color-text)]">
-                          {item.value}
-                        </div>
-                        <div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                          {item.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-[1.8rem] border p-5" style={{ borderColor: 'var(--pill-border)', background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)' }}>
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                      Delivery highlights
-                    </div>
-                    {theme === 'light' ? (
-                      <SnowflakeIcon className="size-5 text-sky-300/70" />
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <StarSparkIcon className="size-4 text-fuchsia-200/65" />
-                        <JellyfishIcon className="size-5 text-cyan-200/50" />
-                      </div>
-                    )}
-                  </div>
-
-                  <ul className="mt-5 space-y-3 text-sm leading-6 text-[var(--color-muted)]">
-                    {featured.highlights.map((highlight) => (
-                      <li key={highlight} className="flex gap-3">
+                <div className="relative z-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+                  <div className="flex flex-col justify-between gap-6">
+                    <div>
+                      <div className="flex flex-wrap items-center gap-3">
                         <span
-                          className="mt-2 size-2.5 shrink-0 rounded-full"
+                          className="inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
                           style={{
-                            background:
-                              theme === 'light'
-                                ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                                : 'linear-gradient(135deg, #FF4FD8, #22D3EE)',
+                            borderColor: 'var(--pill-border)',
+                            background: 'var(--pill-background)',
+                            color: 'var(--pill-text)',
                           }}
-                        />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
+                        >
+                          {activeProject.tag}
+                        </span>
+                        <span className="text-sm font-semibold text-[var(--color-muted)]">
+                          {activeProject.status}
+                        </span>
+                      </div>
 
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {featured.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border px-3 py-1.5 text-xs font-semibold"
+                      <h3 className="mt-5 font-display text-[2.2rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)] sm:text-[2.6rem]">
+                        {activeProject.title}
+                      </h3>
+                      <p className="mt-4 text-sm leading-7 text-[var(--color-muted)]">
+                        {activeProject.description}
+                      </p>
+                    </div>
+
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      {[
+                        { value: `0${activeIndex + 1}`, label: 'active case' },
+                        { value: `${activeProject.highlights.length}`, label: 'core wins' },
+                        { value: `${activeProject.tech.length}`, label: 'tooling layers' },
+                      ].map((item) => (
+                        <div
+                          key={item.label}
+                          className="rounded-[1.3rem] border px-3 py-4"
+                          style={{
+                            borderColor: 'var(--pill-border)',
+                            background: 'var(--pill-background)',
+                          }}
+                        >
+                          <div className="font-display text-2xl font-bold tracking-[-0.05em] text-[var(--color-text)]">
+                            {item.value}
+                          </div>
+                          <div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                            {item.label}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div
+                    className="rounded-[1.8rem] border p-5"
+                    style={{
+                      borderColor: 'var(--pill-border)',
+                      background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
+                    }}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                        Delivery highlights
+                      </div>
+                      {theme === 'light' ? (
+                        <SnowflakeIcon className="size-5 text-sky-300/70" />
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <StarSparkIcon className="size-4 text-fuchsia-200/65" />
+                          <JellyfishIcon className="size-5 text-cyan-200/50" />
+                        </div>
+                      )}
+                    </div>
+
+                    <ul className="mt-5 space-y-3 text-sm leading-6 text-[var(--color-muted)]">
+                      {activeProject.highlights.map((highlight) => (
+                        <li key={highlight} className="flex gap-3">
+                          <span
+                            className="mt-2 size-2.5 shrink-0 rounded-full"
+                            style={{
+                              background:
+                                theme === 'light'
+                                  ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
+                                  : 'linear-gradient(135deg, #FF4FD8, #22D3EE)',
+                            }}
+                          />
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {activeProject.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border px-3 py-1.5 text-xs font-semibold"
+                          style={{
+                            borderColor: 'var(--pill-border)',
+                            background: 'var(--pill-background)',
+                            color: 'var(--pill-text)',
+                          }}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-6">
+                      <a
+                        href={activeProject.ctaHref}
+                        className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white"
                         style={{
-                          borderColor: 'var(--pill-border)',
-                          background: 'var(--pill-background)',
-                          color: 'var(--pill-text)',
+                          background:
+                            theme === 'light'
+                              ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
+                              : 'linear-gradient(135deg, #FF4FD8, #7C5CFF)',
                         }}
                       >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-6">
-                    <a
-                      href={featured.ctaHref}
-                      className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white"
-                      style={{
-                        background:
-                          theme === 'light'
-                            ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                            : 'linear-gradient(135deg, #FF4FD8, #7C5CFF)',
-                      }}
-                    >
-                      {featured.ctaLabel}
-                      <ArrowUpRightIcon className="size-4" />
-                    </a>
+                        {activeProject.ctaLabel}
+                        <ArrowUpRightIcon className="size-4" />
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.article>
+              </motion.article>
+            </AnimatePresence>
 
-            <div className="grid gap-4">
-              {secondaryProjects.map((project, index) => (
-                <motion.article
+            <motion.div layout className="grid gap-4">
+              {previewProjects.map(({ project, index }) => (
+                <motion.button
                   key={project.title}
-                  className="relative overflow-hidden rounded-[1.9rem] border p-5"
+                  layout
+                  type="button"
+                  onClick={() => setActiveIndex(index)}
+                  className="relative overflow-hidden rounded-[1.9rem] border p-5 text-left"
                   whileHover={{
-                    y: -8,
+                    y: -6,
                     scale: 1.01,
                     rotateX: theme === 'light' ? 2 : 3,
                     rotateY: theme === 'light' ? -2 : 2,
                   }}
                   transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-                  style={{ transformStyle: 'preserve-3d' }}
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    borderColor: 'var(--color-border)',
+                    background:
+                      theme === 'light'
+                        ? 'linear-gradient(180deg, rgba(255,255,255,0.94), rgba(240,249,255,0.9))'
+                        : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(34,211,238,0.04))',
+                  }}
                 >
                   <ThemeShiftBackdrop variant="card" />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        theme === 'light'
-                          ? 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(240,249,255,0.88))'
-                          : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(34,211,238,0.04))',
-                    }}
-                  />
-
                   <div className="relative z-10">
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
                         <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                          Case {index + 2}
+                          Click to feature
                         </div>
-                        <h3 className="mt-3 font-display text-[1.7rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)]">
+                        <h3 className="mt-3 font-display text-[1.55rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)]">
                           {project.title}
                         </h3>
                       </div>
@@ -242,7 +259,7 @@ export function ProjectsSection() {
                       ))}
                     </div>
 
-                    <div className="mt-5 flex flex-wrap items-center gap-3">
+                    <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
                       <div className="flex flex-wrap gap-2">
                         {project.tech.slice(0, 4).map((tech) => (
                           <span
@@ -258,18 +275,16 @@ export function ProjectsSection() {
                           </span>
                         ))}
                       </div>
-                      <a
-                        href={project.ctaHref}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-text)]"
-                      >
-                        {project.ctaLabel}
+
+                      <div className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-text)]">
+                        Make active
                         <ArrowUpRightIcon className="size-4" />
-                      </a>
+                      </div>
                     </div>
                   </div>
-                </motion.article>
+                </motion.button>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
