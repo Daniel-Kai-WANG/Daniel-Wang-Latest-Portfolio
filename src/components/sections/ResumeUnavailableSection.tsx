@@ -5,7 +5,6 @@ import {
   JellyfishIcon,
   MusicNoteIcon,
   PetalIcon,
-  PlaneIcon,
   SnowflakeIcon,
   SparkIcon,
 } from '../common/Icons'
@@ -91,9 +90,15 @@ export function ResumeUnavailableSection() {
               <div className="relative z-10 space-y-5">
                 <div className="flex items-center gap-3">
                   <div className="flex gap-2">
-                    <div className="size-10 rounded-full bg-white" />
-                    <div className="mt-3 size-14 rounded-full bg-sky-100" />
-                    <div className="size-9 rounded-full bg-white/90" />
+                    <div className="flex size-10 items-center justify-center rounded-full bg-white">
+                      <PetalIcon className="size-5 text-rose-300" />
+                    </div>
+                    <div className="mt-3 flex size-14 items-center justify-center rounded-full bg-sky-100">
+                      <SnowflakeIcon className="size-6 text-sky-400" />
+                    </div>
+                    <div className="flex size-9 items-center justify-center rounded-full bg-white/90">
+                      <PetalIcon className="size-4 text-pink-200" />
+                    </div>
                   </div>
                   <div className="rounded-[1.4rem] border border-sky-100 bg-white/90 px-4 py-3 text-sm font-semibold text-sky-700">
                     BRB — polishing resume
@@ -113,7 +118,10 @@ export function ResumeUnavailableSection() {
                       Sakura breeze outside, shipping energy still on.
                     </div>
                   </div>
-                  <PlaneIcon className="size-10 rotate-12 text-sky-500" />
+                  <div className="flex items-center gap-2">
+                    <PetalIcon className="size-6 rotate-[-14deg] text-rose-300" />
+                    <SnowflakeIcon className="size-5 text-sky-400" />
+                  </div>
                 </div>
               </div>
             ) : (
