@@ -3,7 +3,7 @@ import { experiences } from '../../data/experience'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
+import { JellyfishIcon, PetalIcon, SnowflakeIcon, StarSparkIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function ExperienceSection() {
@@ -194,9 +194,9 @@ export function ExperienceSection() {
                               </>
                             ) : (
                               <>
-                                <MusicNoteIcon className="size-4 text-fuchsia-200" />
+                                <StarSparkIcon className="size-4 text-fuchsia-200" />
                                 <JellyfishIcon className="size-4 text-cyan-200" />
-                                Midnight-stage focus, calm shipping rhythm.
+                                Midnight-stage focus, calm shipping glow.
                               </>
                             )}
                           </div>

@@ -6,10 +6,10 @@ import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   ArrowUpRightIcon,
   JellyfishIcon,
-  MusicNoteIcon,
   PetalIcon,
   SnowflakeIcon,
   SparkIcon,
+  StarSparkIcon,
 } from '../common/Icons'
 
 function WorkflowPanel() {
@@ -64,7 +64,7 @@ function WorkflowPanel() {
                 <SnowflakeIcon className="absolute -right-2 -top-1 size-3.5 text-sky-300" />
               </div>
             ) : (
-              <MusicNoteIcon className="size-5 text-[var(--color-primary)]" />
+              <StarSparkIcon className="size-5 text-[var(--color-primary)]" />
             )}
           </div>
         </div>
@@ -141,7 +141,7 @@ function WorkflowPanel() {
               {theme === 'light' ? (
                 <PetalIcon className="size-4 text-rose-300/95" />
               ) : (
-                <MusicNoteIcon className="size-4 text-[var(--color-primary)]" />
+                <StarSparkIcon className="size-4 text-[var(--color-primary)]" />
               )}
             </motion.div>
           )}
@@ -262,8 +262,8 @@ export function HeroSection() {
         </>
       ) : (
         <>
-          <MusicNoteIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-fuchsia-200/70" />
-          <MusicNoteIcon className="absolute right-12 top-20 size-5 rotate-[14deg] text-fuchsia-100/55" />
+          <StarSparkIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-fuchsia-200/70" />
+          <StarSparkIcon className="absolute right-12 top-20 size-5 rotate-[14deg] text-fuchsia-100/55" />
           <JellyfishIcon className="absolute bottom-8 right-8 size-12 text-cyan-200/40" />
           <JellyfishIcon className="absolute left-10 top-24 size-8 text-cyan-100/45" />
         </>
@@ -291,8 +291,8 @@ export function HeroSection() {
               </>
             ) : (
               <>
-                <MusicNoteIcon className="size-4 text-fuchsia-200" />
-                K-pop stage energy with drifting jellyfish glow and midnight rhythm.
+                <StarSparkIcon className="size-4 text-fuchsia-200" />
+                K-pop stage energy with drifting jellyfish glow and midnight sparks.
               </>
             )}
           </p>

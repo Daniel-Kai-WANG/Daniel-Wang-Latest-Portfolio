@@ -3,10 +3,10 @@ import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   JellyfishIcon,
-  MusicNoteIcon,
   PetalIcon,
   SnowflakeIcon,
   SparkIcon,
+  StarSparkIcon,
 } from '../common/Icons'
 
 export function ResumeUnavailableSection() {
@@ -142,9 +142,9 @@ export function ResumeUnavailableSection() {
                     shows the work, context, and delivery range.
                   </p>
                   <div className="mt-4 flex items-center gap-2 text-sm text-fuchsia-100/80">
-                    <MusicNoteIcon className="size-4 text-fuchsia-200" />
+                    <StarSparkIcon className="size-4 text-fuchsia-200" />
                     <JellyfishIcon className="size-4 text-cyan-200" />
-                    Midnight-set shimmer with jellyfish drift.
+                    Midnight-set shimmer with jellyfish glow.
                   </div>
                 </div>
               </div>

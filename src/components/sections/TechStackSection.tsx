@@ -3,7 +3,7 @@ import { skillCategories } from '../../data/skills'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { JellyfishIcon, MusicNoteIcon, PetalIcon, SnowflakeIcon } from '../common/Icons'
+import { JellyfishIcon, PetalIcon, SnowflakeIcon, StarSparkIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function TechStackSection() {
@@ -51,7 +51,7 @@ export function TechStackSection() {
                     </>
                   ) : (
                     <>
-                      <MusicNoteIcon className="size-5 text-fuchsia-200" />
+                      <StarSparkIcon className="size-5 text-fuchsia-200" />
                       <JellyfishIcon className="size-6 text-cyan-200/60" />
                     </>
                   )}
