@@ -78,7 +78,7 @@ export function ExperienceSection() {
     <Reveal>
       <section
         id="experience"
-        className="section-frame relative overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
+        className="section-frame relative overflow-visible px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
       >
         <ThemeShiftBackdrop />
 
@@ -134,7 +134,7 @@ export function ExperienceSection() {
 
           <div className="relative">
             <div
-              className="relative overflow-hidden rounded-[2rem] border px-4 py-5 sm:px-6 sm:py-6"
+              className="relative overflow-visible rounded-[2rem] border px-4 py-5 sm:px-6 sm:py-6"
               style={{
                 borderColor: 'var(--color-border)',
                 background:
@@ -184,10 +184,10 @@ export function ExperienceSection() {
                   </div>
                 </div>
 
-                <div className="relative mt-6 h-[35rem] sm:h-[38rem]">
+                <div className="relative mt-6 h-[38rem] sm:h-[41rem] lg:h-[43rem]">
                   <svg
                     viewBox="0 0 420 390"
-                    className="absolute inset-0 h-full w-full"
+                    className="absolute inset-0 z-0 h-full w-full"
                     aria-hidden="true"
                   >
                     <defs>
@@ -271,7 +271,7 @@ export function ExperienceSection() {
                       >
                         <motion.button
                           type="button"
-                          className="relative flex min-h-[72px] w-[106px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[999px] border px-3 py-2 text-center"
+                          className="relative z-10 flex min-h-[72px] w-[106px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[999px] border px-3 py-2 text-center"
                           initial={{ opacity: 0, scale: 0.7, y: 12 }}
                           whileInView={{ opacity: 1, scale: 1, y: 0 }}
                           viewport={{ once: true, amount: 0.4 }}
@@ -300,6 +300,8 @@ export function ExperienceSection() {
                                 ? '0 18px 34px rgba(244,114,182,0.2)'
                                 : '0 18px 34px rgba(124,92,255,0.18)'
                               : '0 14px 30px rgba(15,23,42,0.08)',
+                            zIndex: isActive ? 40 : 12,
+                            opacity: activeFruit !== null && !isActive ? 0.38 : 1,
                           }}
                         >
                           <motion.div
@@ -324,7 +326,7 @@ export function ExperienceSection() {
                           </div>
                         </motion.button>
 
-                        <div className={`pointer-events-none absolute hidden w-[16.5rem] lg:block ${node.panelClassName}`}>
+                        <div className={`pointer-events-none absolute z-30 hidden w-[18rem] lg:block ${node.panelClassName}`}>
                           <AnimatePresence>
                             {isActive ? (
                               <motion.div
@@ -332,14 +334,14 @@ export function ExperienceSection() {
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.92, y: 6 }}
                                 transition={reduceMotion ? { duration: 0 } : { duration: 0.28, ease: 'easeOut' }}
-                                className="overflow-hidden rounded-[1.6rem] border p-4"
+                                className="overflow-hidden rounded-[1.6rem] border p-4 backdrop-blur-sm"
                                 style={{
                                   borderColor: 'var(--pill-border)',
                                   background:
                                     theme === 'light'
-                                      ? 'linear-gradient(180deg, rgba(255,255,255,0.97), rgba(255,241,246,0.95))'
-                                      : 'linear-gradient(180deg, rgba(21,19,36,0.98), rgba(17,26,43,0.96))',
-                                  boxShadow: '0 18px 44px rgba(15,23,42,0.18)',
+                                      ? 'linear-gradient(180deg, rgba(255,255,255,0.995), rgba(255,247,251,0.985))'
+                                      : 'linear-gradient(180deg, rgba(18,17,33,0.99), rgba(16,24,40,0.985))',
+                                  boxShadow: '0 22px 48px rgba(15,23,42,0.22)',
                                 }}
                               >
                                 <div className="flex items-start justify-between gap-3">
@@ -389,19 +391,19 @@ export function ExperienceSection() {
                 <div className="mt-4 lg:hidden">
                   <AnimatePresence mode="wait">
                     {activeFruit !== null ? (
-                      <motion.article
-                        key={experiences[activeFruit].company}
+                        <motion.article
+                          key={experiences[activeFruit].company}
                         initial={{ opacity: 0, y: 14 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={reduceMotion ? { duration: 0 } : { duration: 0.26, ease: 'easeOut' }}
-                        className="rounded-[1.6rem] border p-4"
+                        className="rounded-[1.6rem] border p-4 backdrop-blur-sm"
                         style={{
                           borderColor: 'var(--pill-border)',
                           background:
                             theme === 'light'
-                              ? 'linear-gradient(180deg, rgba(255,255,255,0.97), rgba(255,241,246,0.95))'
-                              : 'linear-gradient(180deg, rgba(21,19,36,0.98), rgba(17,26,43,0.96))',
+                              ? 'linear-gradient(180deg, rgba(255,255,255,0.995), rgba(255,247,251,0.985))'
+                              : 'linear-gradient(180deg, rgba(18,17,33,0.99), rgba(16,24,40,0.985))',
                         }}
                       >
                         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
