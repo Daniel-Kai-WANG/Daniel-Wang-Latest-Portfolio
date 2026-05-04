@@ -1,12 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import {
-  JellyfishIcon,
-  MoonIcon,
-  MusicNoteIcon,
-  PetalIcon,
-  SnowflakeIcon,
-  SunIcon,
-} from '../common/Icons'
+import { MoonIcon, SnowflakeIcon, SunIcon } from '../common/Icons'
 import { useTheme } from '../../hooks/useTheme'
 
 export function ThemeToggle() {
@@ -18,102 +11,118 @@ export function ThemeToggle() {
     <div className="flex items-center gap-3">
       <div className="hidden xl:block">
         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--color-muted)]">
-          Spin the sky
+          Orbit theme
         </p>
-        <p className="mt-1 max-w-[8rem] text-xs leading-5 text-[var(--color-muted)]">
-          Tap the capsule to flip the world in 3D.
+        <p className="mt-1 max-w-[7rem] text-xs leading-5 text-[var(--color-muted)]">
+          Tap the ring to rotate day into night.
         </p>
       </div>
 
       <button
         type="button"
-        aria-label="Toggle portfolio theme"
+        aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
         aria-pressed={theme === 'dark'}
         onClick={toggleTheme}
-        className="group relative inline-flex h-[66px] w-[138px] items-center rounded-full border px-2 shadow-[0_18px_44px_rgba(15,23,42,0.18)] backdrop-blur-xl"
+        className="group relative inline-flex size-[60px] shrink-0 items-center justify-center rounded-full border backdrop-blur-xl transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 sm:size-[64px]"
         style={{
           borderColor: 'var(--color-border)',
           background: isLight
-            ? 'linear-gradient(135deg, rgba(255,255,255,0.88), rgba(248,239,246,0.94), rgba(235,246,255,0.92))'
-            : 'linear-gradient(135deg, rgba(17,18,29,0.94), rgba(24,17,37,0.96), rgba(12,23,42,0.9))',
-          transformStyle: 'preserve-3d',
-          perspective: '1000px',
+            ? 'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(250,240,246,0.96), rgba(236,248,255,0.94))'
+            : 'linear-gradient(135deg, rgba(15,18,29,0.96), rgba(24,17,40,0.94), rgba(10,21,37,0.92))',
+          boxShadow: isLight
+            ? '0 18px 36px rgba(37,99,235,0.12)'
+            : '0 18px 42px rgba(2,6,23,0.42)',
         }}
       >
-        <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.24),transparent_55%)]" />
+        <motion.div
+          className="absolute inset-[5px] rounded-full"
+          animate={{ rotate: isLight ? 0 : 180 }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { type: 'spring', stiffness: 220, damping: 20, mass: 0.8 }
+          }
+          style={{
+            background: isLight
+              ? 'conic-gradient(from 210deg, rgba(255,255,255,0.24), rgba(246,168,200,0.84), rgba(186,230,253,0.82), rgba(255,255,255,0.26))'
+              : 'conic-gradient(from 210deg, rgba(255,255,255,0.1), rgba(255,79,216,0.82), rgba(34,211,238,0.74), rgba(255,255,255,0.08))',
+          }}
+        />
 
-        <div className="relative flex w-full items-center justify-between px-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--color-muted)]">
-          <span className="inline-flex items-center gap-1.5">
-            <PetalIcon className="size-3.5 text-rose-300" />
-            Dawn
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            Midnight
-            <MusicNoteIcon className="size-3.5 text-fuchsia-200" />
-          </span>
-        </div>
+        <div
+          className="absolute inset-[9px] rounded-full border"
+          style={{
+            borderColor: isLight ? 'rgba(255,255,255,0.82)' : 'rgba(255,255,255,0.08)',
+            background: isLight
+              ? 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.98), rgba(255,246,250,0.94), rgba(235,246,255,0.92))'
+              : 'radial-gradient(circle at 35% 35%, rgba(36,37,49,0.95), rgba(23,20,37,0.96), rgba(10,20,32,0.94))',
+          }}
+        />
 
         <motion.div
-          className="absolute left-2 top-2 flex h-[50px] w-[62px] items-center justify-center rounded-full border"
+          className="absolute left-1/2 top-1/2 h-[38px] w-[38px] sm:h-[40px] sm:w-[40px]"
+          animate={{ rotate: isLight ? 0 : 180 }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { type: 'spring', stiffness: 220, damping: 20, mass: 0.8 }
+          }
+        >
+          <motion.div
+            className="absolute left-1/2 top-0 flex size-4 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border sm:size-[17px]"
+            animate={{
+              scale: isLight ? 1 : 0.94,
+              opacity: isLight ? 1 : 0.92,
+            }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              borderColor: isLight ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.18)',
+              background: isLight
+                ? 'radial-gradient(circle, rgba(255,214,120,1), rgba(255,166,66,0.92))'
+                : 'radial-gradient(circle, rgba(255,255,255,0.9), rgba(200,210,255,0.9))',
+              boxShadow: isLight
+                ? '0 0 16px rgba(255,192,87,0.42)'
+                : '0 0 14px rgba(148,163,255,0.34)',
+            }}
+          >
+            {isLight ? (
+              <SunIcon className="size-2.5 text-amber-50 sm:size-3" />
+            ) : (
+              <MoonIcon className="size-2.5 text-slate-700 sm:size-3" />
+            )}
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="relative z-10 flex items-center justify-center rounded-full"
           animate={{
-            x: isLight ? 0 : 62,
-            rotateY: isLight ? 0 : 180,
-            rotateX: isLight ? -6 : 8,
+            rotate: isLight ? 0 : -180,
+            scale: isLight ? 1 : 0.98,
           }}
           transition={
             reduceMotion
               ? { duration: 0 }
-              : { type: 'spring', stiffness: 260, damping: 20, mass: 0.8 }
+              : { type: 'spring', stiffness: 210, damping: 19, mass: 0.85 }
           }
-          style={{
-            transformStyle: 'preserve-3d',
-            borderColor: isLight ? 'rgba(246,168,200,0.26)' : 'rgba(255,255,255,0.1)',
-            background: isLight
-              ? 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,232,241,0.96))'
-              : 'linear-gradient(135deg, rgba(255,89,219,0.94), rgba(124,92,255,0.96), rgba(34,211,238,0.86))',
-            boxShadow: isLight
-              ? '0 14px 28px rgba(246,168,200,0.24)'
-              : '0 16px 30px rgba(2,6,23,0.4)',
-          }}
         >
-          <motion.div
-            className="absolute inset-1 rounded-full"
-            animate={{
-              rotateY: isLight ? 0 : 180,
-            }}
-            transition={reduceMotion ? { duration: 0 } : { duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              transformStyle: 'preserve-3d',
-              background: isLight
-                ? 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.96), rgba(255,239,245,0.96), rgba(235,246,255,0.92))'
-                : 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.16), rgba(255,79,216,0.46), rgba(34,211,238,0.22))',
-            }}
-          />
+          {isLight ? (
+            <SunIcon className="size-5 text-amber-500 sm:size-6" />
+          ) : (
+            <MoonIcon className="size-5 text-slate-50 sm:size-6" />
+          )}
+        </motion.div>
 
-          <motion.div
-            className="relative z-10 flex items-center justify-center"
-            animate={{ rotateY: isLight ? 0 : 180 }}
-            transition={reduceMotion ? { duration: 0 } : { duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-            style={{ transformStyle: 'preserve-3d' }}
-          >
-            {isLight ? (
-              <div className="flex items-center gap-1.5">
-                <SunIcon className="size-5 text-amber-500" />
-                <div className="flex items-center gap-1">
-                  <PetalIcon className="size-3.5 text-rose-400" />
-                  <SnowflakeIcon className="size-3.5 text-sky-300" />
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center gap-1.5">
-                <MoonIcon className="size-5 text-slate-50" />
-                <div className="flex items-center gap-1">
-                  <MusicNoteIcon className="size-3.5 text-fuchsia-100" />
-                  <JellyfishIcon className="size-4 text-cyan-100" />
-                </div>
-              </div>
-            )}
-          </motion.div>
+        <motion.div
+          className="absolute bottom-[11px] right-[11px] rounded-full"
+          animate={{
+            opacity: isLight ? 0.84 : 0.78,
+            scale: isLight ? 1 : 1.04,
+          }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.55, ease: 'easeOut' }}
+        >
+          <SnowflakeIcon
+            className={isLight ? 'size-3.5 text-sky-300/90' : 'size-3.5 text-fuchsia-200/65'}
+          />
         </motion.div>
       </button>
     </div>
