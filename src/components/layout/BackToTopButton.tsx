@@ -64,7 +64,7 @@ export function BackToTopButton() {
               behavior: reduceMotion ? 'auto' : 'smooth',
             })
           }
-          className="fixed bottom-6 right-4 z-50 inline-flex h-[58px] w-[58px] items-center justify-center rounded-full border backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 sm:bottom-8 sm:right-8"
+          className="fixed bottom-6 right-4 z-50 inline-flex h-[54px] items-center gap-3 rounded-[1.35rem] border px-4 backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 sm:bottom-8 sm:right-8"
           style={{
             borderColor: 'var(--color-border)',
             background:
@@ -78,7 +78,7 @@ export function BackToTopButton() {
           }}
         >
           <motion.div
-            className="absolute inset-[5px] rounded-full"
+            className="absolute inset-[4px] rounded-[1.1rem]"
             animate={{ rotate: theme === 'light' ? 18 : 194 }}
             transition={reduceMotion ? { duration: 0 } : { duration: 0.7, ease: 'easeOut' }}
             style={{
@@ -90,7 +90,7 @@ export function BackToTopButton() {
           />
 
           <div
-            className="absolute inset-[10px] rounded-full border"
+            className="absolute inset-[8px] rounded-[1rem] border"
             style={{
               borderColor: theme === 'light' ? 'rgba(255,255,255,0.82)' : 'rgba(255,255,255,0.08)',
               background:
@@ -101,7 +101,7 @@ export function BackToTopButton() {
           />
 
           <motion.div
-            className="relative z-10"
+            className="relative z-10 flex items-center gap-2"
             animate={{
               y: reduceMotion ? 0 : [0, -2.4, 0],
               opacity: [0.95, 1, 0.95],
@@ -123,6 +123,9 @@ export function BackToTopButton() {
                 <span className="absolute left-1/2 top-[-10px] h-2 w-px -translate-x-1/2 rounded-full bg-cyan-100/70" />
               </div>
             )}
+            <span className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-text)]">
+              Top
+            </span>
           </motion.div>
         </motion.button>
       ) : null}
