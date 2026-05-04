@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useMemo } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useTheme } from '../../hooks/useTheme'
 import { JellyfishIcon, SnowCrystalIcon, SunLowIcon, TablerMoonIcon } from '../common/Icons'
@@ -17,27 +17,14 @@ export function ThemeToggle() {
   const reduceMotion = useReducedMotion()
   const isLight = theme === 'light'
   const transition = reduceMotion ? { duration: 0 } : ringSpring
-  const [orbRotation, setOrbRotation] = useState(() => (theme === 'light' ? 0 : 180))
-  const hasMountedRef = useRef(false)
-
-  useEffect(() => {
-    if (reduceMotion) {
-      setOrbRotation(theme === 'light' ? 0 : 180)
-      return
+  const finalOrbRotation = isLight ? 0 : 180
+  const initialOrbRotation = useMemo(() => {
+    if (reduceMotion || !themeShiftDirection) {
+      return finalOrbRotation
     }
 
-    if (!hasMountedRef.current) {
-      hasMountedRef.current = true
-      setOrbRotation(theme === 'light' ? 0 : 180)
-      return
-    }
-
-    if (!themeShiftDirection) {
-      return
-    }
-
-    setOrbRotation((value) => value + 180)
-  }, [theme, themeShiftDirection, themeShiftKey, reduceMotion])
+    return themeShiftDirection === 'light-to-dark' ? 0 : 180
+  }, [finalOrbRotation, reduceMotion, themeShiftDirection])
 
   const orbTransition = reduceMotion
     ? { duration: 0 }
@@ -111,9 +98,10 @@ export function ThemeToggle() {
           />
 
           <motion.div
+            key={themeShiftKey}
             className="absolute inset-0"
-            initial={false}
-            animate={{ rotate: orbRotation }}
+            initial={{ rotate: initialOrbRotation }}
+            animate={{ rotate: finalOrbRotation }}
             transition={orbTransition}
             style={{ transformOrigin: '50% 50%' }}
           >
@@ -161,8 +149,8 @@ export function ThemeToggle() {
             }}
           >
             {isLight ? (
-              <div className="relative">
-                <SunLowIcon className="size-[18px] text-amber-600 sm:size-5" />
+              <div className="relative flex items-center justify-center leading-none">
+                <SunLowIcon className="block size-[18px] text-amber-600 sm:size-5" />
                 <motion.div
                   className="absolute inset-[-6px] rounded-full"
                   animate={{ opacity: [0.28, 0.54, 0.28], scale: [0.92, 1.06, 0.92] }}
@@ -175,8 +163,8 @@ export function ThemeToggle() {
                 />
               </div>
             ) : (
-              <div className="relative">
-                <TablerMoonIcon className="size-[18px] text-slate-700 sm:size-5" />
+              <div className="relative flex items-center justify-center leading-none">
+                <TablerMoonIcon className="block size-[18px] text-slate-700 sm:size-5" />
                 <motion.div
                   className="absolute inset-[-5px] rounded-full"
                   animate={{ opacity: [0.18, 0.4, 0.18], scale: [0.94, 1.04, 0.94] }}
