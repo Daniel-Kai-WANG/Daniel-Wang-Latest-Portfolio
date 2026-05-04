@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from 'react'
 import { AtmosphericAura } from '../animation/AtmosphericAura'
 import { useTheme } from '../../hooks/useTheme'
+import { BackToTopButton } from './BackToTopButton'
 import { Navbar } from './Navbar'
 
 export function PageShell({ children }: PropsWithChildren) {
@@ -34,6 +35,8 @@ export function PageShell({ children }: PropsWithChildren) {
         <Navbar />
         <main className="mt-6 space-y-8 sm:space-y-10 lg:space-y-12">{children}</main>
       </div>
+
+      <BackToTopButton />
     </div>
   )
 }
