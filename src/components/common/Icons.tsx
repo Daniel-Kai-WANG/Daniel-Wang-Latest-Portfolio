@@ -258,25 +258,55 @@ export function MusicNoteIcon(props: SVGProps<SVGSVGElement>) {
 }
 
 export function MusicOrbitIcon(props: SVGProps<SVGSVGElement>) {
+  const variant = useMemo(
+    () => (Math.random() < 0.5 ? 'single' : 'duet'),
+    [],
+  )
+
+  if (variant === 'single') {
+    return <MusicNoteIcon {...props} />
+  }
+
   return (
     <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" {...props}>
       <path
-        d="M12 23V9.2L25 7v14"
+        d="M12.5 23.5V10.2l10-1.8v11.8"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2.2"
       />
-      <circle cx="9" cy="23" r="3" stroke="currentColor" strokeWidth="2.2" />
-      <circle cx="22.5" cy="21" r="3" stroke="currentColor" strokeWidth="2.2" />
-      <circle cx="15.5" cy="22" r="3.1" stroke="currentColor" strokeWidth="2" opacity="0.8" />
       <path
-        d="M18.5 22V5.8l5.6 3.1"
+        d="M12.5 10.2 22.5 8.4"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.2"
+      />
+      <path
+        d="M17.2 22.2V12.2"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
-        opacity="0.8"
+        opacity="0.92"
+      />
+      <path
+        d="M17.2 12.2 22.5 13.7"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        opacity="0.92"
+      />
+      <circle cx="10" cy="23.2" r="3" stroke="currentColor" strokeWidth="2.2" />
+      <circle cx="19.8" cy="22.2" r="3" stroke="currentColor" strokeWidth="2.2" opacity="0.92" />
+      <path
+        d="M22.5 8.4v12.8"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.2"
       />
     </svg>
   )
