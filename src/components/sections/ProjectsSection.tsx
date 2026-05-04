@@ -4,7 +4,7 @@ import { projects } from '../../data/projects'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { ArrowUpRightIcon, JellyfishIcon, SnowflakeIcon, StarSparkIcon } from '../common/Icons'
+import { ArrowUpRightIcon, JellyfishIcon, MusicOrbitIcon, SnowCrystalIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function ProjectsSection() {
@@ -131,10 +131,10 @@ export function ProjectsSection() {
                         Delivery highlights
                       </div>
                       {theme === 'light' ? (
-                        <SnowflakeIcon className="size-5 text-sky-300/70" />
+                        <SnowCrystalIcon className="size-5" />
                       ) : (
                         <div className="flex items-center gap-2">
-                          <StarSparkIcon className="size-4 text-fuchsia-200/65" />
+                          <MusicOrbitIcon className="size-4 text-violet-100/70" />
                           <JellyfishIcon className="size-5 text-cyan-200/50" />
                         </div>
                       )}

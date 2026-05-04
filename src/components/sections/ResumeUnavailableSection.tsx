@@ -3,10 +3,11 @@ import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   JellyfishIcon,
-  PetalIcon,
-  SnowflakeIcon,
-  SparkIcon,
-  StarSparkIcon,
+  MusicOrbitIcon,
+  SakuraIcon,
+  SnowCrystalIcon,
+  SunLowIcon,
+  TablerMoonIcon,
 } from '../common/Icons'
 
 export function ResumeUnavailableSection() {
@@ -91,13 +92,13 @@ export function ResumeUnavailableSection() {
                 <div className="flex items-center gap-3">
                   <div className="flex gap-2">
                     <div className="flex size-10 items-center justify-center rounded-full bg-white">
-                      <PetalIcon className="size-5 text-rose-300" />
+                      <SakuraIcon className="size-5" />
                     </div>
                     <div className="mt-3 flex size-14 items-center justify-center rounded-full bg-sky-100">
-                      <SnowflakeIcon className="size-6 text-sky-400" />
+                      <SnowCrystalIcon className="size-6" />
                     </div>
                     <div className="flex size-9 items-center justify-center rounded-full bg-white/90">
-                      <PetalIcon className="size-4 text-pink-200" />
+                      <SunLowIcon className="size-4 text-amber-500" />
                     </div>
                   </div>
                   <div className="rounded-[1.4rem] border border-sky-100 bg-white/90 px-4 py-3 text-sm font-semibold text-sky-700">
@@ -113,21 +114,21 @@ export function ResumeUnavailableSection() {
                       Work is still very much active.
                     </div>
                     <div className="mt-3 flex items-center gap-2 text-sm text-slate-500">
-                      <PetalIcon className="size-4 text-rose-300" />
-                      <SnowflakeIcon className="size-4 text-sky-300" />
+                      <SakuraIcon className="size-4" />
+                      <SnowCrystalIcon className="size-4" />
                       Sakura breeze outside, shipping energy still on.
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <PetalIcon className="size-6 rotate-[-14deg] text-rose-300" />
-                    <SnowflakeIcon className="size-5 text-sky-400" />
+                    <SakuraIcon className="size-6 rotate-[-14deg]" />
+                    <SnowCrystalIcon className="size-5" />
                   </div>
                 </div>
               </div>
             ) : (
               <div className="relative z-10 space-y-5">
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-fuchsia-200">
-                  <SparkIcon className="size-4" />
+                  <MusicOrbitIcon className="size-4" />
                   Resume is backstage — coming back soon
                 </div>
                 <div className="rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-white/8 to-transparent px-5 py-6">
@@ -142,9 +143,9 @@ export function ResumeUnavailableSection() {
                     shows the work, context, and delivery range.
                   </p>
                   <div className="mt-4 flex items-center gap-2 text-sm text-fuchsia-100/80">
-                    <StarSparkIcon className="size-4 text-fuchsia-200" />
+                    <TablerMoonIcon className="size-4 text-slate-100/84" />
                     <JellyfishIcon className="size-4 text-cyan-200" />
-                    Midnight-set shimmer with jellyfish glow.
+                    Midnight-set shimmer with jellyfish glow and music notes.
                   </div>
                 </div>
               </div>

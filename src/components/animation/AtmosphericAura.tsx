@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { JellyfishIcon, PetalIcon, SnowflakeIcon, StarSparkIcon } from '../common/Icons'
+import { JellyfishIcon, MusicOrbitIcon, SakuraIcon, SnowCrystalIcon } from '../common/Icons'
 import { useTheme } from '../../hooks/useTheme'
 
 const petals = [
@@ -91,8 +91,7 @@ export function AtmosphericAura() {
               ease: 'linear',
             }}
           >
-            <PetalIcon
-              className="text-rose-300/90"
+            <SakuraIcon
               style={{
                 width: `${petal.size}px`,
                 height: `${petal.size}px`,
@@ -123,8 +122,7 @@ export function AtmosphericAura() {
               ease: 'linear',
             }}
           >
-            <SnowflakeIcon
-              className="text-sky-200/60"
+            <SnowCrystalIcon
               style={{
                 width: `${flake.size}px`,
                 height: `${flake.size}px`,
@@ -155,8 +153,8 @@ export function AtmosphericAura() {
               ease: 'easeInOut',
             }}
           >
-            <StarSparkIcon
-              className="text-fuchsia-200/70"
+            <MusicOrbitIcon
+              className="text-violet-100/80"
               style={{
                 width: `${spark.size}px`,
                 height: `${spark.size}px`,
