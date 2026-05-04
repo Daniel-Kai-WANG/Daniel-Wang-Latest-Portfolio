@@ -1,4 +1,12 @@
-import type { SVGProps } from 'react'
+import { useMemo } from 'react'
+import type { CSSProperties, SVGProps } from 'react'
+
+const sakuraVariants = ['/seasonal/sakura-a.png', '/seasonal/sakura-b.png'] as const
+
+type DecorativeImageProps = {
+  className?: string
+  style?: CSSProperties
+}
 
 export function SunIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -163,55 +171,20 @@ export function PetalIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
-export function SakuraIcon(props: SVGProps<SVGSVGElement>) {
+export function SakuraIcon({ className, style }: DecorativeImageProps) {
+  const src = useMemo(
+    () => sakuraVariants[Math.floor(Math.random() * sakuraVariants.length)],
+    [],
+  )
+
   return (
-    <svg viewBox="0 0 64 64" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M30.8 6.8c4.1-.2 8.4 2.4 10.3 7.7c1.7 4.8.7 10.2-1.6 15.1c-1.6 3.5-4 6.8-7.4 8.4c-1.8-3.4-2.1-7.5-1.9-11.3c.3-5.4 1.8-10.7.6-14.8c-.6-2-.5-3.5 0-5.1Z"
-        fill="#F78AA7"
-      />
-      <path
-        d="M11.3 25.4c2.1-3.5 6.5-5.8 12.4-5.4c5.3.4 10.1 2.9 14.2 6.4c3 2.5 5.6 5.7 6.4 9.4c-3.8 1-7.8.4-11.4-.7c-5.2-1.5-9.9-4.3-14.1-4.6c-2.1-.2-3.4-.9-4.8-2.1Z"
-        fill="#F38DAF"
-      />
-      <path
-        d="M52.4 23.7c1.5 4.1.2 8.7-3.8 12.9c-3.6 3.8-8.5 6-13.7 7.1c-3.7.8-7.8 1-11.1-.6c1-3.7 3.6-6.9 6.5-9.4c4.1-3.6 8.9-6 11.5-9.3c1.3-1.7 2.6-2.3 4.5-2.9Z"
-        fill="#F6B9C8"
-      />
-      <path
-        d="M37 56.4c-4 1.6-8.7.5-13.3-3.1c-4.1-3.3-6.9-8-8.5-13.1c-1.2-3.6-1.8-7.6-.6-11.1c3.9.7 7.4 3.1 10.2 5.8c4.2 3.8 7.1 8.4 10.7 10.7c1.8 1.2 2.6 2.4 3.4 4.2Z"
-        fill="#F6C0CD"
-      />
-      <path
-        d="M17.2 47.6c-1.9-3.7-1.3-8.5 1.9-13.4c2.9-4.4 7.2-7.7 12.1-10c3.5-1.6 7.4-2.6 11-1.7c-.4 3.9-2.6 7.6-5 10.7c-3.5 4.4-7.8 7.8-9.7 11.6c-1 1.9-2.1 2.8-3.8 3.8Z"
-        fill="#F78EA8"
-      />
-      <path
-        d="M22.8 19.3c2.9-1.4 6.6-.8 8.9 1.6"
-        fill="none"
-        opacity="0.26"
-        stroke="#FFD4DF"
-        strokeLinecap="round"
-        strokeWidth="3"
-      />
-      <path
-        d="M42.2 14.2c1.8 2.7 2.2 6.2 1 9.2"
-        fill="none"
-        opacity="0.22"
-        stroke="#FFD3DD"
-        strokeLinecap="round"
-        strokeWidth="3"
-      />
-      <path
-        d="M14.6 37.5c.8 3.1 3.1 5.9 6.1 7.1"
-        fill="none"
-        opacity="0.2"
-        stroke="#FFE1E9"
-        strokeLinecap="round"
-        strokeWidth="3"
-      />
-      <circle cx="32" cy="32" r="7.2" fill="#F9DCE6" />
-    </svg>
+    <img
+      src={src}
+      alt=""
+      aria-hidden="true"
+      className={className}
+      style={{ display: 'block', objectFit: 'contain', ...style }}
+    />
   )
 }
 
