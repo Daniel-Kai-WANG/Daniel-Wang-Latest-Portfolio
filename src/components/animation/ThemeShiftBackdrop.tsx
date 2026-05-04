@@ -16,8 +16,18 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
 
   const lightToDark = themeShiftDirection === 'light-to-dark'
   const isCard = variant === 'card'
-  const sunSize = isCard ? 72 : 118
-  const moonSize = isCard ? 62 : 102
+  const sunSize = isCard ? 80 : 132
+  const moonSize = isCard ? 70 : 116
+  const overlayOpacity = isCard ? 0.3 : 0.44
+  const travelEase: [number, number, number, number] = [0.22, 1, 0.36, 1]
+  const sunLeft = isCard ? '72%' : '70%'
+  const moonLeft = isCard ? '24%' : '22%'
+  const sunStartTop = lightToDark ? '-8%' : '80%'
+  const sunMidTop = lightToDark ? '32%' : '48%'
+  const sunEndTop = lightToDark ? '108%' : '8%'
+  const moonStartTop = lightToDark ? '104%' : '10%'
+  const moonMidTop = lightToDark ? '56%' : '42%'
+  const moonEndTop = lightToDark ? '8%' : '108%'
 
   if (reduceMotion) {
     return (
@@ -37,30 +47,60 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
       <motion.div
         className="absolute inset-0"
         initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 0.5, 0] }}
-        transition={{ duration: 1.05, ease: 'easeInOut' }}
+        animate={{ opacity: [0, overlayOpacity, 0] }}
+        transition={{ duration: 1.12, ease: 'easeInOut' }}
         style={{
           background: lightToDark
-            ? 'linear-gradient(180deg, rgba(255,214,148,0.18), rgba(123,92,255,0.12), rgba(34,211,238,0.12))'
-            : 'linear-gradient(180deg, rgba(122,92,255,0.12), rgba(255,228,239,0.18), rgba(196,232,255,0.16))',
+            ? 'linear-gradient(180deg, rgba(255,221,167,0.16), rgba(46,24,76,0.16), rgba(34,211,238,0.1))'
+            : 'linear-gradient(180deg, rgba(122,92,255,0.1), rgba(255,228,239,0.18), rgba(196,232,255,0.14))',
+        }}
+      />
+
+      <motion.div
+        className="absolute inset-x-0 h-[42%] blur-3xl"
+        initial={{ opacity: 0, top: lightToDark ? '62%' : '40%' }}
+        animate={{
+          top: lightToDark ? ['62%', '56%', '48%'] : ['40%', '48%', '58%'],
+          opacity: [0, isCard ? 0.2 : 0.3, 0],
+        }}
+        transition={{ duration: 1.12, ease: 'easeInOut' }}
+        style={{
+          background: lightToDark
+            ? 'linear-gradient(180deg, rgba(255,186,77,0.24), rgba(33,29,60,0))'
+            : 'linear-gradient(180deg, rgba(196,232,255,0), rgba(255,214,148,0.18))',
+        }}
+      />
+
+      <motion.div
+        className="absolute inset-x-0 h-px"
+        initial={{ opacity: 0, top: lightToDark ? '72%' : '34%' }}
+        animate={{
+          top: lightToDark ? ['72%', '58%', '46%'] : ['34%', '46%', '58%'],
+          opacity: [0, isCard ? 0.42 : 0.58, 0],
+        }}
+        transition={{ duration: 1.06, ease: 'easeInOut' }}
+        style={{
+          background: lightToDark
+            ? 'linear-gradient(90deg, transparent, rgba(255,214,148,0.72), transparent)'
+            : 'linear-gradient(90deg, transparent, rgba(214,234,255,0.72), transparent)',
         }}
       />
 
       <motion.div
         className="absolute rounded-full blur-2xl"
         initial={{
-          left: lightToDark ? '-10%' : '64%',
-          top: lightToDark ? '68%' : '6%',
+          left: sunLeft,
+          top: sunStartTop,
           opacity: 0,
-          scale: 0.7,
+          scale: 0.78,
         }}
         animate={{
-          left: lightToDark ? ['-10%', '18%', '42%'] : ['64%', '42%', '14%'],
-          top: lightToDark ? ['68%', '34%', '82%'] : ['6%', '30%', '74%'],
-          opacity: [0, 0.7, 0],
-          scale: [0.74, 1, 0.9],
+          left: [sunLeft, `calc(${sunLeft} - 2%)`, `calc(${sunLeft} - 4%)`],
+          top: [sunStartTop, sunMidTop, sunEndTop],
+          opacity: [0, 0.72, 0],
+          scale: [0.8, 1, 0.86],
         }}
-        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 1.14, ease: travelEase }}
         style={{
           width: `${sunSize}px`,
           height: `${sunSize}px`,
@@ -71,18 +111,18 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
       <motion.div
         className="absolute flex items-center justify-center rounded-full"
         initial={{
-          left: lightToDark ? '-7%' : '68%',
-          top: lightToDark ? '69%' : '8%',
+          left: sunLeft,
+          top: sunStartTop,
           opacity: 0,
           scale: 0.82,
         }}
         animate={{
-          left: lightToDark ? ['-7%', '20%', '44%'] : ['68%', '44%', '16%'],
-          top: lightToDark ? ['69%', '35%', '83%'] : ['8%', '31%', '75%'],
+          left: [sunLeft, `calc(${sunLeft} - 2%)`, `calc(${sunLeft} - 4%)`],
+          top: [sunStartTop, sunMidTop, sunEndTop],
           opacity: [0, 0.95, 0],
           scale: [0.82, 1, 0.94],
         }}
-        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 1.14, ease: travelEase }}
         style={{ width: `${sunSize}px`, height: `${sunSize}px` }}
       >
         <SunIcon className="size-7 text-amber-50" />
@@ -91,18 +131,18 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
       <motion.div
         className="absolute rounded-full blur-2xl"
         initial={{
-          left: lightToDark ? '72%' : '-12%',
-          top: lightToDark ? '8%' : '76%',
+          left: moonLeft,
+          top: moonStartTop,
           opacity: 0,
           scale: 0.72,
         }}
         animate={{
-          left: lightToDark ? ['72%', '48%', '20%'] : ['-12%', '18%', '46%'],
-          top: lightToDark ? ['8%', '30%', '76%'] : ['76%', '36%', '6%'],
+          left: [moonLeft, `calc(${moonLeft} + 2%)`, `calc(${moonLeft} + 4%)`],
+          top: [moonStartTop, moonMidTop, moonEndTop],
           opacity: [0, 0.7, 0],
           scale: [0.72, 0.96, 0.88],
         }}
-        transition={{ duration: 1.12, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 1.14, ease: travelEase }}
         style={{
           width: `${moonSize}px`,
           height: `${moonSize}px`,
@@ -113,18 +153,18 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
       <motion.div
         className="absolute flex items-center justify-center rounded-full"
         initial={{
-          left: lightToDark ? '74%' : '-9%',
-          top: lightToDark ? '10%' : '77%',
+          left: moonLeft,
+          top: moonStartTop,
           opacity: 0,
           scale: 0.82,
         }}
         animate={{
-          left: lightToDark ? ['74%', '50%', '22%'] : ['-9%', '20%', '48%'],
-          top: lightToDark ? ['10%', '31%', '77%'] : ['77%', '37%', '8%'],
+          left: [moonLeft, `calc(${moonLeft} + 2%)`, `calc(${moonLeft} + 4%)`],
+          top: [moonStartTop, moonMidTop, moonEndTop],
           opacity: [0, 0.92, 0],
           scale: [0.82, 1, 0.94],
         }}
-        transition={{ duration: 1.12, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 1.14, ease: travelEase }}
         style={{ width: `${moonSize}px`, height: `${moonSize}px` }}
       >
         <MoonIcon className="size-6 text-slate-50" />
