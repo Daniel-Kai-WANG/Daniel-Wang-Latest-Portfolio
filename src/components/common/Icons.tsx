@@ -250,66 +250,41 @@ export function MusicNoteIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <path
-        d="M14 4.5v10.1a3.5 3.5 0 1 1-1.6-2.9V7.2l7-1.7v7.1a3.5 3.5 0 1 1-1.6-2.9V3.5L14 4.5Z"
-        fill="currentColor"
+        d="M9 18V5l12-2v13"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+      <circle cx="6" cy="18" r="3" stroke="currentColor" strokeWidth="2" />
+      <circle cx="18" cy="16" r="3" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  )
+}
+
+export function MusicTwoIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <circle cx="8" cy="18" r="4" stroke="currentColor" strokeWidth="2" />
+      <path
+        d="M12 18V2l7 4"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
       />
     </svg>
   )
 }
 
 export function MusicOrbitIcon(props: SVGProps<SVGSVGElement>) {
-  const variant = useMemo(
-    () => (Math.random() < 0.5 ? 'single' : 'duet'),
-    [],
-  )
+  const variant = useMemo(() => (Math.random() < 0.5 ? 'music' : 'music-2'), [])
 
-  if (variant === 'single') {
+  if (variant === 'music') {
     return <MusicNoteIcon {...props} />
   }
 
-  return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M12.5 23.5V10.2l10-1.8v11.8"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2.2"
-      />
-      <path
-        d="M12.5 10.2 22.5 8.4"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2.2"
-      />
-      <path
-        d="M17.2 22.2V12.2"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        opacity="0.92"
-      />
-      <path
-        d="M17.2 12.2 22.5 13.7"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        opacity="0.92"
-      />
-      <circle cx="10" cy="23.2" r="3" stroke="currentColor" strokeWidth="2.2" />
-      <circle cx="19.8" cy="22.2" r="3" stroke="currentColor" strokeWidth="2.2" opacity="0.92" />
-      <path
-        d="M22.5 8.4v12.8"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2.2"
-      />
-    </svg>
-  )
+  return <MusicTwoIcon {...props} />
 }
 
 export function StarSparkIcon(props: SVGProps<SVGSVGElement>) {
