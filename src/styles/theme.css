@@ -5,33 +5,33 @@
   --font-display: 'Space Grotesk';
   --font-mono: 'SFMono-Regular';
 
-  --color-background: #f5fbff;
-  --color-surface: rgba(255, 255, 255, 0.88);
-  --color-surface-elevated: rgba(255, 255, 255, 0.74);
-  --color-surface-muted: #eaf6ff;
+  --color-background: #f2f8ff;
+  --color-surface: rgba(255, 255, 255, 0.86);
+  --color-surface-elevated: rgba(255, 255, 255, 0.76);
+  --color-surface-muted: #e8f3fb;
   --color-text: #17324d;
   --color-muted: #5d7892;
-  --color-primary: #38bdf8;
-  --color-secondary: #2563eb;
-  --color-warm: #fdba74;
-  --color-petal: #f6a8c8;
-  --color-snow: #dff3ff;
-  --color-border: rgba(189, 231, 255, 0.88);
+  --color-primary: #58afe8;
+  --color-secondary: #3d74d9;
+  --color-warm: #f3c27f;
+  --color-petal: #efb4c9;
+  --color-snow: #e5f3ff;
+  --color-border: rgba(184, 220, 244, 0.88);
   --surface-shadow: 0 30px 70px rgba(27, 88, 140, 0.12);
   --page-background:
-    linear-gradient(180deg, #fffafc 0%, #edf7ff 26%, #f6fbff 62%, #fbfeff 100%);
-  --page-orb-a: rgba(246, 168, 200, 0.16);
-  --page-orb-b: rgba(37, 99, 235, 0.14);
-  --page-orb-c: rgba(223, 243, 255, 0.2);
+    linear-gradient(180deg, #f9fcff 0%, #e8f4ff 26%, #eff7ff 62%, #fbfdff 100%);
+  --page-orb-a: rgba(186, 222, 248, 0.18);
+  --page-orb-b: rgba(104, 166, 230, 0.14);
+  --page-orb-c: rgba(229, 242, 255, 0.24);
   --hero-grid: rgba(23, 50, 77, 0.08);
-  --soft-accent: rgba(56, 189, 248, 0.14);
-  --soft-accent-strong: rgba(37, 99, 235, 0.2);
-  --timeline-line: rgba(37, 99, 235, 0.2);
+  --soft-accent: rgba(88, 175, 232, 0.14);
+  --soft-accent-strong: rgba(61, 116, 217, 0.18);
+  --timeline-line: rgba(83, 141, 212, 0.18);
   --pill-background: rgba(255, 255, 255, 0.72);
-  --pill-text: #7a3e63;
-  --pill-border: rgba(246, 168, 200, 0.26);
+  --pill-text: #715c7f;
+  --pill-border: rgba(232, 196, 218, 0.28);
   --hero-panel-background:
-    linear-gradient(150deg, rgba(255, 255, 255, 0.94), rgba(243, 233, 246, 0.78), rgba(234, 246, 255, 0.88));
+    linear-gradient(150deg, rgba(255, 255, 255, 0.94), rgba(234, 244, 252, 0.82), rgba(225, 239, 251, 0.9));
 }
 
 :root[data-theme='dark'] {
