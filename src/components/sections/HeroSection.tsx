@@ -8,7 +8,6 @@ import {
   JellyfishIcon,
   MusicNoteIcon,
   PetalIcon,
-  PlaneIcon,
   SnowflakeIcon,
   SparkIcon,
 } from '../common/Icons'
@@ -42,11 +41,11 @@ function WorkflowPanel() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-              {theme === 'light' ? 'Sky route map' : 'Stage workflow'}
+              {theme === 'light' ? 'Seasonal workflow' : 'Stage workflow'}
             </p>
             <h3 className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-text)]">
               {theme === 'light'
-                ? 'From brief to shipped product'
+                ? 'From brief to shipped flow'
                 : 'A delivery pipeline with rhythm'}
             </h3>
           </div>
@@ -60,7 +59,10 @@ function WorkflowPanel() {
             }}
           >
             {theme === 'light' ? (
-              <PlaneIcon className="size-5 text-[var(--color-secondary)]" />
+              <div className="relative flex items-center justify-center">
+                <PetalIcon className="size-5 -rotate-[16deg] text-rose-400" />
+                <SnowflakeIcon className="absolute -right-2 -top-1 size-3.5 text-sky-300" />
+              </div>
             ) : (
               <MusicNoteIcon className="size-5 text-[var(--color-primary)]" />
             )}
@@ -127,13 +129,17 @@ function WorkflowPanel() {
               className="pointer-events-none absolute left-8 top-3"
               animate={
                 theme === 'light'
-                  ? { x: [0, 16, -4, 0], y: [0, 36, 92, 148] }
+                  ? {
+                      x: [0, 14, -6, 10, 0],
+                      y: [0, 34, 88, 138, 168],
+                      rotate: [-10, 16, -18, 10, -8],
+                    }
                   : { x: [0, 12, -3, 0], y: [0, 34, 88, 144] }
               }
               transition={{ duration: 6.6, ease: 'easeInOut', repeat: Infinity }}
             >
               {theme === 'light' ? (
-                <PlaneIcon className="size-4 -rotate-12 text-[var(--color-secondary)]" />
+                <PetalIcon className="size-4 text-rose-300/95" />
               ) : (
                 <MusicNoteIcon className="size-4 text-[var(--color-primary)]" />
               )}
