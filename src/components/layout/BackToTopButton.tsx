@@ -34,9 +34,16 @@ export function BackToTopButton() {
 
     updateVisibility()
     window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('hashchange', updateVisibility)
+    window.addEventListener('resize', updateVisibility)
+
+    const readyTimer = window.setTimeout(updateVisibility, 120)
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('hashchange', updateVisibility)
+      window.removeEventListener('resize', updateVisibility)
+      window.clearTimeout(readyTimer)
 
       if (frame !== 0) {
         window.cancelAnimationFrame(frame)
