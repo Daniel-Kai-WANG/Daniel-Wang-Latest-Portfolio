@@ -18,6 +18,13 @@ const iconByLabel = {
 
 export function ContactSection() {
   const { theme } = useTheme()
+  const emailLink = profile.contactLinks.find((link) => link.label === 'Email')
+  const recipientEmail = emailLink?.value ?? ''
+  const formAction = recipientEmail
+    ? `https://formsubmit.co/${encodeURIComponent(recipientEmail)}`
+    : 'https://formsubmit.co/'
+  const fieldClassName =
+    'w-full rounded-[1.2rem] border px-4 py-3 text-sm text-[var(--color-text)] outline-none transition focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[color:color-mix(in_srgb,var(--color-primary)_22%,transparent)]'
 
   return (
     <Reveal>
@@ -133,6 +140,156 @@ export function ContactSection() {
                   backend wiring, CMS practicality, and structured AI workflow thinking without losing
                   clarity.
                 </p>
+              </div>
+            </div>
+
+            <div
+              className="relative overflow-hidden rounded-[1.8rem] border p-5 md:col-span-2"
+              style={{
+                borderColor: 'var(--color-border)',
+                background:
+                  theme === 'light'
+                    ? 'linear-gradient(180deg, rgba(255,255,255,0.96), rgba(236,245,255,0.92))'
+                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(17,26,43,0.96))',
+              }}
+            >
+              <ThemeShiftBackdrop variant="card" />
+
+              <div className="relative z-10">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                      Contact form
+                    </p>
+                    <h3 className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-text)]">
+                      Send a project note directly from the page.
+                    </h3>
+                    <p className="mt-3 max-w-2xl text-sm leading-7 text-[var(--color-muted)]">
+                      This uses the free FormSubmit endpoint so the portfolio can email submissions
+                      to your inbox without a custom backend.
+                    </p>
+                  </div>
+
+                  <div
+                    className="rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
+                    style={{
+                      borderColor: 'var(--pill-border)',
+                      background: 'var(--pill-background)',
+                      color: 'var(--pill-text)',
+                    }}
+                  >
+                    Free static form
+                  </div>
+                </div>
+
+                <form action={formAction} method="POST" className="mt-6 grid gap-4">
+                  <input
+                    type="hidden"
+                    name="_subject"
+                    value="New submission from daniel-wang-portfolio"
+                  />
+                  <input type="hidden" name="_template" value="table" />
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <label className="grid gap-2">
+                      <span className="text-sm font-semibold text-[var(--color-text)]">Name</span>
+                      <input
+                        className={fieldClassName}
+                        style={{
+                          borderColor: 'var(--color-border)',
+                          background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
+                        }}
+                        type="text"
+                        name="name"
+                        required
+                        placeholder="Your name"
+                      />
+                    </label>
+
+                    <label className="grid gap-2">
+                      <span className="text-sm font-semibold text-[var(--color-text)]">Email</span>
+                      <input
+                        className={fieldClassName}
+                        style={{
+                          borderColor: 'var(--color-border)',
+                          background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
+                        }}
+                        type="email"
+                        name="email"
+                        required
+                        placeholder="name@example.com"
+                      />
+                    </label>
+                  </div>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <label className="grid gap-2">
+                      <span className="text-sm font-semibold text-[var(--color-text)]">Company</span>
+                      <input
+                        className={fieldClassName}
+                        style={{
+                          borderColor: 'var(--color-border)',
+                          background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
+                        }}
+                        type="text"
+                        name="company"
+                        placeholder="Company or team"
+                      />
+                    </label>
+
+                    <label className="grid gap-2">
+                      <span className="text-sm font-semibold text-[var(--color-text)]">Subject</span>
+                      <input
+                        className={fieldClassName}
+                        style={{
+                          borderColor: 'var(--color-border)',
+                          background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
+                        }}
+                        type="text"
+                        name="subject"
+                        required
+                        placeholder="What would you like to build?"
+                      />
+                    </label>
+                  </div>
+
+                  <label className="grid gap-2">
+                    <span className="text-sm font-semibold text-[var(--color-text)]">Message</span>
+                    <textarea
+                      className={fieldClassName}
+                      style={{
+                        borderColor: 'var(--color-border)',
+                        background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
+                        minHeight: '170px',
+                        resize: 'vertical',
+                      }}
+                      name="message"
+                      required
+                      placeholder="Tell me about the product, timeline, and what kind of help you need."
+                    />
+                  </label>
+
+                  <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="max-w-2xl text-xs leading-6 text-[var(--color-muted)]">
+                      First live submission will send a confirmation email to{' '}
+                      <span className="font-semibold text-[var(--color-text)]">{recipientEmail}</span>.
+                      After you confirm it once, future submissions go straight to your inbox.
+                    </p>
+
+                    <button
+                      type="submit"
+                      className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-white"
+                      style={{
+                        background:
+                          theme === 'light'
+                            ? 'linear-gradient(135deg, #58AFE8, #3D74D9)'
+                            : 'linear-gradient(135deg, #7C5CFF, #22D3EE)',
+                      }}
+                    >
+                      Send message
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
