@@ -6,10 +6,11 @@ import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   JellyfishIcon,
-  PetalIcon,
+  MusicOrbitIcon,
   SakuraIcon,
   SnowCrystalIcon,
-  StarSparkIcon,
+  SunLowIcon,
+  TablerMoonIcon,
 } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
@@ -169,12 +170,14 @@ export function ExperienceSection() {
                   <div className="flex items-center gap-3 text-[var(--color-muted)]">
                     {theme === 'light' ? (
                       <>
+                        <SunLowIcon className="size-5 text-amber-500" />
                         <SakuraIcon className="size-5" />
                         <SnowCrystalIcon className="size-5" />
                       </>
                     ) : (
                       <>
-                        <StarSparkIcon className="size-4 text-fuchsia-200/70" />
+                        <TablerMoonIcon className="size-4 text-slate-100/84" />
+                        <MusicOrbitIcon className="size-4 text-violet-100/78" />
                         <JellyfishIcon className="size-5 text-cyan-200/70" />
                       </>
                     )}
@@ -351,7 +354,7 @@ export function ExperienceSection() {
                                       {item.company}
                                     </p>
                                   </div>
-                                  <PetalIcon className="size-5 text-rose-300" />
+                                  <SakuraIcon className="size-5" />
                                 </div>
                                 <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">
                                   {item.highlights[0]}
@@ -432,13 +435,15 @@ export function ExperienceSection() {
                 <div className="mt-4 flex items-center gap-2 text-sm text-[var(--color-muted)]">
                   {theme === 'light' ? (
                     <>
-                      <PetalIcon className="size-4 text-rose-300" />
+                      <SunLowIcon className="size-4 text-amber-500" />
+                      <SakuraIcon className="size-4" />
                       <SnowCrystalIcon className="size-4 text-sky-300" />
                       Blossom shorthand outside, delivery detail inside.
                     </>
                   ) : (
                     <>
-                      <StarSparkIcon className="size-4 text-fuchsia-200" />
+                      <TablerMoonIcon className="size-4 text-slate-100/84" />
+                      <MusicOrbitIcon className="size-4 text-violet-100/78" />
                       <JellyfishIcon className="size-4 text-cyan-200" />
                       Night-bloom focus, same delivery roots.
                     </>

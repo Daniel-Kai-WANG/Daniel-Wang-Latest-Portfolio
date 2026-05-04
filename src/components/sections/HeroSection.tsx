@@ -6,10 +6,11 @@ import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   ArrowUpRightIcon,
   JellyfishIcon,
-  PetalIcon,
-  SnowflakeIcon,
-  SparkIcon,
-  StarSparkIcon,
+  MusicOrbitIcon,
+  SakuraIcon,
+  SnowCrystalIcon,
+  SunLowIcon,
+  TablerMoonIcon,
 } from '../common/Icons'
 
 function WorkflowPanel() {
@@ -60,11 +61,11 @@ function WorkflowPanel() {
           >
             {theme === 'light' ? (
               <div className="relative flex items-center justify-center">
-                <PetalIcon className="size-5 -rotate-[16deg] text-rose-400" />
-                <SnowflakeIcon className="absolute -right-2 -top-1 size-3.5 text-sky-300" />
+                <SakuraIcon className="size-5 -rotate-[10deg]" />
+                <SnowCrystalIcon className="absolute -right-2 -top-1 size-3.5" />
               </div>
             ) : (
-              <StarSparkIcon className="size-5 text-[var(--color-primary)]" />
+              <MusicOrbitIcon className="size-5 text-[var(--color-primary)]" />
             )}
           </div>
         </div>
@@ -139,9 +140,9 @@ function WorkflowPanel() {
               transition={{ duration: 6.6, ease: 'easeInOut', repeat: Infinity }}
             >
               {theme === 'light' ? (
-                <PetalIcon className="size-4 text-rose-300/95" />
+                <SakuraIcon className="size-4" />
               ) : (
-                <StarSparkIcon className="size-4 text-[var(--color-primary)]" />
+                <MusicOrbitIcon className="size-4 text-[var(--color-primary)]" />
               )}
             </motion.div>
           )}
@@ -256,14 +257,14 @@ export function HeroSection() {
 
       {theme === 'light' ? (
         <>
-          <PetalIcon className="absolute left-8 top-10 size-7 rotate-[-18deg] text-rose-300/90" />
-          <PetalIcon className="absolute right-16 top-20 size-5 rotate-[12deg] text-pink-300/80" />
-          <SnowflakeIcon className="absolute right-8 top-10 size-5 text-sky-200/70" />
+          <SakuraIcon className="absolute left-8 top-10 size-7 rotate-[-18deg]" />
+          <SakuraIcon className="absolute right-16 top-20 size-5 rotate-[12deg] opacity-80" />
+          <SnowCrystalIcon className="absolute right-8 top-10 size-5 opacity-80" />
         </>
       ) : (
         <>
-          <StarSparkIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-fuchsia-200/70" />
-          <StarSparkIcon className="absolute right-12 top-20 size-5 rotate-[14deg] text-fuchsia-100/55" />
+          <TablerMoonIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-slate-100/72" />
+          <MusicOrbitIcon className="absolute right-12 top-20 size-5 rotate-[14deg] text-violet-100/70" />
           <JellyfishIcon className="absolute bottom-8 right-8 size-12 text-cyan-200/40" />
           <JellyfishIcon className="absolute left-10 top-24 size-8 text-cyan-100/45" />
         </>
@@ -279,20 +280,20 @@ export function HeroSection() {
               color: 'var(--pill-text)',
             }}
           >
-            <SparkIcon className="size-4" />
+            {theme === 'light' ? <SunLowIcon className="size-4 text-amber-500" /> : <MusicOrbitIcon className="size-4 text-violet-200" />}
             {profile.badge}
           </div>
 
           <p className="mt-5 flex items-center gap-2 text-sm font-medium text-[var(--color-muted)]">
             {theme === 'light' ? (
               <>
-                <PetalIcon className="size-4 text-rose-300" />
+                <SakuraIcon className="size-4" />
                 Spring-sky clarity with sakura drift and ice-light highlights.
               </>
             ) : (
               <>
-                <StarSparkIcon className="size-4 text-fuchsia-200" />
-                K-pop stage energy with drifting jellyfish glow and midnight sparks.
+                <MusicOrbitIcon className="size-4 text-violet-100" />
+                K-pop stage energy with drifting jellyfish glow and midnight notes.
               </>
             )}
           </p>

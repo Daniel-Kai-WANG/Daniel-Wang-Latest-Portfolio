@@ -3,7 +3,7 @@ import { skillCategories } from '../../data/skills'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { JellyfishIcon, PetalIcon, SnowflakeIcon, StarSparkIcon } from '../common/Icons'
+import { JellyfishIcon, SakuraIcon, SnowCrystalIcon, TablerMoonIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function TechStackSection() {
@@ -46,12 +46,12 @@ export function TechStackSection() {
                 <div className="flex items-center gap-2">
                   {theme === 'light' ? (
                     <>
-                      <PetalIcon className="size-5 text-rose-300" />
-                      <SnowflakeIcon className="size-5 text-sky-300" />
+                      <SakuraIcon className="size-5" />
+                      <SnowCrystalIcon className="size-5" />
                     </>
                   ) : (
                     <>
-                      <StarSparkIcon className="size-5 text-fuchsia-200" />
+                      <TablerMoonIcon className="size-5 text-slate-100/80" />
                       <JellyfishIcon className="size-6 text-cyan-200/60" />
                     </>
                   )}
