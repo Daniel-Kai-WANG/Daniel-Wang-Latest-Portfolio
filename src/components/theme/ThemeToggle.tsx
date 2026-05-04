@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useTheme } from '../../hooks/useTheme'
 import { JellyfishIcon, SnowCrystalIcon, SunLowIcon, TablerMoonIcon } from '../common/Icons'
@@ -10,32 +10,38 @@ const ringSpring = {
   mass: 0.84,
 } as const
 
-const ICON_DELAY_MS = 1000
+const ORBIT_DELAY_MS = 500
 
 export function ThemeToggle() {
-  const { theme, toggleTheme, themeShiftKey } = useTheme()
+  const { theme, toggleTheme, themeShiftDirection, themeShiftKey } = useTheme()
   const reduceMotion = useReducedMotion()
   const isLight = theme === 'light'
   const transition = reduceMotion ? { duration: 0 } : ringSpring
-  const [centerTheme, setCenterTheme] = useState(theme)
+  const [orbRotation, setOrbRotation] = useState(() => (theme === 'light' ? 0 : 180))
+  const hasMountedRef = useRef(false)
 
   useEffect(() => {
     if (reduceMotion) {
-      setCenterTheme(theme)
+      setOrbRotation(theme === 'light' ? 0 : 180)
       return
     }
 
-    const timer = window.setTimeout(() => {
-      setCenterTheme(theme)
-    }, ICON_DELAY_MS)
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true
+      setOrbRotation(theme === 'light' ? 0 : 180)
+      return
+    }
 
-    return () => window.clearTimeout(timer)
-  }, [theme, reduceMotion])
+    if (!themeShiftDirection) {
+      return
+    }
 
-  const orbAngle = isLight ? 0 : 180
+    setOrbRotation((value) => value + 180)
+  }, [theme, themeShiftDirection, themeShiftKey, reduceMotion])
+
   const orbTransition = reduceMotion
     ? { duration: 0 }
-    : { duration: 0.84, delay: 1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
+    : { duration: 0.96, delay: ORBIT_DELAY_MS / 1000, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
 
   return (
     <div className="flex items-center gap-3">
@@ -105,10 +111,9 @@ export function ThemeToggle() {
           />
 
           <motion.div
-            key={`${theme}-${themeShiftKey}`}
             className="absolute inset-0"
             initial={false}
-            animate={{ rotate: orbAngle }}
+            animate={{ rotate: orbRotation }}
             transition={orbTransition}
             style={{ transformOrigin: '50% 50%' }}
           >
@@ -155,7 +160,7 @@ export function ThemeToggle() {
                 : '0 0 14px rgba(129,140,248,0.22)',
             }}
           >
-            {centerTheme === 'light' ? (
+            {isLight ? (
               <div className="relative">
                 <SunLowIcon className="size-[18px] text-amber-600 sm:size-5" />
                 <motion.div
