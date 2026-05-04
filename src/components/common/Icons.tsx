@@ -25,6 +25,41 @@ export function MoonIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+export function SunLowIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M4 12h.01M12 4v.01M20 12h.01M12 20v.01M6.31 6.31l-.01 -.01M17.71 6.31l-.01 -.01M17.7 17.7l.01 .01M6.3 17.7l.01 .01"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  )
+}
+
+export function TablerMoonIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  )
+}
+
 export function PlaneIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
@@ -128,6 +163,34 @@ export function PetalIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+export function SakuraIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M31.7 7.3c4.1 0 9.2 4.2 9.2 13.9c0 4.6-1.7 9.5-3.9 13.2c-1.4 2.4-3.2 4.3-5.2 5.6c-2-1.3-3.8-3.2-5.2-5.6c-2.2-3.7-3.9-8.6-3.9-13.2c0-9.7 5.1-13.9 9-13.9Z"
+        fill="#F67D9B"
+      />
+      <path
+        d="M13.8 20.2c3.5-2 9.9-1.5 16.5 5.7c3.2 3.5 5.6 8.2 6.9 12.3c.8 2.6 1 5.2.5 7.5c-2.3.7-4.9.8-7.6.3c-4.2-.7-8.8-2.7-12.6-5.4c-8-5.6-8.4-12.2-3.7-15.4Z"
+        fill="#F998B2"
+      />
+      <path
+        d="M49.8 20.1c4.7 3.2 4.4 9.8-3.6 15.4c-3.8 2.7-8.4 4.7-12.6 5.5c-2.7.5-5.3.4-7.6-.2c-.5-2.4-.3-5 .5-7.6c1.3-4.1 3.7-8.8 6.9-12.3c6.6-7.2 13-7.7 16.4-5.8Z"
+        fill="#F8B6C7"
+      />
+      <path
+        d="M21.2 51.2c-4.6-3.3-4.2-9.7 3.7-15.4c3.7-2.6 8.4-4.5 12.5-5.2c2.7-.5 5.3-.4 7.6.3c.5 2.3.3 4.9-.5 7.5c-1.2 4.2-3.7 8.8-6.8 12.4c-6.7 7.3-13.1 7.8-16.5 5.6Z"
+        fill="#F8C4D2"
+      />
+      <path
+        d="M42.8 51.1c-3.5 2.2-9.9 1.8-16.7-5.2c-3.2-3.4-5.8-8-7.2-12.1c-.9-2.6-1.2-5.2-.8-7.5c2.3-.8 4.9-.9 7.6-.4c4.2.7 8.9 2.5 12.8 5.1c8.2 5.3 8.9 11.9 4.3 15.3Z"
+        fill="#F68EAB"
+      />
+      <circle cx="31.9" cy="31.8" r="6.8" fill="#FCE1EA" />
+    </svg>
+  )
+}
+
 export function SnowflakeIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
@@ -138,6 +201,36 @@ export function SnowflakeIcon(props: SVGProps<SVGSVGElement>) {
         strokeLinejoin="round"
         strokeWidth="1.5"
       />
+    </svg>
+  )
+}
+
+export function SnowCrystalIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M32 8v48M11.2 20l41.6 24M11.2 44l41.6-24"
+        stroke="#C7DFFF"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="5"
+      />
+      <path
+        d="M32 8l4.3 4.4M32 8l-4.3 4.4M32 56l4.3-4.4M32 56l-4.3-4.4M11.2 20l5.9.6M11.2 20l1.6 5.6M52.8 44l-5.9-.6M52.8 44l-1.6-5.6M11.2 44l5.9-.6M11.2 44l1.6-5.6M52.8 20l-5.9.6M52.8 20l-1.6 5.6"
+        stroke="#DCEBFF"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="4.2"
+      />
+      <path
+        d="M32 18l5.5 9.5h11L43 37l4.5 9.5L37 45.2L32 55l-5-9.8l-10.5 1.3L21 37l-5.5-9.5h11L32 18Z"
+        fill="#D9ECFF"
+      />
+      <path
+        d="M32 21.4l3.8 6.6h7.7l-3.8 6.4l3.2 6.8l-7.5-1l-3.4 6.7l-3.4-6.7l-7.5 1l3.2-6.8l-3.8-6.4h7.7l3.8-6.6Z"
+        fill="#A7CFFF"
+      />
+      <circle cx="32" cy="32" r="5.2" fill="#CEDBFF" />
     </svg>
   )
 }
@@ -162,6 +255,31 @@ export function MusicNoteIcon(props: SVGProps<SVGSVGElement>) {
       <path
         d="M14 4.5v10.1a3.5 3.5 0 1 1-1.6-2.9V7.2l7-1.7v7.1a3.5 3.5 0 1 1-1.6-2.9V3.5L14 4.5Z"
         fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+export function MusicOrbitIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M12 23V9.2L25 7v14"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.2"
+      />
+      <circle cx="9" cy="23" r="3" stroke="currentColor" strokeWidth="2.2" />
+      <circle cx="22.5" cy="21" r="3" stroke="currentColor" strokeWidth="2.2" />
+      <circle cx="15.5" cy="22" r="3.1" stroke="currentColor" strokeWidth="2" opacity="0.8" />
+      <path
+        d="M18.5 22V5.8l5.6 3.1"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        opacity="0.8"
       />
     </svg>
   )
