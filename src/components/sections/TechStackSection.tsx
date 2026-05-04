@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { skillCategories } from '../../data/skills'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
@@ -15,101 +16,143 @@ export function TechStackSection() {
         className="section-frame relative overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
       >
         <ThemeShiftBackdrop />
-        <SectionHeading
-          title="Tech stack system"
-          description="A grouped toolkit covering product surfaces, backend delivery, infrastructure touchpoints, and workflow thinking that keeps AI-assisted builds grounded."
-        />
 
-        <div className="relative z-10 mt-8 grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-          {skillCategories.map((category, index) => (
-            <article
-              key={category.title}
-              className="relative overflow-hidden rounded-[1.8rem] border p-5"
+        <div className="relative z-10 grid gap-8 xl:grid-cols-[0.38fr_0.62fr]">
+          <div>
+            <SectionHeading
+              title="Tech stack system"
+              description="This section now behaves more like a capability spectrum: one anchored control panel and a series of long-form skill rails instead of six matching cards."
+            />
+
+            <div
+              className="mt-6 overflow-hidden rounded-[2rem] border p-5"
               style={{
                 borderColor: 'var(--color-border)',
                 background:
                   theme === 'light'
-                    ? 'linear-gradient(180deg, rgba(255,255,255,0.9), rgba(239,249,255,0.88))'
-                    : 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(124,92,255,0.05))',
+                    ? 'linear-gradient(180deg, rgba(255,255,255,0.9), rgba(242,249,255,0.86))'
+                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(124,92,255,0.06))',
               }}
             >
-              <ThemeShiftBackdrop variant="card" />
-              <div
-                className="sheen-pass"
-                style={{
-                  animationDuration: theme === 'light' ? '8.1s' : '6.8s',
-                  animationDelay: `${index * 0.22}s`,
-                  background:
-                    theme === 'light'
-                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.52), rgba(214,244,255,0.28), transparent)'
-                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(34,211,238,0.08), transparent)',
-                }}
-              />
-              <div
-                className="absolute right-4 top-4 h-16 w-16 rounded-full blur-2xl"
-                style={{
-                  background:
-                    theme === 'light'
-                      ? index % 2 === 0
-                        ? 'rgba(56,189,248,0.18)'
-                        : 'rgba(253,186,116,0.18)'
-                      : index % 2 === 0
-                        ? 'rgba(124,92,255,0.16)'
-                        : 'rgba(255,79,216,0.16)',
-                }}
-              />
-
-              <div className="relative z-10">
-                <div className="absolute right-0 top-0">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                    Capability core
+                  </p>
+                  <h3 className="mt-3 font-display text-2xl font-bold tracking-[-0.05em] text-[var(--color-text)]">
+                    6 system layers
+                  </h3>
+                </div>
+                <div className="flex items-center gap-2">
                   {theme === 'light' ? (
-                    <div className="relative h-14 w-14">
-                      <PetalIcon className="absolute left-2 top-1 size-5 rotate-[-20deg] text-rose-300/80" />
-                      <SnowflakeIcon className="absolute right-0 top-5 size-4 text-sky-200/70" />
-                    </div>
+                    <>
+                      <PetalIcon className="size-5 text-rose-300" />
+                      <SnowflakeIcon className="size-5 text-sky-300" />
+                    </>
                   ) : (
-                    <div className="relative h-14 w-16">
-                      <MusicNoteIcon className="absolute right-0 top-2 size-5 rotate-[10deg] text-fuchsia-200/55" />
-                      <JellyfishIcon className="absolute left-0 top-2 size-7 text-cyan-100/50" />
-                    </div>
+                    <>
+                      <MusicNoteIcon className="size-5 text-fuchsia-200" />
+                      <JellyfishIcon className="size-6 text-cyan-200/60" />
+                    </>
                   )}
                 </div>
+              </div>
 
+              <p className="mt-4 text-sm leading-7 text-[var(--color-muted)]">
+                The toolkit is organised by the kind of responsibility it carries: interface work,
+                services, data, infrastructure, collaboration tooling, and AI workflow thinking.
+              </p>
+
+              <div className="mt-5 grid grid-cols-2 gap-3">
+                {[
+                  'frontend surfaces',
+                  'backend logic',
+                  'data models',
+                  'deployment touchpoints',
+                ].map((label) => (
+                  <div
+                    key={label}
+                    className="rounded-[1.2rem] border px-3 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]"
+                    style={{
+                      borderColor: 'var(--pill-border)',
+                      background: 'var(--pill-background)',
+                    }}
+                  >
+                    {label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            {skillCategories.map((category, index) => (
+              <motion.article
+                key={category.title}
+                className="relative overflow-hidden rounded-[1.9rem] border p-5 sm:p-6"
+                initial={{ opacity: 0, x: 24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.62, delay: index * 0.06 }}
+                style={{
+                  borderColor: 'var(--color-border)',
+                  background:
+                    theme === 'light'
+                      ? 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(239,249,255,0.88))'
+                      : 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(124,92,255,0.05))',
+                  marginLeft: index % 2 === 0 ? '0' : '0',
+                }}
+              >
+                <ThemeShiftBackdrop variant="card" />
                 <div
-                  className="inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
+                  className="absolute left-0 top-0 h-full w-1.5"
                   style={{
-                    borderColor: 'var(--pill-border)',
-                    background: 'var(--pill-background)',
-                    color: 'var(--pill-text)',
+                    background:
+                      theme === 'light'
+                        ? 'linear-gradient(180deg, rgba(246,168,200,0.86), rgba(37,99,235,0.72))'
+                        : 'linear-gradient(180deg, rgba(255,79,216,0.82), rgba(34,211,238,0.78))',
                   }}
-                >
-                  {theme === 'light' ? category.metaphorLight : category.metaphorDark}
-                </div>
+                />
 
-                <h3 className="mt-4 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-text)]">
-                  {category.title}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">
-                  {category.summary}
-                </p>
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {category.items.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border px-3 py-1.5 text-xs font-semibold"
+                <div className="relative z-10 grid gap-4 lg:grid-cols-[0.28fr_0.72fr] lg:items-start">
+                  <div className="lg:pr-4">
+                    <div
+                      className="inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
                       style={{
                         borderColor: 'var(--pill-border)',
                         background: 'var(--pill-background)',
                         color: 'var(--pill-text)',
                       }}
                     >
-                      {item}
-                    </span>
-                  ))}
+                      {theme === 'light' ? category.metaphorLight : category.metaphorDark}
+                    </div>
+                    <h3 className="mt-4 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-text)]">
+                      {category.title}
+                    </h3>
+                  </div>
+
+                  <div>
+                    <p className="text-sm leading-7 text-[var(--color-muted)]">{category.summary}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {category.items.map((item) => (
+                        <span
+                          key={item}
+                          className="rounded-full border px-3 py-1.5 text-xs font-semibold"
+                          style={{
+                            borderColor: 'var(--pill-border)',
+                            background: 'var(--pill-background)',
+                            color: 'var(--pill-text)',
+                          }}
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </motion.article>
+            ))}
+          </div>
         </div>
       </section>
     </Reveal>
