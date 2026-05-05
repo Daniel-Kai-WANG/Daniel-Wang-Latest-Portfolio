@@ -5,10 +5,10 @@
   --font-display: 'Space Grotesk';
   --font-mono: 'SFMono-Regular';
 
-  --color-background: #edf6ff;
-  --color-surface: rgba(249, 252, 255, 0.9);
-  --color-surface-elevated: rgba(241, 247, 255, 0.84);
-  --color-surface-muted: #e3efff;
+  --color-background: #e8f4ff;
+  --color-surface: rgba(245, 251, 255, 0.92);
+  --color-surface-elevated: rgba(237, 246, 255, 0.88);
+  --color-surface-muted: #deeeff;
   --color-text: #18314f;
   --color-muted: #5e7696;
   --color-primary: #60b2f3;
@@ -19,19 +19,19 @@
   --color-border: rgba(177, 215, 245, 0.92);
   --surface-shadow: 0 30px 70px rgba(41, 86, 140, 0.14);
   --page-background:
-    linear-gradient(180deg, #f8fbff 0%, #e5f2ff 22%, #edf6ff 52%, #fff4fa 100%);
-  --page-orb-a: rgba(240, 162, 205, 0.22);
-  --page-orb-b: rgba(123, 194, 255, 0.18);
-  --page-orb-c: rgba(228, 243, 255, 0.34);
+    linear-gradient(180deg, #f4fbff 0%, #dff0ff 22%, #e9f5ff 56%, #fff4fa 100%);
+  --page-orb-a: rgba(240, 162, 205, 0.2);
+  --page-orb-b: rgba(123, 194, 255, 0.24);
+  --page-orb-c: rgba(221, 239, 255, 0.38);
   --hero-grid: rgba(23, 50, 77, 0.08);
   --soft-accent: rgba(238, 159, 200, 0.16);
-  --soft-accent-strong: rgba(96, 178, 243, 0.2);
-  --timeline-line: rgba(93, 143, 221, 0.18);
-  --pill-background: rgba(252, 248, 255, 0.76);
+  --soft-accent-strong: rgba(96, 178, 243, 0.24);
+  --timeline-line: rgba(93, 143, 221, 0.22);
+  --pill-background: rgba(247, 250, 255, 0.82);
   --pill-text: #755f84;
   --pill-border: rgba(222, 193, 231, 0.36);
   --hero-panel-background:
-    linear-gradient(152deg, rgba(251, 253, 255, 0.97), rgba(235, 245, 255, 0.94), rgba(255, 239, 248, 0.9));
+    linear-gradient(152deg, rgba(248, 252, 255, 0.98), rgba(228, 243, 255, 0.95), rgba(251, 237, 246, 0.9));
   color-scheme: light;
 }
 

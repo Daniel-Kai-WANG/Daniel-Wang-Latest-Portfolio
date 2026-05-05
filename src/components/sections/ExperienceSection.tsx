@@ -4,7 +4,7 @@ import { experiences } from '../../data/experience'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { JellyfishIcon, SakuraIcon, StarfishIcon } from '../common/Icons'
+import { SakuraIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 const roleMarks: Record<string, string> = {
@@ -26,34 +26,34 @@ const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep
 
 const experienceNodes = [
   {
-    x: 104,
-    y: 118,
+    x: 108,
+    y: 122,
     lightPath: 'M178 254 C168 220 148 172 104 118',
-    darkPath: 'M178 246 C164 220 146 190 134 156 C126 140 118 128 104 118',
+    darkPath: 'M128 138 C120 132 114 126 108 122',
   },
   {
     x: 214,
     y: 84,
     lightPath: 'M182 248 C194 208 206 152 214 84',
-    darkPath: 'M198 238 C206 208 212 170 216 132 C218 112 218 96 214 84',
+    darkPath: 'M214 108 C214 100 214 92 214 84',
   },
   {
-    x: 324,
-    y: 128,
+    x: 320,
+    y: 124,
     lightPath: 'M188 246 C230 214 272 170 328 126',
-    darkPath: 'M210 238 C236 216 264 190 290 162 C304 148 314 136 324 128',
+    darkPath: 'M296 140 C304 134 312 128 320 124',
   },
   {
-    x: 292,
-    y: 258,
+    x: 288,
+    y: 250,
     lightPath: 'M186 300 C226 286 260 292 292 312',
-    darkPath: 'M220 250 C242 248 260 250 274 256 C284 260 288 260 292 258',
+    darkPath: 'M270 248 C276 248 282 249 288 250',
   },
   {
-    x: 132,
-    y: 234,
+    x: 138,
+    y: 246,
     lightPath: 'M182 316 C164 320 146 326 126 334',
-    darkPath: 'M178 248 C160 234 146 226 132 234',
+    darkPath: 'M156 242 C150 243 144 244 138 246',
   },
 ] as const
 
@@ -62,18 +62,35 @@ const lightRootPaths = [
   'M188 382 C228 360 270 348 326 340',
 ]
 
-const darkCoralPaths = [
-  { path: 'M204 366 C210 328 210 288 204 248 C198 212 186 172 170 128', width: 16, opacity: 0.98 },
-  { path: 'M172 182 C158 170 146 154 138 138', width: 8, opacity: 0.84 },
-  { path: 'M148 158 C138 148 126 136 118 126', width: 6, opacity: 0.8 },
-  { path: 'M206 206 C216 184 224 160 232 132', width: 8, opacity: 0.82 },
-  { path: 'M216 224 C240 208 264 188 286 162 C300 146 312 134 324 128', width: 9, opacity: 0.88 },
-  { path: 'M266 178 C278 168 292 152 302 136', width: 6, opacity: 0.78 },
-  { path: 'M228 246 C248 246 266 250 280 260', width: 7, opacity: 0.8 },
-  { path: 'M190 220 C176 216 162 220 150 228', width: 6, opacity: 0.74 },
-  { path: 'M206 290 C222 300 238 314 252 332', width: 7, opacity: 0.78 },
-  { path: 'M194 296 C180 304 168 316 158 330', width: 7, opacity: 0.74 },
+const darkCoralBasePath =
+  'M210 366 C208 338 208 318 208 296 C208 282 208 272 210 262'
+
+const darkCoralBranches = [
+  { path: 'M210 262 C194 228 170 186 128 138', width: 14, opacity: 0.98 },
+  { path: 'M210 262 C212 220 214 168 214 108', width: 13, opacity: 0.98 },
+  { path: 'M210 262 C232 226 258 190 296 140', width: 14, opacity: 0.98 },
+  { path: 'M210 280 C230 272 250 262 270 248', width: 11, opacity: 0.9 },
+  { path: 'M210 284 C194 274 176 260 156 242', width: 11, opacity: 0.9 },
 ] as const
+
+const darkCoralTips = [
+  { x: 108, y: 122, size: 8 },
+  { x: 214, y: 84, size: 7 },
+  { x: 320, y: 124, size: 8 },
+  { x: 288, y: 250, size: 7 },
+  { x: 138, y: 246, size: 7 },
+] as const
+
+function CoralBudMark({ className = '' }: { className?: string }) {
+  return (
+    <div className={`relative ${className}`}>
+      <span className="absolute bottom-0 left-1/2 h-[54%] w-[2px] -translate-x-1/2 rounded-full bg-[rgba(255,173,154,0.7)]" />
+      <span className="absolute left-[16%] top-[28%] size-[30%] rounded-full bg-[rgba(255,181,164,0.92)] shadow-[0_0_10px_rgba(255,181,164,0.18)]" />
+      <span className="absolute right-[16%] top-[22%] size-[28%] rounded-full bg-[rgba(183,176,255,0.9)] shadow-[0_0_10px_rgba(132,117,255,0.18)]" />
+      <span className="absolute left-1/2 top-[4%] size-[34%] -translate-x-1/2 rounded-full bg-[rgba(255,210,191,0.94)] shadow-[0_0_12px_rgba(255,181,164,0.22)]" />
+    </div>
+  )
+}
 
 function getFruitLabel(role: string, company: string) {
   const roleMark = roleMarks[role] ?? role
@@ -175,8 +192,8 @@ export function ExperienceSection() {
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
-                      <JellyfishIcon className="size-6 text-sky-200" />
-                      <StarfishIcon variant="light" className="size-5 rotate-[10deg]" />
+                      <CoralBudMark className="size-6" />
+                      <div className="size-2 rounded-full bg-[rgba(255,210,191,0.82)] shadow-[0_0_10px_rgba(255,181,164,0.28)]" />
                     </div>
                   )}
                 </div>
@@ -287,7 +304,7 @@ export function ExperienceSection() {
                     <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">
                       {isLight
                         ? 'The blossoms stay attached to a single trunk and branch rhythm, while the full delivery story stays anchored on the left.'
-                        : 'The night version shifts to a staghorn coral layout with secondary forks, tight pod labels, and a branch-first reveal.'}
+                        : 'The night version shifts to a five-branch coral fan with one reef base, clearer branch rhythm, and tighter pod labels.'}
                     </p>
                   </div>
 
@@ -299,8 +316,8 @@ export function ExperienceSection() {
                       </>
                     ) : (
                       <>
-                        <JellyfishIcon className="size-5 text-sky-200/80" />
-                        <div className="size-2.5 rounded-full bg-violet-300/60" />
+                        <CoralBudMark className="size-5" />
+                        <div className="size-2.5 rounded-full bg-[rgba(183,176,255,0.72)]" />
                       </>
                     )}
                   </div>
@@ -359,25 +376,73 @@ export function ExperienceSection() {
                         ))}
                       </>
                     ) : (
-                      darkCoralPaths.map((segment, index) => (
+                      <>
                         <motion.path
-                          key={segment.path}
-                          d={segment.path}
+                          d={darkCoralBasePath}
                           fill="none"
                           stroke="url(#experience-dark-coral)"
                           strokeLinecap="round"
-                          strokeWidth={segment.width}
-                          opacity={segment.opacity}
-                          initial={{ pathLength: 0, opacity: segment.opacity * 0.4 }}
-                          whileInView={{ pathLength: 1, opacity: segment.opacity }}
+                          strokeWidth={18}
+                          opacity={0.98}
+                          initial={{ pathLength: 0, opacity: 0.34 }}
+                          whileInView={{ pathLength: 1, opacity: 0.98 }}
                           viewport={{ once: true, amount: 0.35 }}
-                          transition={
-                            reduceMotion
-                              ? { duration: 0 }
-                              : { duration: 0.62, delay: index * 0.08, ease: 'easeOut' }
-                          }
+                          transition={reduceMotion ? { duration: 0 } : { duration: 0.56, ease: 'easeOut' }}
                         />
-                      ))
+
+                        {darkCoralBranches.map((segment, index) => (
+                          <motion.path
+                            key={segment.path}
+                            d={segment.path}
+                            fill="none"
+                            stroke="url(#experience-dark-coral)"
+                            strokeLinecap="round"
+                            strokeWidth={segment.width}
+                            opacity={segment.opacity}
+                            initial={{ pathLength: 0, opacity: segment.opacity * 0.4 }}
+                            whileInView={{ pathLength: 1, opacity: segment.opacity }}
+                            viewport={{ once: true, amount: 0.35 }}
+                            transition={
+                              reduceMotion
+                                ? { duration: 0 }
+                                : { duration: 0.52, delay: 0.12 + index * 0.08, ease: 'easeOut' }
+                            }
+                          />
+                        ))}
+
+                        {darkCoralTips.map((tip, index) => (
+                          <motion.g
+                            key={`${tip.x}-${tip.y}`}
+                            initial={{ opacity: 0, scale: 0.75 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true, amount: 0.35 }}
+                            transition={
+                              reduceMotion
+                                ? { duration: 0 }
+                                : { duration: 0.28, delay: 0.46 + index * 0.06, ease: 'easeOut' }
+                            }
+                          >
+                            <circle
+                              cx={tip.x}
+                              cy={tip.y}
+                              r={tip.size * 1.8}
+                              fill="rgba(255,181,164,0.14)"
+                            />
+                            <circle
+                              cx={tip.x}
+                              cy={tip.y}
+                              r={tip.size}
+                              fill="rgba(255,198,178,0.9)"
+                            />
+                            <circle
+                              cx={tip.x}
+                              cy={tip.y}
+                              r={tip.size * 0.42}
+                              fill="rgba(240,244,255,0.92)"
+                            />
+                          </motion.g>
+                        ))}
+                      </>
                     )}
 
                     {experienceNodes.map((node, index) => (
@@ -402,7 +467,7 @@ export function ExperienceSection() {
                         transition={
                           reduceMotion
                             ? { duration: 0 }
-                            : { duration: 0.52, delay: isLight ? 0.34 + index * 0.08 : 0.82 + index * 0.06, ease: 'easeOut' }
+                            : { duration: 0.46, delay: isLight ? 0.34 + index * 0.08 : 0.78 + index * 0.06, ease: 'easeOut' }
                         }
                       />
                     ))}
@@ -496,10 +561,7 @@ export function ExperienceSection() {
                             {isLight ? (
                               <SakuraIcon className="mx-auto size-5 sm:size-7" />
                             ) : (
-                              <StarfishIcon
-                                variant={index % 2 === 0 ? 'pink' : 'light'}
-                                className="mx-auto size-5 rotate-[10deg] sm:size-6"
-                              />
+                              <CoralBudMark className="mx-auto size-5 sm:size-6" />
                             )}
                             <span className="mt-2 block text-[9px] font-bold uppercase tracking-[0.14em] text-[var(--color-text)] sm:mt-3 sm:text-[11px] sm:tracking-[0.18em]">
                               {getFruitLabel(item.role, item.company)}
@@ -520,9 +582,9 @@ export function ExperienceSection() {
                     </>
                   ) : (
                     <>
-                      <StarfishIcon variant="pink" className="size-4 rotate-[10deg]" />
-                      <div className="size-2 rounded-full bg-violet-300/70" />
-                      Staghorn coral shorthand on the right, full delivery span on the left.
+                      <CoralBudMark className="size-4" />
+                      <div className="size-2 rounded-full bg-[rgba(183,176,255,0.74)]" />
+                      Five coral branches on the right, full delivery span on the left.
                     </>
                   )}
                 </div>
