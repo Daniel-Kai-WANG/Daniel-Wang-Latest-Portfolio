@@ -33,10 +33,7 @@ export function ResumeUnavailableSection() {
                 href="#projects"
                 className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-white"
                 style={{
-                  background:
-                    theme === 'light'
-                      ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                      : 'linear-gradient(135deg, #FF8F73, #39C3DC)',
+                  background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
                 }}
               >
                 Explore Projects Instead
@@ -62,8 +59,8 @@ export function ResumeUnavailableSection() {
               borderColor: 'var(--color-border)',
               background:
                 theme === 'light'
-                  ? 'linear-gradient(180deg, rgba(255,255,255,0.9), rgba(240,249,255,0.9))'
-                  : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(57,195,220,0.08), rgba(255,143,115,0.06))',
+                  ? 'linear-gradient(180deg, rgba(248,252,255,0.92), rgba(240,249,255,0.9), rgba(252,242,247,0.88))'
+                  : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(128,199,255,0.08), rgba(133,120,255,0.08))',
             }}
           >
             <ThemeShiftBackdrop variant="card" />
@@ -74,7 +71,7 @@ export function ResumeUnavailableSection() {
                 background:
                   theme === 'light'
                     ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.52), rgba(214,244,255,0.28), transparent)'
-                    : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.16), rgba(57,195,220,0.1), transparent)',
+                    : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.16), rgba(128,199,255,0.1), transparent)',
               }}
             />
             <div
@@ -83,7 +80,7 @@ export function ResumeUnavailableSection() {
                 background:
                   theme === 'light'
                     ? 'rgba(56,189,248,0.18)'
-                    : 'rgba(255,143,115,0.16)',
+                    : 'rgba(133,120,255,0.16)',
               }}
             />
 
@@ -143,7 +140,7 @@ export function ResumeUnavailableSection() {
                     still shows the work, context, and delivery range.
                   </p>
                   <div className="mt-4 flex items-center gap-2 text-sm text-[#ffd8cb]/80">
-                    <TablerMoonIcon className="size-4 text-cyan-50/84" />
+                    <TablerMoonIcon className="size-4 text-slate-100/84" />
                     <StarfishIcon variant="light" className="size-4 -rotate-[10deg]" />
                     <JellyfishIcon className="size-4 text-cyan-200" />
                     Coral glow outside, the delivery story still fully visible.

@@ -30,8 +30,8 @@ export function TechStackSection() {
                 borderColor: 'var(--color-border)',
                 background:
                   theme === 'light'
-                    ? 'linear-gradient(180deg, rgba(255,255,255,0.9), rgba(242,249,255,0.86))'
-                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(57,195,220,0.06), rgba(255,143,115,0.05))',
+                    ? 'linear-gradient(180deg, rgba(248,252,255,0.92), rgba(240,247,255,0.88), rgba(251,242,248,0.86))'
+                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(128,199,255,0.06), rgba(133,120,255,0.05))',
               }}
             >
               <div className="flex items-center justify-between gap-3">
@@ -51,7 +51,7 @@ export function TechStackSection() {
                     </>
                   ) : (
                     <>
-                      <TablerMoonIcon className="size-5 text-cyan-50/80" />
+                      <TablerMoonIcon className="size-5 text-slate-100/80" />
                       <StarfishIcon variant="pink" className="size-5 rotate-[10deg]" />
                       <JellyfishIcon className="size-6 text-cyan-200/60" />
                     </>
@@ -99,8 +99,8 @@ export function TechStackSection() {
                   borderColor: 'var(--color-border)',
                   background:
                     theme === 'light'
-                      ? 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(239,249,255,0.88))'
-                      : 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(57,195,220,0.05), rgba(255,143,115,0.04))',
+                      ? 'linear-gradient(180deg, rgba(248,252,255,0.92), rgba(239,249,255,0.88), rgba(252,242,248,0.86))'
+                      : 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(128,199,255,0.05), rgba(133,120,255,0.05))',
                   marginLeft: index % 2 === 0 ? '0' : '0',
                 }}
               >
@@ -111,7 +111,7 @@ export function TechStackSection() {
                     background:
                       theme === 'light'
                         ? 'linear-gradient(180deg, rgba(246,168,200,0.86), rgba(37,99,235,0.72))'
-                        : 'linear-gradient(180deg, rgba(255,143,115,0.82), rgba(57,195,220,0.78))',
+                        : 'linear-gradient(180deg, rgba(122,185,255,0.84), rgba(133,120,255,0.8))',
                   }}
                 />
 

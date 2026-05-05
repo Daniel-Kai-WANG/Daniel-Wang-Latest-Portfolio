@@ -35,7 +35,7 @@ function WorkflowPanel() {
           background:
             theme === 'light'
               ? 'rgba(56, 189, 248, 0.22)'
-              : 'rgba(57, 195, 220, 0.18)',
+              : 'rgba(128, 199, 255, 0.16)',
         }}
       />
       <div className="relative z-10">
@@ -77,7 +77,7 @@ function WorkflowPanel() {
               background:
                 theme === 'light'
                   ? 'linear-gradient(180deg, rgba(37,99,235,0.35), rgba(56,189,248,0.12))'
-                  : 'linear-gradient(180deg, rgba(255,143,115,0.58), rgba(57,195,220,0.2))',
+                  : 'linear-gradient(180deg, rgba(241,154,201,0.3), rgba(133,120,255,0.22))',
             }}
           />
 
@@ -174,7 +174,7 @@ function WorkflowPanel() {
                       background:
                         theme === 'light'
                           ? 'linear-gradient(180deg, rgba(56,189,248,0.35), rgba(37,99,235,0.75))'
-                          : 'linear-gradient(180deg, rgba(57,195,220,0.56), rgba(255,143,115,0.92))',
+                          : 'linear-gradient(180deg, rgba(128,199,255,0.6), rgba(133,120,255,0.88))',
                     }}
                   />
                 ))}
@@ -211,8 +211,8 @@ export function HeroSection() {
       style={{
         background:
           theme === 'light'
-            ? 'linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,243,249,0.78), rgba(234,246,255,0.7))'
-            : 'linear-gradient(180deg, rgba(8,24,34,0.88), rgba(12,39,49,0.78), rgba(9,21,31,0.76))',
+            ? 'linear-gradient(180deg, rgba(248,252,255,0.9), rgba(255,241,247,0.8), rgba(232,245,255,0.76))'
+            : 'linear-gradient(180deg, rgba(8,16,33,0.9), rgba(12,22,47,0.82), rgba(18,20,49,0.78))',
         borderColor: 'var(--color-border)',
         boxShadow: 'var(--surface-shadow)',
       }}
@@ -224,7 +224,7 @@ export function HeroSection() {
           background:
             theme === 'light'
               ? `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(255,214,235,0.28), transparent 34%)`
-              : `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(57,195,220,0.16), rgba(255,143,115,0.1), transparent 34%)`,
+              : `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(128,199,255,0.18), rgba(133,120,255,0.1), transparent 34%)`,
         }}
       />
       <div
@@ -233,7 +233,7 @@ export function HeroSection() {
           background:
             theme === 'light'
               ? 'rgba(56, 189, 248, 0.16)'
-              : 'rgba(57, 195, 220, 0.14)',
+              : 'rgba(128, 199, 255, 0.14)',
         }}
       />
       <div
@@ -242,7 +242,7 @@ export function HeroSection() {
           background:
             theme === 'light'
               ? 'rgba(253, 186, 116, 0.16)'
-              : 'rgba(255, 143, 115, 0.16)',
+              : 'rgba(133, 120, 255, 0.16)',
         }}
       />
       <div
@@ -251,7 +251,7 @@ export function HeroSection() {
           background:
             theme === 'light'
               ? 'linear-gradient(90deg, transparent, rgba(246,168,200,0.8), rgba(186,230,253,0.9), transparent)'
-              : 'linear-gradient(90deg, transparent, rgba(255,143,115,0.8), rgba(57,195,220,0.8), transparent)',
+              : 'linear-gradient(90deg, transparent, rgba(255,178,154,0.54), rgba(128,199,255,0.72), rgba(133,120,255,0.72), transparent)',
         }}
       />
 
@@ -263,7 +263,7 @@ export function HeroSection() {
         </>
       ) : (
         <>
-          <TablerMoonIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-cyan-50/76" />
+          <TablerMoonIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-slate-100/76" />
           <StarfishIcon variant="pink" className="absolute right-10 top-16 size-10 rotate-[18deg] opacity-70" />
           <JellyfishIcon className="absolute bottom-8 right-8 size-12 text-cyan-200/42" />
           <StarfishIcon variant="light" className="absolute left-8 top-24 size-8 -rotate-[16deg] opacity-65" />
@@ -315,10 +315,7 @@ export function HeroSection() {
               href={profile.primaryCta.href}
               className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-soft"
               style={{
-                background:
-                  theme === 'light'
-                    ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                    : 'linear-gradient(135deg, #FF8F73, #39C3DC)',
+                background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
               }}
             >
               {profile.primaryCta.label}
