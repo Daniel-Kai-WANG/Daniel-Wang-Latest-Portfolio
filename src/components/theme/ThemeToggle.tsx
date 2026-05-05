@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import jellyfishGif from '../../assets/theme/jellyfish.gif'
+import { jellyfishGif } from '../../assets/experience'
 import { useTheme } from '../../hooks/useTheme'
 import { SakuraIcon } from '../common/Icons'
 

@@ -6,20 +6,10 @@ import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { SakuraIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
+import { CoralDecorPair } from './CoralDecorPair'
 import { ExperienceJourneyGraph } from './ExperienceJourneyGraph'
 
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-function CoralBudMark({ className = '' }: { className?: string }) {
-  return (
-    <div className={`relative ${className}`}>
-      <span className="absolute bottom-0 left-1/2 h-[54%] w-[2px] -translate-x-1/2 rounded-full bg-[rgba(255,173,154,0.7)]" />
-      <span className="absolute left-[16%] top-[28%] size-[30%] rounded-full bg-[rgba(255,181,164,0.92)] shadow-[0_0_10px_rgba(255,181,164,0.18)]" />
-      <span className="absolute right-[16%] top-[22%] size-[28%] rounded-full bg-[rgba(183,176,255,0.9)] shadow-[0_0_10px_rgba(132,117,255,0.18)]" />
-      <span className="absolute left-1/2 top-[4%] size-[34%] -translate-x-1/2 rounded-full bg-[rgba(255,210,191,0.94)] shadow-[0_0_12px_rgba(255,181,164,0.22)]" />
-    </div>
-  )
-}
 
 function formatExperienceRange(date: string) {
   const [startRaw, endRaw] = date.split('–').map((value) => value.trim())
@@ -113,10 +103,7 @@ export function ExperienceSection() {
                       <SakuraIcon className="size-5 opacity-80" />
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2">
-                      <CoralBudMark className="size-6" />
-                      <div className="size-2 rounded-full bg-[rgba(255,210,191,0.82)] shadow-[0_0_10px_rgba(255,181,164,0.28)]" />
-                    </div>
+                    <CoralDecorPair starfishVariant="light" />
                   )}
                 </div>
 
@@ -235,10 +222,7 @@ export function ExperienceSection() {
                         <SakuraIcon className="size-4 opacity-75" />
                       </>
                     ) : (
-                      <>
-                        <CoralBudMark className="size-5" />
-                        <div className="size-2.5 rounded-full bg-[rgba(183,176,255,0.72)]" />
-                      </>
+                      <CoralDecorPair starfishVariant="pink" />
                     )}
                   </div>
                 </div>

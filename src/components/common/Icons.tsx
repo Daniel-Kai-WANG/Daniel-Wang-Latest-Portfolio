@@ -1,9 +1,8 @@
 import { useId } from 'react'
 import type { CSSProperties, SVGProps } from 'react'
+import { starfishLight, starfishPink } from '../../assets/experience'
 import snowflakeCluster from '../../assets/theme/snowflake-cluster.png'
 import snowflakeSoft from '../../assets/theme/snowflake-soft.png'
-import starfishLight from '../../assets/theme/starfish-light.png'
-import starfishPink from '../../assets/theme/starfish-pink.png'
 
 const sakuraVariants = ['/seasonal/sakura-a.png', '/seasonal/sakura-b.png'] as const
 const snowflakeAssetVariants = [snowflakeSoft, snowflakeCluster] as const
