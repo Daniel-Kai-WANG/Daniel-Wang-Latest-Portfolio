@@ -76,8 +76,8 @@ export function BackToTopButton() {
             borderColor: 'var(--color-border)',
             background:
               theme === 'light'
-                ? 'linear-gradient(135deg, rgba(255,255,255,0.96), rgba(236,246,255,0.94), rgba(255,239,223,0.92))'
-                : 'linear-gradient(135deg, rgba(14,18,31,0.98), rgba(23,18,45,0.96), rgba(11,25,42,0.94))',
+                ? 'linear-gradient(135deg, rgba(249,253,255,0.96), rgba(236,246,255,0.94), rgba(252,241,247,0.92))'
+                : 'linear-gradient(135deg, rgba(12,18,38,0.98), rgba(16,24,49,0.96), rgba(26,28,66,0.94))',
             boxShadow:
               theme === 'light'
                 ? '0 18px 42px rgba(37,99,235,0.14)'
@@ -92,7 +92,7 @@ export function BackToTopButton() {
               background:
                 theme === 'light'
                   ? 'conic-gradient(from 180deg, rgba(255,255,255,0.18), rgba(255,209,153,0.72), rgba(190,229,255,0.82), rgba(255,229,236,0.64), rgba(255,255,255,0.12))'
-                  : 'conic-gradient(from 180deg, rgba(255,255,255,0.05), rgba(17,76,94,0.76), rgba(57,195,220,0.72), rgba(255,143,115,0.58), rgba(255,255,255,0.03))',
+                  : 'conic-gradient(from 180deg, rgba(255,255,255,0.05), rgba(39,69,130,0.7), rgba(128,199,255,0.7), rgba(133,120,255,0.62), rgba(255,255,255,0.03))',
             }}
           />
 
@@ -103,7 +103,7 @@ export function BackToTopButton() {
               background:
                 theme === 'light'
                   ? 'linear-gradient(180deg, rgba(218,240,255,0.8), rgba(255,228,176,0.78))'
-                  : 'linear-gradient(180deg, rgba(8,18,30,0.98), rgba(12,42,55,0.92))',
+                  : 'linear-gradient(180deg, rgba(9,18,36,0.98), rgba(16,28,58,0.92))',
             }}
           />
 
@@ -122,12 +122,12 @@ export function BackToTopButton() {
             {theme === 'light' ? (
               <div className="relative">
                 <SunLowIcon className="size-6 text-amber-600" />
-                <span className="absolute left-1/2 top-[-9px] h-2 w-px -translate-x-1/2 rounded-full bg-amber-500/70" />
+                <span className="absolute left-1/2 top-[-9px] h-2 w-px -translate-x-1/2 rounded-full bg-pink-400/70" />
               </div>
             ) : (
               <div className="relative">
                 <TablerMoonIcon className="size-6 text-slate-100" />
-                <span className="absolute left-1/2 top-[-10px] h-2 w-px -translate-x-1/2 rounded-full bg-cyan-100/70" />
+                <span className="absolute left-1/2 top-[-10px] h-2 w-px -translate-x-1/2 rounded-full bg-violet-200/70" />
               </div>
             )}
             <span className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-text)]">

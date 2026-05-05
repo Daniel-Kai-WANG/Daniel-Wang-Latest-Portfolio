@@ -1,34 +1,28 @@
-import { useMemo } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import jellyfishGif from '../../assets/theme/jellyfish.gif'
 import { useTheme } from '../../hooks/useTheme'
-import { JellyfishIcon, SnowCrystalIcon, SunLowIcon, TablerMoonIcon } from '../common/Icons'
+import { SakuraIcon } from '../common/Icons'
 
-const ringSpring = {
-  type: 'spring',
-  stiffness: 220,
-  damping: 18,
-  mass: 0.84,
-} as const
+const LIGHT_DRIFT = {
+  x: [-10, 8, -4, 10, -8, -10],
+  y: [7, -8, 4, -9, 6, 7],
+  rotate: [-14, 16, -8, 12, -10, -14],
+  scale: [0.96, 1.08, 0.98, 1.05, 0.98, 0.96],
+}
 
-const ORBIT_DELAY_MS = 500
+const DARK_DRIFT = {
+  x: [-5, 8, -4, 7, -6, -5],
+  y: [7, -8, 2, -7, 5, 7],
+  rotate: [-6, 6, -3, 5, -5, -6],
+  scale: [0.97, 1.05, 0.99, 1.03, 0.99, 0.97],
+}
+
+const DRIFT_TIMES = [0, 0.18, 0.38, 0.6, 0.82, 1]
 
 export function ThemeToggle() {
-  const { theme, toggleTheme, themeShiftDirection, themeShiftKey } = useTheme()
+  const { theme, toggleTheme } = useTheme()
   const reduceMotion = useReducedMotion()
   const isLight = theme === 'light'
-  const transition = reduceMotion ? { duration: 0 } : ringSpring
-  const finalOrbRotation = isLight ? 0 : 180
-  const initialOrbRotation = useMemo(() => {
-    if (reduceMotion || !themeShiftDirection) {
-      return finalOrbRotation
-    }
-
-    return themeShiftDirection === 'light-to-dark' ? 0 : 180
-  }, [finalOrbRotation, reduceMotion, themeShiftDirection])
-
-  const orbTransition = reduceMotion
-    ? { duration: 0 }
-    : { duration: 0.96, delay: ORBIT_DELAY_MS / 1000, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
 
   return (
     <div className="flex items-center gap-3">
@@ -37,7 +31,7 @@ export function ThemeToggle() {
           Orbit theme
         </p>
         <p className="mt-1 max-w-[7.5rem] text-xs leading-5 text-[var(--color-muted)]">
-          Flip the ring and move the sky from light into midnight.
+          Sakura by day, jelly drift by night.
         </p>
       </div>
 
@@ -46,138 +40,100 @@ export function ThemeToggle() {
         aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
         aria-pressed={theme === 'dark'}
         onClick={toggleTheme}
-        className="group relative inline-flex size-[66px] shrink-0 items-center justify-center rounded-full border backdrop-blur-xl transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 sm:size-[70px]"
+        className="group relative inline-flex size-[66px] shrink-0 items-center justify-center rounded-full border backdrop-blur-xl transition-transform duration-300 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 sm:size-[70px]"
         style={{
           borderColor: 'var(--color-border)',
           background: isLight
-            ? 'linear-gradient(135deg, rgba(255,255,255,0.94), rgba(239,247,255,0.96), rgba(255,244,232,0.94))'
-            : 'linear-gradient(135deg, rgba(9,14,27,0.98), rgba(19,16,38,0.98), rgba(10,21,40,0.96))',
+            ? 'linear-gradient(180deg, rgba(244,250,255,0.98), rgba(235,246,255,0.98), rgba(246,241,249,0.96))'
+            : 'linear-gradient(180deg, rgba(8,14,31,0.98), rgba(10,19,42,0.98), rgba(13,19,44,0.98))',
           boxShadow: isLight
-            ? '0 20px 40px rgba(37,99,235,0.12)'
-            : '0 18px 42px rgba(2,6,23,0.48)',
+            ? '0 16px 34px rgba(122,175,231,0.16)'
+            : '0 20px 44px rgba(2,8,24,0.56)',
         }}
       >
-        <motion.div
-          className="absolute inset-[4px] rounded-full"
-          animate={{ rotate: isLight ? 12 : 192 }}
-          transition={transition}
+        <div
+          className="absolute inset-[4px] rounded-full border"
           style={{
+            borderColor: isLight ? 'rgba(182,220,250,0.94)' : 'rgba(163,178,255,0.3)',
             background: isLight
-              ? 'conic-gradient(from 180deg, rgba(255,255,255,0.2), rgba(255,220,173,0.76), rgba(197,232,255,0.88), rgba(245,214,230,0.64), rgba(255,255,255,0.1))'
-              : 'conic-gradient(from 180deg, rgba(255,255,255,0.05), rgba(19,78,94,0.82), rgba(65,175,244,0.78), rgba(255,153,122,0.56), rgba(255,255,255,0.03))',
+              ? 'conic-gradient(from 180deg, rgba(255,255,255,0.12), rgba(220,239,255,0.84), rgba(246,203,227,0.58), rgba(194,230,255,0.9), rgba(255,255,255,0.08))'
+              : 'linear-gradient(180deg, rgba(20,38,82,0.92), rgba(11,23,52,0.94))',
+            boxShadow: isLight
+              ? '0 0 0 1px rgba(217,239,255,0.84) inset'
+              : '0 0 0 1px rgba(82,100,164,0.28) inset, 0 10px 18px rgba(6,10,30,0.22) inset',
           }}
         />
 
         <div
-          className="absolute inset-[9px] rounded-full border"
+          className="absolute inset-[9px] rounded-full p-[5px]"
           style={{
-            borderColor: isLight ? 'rgba(255,255,255,0.82)' : 'rgba(255,255,255,0.08)',
             background: isLight
-              ? 'linear-gradient(180deg, rgba(222,242,255,0.84), rgba(255,233,186,0.8))'
-              : 'linear-gradient(180deg, rgba(7,13,26,0.98), rgba(14,28,60,0.92))',
+              ? 'conic-gradient(from 180deg, rgba(255,255,255,0.18), rgba(215,238,255,0.86), rgba(244,208,229,0.62), rgba(202,232,255,0.9), rgba(235,247,255,0.16))'
+              : 'linear-gradient(180deg, rgba(23,44,92,0.84), rgba(11,24,53,0.92))',
           }}
         >
           <div
-            className="absolute inset-[6px] rounded-full border"
+            className="relative h-full w-full overflow-hidden rounded-full"
             style={{
-              borderColor: isLight ? 'rgba(170,214,255,0.56)' : 'rgba(255,255,255,0.08)',
-              boxShadow: isLight
-                ? 'inset 0 0 20px rgba(255,255,255,0.2)'
-                : 'inset 0 0 20px rgba(57,195,220,0.08)',
+              background: isLight
+                ? 'radial-gradient(circle at 30% 24%, rgba(250,253,255,0.96), rgba(230,244,255,0.9) 46%, rgba(233,239,252,0.84) 100%)'
+                : 'radial-gradient(circle at 52% 22%, rgba(166,188,255,0.16), transparent 22%), radial-gradient(circle at 48% 76%, rgba(95,166,255,0.1), transparent 24%), linear-gradient(180deg, rgba(18,34,72,0.96), rgba(10,20,45,0.98) 58%, rgba(11,18,40,0.99))',
             }}
-          />
-
-          <motion.div
-            className="absolute inset-0 rounded-full"
-            animate={{ opacity: isLight ? 0.2 : 0.28 }}
-            transition={transition}
-            style={{
-              background:
-                'radial-gradient(circle at 32% 28%, rgba(255,255,255,0.56), transparent 26%), radial-gradient(circle at 66% 74%, rgba(255,255,255,0.12), transparent 34%)',
-            }}
-          />
-
-          <motion.div
-            key={themeShiftKey}
-            className="absolute inset-0"
-            initial={{ rotate: initialOrbRotation }}
-            animate={{ rotate: finalOrbRotation }}
-            transition={orbTransition}
-            style={{ transformOrigin: '50% 50%' }}
           >
-            <motion.div
-              className="absolute left-[73%] top-1/2 flex size-[18px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border sm:size-[20px]"
-              animate={{
-                scale: reduceMotion ? 1 : [0.98, 1.06, 0.98],
-                y: reduceMotion ? '-50%' : ['-50%', '-58%', '-50%'],
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: isLight
+                  ? 'radial-gradient(circle at 22% 42%, rgba(196,232,255,0.24), transparent 24%), radial-gradient(circle at 74% 70%, rgba(255,214,233,0.16), transparent 28%), radial-gradient(circle at 64% 28%, rgba(255,255,255,0.24), transparent 18%)'
+                  : 'radial-gradient(circle at 50% 20%, rgba(223,234,255,0.08), transparent 16%), radial-gradient(circle at 50% 82%, rgba(118,182,255,0.08), transparent 20%), radial-gradient(circle at 28% 34%, rgba(255,255,255,0.04), transparent 12%)',
               }}
+            />
+
+            <motion.div
+              className="absolute left-1/2 top-1/2 z-[2]"
+              animate={
+                reduceMotion
+                  ? isLight
+                    ? { x: -10, y: 7, rotate: -14, scale: 0.96 }
+                    : { x: -6, y: 8, rotate: -8, scale: 0.95 }
+                  : isLight
+                    ? LIGHT_DRIFT
+                    : DARK_DRIFT
+              }
               transition={
                 reduceMotion
                   ? { duration: 0 }
-                  : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+                  : {
+                      duration: isLight ? 4.6 : 4.2,
+                      ease: 'easeInOut',
+                      repeat: Infinity,
+                      times: DRIFT_TIMES,
+                    }
               }
-              style={{
-                borderColor: isLight ? 'rgba(191,219,254,0.98)' : 'rgba(125,211,252,0.22)',
-                background: isLight
-                  ? 'linear-gradient(180deg, rgba(235,245,255,0.98), rgba(195,223,255,0.94))'
-                  : 'linear-gradient(180deg, rgba(17,31,56,0.98), rgba(18,44,74,0.96))',
-                boxShadow: isLight
-                  ? '0 8px 18px rgba(96,165,250,0.2)'
-                  : '0 8px 18px rgba(34,211,238,0.18)',
-              }}
             >
               {isLight ? (
-                <SnowCrystalIcon className="size-[15px] sm:size-4" />
+                <SakuraIcon className="block size-[18px] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_6px_12px_rgba(244,114,182,0.24)] sm:size-[20px]" />
               ) : (
-                <JellyfishIcon className="size-[13px] text-cyan-100 sm:size-[14px]" />
+                <div
+                  className="flex h-[30px] w-[24px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-[999px]"
+                  style={{
+                    background:
+                      'radial-gradient(circle at 50% 18%, rgba(203,225,255,0.08), transparent 34%), radial-gradient(circle at 50% 84%, rgba(72,142,230,0.06), transparent 30%)',
+                  }}
+                >
+                  <img
+                    src={jellyfishGif}
+                    alt=""
+                    aria-hidden="true"
+                    className="block h-[26px] w-[21px] object-contain [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform]"
+                    style={{
+                      filter: 'drop-shadow(0 8px 16px rgba(96,165,250,0.22))',
+                    }}
+                  />
+                </div>
               )}
             </motion.div>
-          </motion.div>
-
-          <motion.div
-            className="absolute left-1/2 top-1/2 z-10 flex size-[30px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border sm:size-[34px]"
-            animate={{ scale: isLight ? 1 : 0.98 }}
-            transition={transition}
-            style={{
-              borderColor: isLight ? 'rgba(255,224,156,0.95)' : 'rgba(191,219,254,0.24)',
-              background: isLight
-                ? 'radial-gradient(circle, rgba(255,239,177,1), rgba(255,186,77,0.96))'
-                : 'radial-gradient(circle at 35% 30%, rgba(255,255,255,0.96), rgba(206,214,255,0.9))',
-              boxShadow: isLight
-                ? '0 0 18px rgba(255,186,77,0.36)'
-                : '0 0 14px rgba(129,140,248,0.22)',
-            }}
-          >
-            {isLight ? (
-              <div className="relative flex items-center justify-center leading-none">
-                <SunLowIcon className="block size-[18px] text-amber-600 sm:size-5" />
-                <motion.div
-                  className="absolute inset-[-6px] rounded-full"
-                  animate={{ opacity: [0.28, 0.54, 0.28], scale: [0.92, 1.06, 0.92] }}
-                  transition={
-                    reduceMotion
-                      ? { duration: 0 }
-                      : { duration: 2.8, repeat: Infinity, ease: 'easeInOut' }
-                  }
-                  style={{ border: '1px solid rgba(255,214,120,0.42)' }}
-                />
-              </div>
-            ) : (
-              <div className="relative flex items-center justify-center leading-none">
-                <TablerMoonIcon className="block size-[18px] text-slate-700 sm:size-5" />
-                <motion.div
-                  className="absolute inset-[-5px] rounded-full"
-                  animate={{ opacity: [0.18, 0.4, 0.18], scale: [0.94, 1.04, 0.94] }}
-                  transition={
-                    reduceMotion
-                      ? { duration: 0 }
-                      : { duration: 2.8, repeat: Infinity, ease: 'easeInOut' }
-                  }
-                  style={{ border: '1px solid rgba(191,219,254,0.22)' }}
-                />
-              </div>
-            )}
-          </motion.div>
+          </div>
         </div>
       </button>
     </div>

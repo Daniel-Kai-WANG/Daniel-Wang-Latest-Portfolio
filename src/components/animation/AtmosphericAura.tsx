@@ -57,7 +57,7 @@ export function AtmosphericAura() {
           background:
             theme === 'light'
               ? 'linear-gradient(180deg, rgba(255,214,235,0.16), transparent 32%)'
-              : 'linear-gradient(180deg, rgba(57,195,220,0.12), rgba(255,143,115,0.05), transparent 30%)',
+              : 'linear-gradient(180deg, rgba(128,199,255,0.12), rgba(133,120,255,0.08), transparent 30%)',
         }}
       />
 
@@ -67,7 +67,7 @@ export function AtmosphericAura() {
           background:
             theme === 'light'
               ? 'radial-gradient(circle, rgba(255,190,220,0.16), transparent 58%)'
-              : 'radial-gradient(circle, rgba(57,195,220,0.16), transparent 60%)',
+              : 'radial-gradient(circle, rgba(128,199,255,0.16), transparent 60%)',
         }}
       />
 
@@ -77,7 +77,7 @@ export function AtmosphericAura() {
           background:
             theme === 'light'
               ? 'rgba(208, 235, 255, 0.28)'
-              : 'rgba(21, 145, 173, 0.16)',
+              : 'rgba(84, 117, 255, 0.16)',
         }}
       />
 
@@ -169,7 +169,7 @@ export function AtmosphericAura() {
               style={{
                 width: `${spark.size}px`,
                 height: `${spark.size}px`,
-                filter: index % 2 === 0 ? 'drop-shadow(0 0 10px rgba(255,143,115,0.24))' : 'none',
+                filter: index % 2 === 0 ? 'drop-shadow(0 0 10px rgba(133,120,255,0.2))' : 'none',
               }}
             />
           </motion.div>
@@ -204,7 +204,7 @@ export function AtmosphericAura() {
                 filter:
                   index === 1
                     ? 'drop-shadow(0 0 20px rgba(216,244,255,0.12))'
-                    : 'drop-shadow(0 0 18px rgba(255,143,115,0.12))',
+                    : 'drop-shadow(0 0 18px rgba(133,120,255,0.12))',
               }}
             />
           </motion.div>
@@ -236,7 +236,7 @@ export function AtmosphericAura() {
               style={{
                 width: `${item.size}px`,
                 height: `${item.size}px`,
-                filter: 'drop-shadow(0 0 18px rgba(57,195,220,0.2))',
+                filter: 'drop-shadow(0 0 18px rgba(128,199,255,0.2))',
               }}
             />
           </motion.div>
@@ -250,7 +250,7 @@ export function AtmosphericAura() {
             transition={{ duration: 7.2, repeat: Infinity, ease: 'easeInOut' }}
             style={{
               background:
-                'linear-gradient(180deg, rgba(255,143,115,0.34), rgba(255,143,115,0))',
+                'linear-gradient(180deg, rgba(255,155,135,0.24), rgba(255,155,135,0))',
             }}
           />
           <motion.div
@@ -259,7 +259,7 @@ export function AtmosphericAura() {
             transition={{ duration: 8.4, repeat: Infinity, ease: 'easeInOut' }}
             style={{
               background:
-                'linear-gradient(180deg, rgba(57,195,220,0.32), rgba(57,195,220,0))',
+                'linear-gradient(180deg, rgba(128,199,255,0.3), rgba(128,199,255,0))',
             }}
           />
         </>

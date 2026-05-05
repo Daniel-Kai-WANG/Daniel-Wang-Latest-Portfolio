@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { projects } from '../../data/projects'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
@@ -52,8 +52,8 @@ export function ProjectsSection() {
                   style={{
                     background:
                       theme === 'light'
-                        ? 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(242,249,255,0.92), rgba(255,242,247,0.84))'
-                        : 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(57,195,220,0.06), rgba(255,143,115,0.08))',
+                        ? 'linear-gradient(135deg, rgba(249,253,255,0.95), rgba(235,246,255,0.92), rgba(255,241,247,0.88))'
+                        : 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(128,199,255,0.08), rgba(133,120,255,0.1))',
                   }}
                 />
                 <div
@@ -63,7 +63,7 @@ export function ProjectsSection() {
                     background:
                       theme === 'light'
                         ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.62), rgba(214,244,255,0.28), transparent)'
-                        : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(57,195,220,0.12), transparent)',
+                        : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(128,199,255,0.12), transparent)',
                   }}
                 />
 
@@ -146,10 +146,7 @@ export function ProjectsSection() {
                           <span
                             className="mt-2 size-2.5 shrink-0 rounded-full"
                             style={{
-                              background:
-                                theme === 'light'
-                                  ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                                  : 'linear-gradient(135deg, #FF8F73, #39C3DC)',
+                              background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
                             }}
                           />
                           <span>{highlight}</span>
@@ -178,10 +175,7 @@ export function ProjectsSection() {
                         href={activeProject.ctaHref}
                         className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white"
                         style={{
-                          background:
-                            theme === 'light'
-                              ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                              : 'linear-gradient(135deg, #FF8F73, #39C3DC)',
+                          background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
                         }}
                       >
                         {activeProject.ctaLabel}
@@ -213,8 +207,8 @@ export function ProjectsSection() {
                     borderColor: 'var(--color-border)',
                     background:
                       theme === 'light'
-                        ? 'linear-gradient(180deg, rgba(255,255,255,0.94), rgba(240,249,255,0.9))'
-                        : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(57,195,220,0.04))',
+                        ? 'linear-gradient(180deg, rgba(248,252,255,0.95), rgba(235,246,255,0.92))'
+                        : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(128,199,255,0.05), rgba(133,120,255,0.06))',
                   }}
                 >
                   <ThemeShiftBackdrop variant="card" />

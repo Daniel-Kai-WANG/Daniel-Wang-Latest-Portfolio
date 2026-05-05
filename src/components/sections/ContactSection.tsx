@@ -87,7 +87,7 @@ export function ContactSection() {
                       background:
                         theme === 'light'
                           ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.42), rgba(214,244,255,0.16), transparent)'
-                          : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(34,211,238,0.08), transparent)',
+                          : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(122,185,255,0.08), transparent)',
                     }}
                   />
                   <div
@@ -128,7 +128,7 @@ export function ContactSection() {
                   background:
                     theme === 'light'
                       ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), rgba(255,228,239,0.18), transparent)'
-                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(57,195,220,0.08), transparent)',
+                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(128,199,255,0.08), transparent)',
                 }}
               />
               <div className="relative z-10">
@@ -149,8 +149,8 @@ export function ContactSection() {
                 borderColor: 'var(--color-border)',
                 background:
                   theme === 'light'
-                    ? 'linear-gradient(180deg, rgba(255,255,255,0.96), rgba(236,245,255,0.92))'
-                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(17,26,43,0.96))',
+                    ? 'linear-gradient(180deg, rgba(249,253,255,0.96), rgba(236,245,255,0.92), rgba(255,243,249,0.9))'
+                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(17,26,43,0.96), rgba(24,30,69,0.92))',
               }}
             >
               <ThemeShiftBackdrop variant="card" />
@@ -280,10 +280,7 @@ export function ContactSection() {
                       type="submit"
                       className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-white"
                       style={{
-                        background:
-                          theme === 'light'
-                            ? 'linear-gradient(135deg, #58AFE8, #3D74D9)'
-                            : 'linear-gradient(135deg, #FF8F73, #39C3DC)',
+                        background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
                       }}
                     >
                       Send message
