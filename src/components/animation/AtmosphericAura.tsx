@@ -1,9 +1,9 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import {
   JellyfishIcon,
+  MoonIcon,
   SakuraIcon,
-  SnowCrystalIcon,
-  StarSparkIcon,
+  SnowflakeAssetIcon,
   StarfishIcon,
 } from '../common/Icons'
 import { useTheme } from '../../hooks/useTheme'
@@ -18,31 +18,29 @@ const petals = [
 ]
 
 const snowflakes = [
-  { left: '12%', size: 14, delay: 1, duration: 16 },
-  { left: '28%', size: 18, delay: 5, duration: 18 },
-  { left: '46%', size: 12, delay: 0, duration: 14 },
-  { left: '57%', size: 16, delay: 3, duration: 17 },
-  { left: '74%', size: 20, delay: 7, duration: 19 },
-  { left: '86%', size: 12, delay: 4, duration: 15 },
-]
-
-const glimmers = [
-  { left: '11%', size: 16, delay: 0, duration: 14 },
-  { left: '34%', size: 18, delay: 4, duration: 18 },
-  { left: '59%', size: 14, delay: 2, duration: 15 },
-  { left: '82%', size: 16, delay: 5, duration: 17 },
+  { left: '14%', size: 30, delay: 1, duration: 18, variant: 'soft' as const },
+  { left: '29%', size: 44, delay: 5, duration: 20, variant: 'cluster' as const },
+  { left: '47%', size: 24, delay: 2, duration: 16, variant: 'soft' as const },
+  { left: '66%', size: 38, delay: 4, duration: 19, variant: 'cluster' as const },
+  { left: '84%', size: 28, delay: 7, duration: 17, variant: 'soft' as const },
 ]
 
 const jellyfish = [
-  { left: '14%', size: 46, delay: 1, duration: 16 },
-  { left: '52%', size: 54, delay: 4, duration: 18 },
-  { left: '78%', size: 42, delay: 2, duration: 15 },
+  { left: '12%', size: 46, delay: 1, duration: 16 },
+  { left: '52%', size: 56, delay: 4, duration: 18 },
+  { left: '80%', size: 42, delay: 2, duration: 15 },
 ]
 
 const starfish = [
-  { left: '6%', top: '14%', size: 64, delay: 0.8, duration: 16, variant: 'pink' as const },
-  { left: '84%', top: '22%', size: 52, delay: 2.4, duration: 18, variant: 'light' as const },
+  { left: '6%', top: '12%', size: 64, delay: 0.8, duration: 16, variant: 'pink' as const },
+  { left: '84%', top: '20%', size: 52, delay: 2.4, duration: 18, variant: 'light' as const },
   { left: '72%', top: '66%', size: 42, delay: 1.4, duration: 15, variant: 'pink' as const },
+]
+
+const moons = [
+  { left: '16%', top: '8%', size: 18, delay: 0.4, duration: 12 },
+  { left: '62%', top: '10%', size: 24, delay: 1.8, duration: 14 },
+  { left: '88%', top: '30%', size: 16, delay: 1.1, duration: 11 },
 ]
 
 export function AtmosphericAura() {
@@ -56,7 +54,7 @@ export function AtmosphericAura() {
         style={{
           background:
             theme === 'light'
-              ? 'linear-gradient(180deg, rgba(255,214,235,0.16), transparent 32%)'
+              ? 'linear-gradient(180deg, rgba(255,214,235,0.16), rgba(223,241,255,0.1), transparent 34%)'
               : 'linear-gradient(180deg, rgba(128,199,255,0.12), rgba(133,120,255,0.08), transparent 30%)',
         }}
       />
@@ -74,10 +72,7 @@ export function AtmosphericAura() {
       <div
         className="absolute left-[-8%] top-[20%] h-80 w-80 rounded-full blur-3xl"
         style={{
-          background:
-            theme === 'light'
-              ? 'rgba(208, 235, 255, 0.28)'
-              : 'rgba(84, 117, 255, 0.16)',
+          background: theme === 'light' ? 'rgba(208, 235, 255, 0.28)' : 'rgba(84, 117, 255, 0.16)',
         }}
       />
 
@@ -121,7 +116,7 @@ export function AtmosphericAura() {
             style={{ left: flake.left }}
             initial={{ opacity: 0, y: '-6vh' }}
             animate={{
-              opacity: [0, 0.35, 0.3, 0],
+              opacity: [0, 0.42, 0.35, 0],
               y: ['-6vh', '106vh'],
               x: [0, 8, -6, 10],
               rotate: [0, 90, 180, 360],
@@ -133,10 +128,12 @@ export function AtmosphericAura() {
               ease: 'linear',
             }}
           >
-            <SnowCrystalIcon
+            <SnowflakeAssetIcon
+              variant={flake.variant}
               style={{
                 width: `${flake.size}px`,
                 height: `${flake.size}px`,
+                filter: index % 2 === 0 ? 'drop-shadow(0 0 8px rgba(186,220,255,0.2))' : 'none',
               }}
             />
           </motion.div>
@@ -144,32 +141,31 @@ export function AtmosphericAura() {
 
       {!reduceMotion &&
         theme === 'dark' &&
-        glimmers.map((spark, index) => (
+        moons.map((moon, index) => (
           <motion.div
-            key={`spark-${spark.left}`}
-            className="absolute top-[8%]"
-            style={{ left: spark.left }}
-            initial={{ opacity: 0, y: '4vh' }}
+            key={`moon-${moon.left}`}
+            className="absolute"
+            style={{ left: moon.left, top: moon.top }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{
-              opacity: [0, 0.7, 0.52, 0],
-              y: ['4vh', '-10vh'],
-              x: [0, 14, -10, 8],
-              rotate: [0, -8, 14, -10],
-              scale: [0.88, 1.08, 0.92, 1],
+              opacity: [0, 0.46, 0.38, 0],
+              y: [10, -4, 8, 10],
+              x: [0, 10, -8, 0],
+              rotate: [0, 6, -4, 0],
             }}
             transition={{
-              duration: spark.duration,
-              delay: spark.delay + index * 0.45,
+              duration: moon.duration,
+              delay: moon.delay + index * 0.35,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
           >
-            <StarSparkIcon
-              className="text-amber-100/75"
+            <MoonIcon
+              className="text-slate-100/70"
               style={{
-                width: `${spark.size}px`,
-                height: `${spark.size}px`,
-                filter: index % 2 === 0 ? 'drop-shadow(0 0 10px rgba(133,120,255,0.2))' : 'none',
+                width: `${moon.size}px`,
+                height: `${moon.size}px`,
+                filter: 'drop-shadow(0 0 10px rgba(196, 218, 255, 0.16))',
               }}
             />
           </motion.div>
@@ -249,8 +245,7 @@ export function AtmosphericAura() {
             animate={{ opacity: [0.22, 0.38, 0.22], x: [0, 26, 0] }}
             transition={{ duration: 7.2, repeat: Infinity, ease: 'easeInOut' }}
             style={{
-              background:
-                'linear-gradient(180deg, rgba(255,155,135,0.24), rgba(255,155,135,0))',
+              background: 'linear-gradient(180deg, rgba(255,155,135,0.24), rgba(255,155,135,0))',
             }}
           />
           <motion.div
@@ -258,8 +253,7 @@ export function AtmosphericAura() {
             animate={{ opacity: [0.16, 0.34, 0.16], x: [0, -24, 0] }}
             transition={{ duration: 8.4, repeat: Infinity, ease: 'easeInOut' }}
             style={{
-              background:
-                'linear-gradient(180deg, rgba(128,199,255,0.3), rgba(128,199,255,0))',
+              background: 'linear-gradient(180deg, rgba(128,199,255,0.3), rgba(128,199,255,0))',
             }}
           />
         </>
