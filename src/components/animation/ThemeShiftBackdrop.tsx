@@ -54,18 +54,18 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
             className="absolute inset-0 rounded-full blur-2xl"
             style={{
               background:
-                'radial-gradient(circle, rgba(255,229,148,0.66), rgba(255,217,122,0.4), transparent 74%)',
+                'radial-gradient(circle, rgba(255,224,236,0.72), rgba(190,233,255,0.44), transparent 74%)',
             }}
           />
           <div
             className="absolute inset-[16%] rounded-full"
             style={{
               background:
-                'radial-gradient(circle, rgba(255,240,192,0.98), rgba(255,214,120,0.88), rgba(255,190,90,0.74))',
+                'radial-gradient(circle, rgba(255,244,248,0.98), rgba(255,214,231,0.88), rgba(182,228,255,0.74))',
             }}
           />
           <div className="absolute inset-0 flex items-center justify-center">
-            <SunLowIcon className="size-[46%] text-amber-100/80" />
+            <SunLowIcon className="size-[46%] text-rose-100/82" />
           </div>
         </>
       ) : (
@@ -74,18 +74,18 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
             className="absolute inset-0 rounded-full blur-2xl"
             style={{
               background:
-                'radial-gradient(circle, rgba(191,219,254,0.28), rgba(129,140,248,0.18), transparent 78%)',
+                'radial-gradient(circle, rgba(216,244,255,0.24), rgba(57,195,220,0.18), transparent 78%)',
             }}
           />
           <div
             className="absolute inset-[18%] rounded-full"
             style={{
               background:
-                'radial-gradient(circle at 32% 28%, rgba(255,255,255,0.98), rgba(216,224,255,0.92), rgba(183,195,255,0.72))',
+                'radial-gradient(circle at 32% 28%, rgba(255,255,255,0.98), rgba(223,244,255,0.92), rgba(145,226,239,0.72))',
             }}
           />
           <div className="absolute inset-0 flex items-center justify-center">
-            <TablerMoonIcon className="size-[44%] text-slate-700/78" />
+            <TablerMoonIcon className="size-[44%] text-cyan-950/78" />
           </div>
         </>
       )}
@@ -104,8 +104,8 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
           className="absolute inset-0"
           style={{
             background: lightToDark
-              ? 'linear-gradient(180deg, rgba(255,214,148,0.14), rgba(125,211,252,0.08), rgba(12,18,36,0.14))'
-              : 'linear-gradient(180deg, rgba(148,163,184,0.1), rgba(255,235,169,0.18), rgba(196,232,255,0.14))',
+              ? 'linear-gradient(180deg, rgba(255,210,197,0.14), rgba(109,225,243,0.1), rgba(7,19,26,0.14))'
+              : 'linear-gradient(180deg, rgba(255,210,226,0.12), rgba(196,232,255,0.18), rgba(255,244,250,0.12))',
           }}
         />
       </div>
@@ -123,8 +123,8 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
         transition={{ duration: 1.1, ease: 'easeInOut' }}
         style={{
           background: lightToDark
-            ? 'linear-gradient(180deg, rgba(255,228,183,0.14), rgba(41,26,66,0.14), rgba(125,211,252,0.1))'
-            : 'linear-gradient(180deg, rgba(94,114,228,0.1), rgba(255,229,176,0.16), rgba(196,232,255,0.14))',
+            ? 'linear-gradient(180deg, rgba(255,208,192,0.14), rgba(13,57,67,0.14), rgba(109,225,243,0.1))'
+            : 'linear-gradient(180deg, rgba(255,206,224,0.1), rgba(234,244,255,0.16), rgba(196,232,255,0.14))',
         }}
       />
 
@@ -138,8 +138,8 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
         transition={{ duration: 1.08, ease: 'easeInOut' }}
         style={{
           background: lightToDark
-            ? 'linear-gradient(180deg, rgba(255,205,122,0.22), rgba(33,29,60,0))'
-            : 'linear-gradient(180deg, rgba(196,232,255,0), rgba(255,222,150,0.18))',
+            ? 'linear-gradient(180deg, rgba(255,167,138,0.22), rgba(16,55,64,0))'
+            : 'linear-gradient(180deg, rgba(250,225,238,0), rgba(196,232,255,0.18))',
         }}
       />
 
@@ -153,8 +153,8 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
         transition={{ duration: 1.04, ease: 'easeInOut' }}
         style={{
           background: lightToDark
-            ? 'linear-gradient(90deg, transparent, rgba(255,214,148,0.72), transparent)'
-            : 'linear-gradient(90deg, transparent, rgba(214,234,255,0.72), transparent)',
+            ? 'linear-gradient(90deg, transparent, rgba(255,185,155,0.72), transparent)'
+            : 'linear-gradient(90deg, transparent, rgba(222,236,255,0.72), transparent)',
         }}
       />
 
@@ -177,7 +177,7 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
           width: `${shiftSunSize}px`,
           height: `${shiftSunSize}px`,
           background:
-            'radial-gradient(circle, rgba(255,229,148,0.88), rgba(255,185,82,0.52), transparent 74%)',
+            'radial-gradient(circle, rgba(255,226,238,0.88), rgba(255,197,214,0.52), transparent 74%)',
         }}
       />
       <motion.div
@@ -197,7 +197,7 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
         transition={{ duration: 1.12, ease: travelEase }}
         style={{ width: `${shiftSunSize}px`, height: `${shiftSunSize}px` }}
       >
-        <SunLowIcon className="size-8 text-amber-50/90" />
+        <SunLowIcon className="size-8 text-rose-50/92" />
       </motion.div>
 
       <motion.div
@@ -219,7 +219,7 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
           width: `${shiftMoonSize}px`,
           height: `${shiftMoonSize}px`,
           background:
-            'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.82), rgba(197,203,255,0.48), transparent 74%)',
+            'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.82), rgba(191,241,248,0.48), transparent 74%)',
         }}
       />
       <motion.div
@@ -239,7 +239,7 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
         transition={{ duration: 1.12, ease: travelEase }}
         style={{ width: `${shiftMoonSize}px`, height: `${shiftMoonSize}px` }}
       >
-        <TablerMoonIcon className="size-7 text-slate-50" />
+        <TablerMoonIcon className="size-7 text-cyan-50" />
       </motion.div>
     </div>
   )

@@ -6,9 +6,9 @@ import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   ArrowUpRightIcon,
   JellyfishIcon,
-  MusicOrbitIcon,
   SakuraIcon,
   SnowCrystalIcon,
+  StarfishIcon,
   SunLowIcon,
   TablerMoonIcon,
 } from '../common/Icons'
@@ -35,19 +35,19 @@ function WorkflowPanel() {
           background:
             theme === 'light'
               ? 'rgba(56, 189, 248, 0.22)'
-              : 'rgba(255, 79, 216, 0.18)',
+              : 'rgba(57, 195, 220, 0.18)',
         }}
       />
       <div className="relative z-10">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-              {theme === 'light' ? 'Seasonal workflow' : 'Stage workflow'}
+              {theme === 'light' ? 'Seasonal workflow' : 'Ocean workflow'}
             </p>
             <h3 className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-text)]">
               {theme === 'light'
                 ? 'From brief to shipped flow'
-                : 'A delivery pipeline with rhythm'}
+                : 'A delivery pipeline with tidal flow'}
             </h3>
           </div>
           <div
@@ -65,7 +65,7 @@ function WorkflowPanel() {
                 <SnowCrystalIcon className="absolute -right-2 -top-1 size-3.5" />
               </div>
             ) : (
-              <MusicOrbitIcon className="size-5 text-[var(--color-primary)]" />
+              <StarfishIcon variant="pink" className="size-5 rotate-[10deg]" />
             )}
           </div>
         </div>
@@ -77,7 +77,7 @@ function WorkflowPanel() {
               background:
                 theme === 'light'
                   ? 'linear-gradient(180deg, rgba(37,99,235,0.35), rgba(56,189,248,0.12))'
-                  : 'linear-gradient(180deg, rgba(255,79,216,0.55), rgba(34,211,238,0.18))',
+                  : 'linear-gradient(180deg, rgba(255,143,115,0.58), rgba(57,195,220,0.2))',
             }}
           />
 
@@ -119,7 +119,7 @@ function WorkflowPanel() {
                 <div className="mt-1 text-sm leading-6 text-[var(--color-muted)]">
                   {theme === 'light'
                     ? 'Keep requirements visible, structure the workflow, and reduce delivery friction.'
-                    : 'Translate complex tasks into a precise sequence with product, API, and content alignment.'}
+                    : 'Translate complex tasks into a calm sequence with product, API, and content alignment.'}
                 </div>
               </div>
             </div>
@@ -142,7 +142,7 @@ function WorkflowPanel() {
               {theme === 'light' ? (
                 <SakuraIcon className="size-4" />
               ) : (
-                <MusicOrbitIcon className="size-4 text-[var(--color-primary)]" />
+                <StarfishIcon variant="light" className="size-4 rotate-[14deg]" />
               )}
             </motion.div>
           )}
@@ -174,7 +174,7 @@ function WorkflowPanel() {
                       background:
                         theme === 'light'
                           ? 'linear-gradient(180deg, rgba(56,189,248,0.35), rgba(37,99,235,0.75))'
-                          : 'linear-gradient(180deg, rgba(34,211,238,0.5), rgba(255,79,216,0.95))',
+                          : 'linear-gradient(180deg, rgba(57,195,220,0.56), rgba(255,143,115,0.92))',
                     }}
                   />
                 ))}
@@ -212,7 +212,7 @@ export function HeroSection() {
         background:
           theme === 'light'
             ? 'linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,243,249,0.78), rgba(234,246,255,0.7))'
-            : 'linear-gradient(180deg, rgba(18,19,28,0.86), rgba(25,16,39,0.76), rgba(15,17,32,0.74))',
+            : 'linear-gradient(180deg, rgba(8,24,34,0.88), rgba(12,39,49,0.78), rgba(9,21,31,0.76))',
         borderColor: 'var(--color-border)',
         boxShadow: 'var(--surface-shadow)',
       }}
@@ -224,7 +224,7 @@ export function HeroSection() {
           background:
             theme === 'light'
               ? `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(255,214,235,0.28), transparent 34%)`
-              : `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(255,79,216,0.18), transparent 30%)`,
+              : `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(57,195,220,0.16), rgba(255,143,115,0.1), transparent 34%)`,
         }}
       />
       <div
@@ -233,7 +233,7 @@ export function HeroSection() {
           background:
             theme === 'light'
               ? 'rgba(56, 189, 248, 0.16)'
-              : 'rgba(255, 79, 216, 0.14)',
+              : 'rgba(57, 195, 220, 0.14)',
         }}
       />
       <div
@@ -242,7 +242,7 @@ export function HeroSection() {
           background:
             theme === 'light'
               ? 'rgba(253, 186, 116, 0.16)'
-              : 'rgba(124, 92, 255, 0.18)',
+              : 'rgba(255, 143, 115, 0.16)',
         }}
       />
       <div
@@ -251,7 +251,7 @@ export function HeroSection() {
           background:
             theme === 'light'
               ? 'linear-gradient(90deg, transparent, rgba(246,168,200,0.8), rgba(186,230,253,0.9), transparent)'
-              : 'linear-gradient(90deg, transparent, rgba(255,79,216,0.8), rgba(34,211,238,0.8), transparent)',
+              : 'linear-gradient(90deg, transparent, rgba(255,143,115,0.8), rgba(57,195,220,0.8), transparent)',
         }}
       />
 
@@ -263,10 +263,10 @@ export function HeroSection() {
         </>
       ) : (
         <>
-          <TablerMoonIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-slate-100/72" />
-          <MusicOrbitIcon className="absolute right-12 top-20 size-5 rotate-[14deg] text-violet-100/70" />
-          <JellyfishIcon className="absolute bottom-8 right-8 size-12 text-cyan-200/40" />
-          <JellyfishIcon className="absolute left-10 top-24 size-8 text-cyan-100/45" />
+          <TablerMoonIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-cyan-50/76" />
+          <StarfishIcon variant="pink" className="absolute right-10 top-16 size-10 rotate-[18deg] opacity-70" />
+          <JellyfishIcon className="absolute bottom-8 right-8 size-12 text-cyan-200/42" />
+          <StarfishIcon variant="light" className="absolute left-8 top-24 size-8 -rotate-[16deg] opacity-65" />
         </>
       )}
 
@@ -280,7 +280,11 @@ export function HeroSection() {
               color: 'var(--pill-text)',
             }}
           >
-            {theme === 'light' ? <SunLowIcon className="size-4 text-amber-500" /> : <MusicOrbitIcon className="size-4 text-violet-200" />}
+            {theme === 'light' ? (
+              <SunLowIcon className="size-4 text-amber-500" />
+            ) : (
+              <StarfishIcon variant="light" className="size-4 rotate-[10deg]" />
+            )}
             {profile.badge}
           </div>
 
@@ -292,8 +296,8 @@ export function HeroSection() {
               </>
             ) : (
               <>
-                <MusicOrbitIcon className="size-4 text-violet-100" />
-                K-pop stage energy with drifting jellyfish glow and midnight notes.
+                <StarfishIcon variant="pink" className="size-4 rotate-[12deg]" />
+                Moonlit ocean depth with coral glow, tide-light, and drifting reef details.
               </>
             )}
           </p>
@@ -314,7 +318,7 @@ export function HeroSection() {
                 background:
                   theme === 'light'
                     ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                    : 'linear-gradient(135deg, #FF4FD8, #7C5CFF)',
+                    : 'linear-gradient(135deg, #FF8F73, #39C3DC)',
               }}
             >
               {profile.primaryCta.label}

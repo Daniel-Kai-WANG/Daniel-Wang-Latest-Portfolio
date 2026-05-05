@@ -32,7 +32,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: 'Tools & Platforms',
     metaphorLight: 'Petal markers and frost badges',
-    metaphorDark: 'Backstage light beacons',
+    metaphorDark: 'Tide light beacons',
     summary: 'Delivery tooling for collaboration, QA, design handoff, and project coordination.',
     items: ['GitHub', 'GitLab', 'Jira', 'Postman', 'Figma', 'Jest'],
   },

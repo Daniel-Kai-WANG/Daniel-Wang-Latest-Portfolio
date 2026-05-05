@@ -3,9 +3,9 @@ import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   JellyfishIcon,
-  MusicOrbitIcon,
   SakuraIcon,
   SnowCrystalIcon,
+  StarfishIcon,
   SunLowIcon,
   TablerMoonIcon,
 } from '../common/Icons'
@@ -36,7 +36,7 @@ export function ResumeUnavailableSection() {
                   background:
                     theme === 'light'
                       ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                      : 'linear-gradient(135deg, #FF4FD8, #7C5CFF)',
+                      : 'linear-gradient(135deg, #FF8F73, #39C3DC)',
                 }}
               >
                 Explore Projects Instead
@@ -63,7 +63,7 @@ export function ResumeUnavailableSection() {
               background:
                 theme === 'light'
                   ? 'linear-gradient(180deg, rgba(255,255,255,0.9), rgba(240,249,255,0.9))'
-                  : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(124,92,255,0.07))',
+                  : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(57,195,220,0.08), rgba(255,143,115,0.06))',
             }}
           >
             <ThemeShiftBackdrop variant="card" />
@@ -74,7 +74,7 @@ export function ResumeUnavailableSection() {
                 background:
                   theme === 'light'
                     ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.52), rgba(214,244,255,0.28), transparent)'
-                    : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.16), rgba(255,79,216,0.1), transparent)',
+                    : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.16), rgba(57,195,220,0.1), transparent)',
               }}
             />
             <div
@@ -83,7 +83,7 @@ export function ResumeUnavailableSection() {
                 background:
                   theme === 'light'
                     ? 'rgba(56,189,248,0.18)'
-                    : 'rgba(255,79,216,0.16)',
+                    : 'rgba(255,143,115,0.16)',
               }}
             />
 
@@ -127,25 +127,26 @@ export function ResumeUnavailableSection() {
               </div>
             ) : (
               <div className="relative z-10 space-y-5">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-fuchsia-200">
-                  <MusicOrbitIcon className="size-4" />
-                  Resume is backstage — coming back soon
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#ffd8cb]">
+                  <StarfishIcon variant="pink" className="size-4 rotate-[10deg]" />
+                  Resume is off-shore for a short refresh
                 </div>
                 <div className="rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-white/8 to-transparent px-5 py-6">
                   <div className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">
-                    Backstage pass
+                    Tidal update
                   </div>
                   <div className="mt-3 font-display text-3xl font-bold tracking-[-0.05em] text-white">
                     Temporary hold
                   </div>
                   <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">
-                    The downloadable file is off-stage for cleanup, but the live portfolio still
-                    shows the work, context, and delivery range.
+                    The downloadable file is being refreshed off-shore, but the live portfolio
+                    still shows the work, context, and delivery range.
                   </p>
-                  <div className="mt-4 flex items-center gap-2 text-sm text-fuchsia-100/80">
-                    <TablerMoonIcon className="size-4 text-slate-100/84" />
+                  <div className="mt-4 flex items-center gap-2 text-sm text-[#ffd8cb]/80">
+                    <TablerMoonIcon className="size-4 text-cyan-50/84" />
+                    <StarfishIcon variant="light" className="size-4 -rotate-[10deg]" />
                     <JellyfishIcon className="size-4 text-cyan-200" />
-                    Midnight-set shimmer with jellyfish glow and music notes.
+                    Coral glow outside, the delivery story still fully visible.
                   </div>
                 </div>
               </div>

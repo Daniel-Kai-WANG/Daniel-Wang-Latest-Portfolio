@@ -92,7 +92,7 @@ export function BackToTopButton() {
               background:
                 theme === 'light'
                   ? 'conic-gradient(from 180deg, rgba(255,255,255,0.18), rgba(255,209,153,0.72), rgba(190,229,255,0.82), rgba(255,229,236,0.64), rgba(255,255,255,0.12))'
-                  : 'conic-gradient(from 180deg, rgba(255,255,255,0.05), rgba(124,92,255,0.76), rgba(34,211,238,0.72), rgba(255,79,216,0.58), rgba(255,255,255,0.03))',
+                  : 'conic-gradient(from 180deg, rgba(255,255,255,0.05), rgba(17,76,94,0.76), rgba(57,195,220,0.72), rgba(255,143,115,0.58), rgba(255,255,255,0.03))',
             }}
           />
 
@@ -103,7 +103,7 @@ export function BackToTopButton() {
               background:
                 theme === 'light'
                   ? 'linear-gradient(180deg, rgba(218,240,255,0.8), rgba(255,228,176,0.78))'
-                  : 'linear-gradient(180deg, rgba(8,14,28,0.98), rgba(16,30,60,0.92))',
+                  : 'linear-gradient(180deg, rgba(8,18,30,0.98), rgba(12,42,55,0.92))',
             }}
           />
 
