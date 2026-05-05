@@ -14,8 +14,8 @@ const starfishGlowByVariant = {
 } as const
 
 const starfishVisualScaleByVariant = {
-  light: 'scale-[0.76]',
-  pink: 'scale-[0.86]',
+  light: 'scale-[0.68]',
+  pink: 'scale-[0.68]',
 } as const
 
 export function CoralDecorPair({ starfishVariant }: CoralDecorPairProps) {

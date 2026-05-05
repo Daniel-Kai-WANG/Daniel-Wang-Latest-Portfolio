@@ -2,27 +2,27 @@ import { motion, useReducedMotion } from 'framer-motion'
 import {
   JellyfishIcon,
   MoonIcon,
-  SakuraIcon,
-  SnowflakeAssetIcon,
+  SnowCrystalIcon,
+  SnowflakeIcon,
   StarfishIcon,
 } from '../common/Icons'
 import { useTheme } from '../../hooks/useTheme'
 
-const petals = [
-  { left: '8%', size: 20, delay: 0, duration: 18 },
-  { left: '18%', size: 26, delay: 2, duration: 21 },
-  { left: '33%', size: 18, delay: 4, duration: 17 },
-  { left: '62%', size: 24, delay: 1, duration: 20 },
-  { left: '78%', size: 16, delay: 5, duration: 19 },
-  { left: '90%', size: 22, delay: 3, duration: 22 },
+const driftingSnowflakes = [
+  { left: '8%', size: 22, delay: 0, duration: 18, kind: 'line' as const },
+  { left: '18%', size: 30, delay: 2, duration: 21, kind: 'crystal' as const },
+  { left: '33%', size: 20, delay: 4, duration: 17, kind: 'line' as const },
+  { left: '62%', size: 28, delay: 1, duration: 20, kind: 'crystal' as const },
+  { left: '78%', size: 18, delay: 5, duration: 19, kind: 'line' as const },
+  { left: '90%', size: 24, delay: 3, duration: 22, kind: 'crystal' as const },
 ]
 
 const snowflakes = [
-  { left: '14%', size: 30, delay: 1, duration: 18, variant: 'soft' as const },
-  { left: '29%', size: 44, delay: 5, duration: 20, variant: 'cluster' as const },
-  { left: '47%', size: 24, delay: 2, duration: 16, variant: 'soft' as const },
-  { left: '66%', size: 38, delay: 4, duration: 19, variant: 'cluster' as const },
-  { left: '84%', size: 28, delay: 7, duration: 17, variant: 'soft' as const },
+  { left: '14%', size: 30, delay: 1, duration: 18, kind: 'line' as const },
+  { left: '29%', size: 44, delay: 5, duration: 20, kind: 'crystal' as const },
+  { left: '47%', size: 24, delay: 2, duration: 16, kind: 'line' as const },
+  { left: '66%', size: 38, delay: 4, duration: 19, kind: 'crystal' as const },
+  { left: '84%', size: 28, delay: 7, duration: 17, kind: 'line' as const },
 ]
 
 const jellyfish = [
@@ -54,7 +54,7 @@ export function AtmosphericAura() {
         style={{
           background:
             theme === 'light'
-              ? 'linear-gradient(180deg, rgba(255,214,235,0.16), rgba(223,241,255,0.1), transparent 34%)'
+              ? 'linear-gradient(180deg, rgba(255,214,235,0.05), rgba(223,241,255,0.03), transparent 28%)'
               : 'linear-gradient(180deg, rgba(128,199,255,0.12), rgba(133,120,255,0.08), transparent 30%)',
         }}
       />
@@ -64,7 +64,7 @@ export function AtmosphericAura() {
         style={{
           background:
             theme === 'light'
-              ? 'radial-gradient(circle, rgba(255,190,220,0.16), transparent 58%)'
+              ? 'radial-gradient(circle, rgba(255,190,220,0.05), transparent 54%)'
               : 'radial-gradient(circle, rgba(128,199,255,0.16), transparent 60%)',
         }}
       />
@@ -72,38 +72,66 @@ export function AtmosphericAura() {
       <div
         className="absolute left-[-8%] top-[20%] h-80 w-80 rounded-full blur-3xl"
         style={{
-          background: theme === 'light' ? 'rgba(208, 235, 255, 0.28)' : 'rgba(84, 117, 255, 0.16)',
+          background: theme === 'light' ? 'rgba(208, 235, 255, 0.1)' : 'rgba(84, 117, 255, 0.16)',
         }}
       />
 
       {!reduceMotion &&
         theme === 'light' &&
-        petals.map((petal, index) => (
+        driftingSnowflakes.map((flake, index) => (
           <motion.div
-            key={`petal-${petal.left}`}
+            key={`drift-flake-${flake.left}`}
             className="absolute top-[-10%]"
-            style={{ left: petal.left }}
+            style={{ left: flake.left }}
             initial={{ opacity: 0, y: '-8vh' }}
             animate={{
-              opacity: [0, 0.95, 0.9, 0],
+              opacity: [0, 0.96, 0.84, 0],
               y: ['-8vh', '108vh'],
-              x: [0, 26, -14, 18, -10],
-              rotate: [0, 130, 220, 320],
+              x: [0, 18, -10, 14, -8],
+              rotate: [0, 100, 190, 320],
             }}
             transition={{
-              duration: petal.duration,
-              delay: petal.delay,
+              duration: flake.duration,
+              delay: flake.delay,
               repeat: Infinity,
               ease: 'linear',
             }}
           >
-            <SakuraIcon
+            <span
+              className="absolute left-1/2 top-1/2 -z-10 rounded-full blur-xl"
               style={{
-                width: `${petal.size}px`,
-                height: `${petal.size}px`,
-                filter: index % 2 === 0 ? 'blur(0px)' : 'blur(0.2px)',
+                width: `${flake.size * 2.15}px`,
+                height: `${flake.size * 2.15}px`,
+                transform: 'translate(-50%, -50%)',
+                background:
+                  'radial-gradient(circle, rgba(255,255,255,0.86), rgba(230,244,255,0.34) 38%, rgba(210,233,255,0.12) 56%, transparent 76%)',
               }}
             />
+            {flake.kind === 'crystal' ? (
+              <SnowCrystalIcon
+                style={{
+                  width: `${flake.size}px`,
+                  height: `${flake.size}px`,
+                  opacity: 1,
+                  filter:
+                    index % 2 === 0
+                      ? 'drop-shadow(0 0 20px rgba(255,255,255,0.68)) drop-shadow(0 0 5px rgba(220,240,255,0.74))'
+                      : 'drop-shadow(0 0 16px rgba(214,235,255,0.52)) drop-shadow(0 0 4px rgba(255,255,255,0.56))',
+                }}
+              />
+            ) : (
+              <SnowflakeIcon
+                className="text-white"
+                style={{
+                  width: `${flake.size}px`,
+                  height: `${flake.size}px`,
+                  filter:
+                    index % 2 === 0
+                      ? 'drop-shadow(0 0 20px rgba(255,255,255,0.68)) drop-shadow(0 0 5px rgba(220,240,255,0.74))'
+                      : 'drop-shadow(0 0 16px rgba(214,235,255,0.52)) drop-shadow(0 0 4px rgba(255,255,255,0.56))',
+                }}
+              />
+            )}
           </motion.div>
         ))}
 
@@ -116,7 +144,7 @@ export function AtmosphericAura() {
             style={{ left: flake.left }}
             initial={{ opacity: 0, y: '-6vh' }}
             animate={{
-              opacity: [0, 0.42, 0.35, 0],
+              opacity: [0, 0.74, 0.64, 0],
               y: ['-6vh', '106vh'],
               x: [0, 8, -6, 10],
               rotate: [0, 90, 180, 360],
@@ -128,14 +156,41 @@ export function AtmosphericAura() {
               ease: 'linear',
             }}
           >
-            <SnowflakeAssetIcon
-              variant={flake.variant}
+            <span
+              className="absolute left-1/2 top-1/2 -z-10 rounded-full blur-xl"
               style={{
-                width: `${flake.size}px`,
-                height: `${flake.size}px`,
-                filter: index % 2 === 0 ? 'drop-shadow(0 0 8px rgba(186,220,255,0.2))' : 'none',
+                width: `${flake.size * 1.9}px`,
+                height: `${flake.size * 1.9}px`,
+                transform: 'translate(-50%, -50%)',
+                background:
+                  'radial-gradient(circle, rgba(255,255,255,0.66), rgba(227,242,255,0.28) 40%, rgba(210,233,255,0.1) 58%, transparent 76%)',
               }}
             />
+            {flake.kind === 'crystal' ? (
+              <SnowCrystalIcon
+                style={{
+                  width: `${flake.size}px`,
+                  height: `${flake.size}px`,
+                  opacity: 0.92,
+                  filter:
+                    index % 2 === 0
+                      ? 'drop-shadow(0 0 16px rgba(220,238,255,0.46)) drop-shadow(0 0 4px rgba(255,255,255,0.48))'
+                      : 'drop-shadow(0 0 12px rgba(196,228,255,0.34))',
+                }}
+              />
+            ) : (
+              <SnowflakeIcon
+                className="text-white"
+                style={{
+                  width: `${flake.size}px`,
+                  height: `${flake.size}px`,
+                  filter:
+                    index % 2 === 0
+                      ? 'drop-shadow(0 0 16px rgba(220,238,255,0.46)) drop-shadow(0 0 4px rgba(255,255,255,0.48))'
+                      : 'drop-shadow(0 0 12px rgba(196,228,255,0.34))',
+                }}
+              />
+            )}
           </motion.div>
         ))}
 

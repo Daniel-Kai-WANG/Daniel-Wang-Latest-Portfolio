@@ -209,6 +209,35 @@ export function SakuraIcon({ className, style }: DecorativeImageProps) {
   )
 }
 
+export function SakuraNodeIcon(props: SVGProps<SVGSVGElement>) {
+  const outerPetal = 'M32 8c4.8 0 8.4 6.8 8.4 14.2 0 6.1-2.4 10.7-8.4 17.4-6-6.7-8.4-11.3-8.4-17.4C23.6 14.8 27.2 8 32 8Z'
+  const innerPetal = 'M32 15.4c3.2 0 5.6 4.4 5.6 9.3 0 3.9-1.6 6.9-5.6 11.2-4-4.3-5.6-7.3-5.6-11.2 0-4.9 2.4-9.3 5.6-9.3Z'
+
+  return (
+    <svg viewBox="0 0 64 64" fill="none" aria-hidden="true" {...props}>
+      <defs>
+        <radialGradient id="sakura-node-core" cx="0" cy="0" r="1" gradientTransform="translate(32 34) rotate(90) scale(16)">
+          <stop offset="0%" stopColor="#fffdfc" stopOpacity="0.96" />
+          <stop offset="100%" stopColor="#ffeef6" stopOpacity="0.24" />
+        </radialGradient>
+      </defs>
+      <g>
+        {[0, 72, 144, 216, 288].map((rotation) => (
+          <g key={rotation} transform={`rotate(${rotation} 32 32)`}>
+            <path d={outerPetal} fill="#ee9fc1" fillOpacity="0.84" />
+            <path d={innerPetal} fill="#fff0f5" fillOpacity="0.78" />
+          </g>
+        ))}
+      </g>
+      <path
+        d="M32 24.5c2.4 4.1 5.1 6.8 9.2 9.2-4.1 2.4-6.8 5.1-9.2 9.2-2.4-4.1-5.1-6.8-9.2-9.2 4.1-2.4 6.8-5.1 9.2-9.2Z"
+        fill="url(#sakura-node-core)"
+      />
+      <circle cx="32" cy="33.7" r="2.8" fill="#fffdfd" fillOpacity="0.88" />
+    </svg>
+  )
+}
+
 export function StarfishIcon({ className, style, variant }: StarfishIconProps) {
   const id = useId()
   const src =

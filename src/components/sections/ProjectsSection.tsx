@@ -5,7 +5,6 @@ import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { ArrowUpRightIcon, JellyfishIcon, SnowCrystalIcon, StarfishIcon } from '../common/Icons'
-import { SectionHeading } from '../common/SectionHeading'
 
 export function ProjectsSection() {
   const { theme } = useTheme()
@@ -24,10 +23,11 @@ export function ProjectsSection() {
         <ThemeShiftBackdrop />
 
         <div className="relative z-10">
-          <SectionHeading
-            title="Featured projects"
-            description="One project stays in active focus on the left, while the other stories rest as compact previews on the right until you call them forward."
-          />
+          <div className="relative z-10 max-w-2xl">
+            <h2 className="font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-4xl">
+              Featured projects
+            </h2>
+          </div>
 
           <div className="mt-8 grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
             <AnimatePresence mode="wait">

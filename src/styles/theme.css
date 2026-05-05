@@ -36,33 +36,33 @@
 }
 
 :root[data-theme='dark'] {
-  --color-background: #060d1d;
-  --color-surface: rgba(8, 16, 35, 0.88);
-  --color-surface-elevated: rgba(11, 23, 48, 0.82);
-  --color-surface-muted: rgba(121, 126, 233, 0.1);
+  --color-background: #071324;
+  --color-surface: rgba(8, 24, 46, 0.88);
+  --color-surface-elevated: rgba(11, 31, 58, 0.84);
+  --color-surface-muted: rgba(120, 206, 255, 0.12);
   --color-text: #edf4ff;
-  --color-muted: #9eafd1;
-  --color-primary: #7ab9ff;
-  --color-secondary: #8275ff;
-  --color-warm: #f2a8d4;
-  --color-petal: #f19ac9;
-  --color-snow: #dae9ff;
-  --color-border: rgba(195, 214, 255, 0.14);
-  --surface-shadow: 0 34px 90px rgba(2, 8, 24, 0.62);
+  --color-muted: #a8c1dd;
+  --color-primary: #84dcff;
+  --color-secondary: #4aa8ff;
+  --color-warm: #ffd3a8;
+  --color-petal: #9de7ff;
+  --color-snow: #e6f5ff;
+  --color-border: rgba(176, 223, 255, 0.18);
+  --surface-shadow: 0 34px 90px rgba(2, 12, 28, 0.52);
   --page-background:
-    linear-gradient(180deg, #040816 0%, #09112a 30%, #0f1a43 64%, #070d1d 100%);
-  --page-orb-a: rgba(241, 154, 201, 0.12);
-  --page-orb-b: rgba(122, 185, 255, 0.16);
-  --page-orb-c: rgba(132, 117, 255, 0.14);
+    linear-gradient(180deg, #06111f 0%, #0a2340 28%, #0d3a63 62%, #081a30 100%);
+  --page-orb-a: rgba(134, 223, 255, 0.12);
+  --page-orb-b: rgba(106, 193, 255, 0.2);
+  --page-orb-c: rgba(72, 164, 255, 0.18);
   --hero-grid: rgba(255, 255, 255, 0.06);
-  --soft-accent: rgba(130, 117, 255, 0.16);
-  --soft-accent-strong: rgba(122, 185, 255, 0.22);
-  --timeline-line: rgba(191, 208, 255, 0.11);
+  --soft-accent: rgba(92, 182, 255, 0.16);
+  --soft-accent-strong: rgba(132, 220, 255, 0.24);
+  --timeline-line: rgba(180, 220, 255, 0.13);
   --pill-background: rgba(255, 255, 255, 0.05);
-  --pill-text: #f6c2e2;
-  --pill-border: rgba(204, 220, 255, 0.14);
+  --pill-text: #cbefff;
+  --pill-border: rgba(185, 226, 255, 0.16);
   --hero-panel-background:
-    linear-gradient(155deg, rgba(10, 20, 44, 0.97), rgba(15, 31, 68, 0.9), rgba(16, 18, 48, 0.84));
+    linear-gradient(155deg, rgba(8, 22, 42, 0.97), rgba(11, 42, 78, 0.9), rgba(8, 28, 54, 0.84));
   color-scheme: dark;
 }
 
