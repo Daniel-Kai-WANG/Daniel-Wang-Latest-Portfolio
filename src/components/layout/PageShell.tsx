@@ -17,7 +17,7 @@ export function PageShell({ children }: PropsWithChildren) {
             background:
               theme === 'light'
                 ? 'rgba(255, 190, 220, 0.2)'
-                : 'rgba(255, 79, 216, 0.18)',
+                : 'rgba(255, 143, 115, 0.18)',
           }}
         />
         <div
@@ -26,7 +26,7 @@ export function PageShell({ children }: PropsWithChildren) {
             background:
               theme === 'light'
                 ? 'rgba(186, 230, 253, 0.22)'
-                : 'rgba(124, 92, 255, 0.24)',
+                : 'rgba(57, 195, 220, 0.2)',
           }}
         />
       </div>

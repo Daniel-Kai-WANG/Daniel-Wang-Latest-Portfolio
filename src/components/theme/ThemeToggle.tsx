@@ -64,7 +64,7 @@ export function ThemeToggle() {
           style={{
             background: isLight
               ? 'conic-gradient(from 180deg, rgba(255,255,255,0.2), rgba(255,220,173,0.76), rgba(197,232,255,0.88), rgba(245,214,230,0.64), rgba(255,255,255,0.1))'
-              : 'conic-gradient(from 180deg, rgba(255,255,255,0.05), rgba(105,95,190,0.82), rgba(65,175,244,0.78), rgba(224,114,198,0.62), rgba(255,255,255,0.03))',
+              : 'conic-gradient(from 180deg, rgba(255,255,255,0.05), rgba(19,78,94,0.82), rgba(65,175,244,0.78), rgba(255,153,122,0.56), rgba(255,255,255,0.03))',
           }}
         />
 
@@ -83,7 +83,7 @@ export function ThemeToggle() {
               borderColor: isLight ? 'rgba(170,214,255,0.56)' : 'rgba(255,255,255,0.08)',
               boxShadow: isLight
                 ? 'inset 0 0 20px rgba(255,255,255,0.2)'
-                : 'inset 0 0 20px rgba(129,140,248,0.08)',
+                : 'inset 0 0 20px rgba(57,195,220,0.08)',
             }}
           />
 

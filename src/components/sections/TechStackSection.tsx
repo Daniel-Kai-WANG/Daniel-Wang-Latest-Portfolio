@@ -3,7 +3,7 @@ import { skillCategories } from '../../data/skills'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { JellyfishIcon, SakuraIcon, SnowCrystalIcon, TablerMoonIcon } from '../common/Icons'
+import { JellyfishIcon, SakuraIcon, SnowCrystalIcon, StarfishIcon, TablerMoonIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function TechStackSection() {
@@ -31,7 +31,7 @@ export function TechStackSection() {
                 background:
                   theme === 'light'
                     ? 'linear-gradient(180deg, rgba(255,255,255,0.9), rgba(242,249,255,0.86))'
-                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(124,92,255,0.06))',
+                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(57,195,220,0.06), rgba(255,143,115,0.05))',
               }}
             >
               <div className="flex items-center justify-between gap-3">
@@ -51,7 +51,8 @@ export function TechStackSection() {
                     </>
                   ) : (
                     <>
-                      <TablerMoonIcon className="size-5 text-slate-100/80" />
+                      <TablerMoonIcon className="size-5 text-cyan-50/80" />
+                      <StarfishIcon variant="pink" className="size-5 rotate-[10deg]" />
                       <JellyfishIcon className="size-6 text-cyan-200/60" />
                     </>
                   )}
@@ -99,7 +100,7 @@ export function TechStackSection() {
                   background:
                     theme === 'light'
                       ? 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(239,249,255,0.88))'
-                      : 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(124,92,255,0.05))',
+                      : 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(57,195,220,0.05), rgba(255,143,115,0.04))',
                   marginLeft: index % 2 === 0 ? '0' : '0',
                 }}
               >
@@ -110,7 +111,7 @@ export function TechStackSection() {
                     background:
                       theme === 'light'
                         ? 'linear-gradient(180deg, rgba(246,168,200,0.86), rgba(37,99,235,0.72))'
-                        : 'linear-gradient(180deg, rgba(255,79,216,0.82), rgba(34,211,238,0.78))',
+                        : 'linear-gradient(180deg, rgba(255,143,115,0.82), rgba(57,195,220,0.78))',
                   }}
                 />
 

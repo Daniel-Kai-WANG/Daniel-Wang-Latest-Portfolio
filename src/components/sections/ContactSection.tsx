@@ -128,7 +128,7 @@ export function ContactSection() {
                   background:
                     theme === 'light'
                       ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), rgba(255,228,239,0.18), transparent)'
-                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(255,79,216,0.08), transparent)',
+                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(57,195,220,0.08), transparent)',
                 }}
               />
               <div className="relative z-10">
@@ -283,7 +283,7 @@ export function ContactSection() {
                         background:
                           theme === 'light'
                             ? 'linear-gradient(135deg, #58AFE8, #3D74D9)'
-                            : 'linear-gradient(135deg, #7C5CFF, #22D3EE)',
+                            : 'linear-gradient(135deg, #FF8F73, #39C3DC)',
                       }}
                     >
                       Send message

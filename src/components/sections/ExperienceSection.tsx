@@ -6,9 +6,9 @@ import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   JellyfishIcon,
-  MusicOrbitIcon,
   SakuraIcon,
   SnowCrystalIcon,
+  StarfishIcon,
   SunLowIcon,
   TablerMoonIcon,
 } from '../common/Icons'
@@ -86,7 +86,11 @@ export function ExperienceSection() {
           <div className="xl:sticky xl:top-32">
             <SectionHeading
               title="Experience journey"
-              description="The timeline becomes a growth scene: the trunk rises first, the branches stretch out, and each fruit opens into a role-and-company story when you hover or tap."
+              description={
+                theme === 'light'
+                  ? 'The timeline becomes a growth scene: the trunk rises first, the branches stretch out, and each fruit opens into a role-and-company story when you hover or tap.'
+                  : 'The journey becomes a reef map: the anchor path rises first, the coral branches spread outward, and each node opens into a role-and-company story when you hover or tap.'
+              }
             />
 
             <div
@@ -96,18 +100,24 @@ export function ExperienceSection() {
                 background:
                   theme === 'light'
                     ? 'linear-gradient(180deg, rgba(255,255,255,0.9), rgba(238,248,255,0.86))'
-                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(124,92,255,0.05))',
+                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(57,195,220,0.05), rgba(255,143,115,0.04))',
               }}
             >
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                Growth notes
+                {theme === 'light' ? 'Growth notes' : 'Reef notes'}
               </p>
               <div className="mt-4 grid grid-cols-3 gap-3">
-                {[
-                  { value: `${experiences.length}`, label: 'fruits' },
-                  { value: '2', label: 'store fronts' },
-                  { value: '1', label: 'workflow trunk' },
-                ].map((item) => (
+                {(theme === 'light'
+                  ? [
+                      { value: `${experiences.length}`, label: 'fruits' },
+                      { value: '2', label: 'store fronts' },
+                      { value: '1', label: 'workflow trunk' },
+                    ]
+                  : [
+                      { value: `${experiences.length}`, label: 'reef nodes' },
+                      { value: '2', label: 'depth zones' },
+                      { value: '1', label: 'anchor route' },
+                    ]).map((item) => (
                   <div
                     key={item.label}
                     className="rounded-[1.2rem] border px-3 py-4 text-center"
@@ -126,8 +136,9 @@ export function ExperienceSection() {
                 ))}
               </div>
               <p className="mt-4 text-sm leading-7 text-[var(--color-muted)]">
-                Each fruit starts as a shorthand role-and-company mark, then blooms open into the
-                delivery detail behind it.
+                {theme === 'light'
+                  ? 'Each fruit starts as a shorthand role-and-company mark, then blooms open into the delivery detail behind it.'
+                  : 'Each reef marker starts as a shorthand role-and-company mark, then opens into the delivery detail behind it.'}
               </p>
             </div>
           </div>
@@ -140,7 +151,7 @@ export function ExperienceSection() {
                 background:
                   theme === 'light'
                     ? 'linear-gradient(180deg, rgba(255,255,255,0.94), rgba(237,247,255,0.92), rgba(248,252,255,0.95))'
-                    : 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(17,25,43,0.9), rgba(18,18,33,0.96))',
+                    : 'linear-gradient(180deg, rgba(11,27,37,0.94), rgba(16,50,55,0.9), rgba(11,25,34,0.96))',
                 boxShadow: 'var(--surface-shadow)',
               }}
             >
@@ -152,7 +163,7 @@ export function ExperienceSection() {
                   background:
                     theme === 'light'
                       ? 'radial-gradient(circle at top, rgba(186,230,253,0.36), transparent 64%)'
-                      : 'radial-gradient(circle at top, rgba(124,92,255,0.18), transparent 64%)',
+                      : 'radial-gradient(circle at top, rgba(255,143,115,0.18), transparent 64%)',
                 }}
               />
 
@@ -160,10 +171,12 @@ export function ExperienceSection() {
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                      Orchard mode
+                      {theme === 'light' ? 'Orchard mode' : 'Reef mode'}
                     </p>
                     <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">
-                      Hover on desktop or tap on mobile to let each resume fruit bloom.
+                      {theme === 'light'
+                        ? 'Hover on desktop or tap on mobile to let each resume fruit bloom.'
+                        : 'Hover on desktop or tap on mobile to let each reef marker open.'}
                     </p>
                   </div>
 
@@ -176,8 +189,8 @@ export function ExperienceSection() {
                       </>
                     ) : (
                       <>
-                        <TablerMoonIcon className="size-4 text-slate-100/84" />
-                        <MusicOrbitIcon className="size-4 text-violet-100/78" />
+                        <TablerMoonIcon className="size-4 text-cyan-50/84" />
+                        <StarfishIcon variant="pink" className="size-4 rotate-[10deg]" />
                         <JellyfishIcon className="size-5 text-cyan-200/70" />
                       </>
                     )}
@@ -199,7 +212,7 @@ export function ExperienceSection() {
                         />
                         <stop
                           offset="100%"
-                          stopColor={theme === 'light' ? '#6D472D' : '#5A3A2A'}
+                          stopColor={theme === 'light' ? '#6D472D' : '#7A4E3E'}
                           stopOpacity="0.98"
                         />
                       </linearGradient>
@@ -220,7 +233,7 @@ export function ExperienceSection() {
                     <motion.path
                       d="M208 364 C198 332 180 310 152 292 C134 280 116 270 94 264"
                       fill="none"
-                      stroke={theme === 'light' ? 'rgba(125,83,54,0.72)' : 'rgba(126,91,70,0.72)'}
+                      stroke={theme === 'light' ? 'rgba(125,83,54,0.72)' : 'rgba(226,123,98,0.72)'}
                       strokeLinecap="round"
                       strokeWidth="10"
                       initial={{ pathLength: 0, opacity: 0.35 }}
@@ -234,7 +247,7 @@ export function ExperienceSection() {
                         key={node.branchPath}
                         d={node.branchPath}
                         fill="none"
-                        stroke={theme === 'light' ? 'rgba(139,94,60,0.82)' : 'rgba(154,113,89,0.82)'}
+                        stroke={theme === 'light' ? 'rgba(139,94,60,0.82)' : 'rgba(244,153,120,0.78)'}
                         strokeLinecap="round"
                         strokeWidth={index === 1 ? 10 : 9}
                         initial={{ pathLength: 0, opacity: 0.35 }}
@@ -255,7 +268,7 @@ export function ExperienceSection() {
                       background:
                         theme === 'light'
                           ? 'rgba(156, 221, 124, 0.34)'
-                          : 'rgba(35, 85, 54, 0.42)',
+                          : 'rgba(32, 110, 101, 0.36)',
                     }}
                   />
 
@@ -294,11 +307,11 @@ export function ExperienceSection() {
                             background:
                               theme === 'light'
                                 ? 'linear-gradient(180deg, rgba(255,239,245,0.98), rgba(248,198,217,0.96))'
-                                : 'linear-gradient(180deg, rgba(43,22,60,0.94), rgba(20,29,52,0.96))',
+                                : 'linear-gradient(180deg, rgba(58,33,32,0.94), rgba(18,52,58,0.96))',
                             boxShadow: isActive
                               ? theme === 'light'
                                 ? '0 18px 34px rgba(244,114,182,0.2)'
-                                : '0 18px 34px rgba(124,92,255,0.18)'
+                                : '0 18px 34px rgba(255,143,115,0.18)'
                               : '0 14px 30px rgba(15,23,42,0.08)',
                             zIndex: isActive ? 40 : 12,
                             opacity: activeFruit !== null && !isActive ? 0.38 : 1,
@@ -315,11 +328,15 @@ export function ExperienceSection() {
                               background:
                                 theme === 'light'
                                   ? 'radial-gradient(circle, rgba(251,207,232,0.56), transparent 64%)'
-                                  : 'radial-gradient(circle, rgba(168,85,247,0.28), transparent 64%)',
+                                  : 'radial-gradient(circle, rgba(255,143,115,0.28), transparent 64%)',
                             }}
                           />
                           <div className="relative z-10">
-                            <SakuraIcon className="mx-auto size-7" />
+                            {theme === 'light' ? (
+                              <SakuraIcon className="mx-auto size-7" />
+                            ) : (
+                              <StarfishIcon variant={index % 2 === 0 ? 'pink' : 'light'} className="mx-auto size-7 rotate-[10deg]" />
+                            )}
                             <span className="mt-1 block text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--color-text)]">
                               {getFruitLabel(item.role, item.company)}
                             </span>
@@ -340,7 +357,7 @@ export function ExperienceSection() {
                                   background:
                                     theme === 'light'
                                       ? 'linear-gradient(180deg, rgba(255,255,255,0.995), rgba(255,247,251,0.985))'
-                                      : 'linear-gradient(180deg, rgba(18,17,33,0.99), rgba(16,24,40,0.985))',
+                                      : 'linear-gradient(180deg, rgba(23,19,20,0.99), rgba(13,39,44,0.985))',
                                   boxShadow: '0 22px 48px rgba(15,23,42,0.22)',
                                 }}
                               >
@@ -356,7 +373,11 @@ export function ExperienceSection() {
                                       {item.company}
                                     </p>
                                   </div>
-                                  <SakuraIcon className="size-5" />
+                                  {theme === 'light' ? (
+                                    <SakuraIcon className="size-5" />
+                                  ) : (
+                                    <StarfishIcon variant="light" className="size-5 rotate-[10deg]" />
+                                  )}
                                 </div>
                                 <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">
                                   {item.highlights[0]}
@@ -403,7 +424,7 @@ export function ExperienceSection() {
                           background:
                             theme === 'light'
                               ? 'linear-gradient(180deg, rgba(255,255,255,0.995), rgba(255,247,251,0.985))'
-                              : 'linear-gradient(180deg, rgba(18,17,33,0.99), rgba(16,24,40,0.985))',
+                              : 'linear-gradient(180deg, rgba(23,19,20,0.99), rgba(13,39,44,0.985))',
                         }}
                       >
                         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
@@ -428,7 +449,9 @@ export function ExperienceSection() {
                         className="rounded-[1.6rem] border border-dashed px-4 py-5 text-sm leading-6 text-[var(--color-muted)]"
                         style={{ borderColor: 'var(--pill-border)' }}
                       >
-                        Tap a fruit to open the role bloom.
+                        {theme === 'light'
+                          ? 'Tap a fruit to open the role bloom.'
+                          : 'Tap a reef marker to open the role detail.'}
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -444,10 +467,10 @@ export function ExperienceSection() {
                     </>
                   ) : (
                     <>
-                      <TablerMoonIcon className="size-4 text-slate-100/84" />
-                      <MusicOrbitIcon className="size-4 text-violet-100/78" />
+                      <TablerMoonIcon className="size-4 text-cyan-50/84" />
+                      <StarfishIcon variant="pink" className="size-4 rotate-[10deg]" />
                       <JellyfishIcon className="size-4 text-cyan-200" />
-                      Night-bloom focus, same delivery roots.
+                      Coral markers outside, delivery detail anchored within.
                     </>
                   )}
                 </div>

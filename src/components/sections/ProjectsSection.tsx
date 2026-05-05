@@ -4,7 +4,7 @@ import { projects } from '../../data/projects'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { ArrowUpRightIcon, JellyfishIcon, MusicOrbitIcon, SnowCrystalIcon } from '../common/Icons'
+import { ArrowUpRightIcon, JellyfishIcon, SnowCrystalIcon, StarfishIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
 
 export function ProjectsSection() {
@@ -53,7 +53,7 @@ export function ProjectsSection() {
                     background:
                       theme === 'light'
                         ? 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(242,249,255,0.92), rgba(255,242,247,0.84))'
-                        : 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(34,211,238,0.05), rgba(124,92,255,0.08))',
+                        : 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(57,195,220,0.06), rgba(255,143,115,0.08))',
                   }}
                 />
                 <div
@@ -63,7 +63,7 @@ export function ProjectsSection() {
                     background:
                       theme === 'light'
                         ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.62), rgba(214,244,255,0.28), transparent)'
-                        : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(124,92,255,0.14), transparent)',
+                        : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(57,195,220,0.12), transparent)',
                   }}
                 />
 
@@ -134,7 +134,7 @@ export function ProjectsSection() {
                         <SnowCrystalIcon className="size-5" />
                       ) : (
                         <div className="flex items-center gap-2">
-                          <MusicOrbitIcon className="size-4 text-violet-100/70" />
+                          <StarfishIcon variant="pink" className="size-4 rotate-[10deg] opacity-80" />
                           <JellyfishIcon className="size-5 text-cyan-200/50" />
                         </div>
                       )}
@@ -149,7 +149,7 @@ export function ProjectsSection() {
                               background:
                                 theme === 'light'
                                   ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                                  : 'linear-gradient(135deg, #FF4FD8, #22D3EE)',
+                                  : 'linear-gradient(135deg, #FF8F73, #39C3DC)',
                             }}
                           />
                           <span>{highlight}</span>
@@ -181,7 +181,7 @@ export function ProjectsSection() {
                           background:
                             theme === 'light'
                               ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                              : 'linear-gradient(135deg, #FF4FD8, #7C5CFF)',
+                              : 'linear-gradient(135deg, #FF8F73, #39C3DC)',
                         }}
                       >
                         {activeProject.ctaLabel}
@@ -214,7 +214,7 @@ export function ProjectsSection() {
                     background:
                       theme === 'light'
                         ? 'linear-gradient(180deg, rgba(255,255,255,0.94), rgba(240,249,255,0.9))'
-                        : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(34,211,238,0.04))',
+                        : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(57,195,220,0.04))',
                   }}
                 >
                   <ThemeShiftBackdrop variant="card" />

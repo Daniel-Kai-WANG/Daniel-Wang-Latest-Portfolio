@@ -1,11 +1,28 @@
-import { useMemo } from 'react'
+import { useId } from 'react'
 import type { CSSProperties, SVGProps } from 'react'
+import starfishLight from '../../assets/theme/starfish-light.png'
+import starfishPink from '../../assets/theme/starfish-pink.png'
 
 const sakuraVariants = ['/seasonal/sakura-a.png', '/seasonal/sakura-b.png'] as const
+const starfishVariants = [starfishPink, starfishLight] as const
 
 type DecorativeImageProps = {
   className?: string
   style?: CSSProperties
+}
+
+type StarfishIconProps = DecorativeImageProps & {
+  variant?: 'pink' | 'light'
+}
+
+function getVariantIndex(id: string, length: number) {
+  let total = 0
+
+  for (const char of id) {
+    total += char.charCodeAt(0)
+  }
+
+  return total % length
 }
 
 export function SunIcon(props: SVGProps<SVGSVGElement>) {
@@ -172,10 +189,28 @@ export function PetalIcon(props: SVGProps<SVGSVGElement>) {
 }
 
 export function SakuraIcon({ className, style }: DecorativeImageProps) {
-  const src = useMemo(
-    () => sakuraVariants[Math.floor(Math.random() * sakuraVariants.length)],
-    [],
+  const id = useId()
+  const src = sakuraVariants[getVariantIndex(id, sakuraVariants.length)]
+
+  return (
+    <img
+      src={src}
+      alt=""
+      aria-hidden="true"
+      className={className}
+      style={{ display: 'block', objectFit: 'contain', ...style }}
+    />
   )
+}
+
+export function StarfishIcon({ className, style, variant }: StarfishIconProps) {
+  const id = useId()
+  const src =
+    variant === 'pink'
+      ? starfishPink
+      : variant === 'light'
+        ? starfishLight
+        : starfishVariants[getVariantIndex(id, starfishVariants.length)]
 
   return (
     <img
@@ -278,7 +313,8 @@ export function MusicTwoIcon(props: SVGProps<SVGSVGElement>) {
 }
 
 export function MusicOrbitIcon(props: SVGProps<SVGSVGElement>) {
-  const variant = useMemo(() => (Math.random() < 0.5 ? 'music' : 'music-2'), [])
+  const id = useId()
+  const variant = getVariantIndex(id, 2) === 0 ? 'music' : 'music-2'
 
   if (variant === 'music') {
     return <MusicNoteIcon {...props} />

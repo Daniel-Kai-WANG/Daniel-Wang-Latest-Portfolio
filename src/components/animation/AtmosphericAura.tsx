@@ -1,5 +1,11 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { JellyfishIcon, MusicOrbitIcon, SakuraIcon, SnowCrystalIcon } from '../common/Icons'
+import {
+  JellyfishIcon,
+  SakuraIcon,
+  SnowCrystalIcon,
+  StarSparkIcon,
+  StarfishIcon,
+} from '../common/Icons'
 import { useTheme } from '../../hooks/useTheme'
 
 const petals = [
@@ -20,18 +26,23 @@ const snowflakes = [
   { left: '86%', size: 12, delay: 4, duration: 15 },
 ]
 
-const sparks = [
-  { left: '10%', size: 18, delay: 0, duration: 14 },
-  { left: '24%', size: 22, delay: 4, duration: 18 },
-  { left: '48%', size: 16, delay: 2, duration: 15 },
-  { left: '66%', size: 20, delay: 6, duration: 17 },
-  { left: '84%', size: 18, delay: 3, duration: 16 },
+const glimmers = [
+  { left: '11%', size: 16, delay: 0, duration: 14 },
+  { left: '34%', size: 18, delay: 4, duration: 18 },
+  { left: '59%', size: 14, delay: 2, duration: 15 },
+  { left: '82%', size: 16, delay: 5, duration: 17 },
 ]
 
 const jellyfish = [
   { left: '14%', size: 46, delay: 1, duration: 16 },
   { left: '52%', size: 54, delay: 4, duration: 18 },
   { left: '78%', size: 42, delay: 2, duration: 15 },
+]
+
+const starfish = [
+  { left: '6%', top: '14%', size: 64, delay: 0.8, duration: 16, variant: 'pink' as const },
+  { left: '84%', top: '22%', size: 52, delay: 2.4, duration: 18, variant: 'light' as const },
+  { left: '72%', top: '66%', size: 42, delay: 1.4, duration: 15, variant: 'pink' as const },
 ]
 
 export function AtmosphericAura() {
@@ -46,7 +57,7 @@ export function AtmosphericAura() {
           background:
             theme === 'light'
               ? 'linear-gradient(180deg, rgba(255,214,235,0.16), transparent 32%)'
-              : 'linear-gradient(180deg, rgba(255,79,216,0.09), transparent 28%)',
+              : 'linear-gradient(180deg, rgba(57,195,220,0.12), rgba(255,143,115,0.05), transparent 30%)',
         }}
       />
 
@@ -56,7 +67,7 @@ export function AtmosphericAura() {
           background:
             theme === 'light'
               ? 'radial-gradient(circle, rgba(255,190,220,0.16), transparent 58%)'
-              : 'radial-gradient(circle, rgba(124,92,255,0.18), transparent 60%)',
+              : 'radial-gradient(circle, rgba(57,195,220,0.16), transparent 60%)',
         }}
       />
 
@@ -66,7 +77,7 @@ export function AtmosphericAura() {
           background:
             theme === 'light'
               ? 'rgba(208, 235, 255, 0.28)'
-              : 'rgba(34, 211, 238, 0.11)',
+              : 'rgba(21, 145, 173, 0.16)',
         }}
       />
 
@@ -133,7 +144,7 @@ export function AtmosphericAura() {
 
       {!reduceMotion &&
         theme === 'dark' &&
-        sparks.map((spark, index) => (
+        glimmers.map((spark, index) => (
           <motion.div
             key={`spark-${spark.left}`}
             className="absolute top-[8%]"
@@ -153,12 +164,47 @@ export function AtmosphericAura() {
               ease: 'easeInOut',
             }}
           >
-            <MusicOrbitIcon
-              className="text-violet-100/80"
+            <StarSparkIcon
+              className="text-amber-100/75"
               style={{
                 width: `${spark.size}px`,
                 height: `${spark.size}px`,
-                filter: index % 2 === 0 ? 'drop-shadow(0 0 10px rgba(255,79,216,0.24))' : 'none',
+                filter: index % 2 === 0 ? 'drop-shadow(0 0 10px rgba(255,143,115,0.24))' : 'none',
+              }}
+            />
+          </motion.div>
+        ))}
+
+      {!reduceMotion &&
+        theme === 'dark' &&
+        starfish.map((item, index) => (
+          <motion.div
+            key={`starfish-${item.left}-${item.top}`}
+            className="absolute"
+            style={{ left: item.left, top: item.top }}
+            initial={{ opacity: 0, rotate: -12 }}
+            animate={{
+              opacity: [0, 0.22, 0.18, 0],
+              y: [0, -10, 8, 0],
+              x: [0, 10, -8, 0],
+              rotate: [-12, 4, -6, -12],
+            }}
+            transition={{
+              duration: item.duration,
+              delay: item.delay + index * 0.6,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          >
+            <StarfishIcon
+              variant={item.variant}
+              style={{
+                width: `${item.size}px`,
+                height: `${item.size}px`,
+                filter:
+                  index === 1
+                    ? 'drop-shadow(0 0 20px rgba(216,244,255,0.12))'
+                    : 'drop-shadow(0 0 18px rgba(255,143,115,0.12))',
               }}
             />
           </motion.div>
@@ -190,7 +236,7 @@ export function AtmosphericAura() {
               style={{
                 width: `${item.size}px`,
                 height: `${item.size}px`,
-                filter: 'drop-shadow(0 0 18px rgba(34,211,238,0.18))',
+                filter: 'drop-shadow(0 0 18px rgba(57,195,220,0.2))',
               }}
             />
           </motion.div>
@@ -204,7 +250,7 @@ export function AtmosphericAura() {
             transition={{ duration: 7.2, repeat: Infinity, ease: 'easeInOut' }}
             style={{
               background:
-                'linear-gradient(180deg, rgba(255,79,216,0.38), rgba(255,79,216,0))',
+                'linear-gradient(180deg, rgba(255,143,115,0.34), rgba(255,143,115,0))',
             }}
           />
           <motion.div
@@ -213,7 +259,7 @@ export function AtmosphericAura() {
             transition={{ duration: 8.4, repeat: Infinity, ease: 'easeInOut' }}
             style={{
               background:
-                'linear-gradient(180deg, rgba(34,211,238,0.34), rgba(34,211,238,0))',
+                'linear-gradient(180deg, rgba(57,195,220,0.32), rgba(57,195,220,0))',
             }}
           />
         </>
