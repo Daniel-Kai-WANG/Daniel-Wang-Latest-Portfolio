@@ -32,7 +32,7 @@ const companyMarks: Record<string, string> = {
 const fruitNodes = [
   {
     top: '13%',
-    left: '13%',
+    left: '14%',
     panelClassName: 'left-0 top-[2%]',
     branchPath: 'M214 346 C205 286 182 240 148 198 C132 178 118 164 96 150',
   },
@@ -56,7 +56,7 @@ const fruitNodes = [
   },
   {
     top: '50%',
-    left: '18%',
+    left: '20%',
     panelClassName: 'left-[2%] top-[40%]',
     branchPath: 'M214 346 C192 316 168 292 138 274 C118 262 100 248 86 230',
   },
@@ -145,7 +145,7 @@ export function ExperienceSection() {
 
           <div className="relative">
             <div
-              className="relative overflow-visible rounded-[2rem] border px-4 py-5 sm:px-6 sm:py-6"
+              className="relative overflow-hidden rounded-[2rem] border px-4 py-5 sm:px-6 sm:py-6 lg:overflow-visible"
               style={{
                 borderColor: 'var(--color-border)',
                 background:
@@ -284,7 +284,7 @@ export function ExperienceSection() {
                       >
                         <motion.button
                           type="button"
-                          className="relative z-10 flex min-h-[72px] w-[106px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[999px] border px-3 py-2 text-center"
+                          className="relative z-10 flex min-h-[68px] w-[82px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[999px] border px-2 py-2 text-center sm:min-h-[72px] sm:w-[106px] sm:px-3"
                           initial={{ opacity: 0, scale: 0.7, y: 12 }}
                           whileInView={{ opacity: 1, scale: 1, y: 0 }}
                           viewport={{ once: true, amount: 0.4 }}
@@ -333,11 +333,11 @@ export function ExperienceSection() {
                           />
                           <div className="relative z-10">
                             {theme === 'light' ? (
-                              <SakuraIcon className="mx-auto size-7" />
+                              <SakuraIcon className="mx-auto size-6 sm:size-7" />
                             ) : (
-                              <StarfishIcon variant={index % 2 === 0 ? 'pink' : 'light'} className="mx-auto size-7 rotate-[10deg]" />
+                              <StarfishIcon variant={index % 2 === 0 ? 'pink' : 'light'} className="mx-auto size-6 rotate-[10deg] sm:size-7" />
                             )}
-                            <span className="mt-1 block text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--color-text)]">
+                            <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--color-text)] sm:text-[11px] sm:tracking-[0.16em]">
                               {getFruitLabel(item.role, item.company)}
                             </span>
                           </div>
