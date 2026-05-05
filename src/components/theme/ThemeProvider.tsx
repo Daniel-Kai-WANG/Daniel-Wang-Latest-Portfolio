@@ -1,11 +1,9 @@
-import { startTransition, useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { PropsWithChildren } from 'react'
 import type { ThemeMode } from '../../types/content'
 import { ThemeContext } from './theme-context'
-import type { ThemeShiftDirection } from './theme-context'
 
 const STORAGE_KEY = 'daniel-portfolio-theme'
-const SHIFT_DURATION_MS = 1180
 
 function readTheme(): ThemeMode {
   if (typeof window === 'undefined') {
@@ -18,49 +16,18 @@ function readTheme(): ThemeMode {
 
 export function ThemeProvider({ children }: PropsWithChildren) {
   const [theme, updateTheme] = useState<ThemeMode>(() => readTheme())
-  const [isThemeShifting, setIsThemeShifting] = useState(false)
-  const [themeShiftDirection, setThemeShiftDirection] = useState<ThemeShiftDirection>(null)
-  const [themeShiftKey, setThemeShiftKey] = useState(0)
-  const shiftTimerRef = useRef<number | null>(null)
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     window.localStorage.setItem(STORAGE_KEY, theme)
   }, [theme])
 
-  useEffect(() => {
-    return () => {
-      if (shiftTimerRef.current !== null) {
-        window.clearTimeout(shiftTimerRef.current)
-      }
-    }
-  }, [])
-
   const setTheme = (nextTheme: ThemeMode) => {
     if (nextTheme === theme) {
       return
     }
 
-    const nextDirection: ThemeShiftDirection =
-      theme === 'light' ? 'light-to-dark' : 'dark-to-light'
-
-    if (shiftTimerRef.current !== null) {
-      window.clearTimeout(shiftTimerRef.current)
-    }
-
-    setThemeShiftDirection(nextDirection)
-    setThemeShiftKey((value) => value + 1)
-    setIsThemeShifting(true)
-
-    startTransition(() => {
-      updateTheme(nextTheme)
-    })
-
-    shiftTimerRef.current = window.setTimeout(() => {
-      setIsThemeShifting(false)
-      setThemeShiftDirection(null)
-      shiftTimerRef.current = null
-    }, SHIFT_DURATION_MS)
+    updateTheme(nextTheme)
   }
 
   const toggleTheme = () => {
@@ -73,9 +40,9 @@ export function ThemeProvider({ children }: PropsWithChildren) {
         theme,
         setTheme,
         toggleTheme,
-        isThemeShifting,
-        themeShiftDirection,
-        themeShiftKey,
+        isThemeShifting: false,
+        themeShiftDirection: null,
+        themeShiftKey: 0,
       }}
     >
       {children}

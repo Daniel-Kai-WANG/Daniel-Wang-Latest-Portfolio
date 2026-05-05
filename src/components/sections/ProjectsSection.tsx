@@ -29,7 +29,7 @@ export function ProjectsSection() {
             description="One project stays in active focus on the left, while the other stories rest as compact previews on the right until you call them forward."
           />
 
-          <div className="mt-8 grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
+          <div className="mt-8 grid gap-5 xl:grid-cols-[0.96fr_1.04fr]">
             <AnimatePresence mode="wait">
               <motion.article
                 key={activeProject.title}
@@ -52,7 +52,7 @@ export function ProjectsSection() {
                   style={{
                     background:
                       theme === 'light'
-                        ? 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(242,249,255,0.92), rgba(255,242,247,0.84))'
+                        ? 'linear-gradient(135deg, rgba(247,252,255,0.95), rgba(232,245,255,0.92), rgba(248,243,249,0.84))'
                         : 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(34,211,238,0.05), rgba(124,92,255,0.08))',
                   }}
                 />
@@ -67,8 +67,8 @@ export function ProjectsSection() {
                   }}
                 />
 
-                <div className="relative z-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-                  <div className="flex flex-col justify-between gap-6">
+                <div className="relative z-10 grid gap-6 lg:grid-cols-[0.94fr_1.06fr]">
+                  <div className="flex flex-col gap-6">
                     <div>
                       <div className="flex flex-wrap items-center gap-3">
                         <span
@@ -86,12 +86,27 @@ export function ProjectsSection() {
                         </span>
                       </div>
 
-                      <h3 className="mt-5 font-display text-[2.2rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)] sm:text-[2.6rem]">
+                      <h3 className="mt-5 font-display text-[2.2rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)] sm:text-[2.55rem]">
                         {activeProject.title}
                       </h3>
                       <p className="mt-4 text-sm leading-7 text-[var(--color-muted)]">
                         {activeProject.description}
                       </p>
+
+                      <div
+                        className="mt-5 rounded-[1.5rem] border p-4"
+                        style={{
+                          borderColor: 'var(--pill-border)',
+                          background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
+                        }}
+                      >
+                        <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--color-muted)]">
+                          Active case focus
+                        </div>
+                        <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">
+                          {activeProject.highlights[0]}
+                        </p>
+                      </div>
                     </div>
 
                     <div className="grid gap-3 sm:grid-cols-3">
@@ -102,7 +117,7 @@ export function ProjectsSection() {
                       ].map((item) => (
                         <div
                           key={item.label}
-                          className="rounded-[1.3rem] border px-3 py-4"
+                          className="rounded-[1.2rem] border px-3 py-4"
                           style={{
                             borderColor: 'var(--pill-border)',
                             background: 'var(--pill-background)',
@@ -213,7 +228,7 @@ export function ProjectsSection() {
                     borderColor: 'var(--color-border)',
                     background:
                       theme === 'light'
-                        ? 'linear-gradient(180deg, rgba(255,255,255,0.94), rgba(240,249,255,0.9))'
+                        ? 'linear-gradient(180deg, rgba(248,252,255,0.95), rgba(235,246,255,0.92))'
                         : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(34,211,238,0.04))',
                   }}
                 >
