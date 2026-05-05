@@ -115,19 +115,19 @@ export function ThemeToggle() {
                 <SakuraIcon className="block size-[18px] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_6px_12px_rgba(244,114,182,0.24)] sm:size-[20px]" />
               ) : (
                 <div
-                  className="flex h-[30px] w-[24px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-[999px]"
+                  className="flex h-[34px] w-[28px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-visible rounded-full"
                   style={{
                     background:
-                      'radial-gradient(circle at 50% 18%, rgba(203,225,255,0.08), transparent 34%), radial-gradient(circle at 50% 84%, rgba(72,142,230,0.06), transparent 30%)',
+                      'radial-gradient(circle at 50% 24%, rgba(203,225,255,0.05), transparent 34%), radial-gradient(circle at 50% 82%, rgba(72,142,230,0.04), transparent 30%)',
                   }}
                 >
                   <img
                     src={jellyfishGif}
                     alt=""
                     aria-hidden="true"
-                    className="block h-[26px] w-[21px] object-contain [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform]"
+                    className="block h-[30px] w-[24px] object-contain [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform]"
                     style={{
-                      filter: 'drop-shadow(0 8px 16px rgba(96,165,250,0.22))',
+                      filter: 'drop-shadow(0 8px 18px rgba(96,165,250,0.22))',
                     }}
                   />
                 </div>

@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import { experiences } from '../../data/experience'
 
 type ThemeMode = 'light' | 'dark'
+const GRAPH_WIDTH = 100
+const GRAPH_HEIGHT = 100
 
 type Point = {
   x: number
@@ -16,8 +18,6 @@ type BranchSpec = {
 }
 
 type GraphSpec = {
-  panelCopy: string
-  legendCopy: string
   baseFill: string
   baseStem: string
   baseStemWidth: number
@@ -33,48 +33,44 @@ type ExperienceJourneyGraphProps = {
 }
 
 const lightGraph: GraphSpec = {
-  panelCopy:
-    'A clean sakura-tree branch spread carries each role to one pearl anchor, then lets the company label float above it.',
-  legendCopy: 'Five branch ends on the right, full delivery span on the left.',
-  baseFill: 'M98 382 C130 358 156 346 186 344 C200 344 220 344 236 346 C266 348 292 360 322 382 C292 392 258 398 210 398 C162 398 128 392 98 382Z',
-  baseStem: 'M208 382 C206 346 204 304 202 256 C198 216 194 174 188 126',
-  baseStemWidth: 16,
+  baseFill:
+    'M18 95 C28 89 40 85 48 84 H56 C64 85 74 89 86 95 C76 98 66 100 52 100 C38 100 28 98 18 95Z',
+  baseStem: 'M50 93 C50 84 50 72 50 58 C50 44 49 32 48 21',
+  baseStemWidth: 3.8,
   branches: [
-    { path: 'M190 216 C176 188 152 146 78 104', tip: { x: 78, y: 104 }, labelShiftX: 28, width: 10 },
-    { path: 'M194 196 C198 158 202 112 206 66', tip: { x: 206, y: 66 }, labelShiftX: 0, width: 10 },
-    { path: 'M198 218 C230 194 268 164 350 112', tip: { x: 350, y: 112 }, labelShiftX: -28, width: 10 },
-    { path: 'M204 270 C236 274 274 280 320 286', tip: { x: 320, y: 286 }, labelShiftX: -22, width: 9 },
-    { path: 'M196 282 C164 288 134 296 102 306', tip: { x: 102, y: 306 }, labelShiftX: 24, width: 9 },
+    { path: 'M50 58 C50 46 50 32 50 18', tip: { x: 50, y: 18 }, labelShiftX: 0, width: 3.2 },
+    { path: 'M48 54 C44 46 40 38 34 30 C30 24 26 21 22 18', tip: { x: 22, y: 18 }, labelShiftX: 26, width: 3 },
+    { path: 'M52 56 C58 48 64 40 72 31 C78 25 82 22 86 20', tip: { x: 86, y: 20 }, labelShiftX: -26, width: 3 },
+    { path: 'M52 68 C58 70 66 70 74 67 C80 64 84 60 88 56', tip: { x: 88, y: 56 }, labelShiftX: -20, width: 2.8 },
+    { path: 'M48 70 C42 72 34 72 26 69 C20 66 16 62 12 58', tip: { x: 12, y: 58 }, labelShiftX: 22, width: 2.8 },
   ],
   buds: [
-    { x: 112, y: 134 },
-    { x: 164, y: 174 },
-    { x: 214, y: 98 },
-    { x: 304, y: 156 },
-    { x: 148, y: 292 },
+    { x: 29, y: 27 },
+    { x: 39, y: 39 },
+    { x: 50, y: 30 },
+    { x: 72, y: 34 },
+    { x: 24, y: 63 },
   ],
 }
 
 const darkGraph: GraphSpec = {
-  panelCopy:
-    'A reef base fans into five coral arms first; only after the growth completes do pearl endpoints and company labels surface.',
-  legendCopy: 'Five coral ends on the right, full delivery span on the left.',
-  baseFill: 'M70 376 C100 348 136 334 176 332 H246 C286 334 320 348 350 376 C312 390 268 398 210 398 C152 398 108 390 70 376Z',
-  baseStem: 'M210 338 C208 316 208 300 210 284',
-  baseStemWidth: 18,
+  baseFill:
+    'M12 94 C24 88 36 84 46 83 H58 C68 84 80 88 92 94 C82 98 68 100 52 100 C34 100 22 98 12 94Z',
+  baseStem: 'M51 91 C51 84 51 78 52 72',
+  baseStemWidth: 4.4,
   branches: [
-    { path: 'M170 334 C160 290 146 238 126 192 C108 152 92 122 72 102', tip: { x: 72, y: 102 }, labelShiftX: 30, width: 13 },
-    { path: 'M196 332 C198 284 202 230 206 172 C208 124 210 84 214 48', tip: { x: 214, y: 48 }, labelShiftX: 0, width: 14 },
-    { path: 'M242 334 C256 292 278 244 304 198 C322 162 338 128 354 96', tip: { x: 354, y: 96 }, labelShiftX: -30, width: 13 },
-    { path: 'M248 340 C272 332 294 318 312 300 C322 290 328 282 332 276', tip: { x: 332, y: 276 }, labelShiftX: -22, width: 10 },
-    { path: 'M172 340 C146 332 124 318 108 302 C98 292 94 288 92 286', tip: { x: 92, y: 286 }, labelShiftX: 22, width: 10 },
+    { path: 'M52 72 C51 58 50 40 50 16', tip: { x: 50, y: 16 }, labelShiftX: 0, width: 4.2 },
+    { path: 'M48 74 C42 60 36 48 28 35 C24 28 20 24 16 20', tip: { x: 16, y: 20 }, labelShiftX: 26, width: 3.8 },
+    { path: 'M56 74 C62 60 70 49 80 36 C84 31 88 27 92 22', tip: { x: 92, y: 22 }, labelShiftX: -24, width: 3.8 },
+    { path: 'M58 78 C64 79 70 77 77 72 C82 68 86 63 90 58', tip: { x: 90, y: 58 }, labelShiftX: -18, width: 3.2 },
+    { path: 'M46 78 C40 79 34 77 27 73 C20 69 15 64 10 58', tip: { x: 10, y: 58 }, labelShiftX: 24, width: 3.2 },
   ],
   buds: [
-    { x: 94, y: 152 },
-    { x: 124, y: 188 },
-    { x: 214, y: 126 },
-    { x: 300, y: 176 },
-    { x: 318, y: 132 },
+    { x: 24, y: 34 },
+    { x: 33, y: 44 },
+    { x: 50, y: 39 },
+    { x: 74, y: 46 },
+    { x: 82, y: 34 },
   ],
 }
 
@@ -88,10 +84,11 @@ export function ExperienceJourneyGraph({
   const graph = isLight ? lightGraph : darkGraph
 
   return (
-    <div className="relative mt-6 h-[38rem] sm:h-[40rem]">
+    <div className="relative mt-4 h-[24rem] sm:h-[28rem] xl:h-[32rem]">
       <svg
         key={`experience-journey-${theme}`}
-        viewBox="0 0 420 420"
+        viewBox={`0 0 ${GRAPH_WIDTH} ${GRAPH_HEIGHT}`}
+        preserveAspectRatio="none"
         className="absolute inset-0 z-0 h-full w-full"
         aria-hidden="true"
       >
@@ -139,6 +136,7 @@ export function ExperienceJourneyGraph({
               fill="none"
               stroke={isLight ? 'url(#journey-light-wood)' : 'url(#journey-dark-coral)'}
               strokeLinecap="round"
+              strokeLinejoin="round"
               strokeWidth={activeIndex === index ? branch.width + 1 : branch.width}
               opacity={activeIndex === index ? 1 : isLight ? 0.88 : 0.84}
               initial={{ pathLength: 0, opacity: reduceMotion ? 1 : 0.26 }}
@@ -168,17 +166,33 @@ export function ExperienceJourneyGraph({
             <circle
               cx={bud.x}
               cy={bud.y}
-              r={isLight ? 3.2 : 3.8}
+              r={isLight ? 0.82 : 0.92}
               fill={isLight ? 'rgba(255, 190, 220, 0.82)' : 'rgba(255, 210, 191, 0.82)'}
             />
           </motion.g>
         ))}
+
+        {graph.branches.map((branch, index) => (
+          <path
+            key={`hit-${branch.path}`}
+            d={branch.path}
+            fill="none"
+            stroke="transparent"
+            strokeLinecap="round"
+            strokeWidth={Math.max(branch.width + 4.6, 7.2)}
+            onMouseEnter={() => onSelect(index)}
+            onClick={() => onSelect(index)}
+            style={{ cursor: 'pointer', pointerEvents: 'stroke' }}
+          />
+        ))}
       </svg>
 
       <div
-        className="pointer-events-none absolute bottom-[6%] left-1/2 h-16 w-64 -translate-x-1/2 rounded-full blur-2xl"
+        className="pointer-events-none absolute bottom-[4%] left-1/2 h-24 w-[76%] -translate-x-1/2 rounded-full blur-3xl"
         style={{
-          background: isLight ? 'rgba(255, 205, 229, 0.22)' : 'rgba(110, 160, 255, 0.16)',
+          background: isLight
+            ? 'radial-gradient(circle, rgba(255, 205, 229, 0.18), rgba(126, 200, 255, 0.08), transparent 74%)'
+            : 'radial-gradient(circle, rgba(110, 160, 255, 0.14), rgba(133, 120, 255, 0.08), transparent 72%)',
         }}
       />
 
@@ -200,14 +214,14 @@ export function ExperienceJourneyGraph({
             onMouseEnter={() => onSelect(index)}
             onFocus={() => onSelect(index)}
             onClick={() => onSelect(index)}
-            className="absolute z-10 size-8 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            className="absolute z-10 flex size-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] sm:size-16"
             style={{
-              top: `${(branch.tip.y / 420) * 100}%`,
-              left: `${(branch.tip.x / 420) * 100}%`,
+              top: `${(branch.tip.y / GRAPH_HEIGHT) * 100}%`,
+              left: `${(branch.tip.x / GRAPH_WIDTH) * 100}%`,
             }}
           >
             <motion.span
-              className="absolute left-1/2 top-1/2 block size-7 -translate-x-1/2 -translate-y-1/2 rounded-full"
+              className="absolute left-1/2 top-1/2 block size-11 -translate-x-1/2 -translate-y-1/2 rounded-full sm:size-12"
               initial={{ opacity: 0, scale: 0.7 }}
               animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.7 }}
               transition={
@@ -223,7 +237,7 @@ export function ExperienceJourneyGraph({
             />
 
             <motion.span
-              className="absolute left-1/2 top-1/2 block size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
+              className="absolute left-1/2 top-1/2 block size-4 -translate-x-1/2 -translate-y-1/2 rounded-full sm:size-[1.15rem]"
               initial={{ opacity: 0, scale: 0.4 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -245,7 +259,7 @@ export function ExperienceJourneyGraph({
             />
 
             <motion.span
-              className="pointer-events-none absolute bottom-[calc(100%+0.45rem)] left-1/2 block max-w-[8.5rem] -translate-x-1/2 rounded-full border px-3 py-1 text-center text-[10px] font-semibold tracking-[0.12em] whitespace-nowrap sm:text-[11px]"
+              className="pointer-events-none absolute bottom-[calc(100%+0.4rem)] left-1/2 block max-w-[9.25rem] -translate-x-1/2 rounded-full border px-3 py-1 text-center text-[11px] font-semibold tracking-[0.12em] whitespace-nowrap sm:text-xs"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -279,11 +293,6 @@ export function ExperienceJourneyGraph({
           </button>
         )
       })}
-
-      <p className="mt-[35rem] text-sm leading-6 text-[var(--color-muted)] sm:mt-[37rem]">
-        {graph.panelCopy}
-      </p>
-      <p className="mt-3 text-sm text-[var(--color-muted)]">{graph.legendCopy}</p>
     </div>
   )
 }

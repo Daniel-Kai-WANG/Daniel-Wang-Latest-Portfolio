@@ -48,7 +48,7 @@ function getExperiencePhase(date: string) {
 export function ExperienceSection() {
   const { theme } = useTheme()
   const reduceMotion = useReducedMotion() ?? false
-  const [activeFruit, setActiveFruit] = useState(2)
+  const [activeFruit, setActiveFruit] = useState(0)
   const activeExperience = experiences[activeFruit]
   const isLight = theme === 'light'
 
@@ -189,7 +189,7 @@ export function ExperienceSection() {
                 </div>
 
                 <p className="mt-6 text-sm leading-7 text-[var(--color-muted)]">
-                  Use the pearl anchors on the right to move through each role story while the left panel stays fixed.
+                  Use the journey map on the right to move through each role story while the left panel stays fixed.
                 </p>
               </div>
             </motion.article>
@@ -217,14 +217,14 @@ export function ExperienceSection() {
 
               <div className="relative z-10">
                 <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
+                  <div className="max-w-[26rem]">
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
                       {isLight ? 'Orchard mode' : 'Coral mode'}
                     </p>
                     <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">
                       {isLight
-                        ? 'The right side now behaves like a clean five-branch sakura map with each company resting on one exact branch end.'
-                        : 'The right side now behaves like a five-arm reef fan, with each company surfaced only after its coral arm finishes growing.'}
+                        ? 'Hover or tap any branch or pearl to move through the five-end orchard map.'
+                        : 'Hover or tap any coral arm or pearl to move through the full reef fan.'}
                     </p>
                   </div>
 
