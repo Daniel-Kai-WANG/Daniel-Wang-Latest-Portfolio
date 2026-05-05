@@ -6,80 +6,9 @@ import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { SakuraIcon } from '../common/Icons'
 import { SectionHeading } from '../common/SectionHeading'
-
-const roleMarks: Record<string, string> = {
-  'Full Stack Developer': 'FSD',
-  'Mobile App Developer Freelancer': 'MADF',
-  'IT Developer Intern': 'IDI',
-  'Front End Developer Intern': 'FEDI',
-}
-
-const companyMarks: Record<string, string> = {
-  Actualisation: 'ACT',
-  'Golf Wizard Co.': 'GW',
-  'Digital 8': 'D8',
-  'Easy Skill': 'ES',
-  Phonely: 'PH',
-}
+import { ExperienceJourneyGraph } from './ExperienceJourneyGraph'
 
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-const experienceNodes = [
-  {
-    x: 108,
-    y: 122,
-    lightPath: 'M178 254 C168 220 148 172 104 118',
-    darkPath: 'M128 138 C120 132 114 126 108 122',
-  },
-  {
-    x: 214,
-    y: 84,
-    lightPath: 'M182 248 C194 208 206 152 214 84',
-    darkPath: 'M214 108 C214 100 214 92 214 84',
-  },
-  {
-    x: 320,
-    y: 124,
-    lightPath: 'M188 246 C230 214 272 170 328 126',
-    darkPath: 'M296 140 C304 134 312 128 320 124',
-  },
-  {
-    x: 288,
-    y: 250,
-    lightPath: 'M186 300 C226 286 260 292 292 312',
-    darkPath: 'M270 248 C276 248 282 249 288 250',
-  },
-  {
-    x: 138,
-    y: 246,
-    lightPath: 'M182 316 C164 320 146 326 126 334',
-    darkPath: 'M156 242 C150 243 144 244 138 246',
-  },
-] as const
-
-const lightRootPaths = [
-  'M188 382 C152 362 120 352 86 346',
-  'M188 382 C228 360 270 348 326 340',
-]
-
-const darkCoralBasePath =
-  'M210 366 C208 338 208 318 208 296 C208 282 208 272 210 262'
-
-const darkCoralBranches = [
-  { path: 'M210 262 C194 228 170 186 128 138', width: 14, opacity: 0.98 },
-  { path: 'M210 262 C212 220 214 168 214 108', width: 13, opacity: 0.98 },
-  { path: 'M210 262 C232 226 258 190 296 140', width: 14, opacity: 0.98 },
-  { path: 'M210 280 C230 272 250 262 270 248', width: 11, opacity: 0.9 },
-  { path: 'M210 284 C194 274 176 260 156 242', width: 11, opacity: 0.9 },
-] as const
-
-const darkCoralTips = [
-  { x: 108, y: 122, size: 8 },
-  { x: 214, y: 84, size: 7 },
-  { x: 320, y: 124, size: 8 },
-  { x: 288, y: 250, size: 7 },
-  { x: 138, y: 246, size: 7 },
-] as const
 
 function CoralBudMark({ className = '' }: { className?: string }) {
   return (
@@ -90,13 +19,6 @@ function CoralBudMark({ className = '' }: { className?: string }) {
       <span className="absolute left-1/2 top-[4%] size-[34%] -translate-x-1/2 rounded-full bg-[rgba(255,210,191,0.94)] shadow-[0_0_12px_rgba(255,181,164,0.22)]" />
     </div>
   )
-}
-
-function getFruitLabel(role: string, company: string) {
-  const roleMark = roleMarks[role] ?? role
-  const companyMark = companyMarks[company] ?? company
-
-  return `${roleMark} · ${companyMark}`
 }
 
 function formatExperienceRange(date: string) {
@@ -125,7 +47,7 @@ function getExperiencePhase(date: string) {
 
 export function ExperienceSection() {
   const { theme } = useTheme()
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useReducedMotion() ?? false
   const [activeFruit, setActiveFruit] = useState(2)
   const activeExperience = experiences[activeFruit]
   const isLight = theme === 'light'
@@ -143,8 +65,8 @@ export function ExperienceSection() {
             title="Experience journey"
             description={
               isLight
-                ? 'Hover on desktop or tap on mobile to switch the active blossom. The left panel carries the full role story while the right side keeps the orchard structure readable.'
-                : 'Hover on desktop or tap on mobile to switch the active coral pod. The left panel carries the full role story while the right side keeps the reef skeleton readable.'
+                ? 'Hover on desktop or tap on mobile to switch the active branch. The left panel keeps the full role story while the right side carries the botanical map.'
+                : 'Hover on desktop or tap on mobile to switch the active coral end. The left panel keeps the full role story while the right side carries the reef fan.'
             }
           />
 
@@ -267,9 +189,7 @@ export function ExperienceSection() {
                 </div>
 
                 <p className="mt-6 text-sm leading-7 text-[var(--color-muted)]">
-                  {isLight
-                    ? 'Pick another blossom on the right to move through the orchard and load a new role story.'
-                    : 'Pick another coral pod on the right to travel across the reef and load a new role story.'}
+                  Use the pearl anchors on the right to move through each role story while the left panel stays fixed.
                 </p>
               </div>
             </motion.article>
@@ -303,8 +223,8 @@ export function ExperienceSection() {
                     </p>
                     <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">
                       {isLight
-                        ? 'The blossoms stay attached to a single trunk and branch rhythm, while the full delivery story stays anchored on the left.'
-                        : 'The night version shifts to a five-branch coral fan with one reef base, clearer branch rhythm, and tighter pod labels.'}
+                        ? 'The right side now behaves like a clean five-branch sakura map with each company resting on one exact branch end.'
+                        : 'The right side now behaves like a five-arm reef fan, with each company surfaced only after its coral arm finishes growing.'}
                     </p>
                   </div>
 
@@ -323,271 +243,12 @@ export function ExperienceSection() {
                   </div>
                 </div>
 
-                <div className="relative mt-6 h-[37rem] sm:h-[39rem]">
-                  <svg
-                    key={`experience-journey-${theme}`}
-                    viewBox="0 0 420 420"
-                    className="absolute inset-0 z-0 h-full w-full"
-                    aria-hidden="true"
-                  >
-                    <defs>
-                      <linearGradient id="experience-light-trunk" x1="0%" x2="0%" y1="0%" y2="100%">
-                        <stop offset="0%" stopColor="#916343" stopOpacity="0.92" />
-                        <stop offset="100%" stopColor="#6d482f" stopOpacity="0.98" />
-                      </linearGradient>
-                      <linearGradient id="experience-dark-coral" x1="0%" x2="100%" y1="0%" y2="100%">
-                        <stop offset="0%" stopColor="#90d4ff" stopOpacity="0.92" />
-                        <stop offset="58%" stopColor="#6eb8ff" stopOpacity="0.86" />
-                        <stop offset="100%" stopColor="#8a7aff" stopOpacity="0.78" />
-                      </linearGradient>
-                    </defs>
-
-                    {isLight ? (
-                      <>
-                        <motion.path
-                          d="M188 382 C188 334 186 294 180 252 C172 206 160 162 144 118"
-                          fill="none"
-                          stroke="url(#experience-light-trunk)"
-                          strokeLinecap="round"
-                          strokeWidth="18"
-                          initial={{ pathLength: 0, opacity: 0.38 }}
-                          whileInView={{ pathLength: 1, opacity: 1 }}
-                          viewport={{ once: true, amount: 0.4 }}
-                          transition={reduceMotion ? { duration: 0 } : { duration: 0.96, ease: 'easeOut' }}
-                        />
-
-                        {lightRootPaths.map((path, index) => (
-                          <motion.path
-                            key={path}
-                            d={path}
-                            fill="none"
-                            stroke={index === 0 ? 'rgba(145, 105, 75, 0.82)' : 'rgba(155, 112, 82, 0.76)'}
-                            strokeLinecap="round"
-                            strokeWidth="10"
-                            initial={{ pathLength: 0, opacity: 0.22 }}
-                            whileInView={{ pathLength: 1, opacity: 1 }}
-                            viewport={{ once: true, amount: 0.4 }}
-                            transition={
-                              reduceMotion
-                                ? { duration: 0 }
-                                : { duration: 0.68, delay: 0.18 + index * 0.08, ease: 'easeOut' }
-                            }
-                          />
-                        ))}
-                      </>
-                    ) : (
-                      <>
-                        <motion.path
-                          d={darkCoralBasePath}
-                          fill="none"
-                          stroke="url(#experience-dark-coral)"
-                          strokeLinecap="round"
-                          strokeWidth={18}
-                          opacity={0.98}
-                          initial={{ pathLength: 0, opacity: 0.34 }}
-                          whileInView={{ pathLength: 1, opacity: 0.98 }}
-                          viewport={{ once: true, amount: 0.35 }}
-                          transition={reduceMotion ? { duration: 0 } : { duration: 0.56, ease: 'easeOut' }}
-                        />
-
-                        {darkCoralBranches.map((segment, index) => (
-                          <motion.path
-                            key={segment.path}
-                            d={segment.path}
-                            fill="none"
-                            stroke="url(#experience-dark-coral)"
-                            strokeLinecap="round"
-                            strokeWidth={segment.width}
-                            opacity={segment.opacity}
-                            initial={{ pathLength: 0, opacity: segment.opacity * 0.4 }}
-                            whileInView={{ pathLength: 1, opacity: segment.opacity }}
-                            viewport={{ once: true, amount: 0.35 }}
-                            transition={
-                              reduceMotion
-                                ? { duration: 0 }
-                                : { duration: 0.52, delay: 0.12 + index * 0.08, ease: 'easeOut' }
-                            }
-                          />
-                        ))}
-
-                        {darkCoralTips.map((tip, index) => (
-                          <motion.g
-                            key={`${tip.x}-${tip.y}`}
-                            initial={{ opacity: 0, scale: 0.75 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true, amount: 0.35 }}
-                            transition={
-                              reduceMotion
-                                ? { duration: 0 }
-                                : { duration: 0.28, delay: 0.46 + index * 0.06, ease: 'easeOut' }
-                            }
-                          >
-                            <circle
-                              cx={tip.x}
-                              cy={tip.y}
-                              r={tip.size * 1.8}
-                              fill="rgba(255,181,164,0.14)"
-                            />
-                            <circle
-                              cx={tip.x}
-                              cy={tip.y}
-                              r={tip.size}
-                              fill="rgba(255,198,178,0.9)"
-                            />
-                            <circle
-                              cx={tip.x}
-                              cy={tip.y}
-                              r={tip.size * 0.42}
-                              fill="rgba(240,244,255,0.92)"
-                            />
-                          </motion.g>
-                        ))}
-                      </>
-                    )}
-
-                    {experienceNodes.map((node, index) => (
-                      <motion.path
-                        key={`${theme}-${node.x}-${node.y}`}
-                        d={isLight ? node.lightPath : node.darkPath}
-                        fill="none"
-                        stroke={
-                          activeFruit === index
-                            ? isLight
-                              ? 'rgba(221, 96, 150, 0.94)'
-                              : 'rgba(164, 210, 255, 0.98)'
-                            : isLight
-                              ? 'rgba(143, 100, 66, 0.8)'
-                              : 'rgba(112, 159, 236, 0.72)'
-                        }
-                        strokeLinecap="round"
-                        strokeWidth={activeFruit === index ? (isLight ? 10 : 8) : isLight ? 8 : 7}
-                        initial={{ pathLength: 0, opacity: 0.32 }}
-                        whileInView={{ pathLength: 1, opacity: 1 }}
-                        viewport={{ once: true, amount: 0.35 }}
-                        transition={
-                          reduceMotion
-                            ? { duration: 0 }
-                            : { duration: 0.46, delay: isLight ? 0.34 + index * 0.08 : 0.78 + index * 0.06, ease: 'easeOut' }
-                        }
-                      />
-                    ))}
-                  </svg>
-
-                  <div
-                    className="absolute bottom-[9%] left-1/2 h-14 w-52 -translate-x-1/2 rounded-full blur-2xl"
-                    style={{
-                      background: isLight
-                        ? 'rgba(170, 220, 152, 0.28)'
-                        : 'rgba(100, 126, 255, 0.18)',
-                    }}
-                  />
-
-                  {experiences.map((item, index) => {
-                    const node = experienceNodes[index]
-                    const isActive = activeFruit === index
-
-                    return (
-                      <div
-                        key={`${item.company}-${item.date}`}
-                        className="absolute"
-                        style={{
-                          top: `${(node.y / 420) * 100}%`,
-                          left: `${(node.x / 420) * 100}%`,
-                        }}
-                      >
-                        <motion.button
-                          type="button"
-                          aria-pressed={isActive}
-                          onMouseEnter={() => setActiveFruit(index)}
-                          onFocus={() => setActiveFruit(index)}
-                          onClick={() => setActiveFruit(index)}
-                          className={`relative z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center border px-3 py-2 text-center ${
-                            isLight
-                              ? 'min-h-[74px] w-[112px] rounded-[1.6rem] sm:min-h-[92px] sm:w-[152px] sm:rounded-[2rem] sm:px-4 sm:py-3'
-                              : 'min-h-[62px] w-[92px] rounded-[1.35rem] sm:min-h-[72px] sm:w-[112px] sm:rounded-[1.55rem]'
-                          }`}
-                          initial={{ opacity: 0, scale: 0.72, y: 10 }}
-                          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                          viewport={{ once: true, amount: 0.3 }}
-                          transition={
-                            reduceMotion
-                              ? { duration: 0 }
-                              : {
-                                  type: 'spring',
-                                  stiffness: 220,
-                                  damping: 18,
-                                  delay: isLight ? 0.86 + index * 0.08 : 1.22 + index * 0.06,
-                                }
-                          }
-                          whileHover={reduceMotion ? undefined : { y: -3, scale: 1.03 }}
-                          style={{
-                            borderColor: isActive
-                              ? isLight
-                                ? 'rgba(246, 168, 200, 0.76)'
-                                : 'rgba(164, 210, 255, 0.72)'
-                              : 'var(--pill-border)',
-                            background: isLight
-                              ? isActive
-                                ? 'linear-gradient(180deg, rgba(255,232,242,1), rgba(247,190,214,0.98))'
-                                : 'linear-gradient(180deg, rgba(255,242,247,0.96), rgba(250,214,228,0.95))'
-                              : isActive
-                                ? 'linear-gradient(180deg, rgba(34,82,146,0.98), rgba(18,30,68,0.98))'
-                                : 'linear-gradient(180deg, rgba(18,40,82,0.94), rgba(11,22,46,0.97))',
-                            boxShadow: isActive
-                              ? isLight
-                                ? '0 18px 34px rgba(244,114,182,0.24)'
-                                : '0 18px 34px rgba(104,142,255,0.24)'
-                              : isLight
-                                ? '0 14px 30px rgba(244,114,182,0.12)'
-                                : '0 14px 30px rgba(8,18,34,0.3)',
-                            opacity: isLight || isActive ? 1 : 0.94,
-                          }}
-                        >
-                          <motion.div
-                            className={`absolute inset-[-8px] ${isLight ? 'rounded-[999px]' : 'rounded-[1.5rem]'}`}
-                            animate={{
-                              opacity: isActive ? 1 : 0,
-                              scale: isActive ? 1.05 : 0.9,
-                            }}
-                            transition={reduceMotion ? { duration: 0 } : { duration: 0.28 }}
-                            style={{
-                              background: isLight
-                                ? 'radial-gradient(circle, rgba(251,207,232,0.56), transparent 64%)'
-                                : 'radial-gradient(circle, rgba(123,184,255,0.24), rgba(132,117,255,0.12), transparent 68%)',
-                            }}
-                          />
-
-                          <div className="relative z-10">
-                            {isLight ? (
-                              <SakuraIcon className="mx-auto size-5 sm:size-7" />
-                            ) : (
-                              <CoralBudMark className="mx-auto size-5 sm:size-6" />
-                            )}
-                            <span className="mt-2 block text-[9px] font-bold uppercase tracking-[0.14em] text-[var(--color-text)] sm:mt-3 sm:text-[11px] sm:tracking-[0.18em]">
-                              {getFruitLabel(item.role, item.company)}
-                            </span>
-                          </div>
-                        </motion.button>
-                      </div>
-                    )
-                  })}
-                </div>
-
-                <div className="mt-4 flex items-center gap-2 text-sm text-[var(--color-muted)]">
-                  {isLight ? (
-                    <>
-                      <SakuraIcon className="size-4" />
-                      <SakuraIcon className="size-3 opacity-75" />
-                      Blossom shorthand on the right, full delivery span on the left.
-                    </>
-                  ) : (
-                    <>
-                      <CoralBudMark className="size-4" />
-                      <div className="size-2 rounded-full bg-[rgba(183,176,255,0.74)]" />
-                      Five coral branches on the right, full delivery span on the left.
-                    </>
-                  )}
-                </div>
+                <ExperienceJourneyGraph
+                  activeIndex={activeFruit}
+                  onSelect={setActiveFruit}
+                  reduceMotion={reduceMotion}
+                  theme={theme}
+                />
               </div>
             </div>
           </div>

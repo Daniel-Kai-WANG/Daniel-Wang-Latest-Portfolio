@@ -1,87 +1,69 @@
 # AI_WORKFLOW
 
-purpose: Daniel Wang portfolio; full-stack + AI workflow positioning in a single-page experience.
-stack: Vite, React, TypeScript, Tailwind CSS, Framer Motion, clsx, tailwind-merge.
-branches: main -> staging -> feature/* -> staging.
-themes: light=sakura + snowfall sky; dark=K-pop midnight stage + jellyfish drift + star-spark accents.
-content_source: resume-derived data in src/data/profile.ts, src/data/experience.ts, src/data/projects.ts, src/data/skills.ts.
-features:
-- fixed floating navbar
-- upgraded circular ring-style theme toggle with orbital atmosphere and localStorage persistence
-- hero workflow section
-- experience journey
-- tech stack system
-- featured projects
-- resume unavailable section
-- contact CTA
-- GitHub Pages workflow
-- QR generation script
-validation:
-- npm run typecheck
-- npm run build
-- npm run lint
-- manual responsive review at 375, 390, 430, 768, 1024, 1440
-- theme toggle persistence and anchor-link checks
-- feature-specific validation was run after each theme UI branch before merging back to staging
-components:
-- layout/PageShell
-- layout/Navbar
-- theme/ThemeProvider
-- theme/ThemeToggle
-- animation/AtmosphericAura
-- animation/ThemeShiftBackdrop
-- animation/Reveal
-- sections/HeroSection
-- sections/ExperienceSection
-- sections/TechStackSection
-- sections/ProjectsSection
-- sections/ResumeUnavailableSection
-- sections/ContactSection
-data_map:
-- profile: hero copy, nav, workflow steps, contact links
-- experience: timeline cards
-- projects: featured cards + CTA behavior
-- skills: grouped stack categories
-animation:
-- global reveal
-- global sakura petal drift and snow fall in light mode
-- floating star-spark accents and jellyfish drift in dark mode
-- block-level sunrise / moonrise transition backdrops during theme switch
-- hero mouse-reactive glow and themed accents
-- light: floating cards, seasonal workflow motion, soft gradient orbs, spring-air highlights
-- dark: restrained glow, workflow pulse, jellyfish-stage atmosphere
-- hover tilt/lift and lighter CSS sheen passes on key cards
-theme_update_2026_05_04:
-- created branch `feat/theme-toggle-ring`
-- created branch `feat/light-mode-seasonal-decor`
-- created branch `feat/theme-transition-sun-moon`
-- created branch `docs/update-ai-workflow-theme-updates`
-- replaced the previous capsule-like theme control with a premium circular ring toggle sized to fit the existing navbar without layout collisions
-- removed the remaining light-mode plane-style decorative elements from hero and resume-related surfaces and replaced them with cherry blossom and snowflake motifs
-- refined `ThemeShiftBackdrop` so large sections now show clearer vertical sun-down / moon-up and moon-down / sun-up motion during theme changes
-module_refresh_2026_05_04:
-- created branch `feat/toggle-atmosphere-upgrade`
-- created branch `feat/module-layout-variation`
-- created branch `feat/decor-system-refresh`
-- created branch `feat/remove-extra-module`
-- created branch `docs/update-ai-workflow-module-refresh`
-- upgraded the ring toggle using orbit-inspired motion from the reference HTML while keeping the portfolio's own palette, typography, and surface treatment
-- redesigned `ExperienceSection` as an alternating timeline layout instead of a uniform card grid
-- redesigned `ProjectsSection` as a spotlight case-study layout with one featured project and a stacked secondary column
-- redesigned `TechStackSection` as a capability-spectrum layout with a control panel plus long-form skill rails
-- replaced dark-mode music-note decorations with a star-spark visual system and cleaned the remaining light-mode balloon/route metaphors out of visible UI copy
-- removed the standalone divider module between hero and experience
-implementation_notes:
-- no new third-party libraries were added; the update stays on React, Tailwind CSS, and Framer Motion
-- the repository currently has no configured `origin` remote, so the requested `git pull origin staging` step could not be executed locally
-- theme transition logic remains centralized in `ThemeProvider` and `ThemeShiftBackdrop` to avoid duplicated animation code across sections
-- light-mode decorative cleanup focused on visible section elements rather than deleting unused icon definitions from the shared icon file
-- the standalone module removal was implemented by assuming the screenshot-referenced module was `SignatureDivider`; confirm if a different module was intended
-remaining_risks:
-- console-error verification was covered through successful production build rather than a full live browser console pass
-- visual QA in an interactive browser is still recommended for final tuning of the new ring toggle proportions on smaller mobile widths
-- the exact module the user wanted removed could differ from the assumed `SignatureDivider`
-future:
-- connect real public project links when available
-- generate and verify QR after live deployment exists
-- add screenshot-based regression checks
+## Core
+- Purpose: Daniel Wang personal portfolio; recruiter-friendly single page for full-stack + AI workflow positioning.
+- Stack: Vite, React, TypeScript, Tailwind CSS, Framer Motion, clsx, tailwind-merge.
+- Data: `src/data/profile.ts`, `src/data/experience.ts`, `src/data/projects.ts`, `src/data/skills.ts`.
+- Main blocks: navbar, hero, experience journey, tech stack, projects, resume unavailable, contact.
+
+## Theme
+- Light: sakura pink + icy blue; soft sky gradients; clean botanical branch language.
+- Dark: deep-ocean navy/cobalt with coral warmth; jellyfish/moon/starfish atmosphere; reef/coral language.
+- Toggle: one decorative element per mode; light uses sakura; dark uses `src/assets/theme/jellyfish.gif`.
+- Shared rule: reuse theme tokens and existing section shells; no duplicate parallel systems.
+
+## Experience Journey
+- Layout: keep left detail panel sticky/content-rich; rebuild only the right graph.
+- Graph area: use full assigned panel height/width; avoid center-compressed diagrams.
+- Endpoints: no cards/pods; each endpoint is one pearl/dot anchor + floating company label above it.
+- Positioning: every node is centered on the exact terminal tip coordinate of its branch/coral arm; labels default to centered above node and shift only to avoid overflow.
+- Interaction: hover/focus/click on endpoint updates the left detail panel; interaction model unchanged.
+
+### Dark graph
+- One reef-like base across the bottom.
+- Exactly 5 major coral arms.
+- Silhouette: fan coral / branching coral; wide spread; no wood trunk; no crossing limbs; rounded tips; sparse buds only.
+- Material: glowing deep-sea coral, not bark or pipe rails.
+
+### Light graph
+- One main botanical base/trunk at the bottom.
+- Exactly 5 major branches.
+- Silhouette: clean sakura-tree composition; balanced left/right spread; minimal offshoots; no messy crossings.
+
+### Graph animation
+- Fixed order: base -> branch/coral growth -> small tip accents -> endpoint dot -> floating label -> active glow.
+- Nodes must not appear before the branch/coral growth finishes.
+- If a node looks detached from the branch end, the implementation is wrong.
+
+## Atmosphere
+- Light floating elements: sakura + uploaded snowflake assets together, subtle page-wide drift.
+- Dark floating elements: project jellyfish + moon + starfish only.
+- Ambient gradients/orbs may support the page but must not replace the requested themed objects.
+
+## Assets
+- Dark GIF: `src/assets/theme/jellyfish.gif`
+- Dark floating raster assets: `src/assets/theme/starfish-pink.png`, `src/assets/theme/starfish-light.png`
+- Light floating raster assets: `src/assets/theme/snowflake-soft.png`, `src/assets/theme/snowflake-cluster.png`
+- Reference coral traits used in dark graph:
+  - reef-like base
+  - 5 upward/outward arms
+  - blunt rounded tips
+  - sparse buds/polyps
+  - wide fan spread
+  - no trunk / no bark / no random crossings
+
+## Responsive
+- Must remain readable at 375, 390, 430, 768, 1024, 1440.
+- No horizontal overflow.
+- Endpoint dots remain tappable on mobile.
+- Floating labels must stay visually attached to their own node and avoid clipping near edges.
+
+## Validation
+- Run: `npm run typecheck`, `npm run lint`, `npm run build`
+- Verify:
+  - dark graph reads as coral, not tree/network
+  - light graph reads as ordered sakura branching
+  - exactly 5 main branches in both themes
+  - graph fills panel intentionally
+  - node timing/order follows the fixed animation sequence
+  - atmosphere assets match theme rules

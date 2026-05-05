@@ -1,14 +1,21 @@
 import { useId } from 'react'
 import type { CSSProperties, SVGProps } from 'react'
+import snowflakeCluster from '../../assets/theme/snowflake-cluster.png'
+import snowflakeSoft from '../../assets/theme/snowflake-soft.png'
 import starfishLight from '../../assets/theme/starfish-light.png'
 import starfishPink from '../../assets/theme/starfish-pink.png'
 
 const sakuraVariants = ['/seasonal/sakura-a.png', '/seasonal/sakura-b.png'] as const
+const snowflakeAssetVariants = [snowflakeSoft, snowflakeCluster] as const
 const starfishVariants = [starfishPink, starfishLight] as const
 
 type DecorativeImageProps = {
   className?: string
   style?: CSSProperties
+}
+
+type SnowflakeAssetIconProps = DecorativeImageProps & {
+  variant?: 'soft' | 'cluster'
 }
 
 type StarfishIconProps = DecorativeImageProps & {
@@ -211,6 +218,26 @@ export function StarfishIcon({ className, style, variant }: StarfishIconProps) {
       : variant === 'light'
         ? starfishLight
         : starfishVariants[getVariantIndex(id, starfishVariants.length)]
+
+  return (
+    <img
+      src={src}
+      alt=""
+      aria-hidden="true"
+      className={className}
+      style={{ display: 'block', objectFit: 'contain', ...style }}
+    />
+  )
+}
+
+export function SnowflakeAssetIcon({ className, style, variant }: SnowflakeAssetIconProps) {
+  const id = useId()
+  const src =
+    variant === 'soft'
+      ? snowflakeSoft
+      : variant === 'cluster'
+        ? snowflakeCluster
+        : snowflakeAssetVariants[getVariantIndex(id, snowflakeAssetVariants.length)]
 
   return (
     <img
