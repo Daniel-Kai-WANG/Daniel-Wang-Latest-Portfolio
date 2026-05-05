@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion'
+import { sakuraNode } from '../../assets/experience'
+import { SakuraIcon } from '../common/Icons'
 import { experiences } from '../../data/experience'
 import {
-  experienceJourneyGraph,
+  darkExperienceJourneyGraph,
   getBranchEndpoint,
   getBranchLabelPoint,
   getBranchPath,
+  lightExperienceJourneyGraph,
 } from './experienceJourneyGraphConfig'
 
 type ThemeMode = 'light' | 'dark'
@@ -32,7 +35,9 @@ export function ExperienceJourneyGraph({
 }: ExperienceJourneyGraphProps) {
   const isLight = theme === 'light'
   const animationCycleKey = `experience-journey-${theme}`
-  const graph = experienceJourneyGraph
+  const graph = isLight
+    ? lightExperienceJourneyGraph
+    : darkExperienceJourneyGraph
   const branches = graph.branches.map((branch) => ({
     ...branch,
     endpoint: getBranchEndpoint(branch),
@@ -51,6 +56,8 @@ export function ExperienceJourneyGraph({
     center: 'translate(-50%, -100%)',
     end: 'translate(-100%, -100%)',
   } as const
+
+  const sakuraRotationByIndex = [-12, 10, -18, 16, -8] as const
 
   return (
     <div className="relative mt-4 h-[24rem] sm:h-[28rem] xl:h-[32rem]">
@@ -79,16 +86,17 @@ export function ExperienceJourneyGraph({
             y1="0%"
             y2="100%"
           >
-            <stop offset="0%" stopColor="#ffa996" stopOpacity="0.96" />
-            <stop offset="56%" stopColor="#7ac4ff" stopOpacity="0.88" />
-            <stop offset="100%" stopColor="#9d8aff" stopOpacity="0.8" />
+            <stop offset="0%" stopColor="#ff9b7a" stopOpacity="0.98" />
+            <stop offset="46%" stopColor="#ff7f73" stopOpacity="0.94" />
+            <stop offset="82%" stopColor="#8ed7ff" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#5d9fff" stopOpacity="0.86" />
           </linearGradient>
         </defs>
 
         <motion.path
           d={graph.baseFill}
           fill={
-            isLight ? 'rgba(173, 126, 90, 0.26)' : 'rgba(255, 167, 150, 0.2)'
+            isLight ? 'rgba(173, 126, 90, 0.26)' : 'rgba(255, 160, 134, 0.22)'
           }
           initial={reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.94 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -234,31 +242,6 @@ export function ExperienceJourneyGraph({
           )
         })}
 
-        {graph.buds.map((bud, index) => (
-          <motion.g
-            key={`${bud.x}-${bud.y}`}
-            initial={{ opacity: 0, scale: 0.6 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: GRAPH_VIEWPORT_AMOUNT }}
-            transition={
-              reduceMotion
-                ? { duration: 0 }
-                : { duration: 0.22, delay: 0.9 + index * 0.04, ease: 'easeOut' }
-            }
-          >
-            <circle
-              cx={bud.x}
-              cy={bud.y}
-              r={isLight ? 0.82 : 0.92}
-              fill={
-                isLight
-                  ? 'rgba(255, 190, 220, 0.82)'
-                  : 'rgba(255, 210, 191, 0.82)'
-              }
-            />
-          </motion.g>
-        ))}
-
         {branches.map((branch, index) => (
           <path
             key={`hit-${branch.id}`}
@@ -273,6 +256,50 @@ export function ExperienceJourneyGraph({
           />
         ))}
       </svg>
+
+      <div className="pointer-events-none absolute inset-0 z-[1]">
+        {graph.buds.map((bud, index) => (
+          <motion.div
+            key={`${bud.x}-${bud.y}`}
+            className="absolute left-0 top-0"
+            initial={{ opacity: 0, scale: 0.6 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: GRAPH_VIEWPORT_AMOUNT }}
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : { duration: 0.22, delay: 0.9 + index * 0.04, ease: 'easeOut' }
+            }
+            style={{
+              left: `${(bud.x / GRAPH_WIDTH) * 100}%`,
+              top: `${(bud.y / GRAPH_HEIGHT) * 100}%`,
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            {isLight ? (
+              <SakuraIcon
+                className="block size-[0.95rem] sm:size-[1.08rem]"
+                style={{
+                  filter: 'drop-shadow(0 2px 8px rgba(244, 114, 182, 0.14))',
+                  rotate: `${sakuraRotationByIndex[index % sakuraRotationByIndex.length]}deg`,
+                }}
+              />
+            ) : (
+              <span
+                className="block rounded-full"
+                style={{
+                  width: index === 2 ? '0.92rem' : '0.8rem',
+                  height: index === 2 ? '0.92rem' : '0.8rem',
+                  background:
+                    'radial-gradient(circle at 35% 35%, rgba(255, 228, 214, 0.96), rgba(255, 204, 182, 0.9) 58%, rgba(250, 168, 152, 0.64) 100%)',
+                  boxShadow:
+                    '0 0 0 1px rgba(255, 218, 204, 0.22), 0 0 14px rgba(123, 197, 255, 0.12)',
+                }}
+              />
+            )}
+          </motion.div>
+        ))}
+      </div>
 
       <div
         className="pointer-events-none absolute bottom-[4%] left-1/2 h-24 w-[76%] -translate-x-1/2 rounded-full blur-3xl"
@@ -325,13 +352,15 @@ export function ExperienceJourneyGraph({
                 }
                 style={{
                   background: isLight
-                    ? 'radial-gradient(circle, rgba(248, 190, 220, 0.34), rgba(126, 200, 255, 0.18), transparent 72%)'
+                    ? isActive
+                      ? 'radial-gradient(circle, rgba(250, 217, 234, 0.42), rgba(166, 224, 255, 0.24), transparent 72%)'
+                      : 'radial-gradient(circle, rgba(248, 206, 226, 0.18), rgba(166, 224, 255, 0.1), transparent 72%)'
                     : 'radial-gradient(circle, rgba(255, 181, 164, 0.22), rgba(122, 196, 255, 0.18), transparent 72%)',
                 }}
               />
 
               <motion.span
-                className="absolute left-1/2 top-1/2 block size-4 -translate-x-1/2 -translate-y-1/2 rounded-full sm:size-[1.15rem]"
+                className="absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2"
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: GRAPH_VIEWPORT_AMOUNT }}
@@ -340,19 +369,34 @@ export function ExperienceJourneyGraph({
                     ? { duration: 0 }
                     : { duration: 0.26, delay: nodeDelay, ease: 'easeOut' }
                 }
-                style={{
-                  background: isLight
-                    ? isActive
-                      ? 'linear-gradient(135deg, #f08ec1, #7ec8ff)'
-                      : 'rgba(250, 180, 212, 0.9)'
-                    : isActive
-                      ? 'linear-gradient(135deg, #ffd4c6, #99d4ff)'
-                      : 'rgba(255, 209, 191, 0.88)',
-                  boxShadow: isLight
-                    ? '0 0 0 1px rgba(255,255,255,0.72), 0 0 10px rgba(244,114,182,0.1)'
-                    : '0 0 0 1px rgba(255,236,228,0.58), 0 0 10px rgba(122,196,255,0.12)',
-                }}
-              />
+              >
+                {isLight ? (
+                  <img
+                    src={sakuraNode}
+                    alt=""
+                    aria-hidden="true"
+                    className="block size-6 object-contain sm:size-7"
+                    style={{
+                      display: 'block',
+                      opacity: isActive ? 0.98 : 0.94,
+                      filter: isActive
+                        ? 'drop-shadow(0 0 12px rgba(122, 216, 255, 0.18)) drop-shadow(0 3px 8px rgba(244, 153, 195, 0.14))'
+                        : 'drop-shadow(0 1px 5px rgba(244, 153, 195, 0.12))',
+                    }}
+                  />
+                ) : (
+                  <span
+                    className="block size-4 rounded-full sm:size-[1.15rem]"
+                    style={{
+                      background: isActive
+                        ? 'linear-gradient(135deg, #ffd4c6, #99d4ff)'
+                        : 'rgba(255, 209, 191, 0.88)',
+                      boxShadow:
+                        '0 0 0 1px rgba(255,236,228,0.58), 0 0 10px rgba(122,196,255,0.12)',
+                    }}
+                  />
+                )}
+              </motion.span>
             </button>
 
             <div

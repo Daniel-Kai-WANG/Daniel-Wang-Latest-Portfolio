@@ -5,7 +5,6 @@ import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { SakuraIcon } from '../common/Icons'
-import { SectionHeading } from '../common/SectionHeading'
 import { CoralDecorPair } from './CoralDecorPair'
 import { ExperienceJourneyGraph } from './ExperienceJourneyGraph'
 
@@ -51,14 +50,11 @@ export function ExperienceSection() {
         <ThemeShiftBackdrop />
 
         <div className="relative z-10">
-          <SectionHeading
-            title="Experience journey"
-            description={
-              isLight
-                ? 'Hover on desktop or tap on mobile to switch the active branch. The left panel keeps the full role story while the right side carries the botanical map.'
-                : 'Hover on desktop or tap on mobile to switch the active coral end. The left panel keeps the full role story while the right side carries the reef fan.'
-            }
-          />
+          <div className="relative z-10 max-w-2xl">
+            <h2 className="font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-4xl">
+              Experience journey
+            </h2>
+          </div>
 
           <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.1fr)] xl:items-start">
             <motion.article
@@ -203,30 +199,6 @@ export function ExperienceSection() {
               />
 
               <div className="relative z-10">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div className="max-w-[26rem]">
-                    <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                      {isLight ? 'Orchard mode' : 'Coral mode'}
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">
-                      {isLight
-                        ? 'Hover or tap any branch or pearl to move through the five-end orchard map.'
-                        : 'Hover or tap any coral arm or pearl to move through the full reef fan.'}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-3 text-[var(--color-muted)]">
-                    {isLight ? (
-                      <>
-                        <SakuraIcon className="size-5" />
-                        <SakuraIcon className="size-4 opacity-75" />
-                      </>
-                    ) : (
-                      <CoralDecorPair starfishVariant="pink" />
-                    )}
-                  </div>
-                </div>
-
                 <ExperienceJourneyGraph
                   activeIndex={activeFruit}
                   onSelect={setActiveFruit}

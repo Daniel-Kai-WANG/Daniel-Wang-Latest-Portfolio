@@ -4,7 +4,6 @@ import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { JellyfishIcon, SakuraIcon, SnowCrystalIcon, StarfishIcon, TablerMoonIcon } from '../common/Icons'
-import { SectionHeading } from '../common/SectionHeading'
 
 export function TechStackSection() {
   const { theme } = useTheme()
@@ -19,10 +18,11 @@ export function TechStackSection() {
 
         <div className="relative z-10 grid gap-8 xl:grid-cols-[0.38fr_0.62fr]">
           <div>
-            <SectionHeading
-              title="Tech stack system"
-              description="This section now behaves more like a capability spectrum: one anchored control panel and a series of long-form skill rails instead of six matching cards."
-            />
+            <div className="relative z-10 max-w-2xl">
+              <h2 className="font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-4xl">
+                Tech stack system
+              </h2>
+            </div>
 
             <div
               className="mt-6 overflow-hidden rounded-[2rem] border p-5"
@@ -110,7 +110,7 @@ export function TechStackSection() {
                   style={{
                     background:
                       theme === 'light'
-                        ? 'linear-gradient(180deg, rgba(246,168,200,0.86), rgba(37,99,235,0.72))'
+                        ? 'linear-gradient(180deg, rgba(255, 236, 132, 0.78) 0%, rgba(213, 246, 255, 0.9) 38%, rgba(170, 238, 255, 0.96) 100%)'
                         : 'linear-gradient(180deg, rgba(122,185,255,0.84), rgba(133,120,255,0.8))',
                   }}
                 />
