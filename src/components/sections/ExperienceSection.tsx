@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import { leafBud } from '../../assets/experience'
 import { experiences } from '../../data/experience'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
@@ -96,7 +97,15 @@ export function ExperienceSection() {
                   {isLight ? (
                     <div className="flex items-center gap-2">
                       <SakuraIcon className="size-7" />
-                      <SakuraIcon className="size-5 opacity-80" />
+                      <img
+                        src={leafBud}
+                        alt=""
+                        aria-hidden="true"
+                        className="block size-7 object-contain -rotate-[16deg]"
+                        style={{
+                          filter: 'drop-shadow(0 2px 7px rgba(170, 214, 98, 0.16))',
+                        }}
+                      />
                     </div>
                   ) : (
                     <CoralDecorPair starfishVariant="light" />
@@ -146,7 +155,7 @@ export function ExperienceSection() {
                         className="mt-2 size-2.5 shrink-0 rounded-full"
                         style={{
                           background: isLight
-                            ? 'linear-gradient(135deg, #ee9fc8, #60b2f3)'
+                            ? 'linear-gradient(90deg, rgba(255, 236, 132, 0.92) 0%, rgba(215, 243, 194, 0.92) 48%, rgba(170, 238, 255, 0.94) 100%)'
                             : 'linear-gradient(135deg, #7ab9ff, #8275ff)',
                         }}
                       />

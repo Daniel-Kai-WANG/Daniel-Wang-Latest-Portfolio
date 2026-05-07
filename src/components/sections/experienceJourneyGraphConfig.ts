@@ -38,6 +38,7 @@ export type GraphSpec = {
   branchDuration: number
   branches: BranchSpec[]
   buds: Point[]
+  leafBuds?: Point[]
 }
 
 type BranchId =
@@ -290,6 +291,16 @@ export const lightExperienceJourneyGraph: GraphSpec = {
     { x: 82.4, y: 29.2 },
     { x: 73.2, y: 70.4 },
     { x: 84.8, y: 59.4 },
+  ],
+  leafBuds: [
+    { x: 18.6, y: 28.8 },
+    { x: 30.8, y: 42.8 },
+    { x: 42.6, y: 55.8 },
+    { x: 48.8, y: 24.4 },
+    { x: 52.8, y: 34.8 },
+    { x: 66.2, y: 46.2 },
+    { x: 78.4, y: 33.6 },
+    { x: 82.8, y: 64.2 },
   ],
 }
 

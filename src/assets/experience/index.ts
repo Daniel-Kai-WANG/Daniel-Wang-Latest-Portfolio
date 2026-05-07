@@ -1,4 +1,5 @@
 export { default as jellyfishGif } from './jellyfish.gif'
+export { default as leafBud } from './leaf-bud.png'
 export { default as sakuraNode } from './sakura-node.png'
 export { default as starfishLight } from './starfish-light.png'
 export { default as starfishPink } from './starfish-pink.png'
