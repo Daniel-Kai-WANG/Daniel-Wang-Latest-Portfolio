@@ -1,30 +1,151 @@
-import { motion } from 'framer-motion'
+import type { FormEvent } from 'react'
+import { useEffect, useState } from 'react'
 import { profile } from '../../data/profile'
-import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import {
-  ArrowUpRightIcon,
-  LinkIcon,
-  LocationIcon,
-  MailIcon,
-} from '../common/Icons'
+import { SectionPolishAccent } from '../common/SectionPolishAccent'
+import { ContactActionCards } from './contact/ContactActionCards'
+import { ContactForm, type ContactFormErrors, type ContactFormValues } from './contact/ContactForm'
+import { ContactSuccessState } from './contact/ContactSuccessState'
+import { loadSuccessAnimation } from './contact/successAnimation'
 
-const iconByLabel = {
-  Email: MailIcon,
-  LinkedIn: LinkIcon,
-  'Portfolio Archive': LinkIcon,
+const initialValues: ContactFormValues = {
+  name: '',
+  email: '',
+  message: '',
+}
+
+type FormSubmitResponse = {
+  message?: string
+  success?: boolean | string
+}
+
+function validateForm(values: ContactFormValues) {
+  const errors: ContactFormErrors = {}
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+  if (!values.name.trim()) {
+    errors.name = 'Please enter your name.'
+  }
+
+  if (!values.email.trim()) {
+    errors.email = 'Please enter your email address.'
+  } else if (!emailPattern.test(values.email.trim())) {
+    errors.email = 'Please enter a valid email address.'
+  }
+
+  if (!values.message.trim()) {
+    errors.message = 'Please add a short message or project inquiry.'
+  }
+
+  return errors
+}
+
+function resolveFormEndpoint(recipientEmail: string) {
+  const envEndpoint = import.meta.env.VITE_FORMSUBMIT_ENDPOINT?.trim()
+
+  if (envEndpoint) {
+    return envEndpoint
+  }
+
+  return `https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`
 }
 
 export function ContactSection() {
-  const { theme } = useTheme()
   const emailLink = profile.contactLinks.find((link) => link.label === 'Email')
-  const recipientEmail = emailLink?.value ?? ''
-  const formAction = recipientEmail
-    ? `https://formsubmit.co/${encodeURIComponent(recipientEmail)}`
-    : 'https://formsubmit.co/'
-  const fieldClassName =
-    'w-full rounded-[1.2rem] border px-4 py-3 text-sm text-[var(--color-text)] outline-none transition focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[color:color-mix(in_srgb,var(--color-primary)_22%,transparent)]'
+  const linkedinLink = profile.contactLinks.find((link) => link.label === 'LinkedIn')
+  const recipientEmail = emailLink?.value ?? 'kaiwang2027@gmail.com'
+  const formEndpoint = resolveFormEndpoint(recipientEmail)
+
+  const [values, setValues] = useState<ContactFormValues>(initialValues)
+  const [errors, setErrors] = useState<ContactFormErrors>({})
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [successAnimationData, setSuccessAnimationData] = useState<object | null>(null)
+
+  useEffect(() => {
+    let isMounted = true
+
+    void loadSuccessAnimation()
+      .then((animation) => {
+        if (isMounted) {
+          setSuccessAnimationData(animation)
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setSuccessAnimationData(null)
+        }
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const updateField = (field: keyof ContactFormValues, value: string) => {
+    setValues((current) => ({ ...current, [field]: value }))
+    setErrors((current) => ({ ...current, [field]: undefined }))
+    setErrorMessage(null)
+  }
+
+  const resetForm = () => {
+    setValues(initialValues)
+    setErrors({})
+    setErrorMessage(null)
+    setIsSuccess(false)
+  }
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const nextErrors = validateForm(values)
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors)
+      return
+    }
+
+    setIsSubmitting(true)
+    setErrorMessage(null)
+
+    try {
+      const formData = new FormData()
+      formData.append('name', values.name.trim())
+      formData.append('email', values.email.trim())
+      formData.append('message', values.message.trim())
+      formData.append('_subject', 'New inquiry from daniel-wang-portfolio')
+      formData.append('_template', 'table')
+      formData.append('_captcha', 'false')
+      formData.append('_replyto', values.email.trim())
+
+      const response = await fetch(formEndpoint, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+        },
+        body: formData,
+      })
+      const result = (await response.json().catch(() => null)) as FormSubmitResponse | null
+      const isSuccessful = result?.success === true || result?.success === 'true'
+
+      if (!response.ok || !isSuccessful) {
+        throw new Error(result?.message || 'The contact request could not be sent.')
+      }
+
+      setIsSuccess(true)
+      setValues(initialValues)
+      setErrors({})
+    } catch (error) {
+      const fallbackMessage =
+        'Something went wrong while sending your message. Please try again in a moment or email me directly.'
+
+      setErrorMessage(error instanceof Error ? error.message || fallbackMessage : fallbackMessage)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <Reveal>
@@ -39,256 +160,48 @@ export function ContactSection() {
         }}
       >
         <ThemeShiftBackdrop />
-        <div className="relative z-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-          <div className="relative z-10">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-              Contact CTA
-            </p>
-            <h2 className="mt-4 font-display text-3xl font-bold tracking-[-0.05em] text-[var(--color-text)] sm:text-4xl">
-              Ready to build a reliable product flow.
-            </h2>
-            <p className="mt-4 max-w-xl text-base leading-7 text-[var(--color-muted)]">
-              I enjoy turning ambiguous requirements into clear systems across product UI, mobile
-              experiences, backend services, CMS delivery, and AI-assisted workflow design.
-            </p>
+        <SectionPolishAccent />
 
-            <div className="mt-7 inline-flex items-center gap-3 rounded-full border px-4 py-2 text-sm font-semibold text-[var(--color-text)]">
-              <LocationIcon className="size-4" />
-              {profile.location}
+        <div className="relative z-10 mx-auto max-w-4xl">
+          <h2 className="mx-auto max-w-3xl text-center font-display text-3xl font-bold tracking-[-0.05em] text-[var(--color-text)] sm:text-4xl lg:text-[3.25rem]">
+            Ready to build a reliable product flow.
+          </h2>
+
+          <div
+            className="mt-8 overflow-hidden rounded-[1.9rem] border p-5 sm:p-6"
+            style={{
+              borderColor: 'var(--color-border)',
+              background:
+                'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 94%, white 6%), color-mix(in srgb, var(--color-surface-muted) 58%, transparent), color-mix(in srgb, var(--color-surface) 92%, transparent))',
+            }}
+          >
+            <ThemeShiftBackdrop variant="card" />
+            <div
+              className="sheen-pass"
+              style={{
+                animationDuration: '7.8s',
+                background:
+                  'linear-gradient(90deg, transparent, rgba(255,255,255,0.42), rgba(214,244,255,0.18), transparent)',
+              }}
+            />
+            <div className="relative z-10">
+              {isSuccess ? (
+                <ContactSuccessState animationData={successAnimationData} onReset={resetForm} />
+              ) : (
+                <ContactForm
+                  errorMessage={errorMessage}
+                  errors={errors}
+                  isSubmitting={isSubmitting}
+                  onChange={updateField}
+                  onSubmit={handleSubmit}
+                  values={values}
+                />
+              )}
             </div>
           </div>
 
-          <div className="relative z-10 grid gap-4 md:grid-cols-2">
-            {profile.contactLinks.map((link) => {
-              const Icon = iconByLabel[link.label as keyof typeof iconByLabel] ?? LinkIcon
-
-              return (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith('http') ? '_blank' : undefined}
-                  rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="group relative overflow-hidden rounded-[1.8rem] border p-5 transition-transform hover:-translate-y-1"
-                  whileHover={{
-                    y: -8,
-                    scale: 1.01,
-                    rotateX: 3,
-                    rotateY: -3,
-                  }}
-                  transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-                  style={{ transformStyle: 'preserve-3d' }}
-                >
-                  <ThemeShiftBackdrop variant="card" />
-                  <div
-                    className="sheen-pass"
-                    style={{
-                      animationDuration: '7.6s',
-                      animationDelay: '0.3s',
-                      background:
-                        theme === 'light'
-                          ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.42), rgba(214,244,255,0.16), transparent)'
-                          : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(122,185,255,0.08), transparent)',
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      borderColor: 'var(--color-border)',
-                      background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
-                    }}
-                  />
-                  <div className="relative flex items-center justify-between">
-                    <div className="flex size-11 items-center justify-center rounded-2xl bg-[var(--soft-accent)] text-[var(--color-text)]">
-                      <Icon className="size-5" />
-                    </div>
-                    <ArrowUpRightIcon className="size-4 text-[var(--color-muted)] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </div>
-                  <p className="relative mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                    {link.label}
-                  </p>
-                  <p className="relative mt-2 text-sm font-semibold leading-6 text-[var(--color-text)]">
-                    {link.value}
-                  </p>
-                </motion.a>
-              )
-            })}
-
-            <div
-              className="relative overflow-hidden rounded-[1.8rem] border p-5 md:col-span-2"
-              style={{
-                borderColor: 'var(--color-border)',
-                background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
-              }}
-            >
-              <ThemeShiftBackdrop variant="card" />
-              <div
-                className="sheen-pass"
-                style={{
-                  animationDuration: '8.2s',
-                  background:
-                    theme === 'light'
-                      ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), rgba(255,228,239,0.18), transparent)'
-                      : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(128,199,255,0.08), transparent)',
-                }}
-              />
-              <div className="relative z-10">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                  Best fit
-                </p>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text)]">
-                  Teams that need a developer who can move between front-end polish, mobile delivery,
-                  backend wiring, CMS practicality, and structured AI workflow thinking without losing
-                  clarity.
-                </p>
-              </div>
-            </div>
-
-            <div
-              className="relative overflow-hidden rounded-[1.8rem] border p-5 md:col-span-2"
-              style={{
-                borderColor: 'var(--color-border)',
-                background:
-                  theme === 'light'
-                    ? 'linear-gradient(180deg, rgba(249,253,255,0.96), rgba(236,245,255,0.92), rgba(255,243,249,0.9))'
-                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(17,26,43,0.96), rgba(24,30,69,0.92))',
-              }}
-            >
-              <ThemeShiftBackdrop variant="card" />
-
-              <div className="relative z-10">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                      Contact form
-                    </p>
-                    <h3 className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-text)]">
-                      Send a project note directly from the page.
-                    </h3>
-                    <p className="mt-3 max-w-2xl text-sm leading-7 text-[var(--color-muted)]">
-                      This uses the free FormSubmit endpoint so the portfolio can email submissions
-                      to your inbox without a custom backend.
-                    </p>
-                  </div>
-
-                  <div
-                    className="rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
-                    style={{
-                      borderColor: 'var(--pill-border)',
-                      background: 'var(--pill-background)',
-                      color: 'var(--pill-text)',
-                    }}
-                  >
-                    Free static form
-                  </div>
-                </div>
-
-                <form action={formAction} method="POST" className="mt-6 grid gap-4">
-                  <input
-                    type="hidden"
-                    name="_subject"
-                    value="New submission from daniel-wang-portfolio"
-                  />
-                  <input type="hidden" name="_template" value="table" />
-
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <label className="grid gap-2">
-                      <span className="text-sm font-semibold text-[var(--color-text)]">Name</span>
-                      <input
-                        className={fieldClassName}
-                        style={{
-                          borderColor: 'var(--color-border)',
-                          background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
-                        }}
-                        type="text"
-                        name="name"
-                        required
-                        placeholder="Your name"
-                      />
-                    </label>
-
-                    <label className="grid gap-2">
-                      <span className="text-sm font-semibold text-[var(--color-text)]">Email</span>
-                      <input
-                        className={fieldClassName}
-                        style={{
-                          borderColor: 'var(--color-border)',
-                          background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
-                        }}
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="name@example.com"
-                      />
-                    </label>
-                  </div>
-
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <label className="grid gap-2">
-                      <span className="text-sm font-semibold text-[var(--color-text)]">Company</span>
-                      <input
-                        className={fieldClassName}
-                        style={{
-                          borderColor: 'var(--color-border)',
-                          background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
-                        }}
-                        type="text"
-                        name="company"
-                        placeholder="Company or team"
-                      />
-                    </label>
-
-                    <label className="grid gap-2">
-                      <span className="text-sm font-semibold text-[var(--color-text)]">Subject</span>
-                      <input
-                        className={fieldClassName}
-                        style={{
-                          borderColor: 'var(--color-border)',
-                          background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
-                        }}
-                        type="text"
-                        name="subject"
-                        required
-                        placeholder="What would you like to build?"
-                      />
-                    </label>
-                  </div>
-
-                  <label className="grid gap-2">
-                    <span className="text-sm font-semibold text-[var(--color-text)]">Message</span>
-                    <textarea
-                      className={fieldClassName}
-                      style={{
-                        borderColor: 'var(--color-border)',
-                        background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
-                        minHeight: '170px',
-                        resize: 'vertical',
-                      }}
-                      name="message"
-                      required
-                      placeholder="Tell me about the product, timeline, and what kind of help you need."
-                    />
-                  </label>
-
-                  <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="max-w-2xl text-xs leading-6 text-[var(--color-muted)]">
-                      First live submission will send a confirmation email to{' '}
-                      <span className="font-semibold text-[var(--color-text)]">{recipientEmail}</span>.
-                      After you confirm it once, future submissions go straight to your inbox.
-                    </p>
-
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-white"
-                      style={{
-                        background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
-                      }}
-                    >
-                      Send message
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
+          <div className="mt-4">
+            <ContactActionCards emailLink={emailLink} linkedinLink={linkedinLink} />
           </div>
         </div>
       </section>

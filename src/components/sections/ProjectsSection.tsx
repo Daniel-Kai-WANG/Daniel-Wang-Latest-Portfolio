@@ -4,6 +4,7 @@ import { projects } from '../../data/projects'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
+import { SectionPolishAccent } from '../common/SectionPolishAccent'
 import { ArrowUpRightIcon, JellyfishIcon, SnowCrystalIcon, StarfishIcon } from '../common/Icons'
 
 export function ProjectsSection() {
@@ -21,6 +22,7 @@ export function ProjectsSection() {
         className="section-frame relative overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
       >
         <ThemeShiftBackdrop />
+        <SectionPolishAccent />
 
         <div className="relative z-10">
           <div className="relative z-10 max-w-2xl">
@@ -64,7 +66,7 @@ export function ProjectsSection() {
                       theme === 'light'
                         ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.62), rgba(214,244,255,0.28), transparent)'
                         : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(128,199,255,0.12), transparent)',
-                  }}
+                    }}
                 />
 
                 <div className="relative z-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
