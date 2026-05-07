@@ -9,6 +9,7 @@ import {
   ROW_GAP,
   buildSegments,
   getCycleDuration,
+  getVisibleDuration,
   getLogoPosition,
 } from './techLogoCarouselTimeline'
 import { TechLogoTile } from './TechLogoTile'
@@ -64,19 +65,19 @@ export function TechLogoCarousel({ activeKey, logos }: TechLogoCarouselProps) {
     rowCount * LOGO_TILE_HEIGHT + Math.max(0, rowCount - 1) * ROW_GAP
   const segments = useMemo(() => buildSegments(rowCount, trackWidth), [rowCount, trackWidth])
   const cycleDurationMs = getCycleDuration(segments)
+  const visibleDurationMs = getVisibleDuration(segments)
   const logoDelayMs = ((LOGO_TILE_WIDTH + LOGO_GAP) / LOGO_SPEED) * 1000
-  const hasLoopStarted = elapsedMs >= cycleDurationMs
   const isAnimated = !reduceMotion && logos.length >= 2 && cycleDurationMs > 0
   const renderLogos = useMemo(() => {
     const minimumInstances = Math.max(
       logos.length,
-      Math.ceil(cycleDurationMs / logoDelayMs) + 1
+      Math.ceil(visibleDurationMs / logoDelayMs)
     )
 
     return Array.from({ length: minimumInstances }, (_, index) => {
       return logos[index % logos.length]
     })
-  }, [cycleDurationMs, logoDelayMs, logos])
+  }, [logos, logoDelayMs, visibleDurationMs])
 
   useEffect(() => {
     if (!isAnimated) {
@@ -128,8 +129,7 @@ export function TechLogoCarousel({ activeKey, logos }: TechLogoCarouselProps) {
           const position = getLogoPosition(
             elapsedMs - logoIndex * logoDelayMs,
             segments,
-            cycleDurationMs,
-            hasLoopStarted
+            cycleDurationMs
           )
 
           return (

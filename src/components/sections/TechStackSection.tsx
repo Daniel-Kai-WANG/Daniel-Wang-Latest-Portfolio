@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { techStackCategories } from '../../data/techStack'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { SectionPolishAccent } from '../common/SectionPolishAccent'
 import { TechCategoryList } from './tech-stack/TechCategoryList'
+import { TechStackCornerAccent } from './tech-stack/TechStackCornerAccent'
 import { TechDetailCard } from './tech-stack/TechDetailCard'
 
 export function TechStackSection() {
@@ -22,7 +22,7 @@ export function TechStackSection() {
         className="section-frame relative overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
       >
         <ThemeShiftBackdrop />
-        <SectionPolishAccent />
+        <TechStackCornerAccent />
 
         <div className="relative z-10">
           <h2 className="font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-4xl">

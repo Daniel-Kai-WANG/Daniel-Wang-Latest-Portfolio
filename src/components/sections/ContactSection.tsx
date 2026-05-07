@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import { profile } from '../../data/profile'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { SectionPolishAccent } from '../common/SectionPolishAccent'
 import { ContactActionCards } from './contact/ContactActionCards'
+import { ContactSectionAccent } from './contact/ContactSectionAccent'
 import { ContactForm, type ContactFormErrors, type ContactFormValues } from './contact/ContactForm'
 import { ContactSuccessState } from './contact/ContactSuccessState'
 import { loadSuccessAnimation } from './contact/successAnimation'
@@ -160,10 +160,10 @@ export function ContactSection() {
         }}
       >
         <ThemeShiftBackdrop />
-        <SectionPolishAccent />
+        <ContactSectionAccent />
 
         <div className="relative z-10 mx-auto max-w-4xl">
-          <h2 className="mx-auto max-w-3xl text-center font-display text-3xl font-bold tracking-[-0.05em] text-[var(--color-text)] sm:text-4xl lg:text-[3.25rem]">
+          <h2 className="mx-auto max-w-3xl text-center font-display text-[1.9rem] font-bold tracking-[-0.05em] text-[var(--color-text)] sm:text-[2.35rem] lg:text-[2.6rem]">
             Ready to build a reliable product flow.
           </h2>
 

@@ -127,3 +127,70 @@ Cause: technical environment mismatch rather than product logic.
 6. Always verify UI tasks locally with `npm run dev` and Chrome at `localhost:5173` when instructed.
 7. Open the localhost page once and complete all checks in the same browser session instead of reopening a new page for each test.
 8. Do not mark a branch as complete if it is not clean.
+
+## Fourth correction: ghosting diagnosis, exact corner-element rules, Featured Projects child-block decoration, Contact CTA icon-state rules, and single-session localhost verification
+
+### Missed requirement: logo ghosting
+
+- The requirement was present in the prompt. The implementation was incorrect, not under-specified.
+- The exact technical cause was that the carousel rendered more repeated logo instances than the visible travel window could support, while each instance reused the same serpentine loop timeline. That let delayed instances wrap back into visible positions at the same time as the current instances, which produced overlapping and ghosted logo cards.
+- The fix was to keep the previous serpentine travel behavior as the base, stop rendering future instances before their row entry time, and limit the repeated instances to the minimum count needed to cover the visible travel duration so the last logo still hands off cleanly to the first logo without a gap.
+
+### Missed requirement: Tech Stack exact decorative corner logic
+
+- The earlier instruction was misunderstood. The prior pass added decorative polish, but not the literal corner assignments the prompt asked for.
+- Light mode now follows the exact requested mapping:
+  - top-left: leaf element only, with no extra visible wrapper block
+  - top-right: sakura plus sun
+  - bottom-left: the other sakura asset
+  - bottom-right: snowflake
+- Dark mode now follows the exact requested mapping:
+  - top-left: first starfish
+  - top-right: jellyfish plus moon
+  - bottom-left: pearl
+  - bottom-right: second starfish
+- All Tech Stack corner elements use a consistent visual size and stay near the section corners instead of drifting into the content area.
+
+### Missed requirement: Featured Projects decoration and content density
+
+- The earlier section-level decoration was incorrect because the prompt asked for decoration on the right-side child blocks, not around the whole Featured Projects boundary.
+- The new pattern removes the outer section decoration and places one same-sized accent at the top-right corner of each right-side preview card.
+- The right-side content was reduced by roughly half by removing extra highlight density, shrinking the tech-chip count, and simplifying the right card footer so the left and right sides feel closer in height and less visually crowded.
+
+### Missed requirement: Contact CTA / Ready to build a reliable product flow
+
+- The title size was previously too large relative to the requested correction. It has been reduced to a smaller scale that matches the requested step-down while preserving the existing typography system.
+- The decorative treatment is now intentionally different from Tech Stack. Tech Stack uses exact corner assets, while Contact CTA uses softer section-shell orbs and rounded accents so the sections feel related without repeating the same arrangement.
+- Each small action block now includes a same-sized top-left embellishment, matching the requested child-block accent rule.
+
+### Missed requirement: icon block active/inactive styling
+
+- The light and dark mode icon-state rules were previously not implemented literally enough.
+- The current state logic is:
+  - light inactive: ice-blue icon on pink background
+  - light active: pink icon on ice-blue background
+  - dark inactive: coral-orange icon on ocean-blue background
+  - dark active: ocean-blue icon on coral-orange background
+- The shared icon block now also enforces the 60% inner SVG sizing rule so the icon area reads consistently across Tech Stack and Contact CTA.
+
+### Missed requirement: real local verification
+
+- Previous validation was insufficient and did not fully stay in the intended local-browser workflow.
+- Local verification for this task must include:
+  - `npm run dev`
+  - Google Chrome
+  - `http://localhost:5173`
+  - browser console review
+  - UI and interaction checks
+  - opening the localhost page only once and completing checks in the same page/session where possible
+
+### Rules to remember
+
+1. First diagnose visual bugs like ghosting before trying random fixes.
+2. When the user gives exact corner-element assignments, follow them literally.
+3. When the user asks for different decorative logic across sections, do not reuse the same arrangement everywhere.
+4. When the user asks to move decorative elements to child blocks, remove the previous section-level decoration.
+5. When the user gives active and inactive icon colour rules, implement them exactly and verify in both light and dark modes.
+6. Always verify UI tasks locally with `npm run dev` and Chrome at `localhost:5173` when instructed.
+7. Open the localhost page once and complete all checks in the same browser session instead of reopening a new page for each test.
+8. Do not mark a branch as complete if it is not clean.

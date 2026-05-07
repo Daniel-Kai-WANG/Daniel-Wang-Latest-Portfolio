@@ -1,6 +1,6 @@
 import { useId } from 'react'
 import type { CSSProperties, SVGProps } from 'react'
-import { starfishLight, starfishPink } from '../../assets/experience'
+import { leafBud, pearl, starfishLight, starfishPink } from '../../assets/experience'
 import snowflakeCluster from '../../assets/theme/snowflake-cluster.png'
 import snowflakeSoft from '../../assets/theme/snowflake-soft.png'
 
@@ -19,6 +19,10 @@ type SnowflakeAssetIconProps = DecorativeImageProps & {
 
 type StarfishIconProps = DecorativeImageProps & {
   variant?: 'pink' | 'light'
+}
+
+type SakuraIconProps = DecorativeImageProps & {
+  variant?: 'a' | 'b'
 }
 
 function getVariantIndex(id: string, length: number) {
@@ -194,13 +198,30 @@ export function PetalIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
-export function SakuraIcon({ className, style }: DecorativeImageProps) {
+export function SakuraIcon({ className, style, variant }: SakuraIconProps) {
   const id = useId()
-  const src = sakuraVariants[getVariantIndex(id, sakuraVariants.length)]
+  const src =
+    variant === 'a'
+      ? sakuraVariants[0]
+      : variant === 'b'
+        ? sakuraVariants[1]
+        : sakuraVariants[getVariantIndex(id, sakuraVariants.length)]
 
   return (
     <img
       src={src}
+      alt=""
+      aria-hidden="true"
+      className={className}
+      style={{ display: 'block', objectFit: 'contain', ...style }}
+    />
+  )
+}
+
+export function LeafBudIcon({ className, style }: DecorativeImageProps) {
+  return (
+    <img
+      src={leafBud}
       alt=""
       aria-hidden="true"
       className={className}
@@ -270,6 +291,18 @@ export function SnowflakeAssetIcon({ className, style, variant }: SnowflakeAsset
   return (
     <img
       src={src}
+      alt=""
+      aria-hidden="true"
+      className={className}
+      style={{ display: 'block', objectFit: 'contain', ...style }}
+    />
+  )
+}
+
+export function PearlIcon({ className, style }: DecorativeImageProps) {
+  return (
+    <img
+      src={pearl}
       alt=""
       aria-hidden="true"
       className={className}

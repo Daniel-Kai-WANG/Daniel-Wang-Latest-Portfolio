@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <defs>
+    <radialGradient id="pearl-core" cx="0" cy="0" r="1" gradientTransform="translate(42 36) rotate(55) scale(40 36)" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98" />
+      <stop offset="58%" stop-color="#f5fbff" stop-opacity="0.94" />
+      <stop offset="100%" stop-color="#cbe9ff" stop-opacity="0.88" />
+    </radialGradient>
+    <radialGradient id="pearl-glow" cx="0" cy="0" r="1" gradientTransform="translate(58 64) rotate(130) scale(38 44)" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#9edfff" stop-opacity="0.52" />
+      <stop offset="100%" stop-color="#9edfff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <circle cx="48" cy="48" r="34" fill="url(#pearl-core)" />
+  <circle cx="48" cy="48" r="34" fill="url(#pearl-glow)" />
+  <circle cx="38" cy="34" r="10" fill="#ffffff" fill-opacity="0.76" />
+  <circle cx="48" cy="48" r="34" stroke="#dff1ff" stroke-width="4" stroke-opacity="0.9" />
+</svg>

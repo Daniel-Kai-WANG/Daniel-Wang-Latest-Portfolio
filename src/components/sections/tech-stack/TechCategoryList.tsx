@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import type { TechStackCategory } from '../../../data/techStack'
 import { ThemeShiftBackdrop } from '../../animation/ThemeShiftBackdrop'
+import { StateIconBlock } from '../../common/StateIconBlock'
 import { ChevronRightIcon } from '../SectionIcons'
 import { TechCategoryIcon } from './TechCategoryIcon'
 
@@ -41,21 +42,15 @@ export function TechCategoryList({
               boxShadow: isActive ? 'var(--surface-shadow)' : 'none',
             }}
             aria-pressed={isActive}
-          >
-            <ThemeShiftBackdrop variant="card" />
-            <div className="relative z-10 flex items-center justify-between gap-4">
-              <div className="flex min-w-0 items-center gap-3">
-                <div
-                  className="flex size-11 shrink-0 items-center justify-center rounded-2xl"
-                  style={{
-                    background: isActive
-                      ? 'color-mix(in srgb, var(--color-primary) 16%, var(--color-surface))'
-                      : 'var(--soft-accent)',
-                    color: 'var(--color-text)',
-                  }}
-                >
-                  <TechCategoryIcon icon={category.icon} className="size-5" />
-                </div>
+            >
+              <ThemeShiftBackdrop variant="card" />
+              <div className="relative z-10 flex items-center justify-between gap-4">
+                <div className="flex min-w-0 items-center gap-3">
+                  <StateIconBlock
+                    active={isActive}
+                    className="size-11 rounded-2xl"
+                    icon={(props) => <TechCategoryIcon icon={category.icon} {...props} />}
+                  />
                 <span className="font-display text-xl font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-[1.75rem]">
                   {category.label}
                 </span>

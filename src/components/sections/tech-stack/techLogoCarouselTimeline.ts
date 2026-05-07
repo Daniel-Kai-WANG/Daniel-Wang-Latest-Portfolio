@@ -53,19 +53,28 @@ function getCycleDuration(segments: LogoSegment[]) {
   return segments.reduce((total, segment) => total + segment.durationMs, 0)
 }
 
+function getVisibleDuration(segments: LogoSegment[]) {
+  return segments.reduce((total, segment) => {
+    if (segment.type !== 'travel') {
+      return total
+    }
+
+    return total + segment.durationMs
+  }, 0)
+}
+
 function getLogoPosition(
   timeMs: number,
   segments: LogoSegment[],
-  cycleDurationMs: number,
-  wrapTime: boolean
+  cycleDurationMs: number
 ) {
-  if (!wrapTime && (timeMs < 0 || timeMs > cycleDurationMs)) {
+  if (timeMs < 0) {
     return null
   }
 
   let localTime = timeMs
 
-  if (wrapTime) {
+  if (timeMs > cycleDurationMs) {
     localTime %= cycleDurationMs
 
     if (localTime < 0) {
@@ -107,4 +116,5 @@ export {
   buildSegments,
   getCycleDuration,
   getLogoPosition,
+  getVisibleDuration,
 }

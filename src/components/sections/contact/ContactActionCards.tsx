@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import type { ContactLink } from '../../../types/content'
 import { ThemeShiftBackdrop } from '../../animation/ThemeShiftBackdrop'
+import { StateIconBlock } from '../../common/StateIconBlock'
 import { LinkIcon, MailIcon } from '../../common/Icons'
 import { DownloadIcon } from '../SectionIcons'
+import { ContactCardAccent } from './ContactCardAccent'
 
 type ContactActionCardsProps = {
   emailLink?: ContactLink
@@ -59,11 +61,14 @@ export function ContactActionCards({ emailLink, linkedinLink }: ContactActionCar
               }}
             >
               <ThemeShiftBackdrop variant="card" />
-              <div className="relative z-10">
-                <div className="flex size-12 items-center justify-center rounded-2xl bg-[var(--soft-accent)] text-[var(--color-text)]">
-                  <Icon className="size-5" />
-                </div>
-                <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+              <ContactCardAccent />
+              <div className="relative z-10 pt-7">
+                <StateIconBlock
+                  icon={Icon}
+                  interactive
+                  className="size-12 rounded-2xl"
+                />
+                <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
                   {action.label}
                 </p>
                 <p className="mt-2 text-sm font-semibold leading-6 text-[var(--color-text)]">
@@ -92,11 +97,14 @@ export function ContactActionCards({ emailLink, linkedinLink }: ContactActionCar
             }}
           >
             <ThemeShiftBackdrop variant="card" />
-            <div className="relative z-10">
-              <div className="flex size-12 items-center justify-center rounded-2xl bg-[var(--soft-accent)] text-[var(--color-text)]">
-                <Icon className="size-5" />
-              </div>
-              <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+            <ContactCardAccent />
+            <div className="relative z-10 pt-7">
+              <StateIconBlock
+                icon={Icon}
+                interactive
+                className="size-12 rounded-2xl"
+              />
+              <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
                 {action.label}
               </p>
               <p className="mt-2 text-sm font-semibold leading-6 text-[var(--color-text)]">

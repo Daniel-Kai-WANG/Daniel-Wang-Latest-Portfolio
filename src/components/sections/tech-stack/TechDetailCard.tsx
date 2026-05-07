@@ -1,5 +1,6 @@
 import type { TechStackCategory } from '../../../data/techStack'
 import { ThemeShiftBackdrop } from '../../animation/ThemeShiftBackdrop'
+import { StateIconBlock } from '../../common/StateIconBlock'
 import { TechCategoryIcon } from './TechCategoryIcon'
 import { TechLogoCarousel } from './TechLogoCarousel'
 
@@ -28,15 +29,11 @@ export function TechDetailCard({ category }: TechDetailCardProps) {
       />
       <div className="relative z-10 flex h-full flex-col">
         <div className="flex items-center gap-4">
-          <div
-            className="flex size-14 shrink-0 items-center justify-center rounded-[1.4rem]"
-            style={{
-              background: 'color-mix(in srgb, var(--color-primary) 16%, var(--color-surface))',
-              color: 'var(--color-text)',
-            }}
-          >
-            <TechCategoryIcon icon={category.icon} className="size-6" />
-          </div>
+          <StateIconBlock
+            active
+            className="size-14 rounded-[1.4rem]"
+            icon={(props) => <TechCategoryIcon icon={category.icon} {...props} />}
+          />
 
           <div className="min-w-0">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
