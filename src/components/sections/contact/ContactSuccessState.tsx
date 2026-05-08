@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react'
 import * as LottiePackage from 'lottie-react'
+import { useTheme } from '../../../hooks/useTheme'
 
 type ContactSuccessStateProps = {
   animationData: object | null
@@ -7,6 +8,7 @@ type ContactSuccessStateProps = {
 }
 
 export function ContactSuccessState({ animationData, onReset }: ContactSuccessStateProps) {
+  const { theme } = useTheme()
   const packageDefault = (LottiePackage as unknown as { default?: unknown }).default
   const lottieCandidate =
     packageDefault && typeof packageDefault === 'object' && 'default' in packageDefault
@@ -27,17 +29,23 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
     <div
       className="relative overflow-hidden rounded-[1.8rem] border p-6 text-center sm:p-8"
       style={{
-        borderColor: 'color-mix(in srgb, #b6d8b3 52%, var(--color-border))',
+        borderColor:
+          theme === 'light'
+            ? 'color-mix(in srgb, #b6d8b3 40%, var(--color-border))'
+            : 'color-mix(in srgb, #7cb58a 24%, var(--color-border))',
         background:
-          'linear-gradient(180deg, rgba(232,247,230,0.96), rgba(239,251,238,0.94), rgba(248,255,248,0.92))',
+          theme === 'light'
+            ? 'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 96%, rgba(233,248,232,0.82)), color-mix(in srgb, var(--color-surface-muted) 54%, rgba(220,242,221,0.54)), color-mix(in srgb, var(--color-surface) 94%, rgba(245,255,245,0.7)))'
+            : 'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 95%, rgba(127,186,142,0.1)), color-mix(in srgb, var(--color-surface-muted) 72%, rgba(91,146,110,0.08)), color-mix(in srgb, var(--color-surface) 96%, rgba(14,26,58,0.24)))',
       }}
     >
       <div
-        className="mx-auto flex h-40 w-40 items-center justify-center rounded-[1.75rem] p-3 sm:h-44 sm:w-44"
+        className="mx-auto flex h-28 w-28 items-center justify-center sm:h-32 sm:w-32"
         style={{
-          background:
-            'radial-gradient(circle at top, rgba(224,242,221,0.92), rgba(207,233,201,0.9) 58%, rgba(234,246,232,0.94))',
-          boxShadow: '0 18px 40px rgba(107, 142, 95, 0.18)',
+          filter:
+            theme === 'light'
+              ? 'drop-shadow(0 12px 22px rgba(126, 183, 110, 0.18))'
+              : 'drop-shadow(0 12px 24px rgba(255, 211, 168, 0.14))',
         }}
       >
         {animationData && LottiePlayer ? (
@@ -48,15 +56,29 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
             className="h-full w-full"
           />
         ) : (
-          <div className="h-full w-full animate-pulse rounded-[1.4rem] bg-white/55" />
+          <div
+            className="h-full w-full animate-pulse"
+            style={{
+              background:
+                theme === 'light'
+                  ? 'linear-gradient(90deg, rgba(130, 200, 120, 0.15), rgba(130, 200, 120, 0.4), rgba(130, 200, 120, 0.15))'
+                  : 'linear-gradient(90deg, rgba(255, 211, 168, 0.14), rgba(255, 211, 168, 0.42), rgba(255, 211, 168, 0.14))',
+              maskImage:
+                'linear-gradient(135deg, transparent 0%, transparent 24%, black 24%, black 100%)',
+              WebkitMaskImage:
+                'linear-gradient(135deg, transparent 0%, transparent 24%, black 24%, black 100%)',
+            }}
+          />
         )}
       </div>
 
-      <p className="mx-auto mt-6 max-w-xl whitespace-pre-line text-base leading-7 text-[var(--color-text)]">
+      <h3 className="mx-auto mt-5 max-w-xl font-display text-[1.6rem] font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-[1.8rem]">
         Thank you for reaching out.
-        {'\n'}
-        Your message has been sent successfully. I'll review your inquiry and get back to you as
-        soon as possible.
+      </h3>
+
+      <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-[var(--color-muted)]">
+        Your message has been sent successfully. I&apos;ll review your inquiry and get back to you
+        as soon as possible.
       </p>
 
       <button
@@ -64,8 +86,14 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
         onClick={onReset}
         className="mt-6 inline-flex items-center justify-center rounded-full border px-5 py-3 text-sm font-semibold text-[var(--color-text)]"
         style={{
-          borderColor: 'color-mix(in srgb, var(--color-primary) 28%, var(--color-border))',
-          background: 'rgba(255,255,255,0.72)',
+          borderColor:
+            theme === 'light'
+              ? 'color-mix(in srgb, var(--color-primary) 22%, var(--color-border))'
+              : 'color-mix(in srgb, rgba(255,255,255,0.2) 52%, var(--color-border))',
+          background:
+            theme === 'light'
+              ? 'rgba(255,255,255,0.72)'
+              : 'rgba(255,255,255,0.06)',
         }}
       >
         Send another message

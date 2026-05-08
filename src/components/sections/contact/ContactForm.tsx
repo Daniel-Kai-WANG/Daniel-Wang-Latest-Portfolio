@@ -47,7 +47,8 @@ export function ContactForm({
               borderColor: errors.name
                 ? 'color-mix(in srgb, var(--color-warm) 60%, var(--color-border))'
                 : 'var(--color-border)',
-              background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
+              background:
+                'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 84%, transparent), color-mix(in srgb, var(--color-surface-muted) 32%, transparent))',
             }}
             type="text"
             name="name"
@@ -67,7 +68,8 @@ export function ContactForm({
               borderColor: errors.email
                 ? 'color-mix(in srgb, var(--color-warm) 60%, var(--color-border))'
                 : 'var(--color-border)',
-              background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
+              background:
+                'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 84%, transparent), color-mix(in srgb, var(--color-surface-muted) 32%, transparent))',
             }}
             type="email"
             name="email"
@@ -88,7 +90,8 @@ export function ContactForm({
             borderColor: errors.message
               ? 'color-mix(in srgb, var(--color-warm) 60%, var(--color-border))'
               : 'var(--color-border)',
-            background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
+            background:
+              'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 84%, transparent), color-mix(in srgb, var(--color-surface-muted) 32%, transparent))',
             minHeight: '11rem',
             resize: 'vertical',
           }}
@@ -107,7 +110,8 @@ export function ContactForm({
             className="rounded-[1.1rem] border px-4 py-3 text-sm text-[var(--color-text)]"
             style={{
               borderColor: 'color-mix(in srgb, var(--color-warm) 60%, var(--color-border))',
-              background: 'color-mix(in srgb, var(--color-surface) 82%, rgba(255,255,255,0.4))',
+              background:
+                'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 86%, transparent), color-mix(in srgb, var(--color-surface-muted) 28%, transparent))',
             }}
           >
             {errorMessage}

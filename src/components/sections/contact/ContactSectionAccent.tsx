@@ -1,37 +1,86 @@
+import { useTheme } from '../../../hooks/useTheme'
+import { JellyfishIcon, PearlIcon, StarfishIcon, TablerMoonIcon } from '../../common/Icons'
+
 export function ContactSectionAccent() {
+  const { theme } = useTheme()
+
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
       <div
-        className="absolute left-6 top-10 h-20 w-20 rounded-full border"
+        className="absolute left-3 top-16 hidden sm:block"
         style={{
-          borderColor: 'color-mix(in srgb, var(--color-primary) 24%, var(--color-border))',
-          background:
-            'radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--color-surface) 90%, white 10%), transparent 72%)',
+          opacity: theme === 'light' ? 0.52 : 0.44,
         }}
-      />
+      >
+        <StarfishIcon
+          variant={theme === 'light' ? 'pink' : 'light'}
+          className="size-20 rotate-[-12deg]"
+        />
+      </div>
+
       <div
-        className="absolute right-8 top-6 h-16 w-28 rounded-full border"
+        className="absolute left-16 top-40 hidden sm:block"
         style={{
-          borderColor: 'color-mix(in srgb, var(--color-secondary) 18%, var(--color-border))',
-          background:
-            'linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 12%, transparent), color-mix(in srgb, var(--color-warm) 12%, transparent))',
+          opacity: theme === 'light' ? 0.42 : 0.3,
         }}
-      />
+      >
+        <PearlIcon className="size-14" />
+      </div>
+
       <div
-        className="absolute bottom-6 left-5 h-12 w-20 rounded-full border"
+        className="absolute right-10 top-7 hidden items-center gap-3 sm:flex"
         style={{
-          borderColor: 'color-mix(in srgb, var(--color-primary) 18%, var(--color-border))',
-          background:
-            'linear-gradient(135deg, color-mix(in srgb, var(--color-surface) 92%, transparent), color-mix(in srgb, var(--color-warm) 10%, transparent))',
+          opacity: theme === 'light' ? 0.7 : 0.58,
         }}
-      />
+      >
+        <TablerMoonIcon
+          className="size-10"
+          style={{
+            color: theme === 'light' ? 'rgba(246, 181, 112, 0.92)' : 'rgba(226, 235, 255, 0.84)',
+          }}
+        />
+        <PearlIcon className="size-11" />
+      </div>
+
       <div
-        className="absolute bottom-4 right-6 h-24 w-24 rounded-full"
+        className="absolute bottom-10 left-4 hidden sm:block"
         style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--color-primary) 12%, transparent) 0%, transparent 72%)',
+          opacity: theme === 'light' ? 0.24 : 0.2,
         }}
-      />
+      >
+        <JellyfishIcon
+          className="size-10"
+          style={{
+            color: theme === 'light' ? '#7bc8ec' : 'rgba(164, 228, 255, 0.72)',
+          }}
+        />
+      </div>
+
+      <div
+        className="absolute bottom-6 right-8 hidden sm:block"
+        style={{
+          opacity: theme === 'light' ? 0.2 : 0.18,
+        }}
+      >
+        <JellyfishIcon
+          className="size-11"
+          style={{
+            color: theme === 'light' ? '#7bc8ec' : 'rgba(164, 228, 255, 0.68)',
+          }}
+        />
+      </div>
+
+      <div
+        className="absolute right-0 top-28 hidden sm:block"
+        style={{
+          opacity: theme === 'light' ? 0.38 : 0.28,
+        }}
+      >
+        <StarfishIcon
+          variant={theme === 'light' ? 'light' : 'pink'}
+          className="size-16 rotate-[12deg]"
+        />
+      </div>
     </div>
   )
 }

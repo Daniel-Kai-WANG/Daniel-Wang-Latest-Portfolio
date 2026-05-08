@@ -1,6 +1,7 @@
 import type { FormEvent } from 'react'
 import { useEffect, useState } from 'react'
 import { profile } from '../../data/profile'
+import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { ContactActionCards } from './contact/ContactActionCards'
@@ -52,6 +53,7 @@ function resolveFormEndpoint(recipientEmail: string) {
 }
 
 export function ContactSection() {
+  const { theme } = useTheme()
   const emailLink = profile.contactLinks.find((link) => link.label === 'Email')
   const linkedinLink = profile.contactLinks.find((link) => link.label === 'LinkedIn')
   const recipientEmail = emailLink?.value ?? 'kaiwang2027@gmail.com'
@@ -67,7 +69,7 @@ export function ContactSection() {
   useEffect(() => {
     let isMounted = true
 
-    void loadSuccessAnimation()
+    void loadSuccessAnimation(theme)
       .then((animation) => {
         if (isMounted) {
           setSuccessAnimationData(animation)
@@ -82,7 +84,7 @@ export function ContactSection() {
     return () => {
       isMounted = false
     }
-  }, [])
+  }, [theme])
 
   const updateField = (field: keyof ContactFormValues, value: string) => {
     setValues((current) => ({ ...current, [field]: value }))
@@ -172,7 +174,7 @@ export function ContactSection() {
             style={{
               borderColor: 'var(--color-border)',
               background:
-                'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 94%, white 6%), color-mix(in srgb, var(--color-surface-muted) 58%, transparent), color-mix(in srgb, var(--color-surface) 92%, transparent))',
+                'linear-gradient(135deg, color-mix(in srgb, var(--color-surface) 91%, transparent), color-mix(in srgb, var(--color-surface-muted) 73%, transparent), color-mix(in srgb, var(--color-surface) 89%, transparent))',
             }}
           >
             <ThemeShiftBackdrop variant="card" />

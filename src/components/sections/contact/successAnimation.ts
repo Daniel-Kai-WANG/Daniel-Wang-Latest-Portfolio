@@ -3,6 +3,12 @@ type LottieShapeItem = {
   c?: {
     k?: number[]
   }
+  o?: {
+    k?: number
+  }
+  w?: {
+    k?: number
+  }
 }
 
 type LottieLayer = {
@@ -25,7 +31,25 @@ function setLayerFill(animation: LottieAnimation, layerName: string, fillColor: 
   }
 }
 
-export async function loadSuccessAnimation() {
+function setLayerStroke(
+  animation: LottieAnimation,
+  layerName: string,
+  strokeColor: number[],
+  strokeWidth?: number
+) {
+  const layer = animation.layers?.find((item) => item.nm === layerName)
+  const stroke = layer?.shapes?.[0]?.it?.find((item) => item.ty === 'st')
+
+  if (stroke?.c?.k) {
+    stroke.c.k = strokeColor
+  }
+
+  if (typeof strokeWidth === 'number' && stroke?.w?.k !== undefined) {
+    stroke.w.k = strokeWidth
+  }
+}
+
+export async function loadSuccessAnimation(theme: 'light' | 'dark') {
   const response = await fetch('/animations/success-check.json')
 
   if (!response.ok) {
@@ -34,9 +58,15 @@ export async function loadSuccessAnimation() {
 
   const animation = (await response.json()) as LottieAnimation
 
-  setLayerFill(animation, 'BG', [0.9137, 0.9725, 0.9176, 1])
-  setLayerFill(animation, 'Shape Layer 2', [0.6118, 0.8471, 0.6431, 1])
-  setLayerFill(animation, 'Shape Layer 1', [0.8157, 0.9294, 0.8078, 1])
+  setLayerFill(animation, 'BG', [0, 0, 0, 0])
+  setLayerFill(animation, 'Shape Layer 2', [0, 0, 0, 0])
+  setLayerFill(animation, 'Shape Layer 1', [0, 0, 0, 0])
+  setLayerStroke(
+    animation,
+    'check',
+    theme === 'dark' ? [1, 0.8275, 0.6588, 1] : [0.4902, 0.7843, 0.5412, 1],
+    34
+  )
 
   return animation
 }
