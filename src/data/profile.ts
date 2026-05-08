@@ -43,6 +43,11 @@ export const profile: Profile = {
       href: 'https://www.linkedin.com/in/daniel-kai-wang/',
     },
     {
+      label: 'GitHub',
+      value: 'https://github.com/Daniel-Kai-WANG',
+      href: 'https://github.com/Daniel-Kai-WANG',
+    },
+    {
       label: 'Portfolio Archive',
       value: 'daniel-kai-wang.github.io/Daniel-WANG-Portfolio',
       href: 'https://daniel-kai-wang.github.io/Daniel-WANG-Portfolio/',

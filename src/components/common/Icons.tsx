@@ -1,6 +1,6 @@
 import { useId } from 'react'
 import type { CSSProperties, SVGProps } from 'react'
-import { starfishLight, starfishPink } from '../../assets/experience'
+import { leafBud, pearl, starfishLight, starfishPink } from '../../assets/experience'
 import snowflakeCluster from '../../assets/theme/snowflake-cluster.png'
 import snowflakeSoft from '../../assets/theme/snowflake-soft.png'
 
@@ -19,6 +19,10 @@ type SnowflakeAssetIconProps = DecorativeImageProps & {
 
 type StarfishIconProps = DecorativeImageProps & {
   variant?: 'pink' | 'light'
+}
+
+type SakuraIconProps = DecorativeImageProps & {
+  variant?: 'a' | 'b'
 }
 
 function getVariantIndex(id: string, length: number) {
@@ -81,11 +85,8 @@ export function TablerMoonIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <path
-        d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
+        d="M18.5 14.4a7.4 7.4 0 1 1-8.9-8.9 6.6 6.6 0 1 0 8.9 8.9Z"
+        fill="currentColor"
       />
     </svg>
   )
@@ -194,13 +195,30 @@ export function PetalIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
-export function SakuraIcon({ className, style }: DecorativeImageProps) {
+export function SakuraIcon({ className, style, variant }: SakuraIconProps) {
   const id = useId()
-  const src = sakuraVariants[getVariantIndex(id, sakuraVariants.length)]
+  const src =
+    variant === 'a'
+      ? sakuraVariants[0]
+      : variant === 'b'
+        ? sakuraVariants[1]
+        : sakuraVariants[getVariantIndex(id, sakuraVariants.length)]
 
   return (
     <img
       src={src}
+      alt=""
+      aria-hidden="true"
+      className={className}
+      style={{ display: 'block', objectFit: 'contain', ...style }}
+    />
+  )
+}
+
+export function LeafBudIcon({ className, style }: DecorativeImageProps) {
+  return (
+    <img
+      src={leafBud}
       alt=""
       aria-hidden="true"
       className={className}
@@ -270,6 +288,18 @@ export function SnowflakeAssetIcon({ className, style, variant }: SnowflakeAsset
   return (
     <img
       src={src}
+      alt=""
+      aria-hidden="true"
+      className={className}
+      style={{ display: 'block', objectFit: 'contain', ...style }}
+    />
+  )
+}
+
+export function PearlIcon({ className, style }: DecorativeImageProps) {
+  return (
+    <img
+      src={pearl}
       alt=""
       aria-hidden="true"
       className={className}

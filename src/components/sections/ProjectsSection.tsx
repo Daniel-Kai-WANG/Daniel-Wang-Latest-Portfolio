@@ -5,6 +5,7 @@ import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { ArrowUpRightIcon, JellyfishIcon, SnowCrystalIcon, StarfishIcon } from '../common/Icons'
+import { ProjectPreviewAccent } from './projects/ProjectPreviewAccent'
 
 export function ProjectsSection() {
   const { theme } = useTheme()
@@ -64,10 +65,10 @@ export function ProjectsSection() {
                       theme === 'light'
                         ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.62), rgba(214,244,255,0.28), transparent)'
                         : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.14), rgba(128,199,255,0.12), transparent)',
-                  }}
+                    }}
                 />
 
-                <div className="relative z-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+                <div className="relative z-10 grid gap-6">
                   <div className="flex flex-col justify-between gap-6">
                     <div>
                       <div className="flex flex-wrap items-center gap-3">
@@ -212,50 +213,26 @@ export function ProjectsSection() {
                   }}
                 >
                   <ThemeShiftBackdrop variant="card" />
+                  <ProjectPreviewAccent accentIndex={index} />
                   <div className="relative z-10">
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
                         <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
                           Click to feature
                         </div>
-                        <h3 className="mt-3 font-display text-[1.55rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)]">
+                        <h3 className="mt-3 font-display text-[1.5rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)]">
                           {project.title}
                         </h3>
                       </div>
-                      <span
-                        className="inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
-                        style={{
-                          borderColor: 'var(--pill-border)',
-                          background: 'var(--pill-background)',
-                          color: 'var(--pill-text)',
-                        }}
-                      >
-                        {project.tag}
-                      </span>
                     </div>
 
-                    <p className="mt-4 text-sm leading-7 text-[var(--color-muted)]">
-                      {project.description}
+                    <p className="mt-4 text-sm leading-6 text-[var(--color-muted)]">
+                      {project.highlights[0]}
                     </p>
-
-                    <div className="mt-5 grid gap-2 sm:grid-cols-2">
-                      {project.highlights.slice(0, 2).map((highlight) => (
-                        <div
-                          key={highlight}
-                          className="rounded-[1.2rem] border px-4 py-3 text-sm leading-6 text-[var(--color-muted)]"
-                          style={{
-                            borderColor: 'var(--pill-border)',
-                            background: 'color-mix(in srgb, var(--color-surface) 82%, transparent)',
-                          }}
-                        >
-                          {highlight}
-                        </div>
-                      ))}
-                    </div>
 
                     <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
                       <div className="flex flex-wrap gap-2">
-                        {project.tech.slice(0, 4).map((tech) => (
+                        {project.tech.slice(0, 2).map((tech) => (
                           <span
                             key={tech}
                             className="rounded-full border px-3 py-1.5 text-xs font-semibold"
@@ -270,10 +247,9 @@ export function ProjectsSection() {
                         ))}
                       </div>
 
-                      <div className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-text)]">
-                        Make active
-                        <ArrowUpRightIcon className="size-4" />
-                      </div>
+                      <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                        {project.tag}
+                      </span>
                     </div>
                   </div>
                 </motion.button>
