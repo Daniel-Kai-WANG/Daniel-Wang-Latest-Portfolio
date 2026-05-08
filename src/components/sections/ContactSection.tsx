@@ -7,6 +7,7 @@ import { ContactActionCards } from './contact/ContactActionCards'
 import { ContactSectionAccent } from './contact/ContactSectionAccent'
 import { ContactForm, type ContactFormErrors, type ContactFormValues } from './contact/ContactForm'
 import { ContactSuccessState } from './contact/ContactSuccessState'
+import { ContactTitleCluster } from './contact/ContactTitleCluster'
 import { loadSuccessAnimation } from './contact/successAnimation'
 
 const initialValues: ContactFormValues = {
@@ -153,7 +154,7 @@ export function ContactSection() {
     <Reveal>
       <section
         id="contact"
-        className="relative overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12"
+        className="relative overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
         style={{
           background: 'color-mix(in srgb, var(--color-surface) 94%, transparent)',
           borderColor: 'var(--color-border)',
@@ -162,42 +163,43 @@ export function ContactSection() {
       >
         <ContactSectionAccent />
 
-        <div className="relative z-10 mx-auto max-w-5xl">
-          <h2 className="mx-auto max-w-3xl text-center font-display text-[1.9rem] font-bold tracking-[-0.05em] text-[var(--color-text)] sm:text-[2.35rem] lg:ml-12 lg:mr-auto lg:max-w-[36rem] lg:text-left lg:text-[2.85rem]">
-            Ready to build a reliable product flow.
-          </h2>
+        <div className="relative z-10 mx-auto max-w-4xl">
+          <div className="relative mx-auto max-w-[24rem] px-7 text-center sm:max-w-[30rem] sm:px-8">
+            <ContactTitleCluster />
+            <h2 className="relative z-10 mx-auto text-center font-display text-[1.9rem] font-bold tracking-[-0.05em] text-[var(--color-text)] sm:text-[2.35rem] lg:text-[2.6rem]">
+              Ready to build a reliable product flow.
+            </h2>
+          </div>
 
-          <div className="relative mt-8 lg:mt-10">
-            <div
-              className="overflow-hidden rounded-[1.9rem] border p-5 sm:p-6 lg:ml-14 lg:mr-8"
-              style={{
-                borderColor: 'var(--color-border)',
-                background: 'color-mix(in srgb, var(--color-surface) 92%, transparent)',
-              }}
-            >
-              <div className="relative z-10">
-                {isSuccess ? (
-                  <ContactSuccessState animationData={successAnimationData} onReset={resetForm} />
-                ) : (
-                  <ContactForm
-                    errorMessage={errorMessage}
-                    errors={errors}
-                    isSubmitting={isSubmitting}
-                    onChange={updateField}
-                    onSubmit={handleSubmit}
-                    values={values}
-                  />
-                )}
-              </div>
+          <div
+            className="mt-8 overflow-hidden rounded-[1.9rem] border p-5 sm:p-6"
+            style={{
+              borderColor: 'var(--color-border)',
+              background: 'color-mix(in srgb, var(--color-surface) 92%, transparent)',
+            }}
+          >
+            <div className="relative z-10">
+              {isSuccess ? (
+                <ContactSuccessState animationData={successAnimationData} onReset={resetForm} />
+              ) : (
+                <ContactForm
+                  errorMessage={errorMessage}
+                  errors={errors}
+                  isSubmitting={isSubmitting}
+                  onChange={updateField}
+                  onSubmit={handleSubmit}
+                  values={values}
+                />
+              )}
             </div>
+          </div>
 
-            <div className="relative mt-5 lg:-mt-4 lg:ml-8 lg:pr-4">
-              <ContactActionCards
-                emailLink={emailLink}
-                githubLink={githubLink}
-                linkedinLink={linkedinLink}
-              />
-            </div>
+          <div className="mt-4">
+            <ContactActionCards
+              emailLink={emailLink}
+              githubLink={githubLink}
+              linkedinLink={linkedinLink}
+            />
           </div>
         </div>
       </section>

@@ -37,8 +37,8 @@ export function ContactForm({
   values,
 }: ContactFormProps) {
   return (
-    <form noValidate onSubmit={onSubmit} className="grid gap-5">
-      <div className="grid gap-4 md:grid-cols-[0.96fr_1.04fr] md:gap-5">
+    <form noValidate onSubmit={onSubmit} className="grid gap-4">
+      <div className="grid gap-4 md:grid-cols-2">
         <label className="grid gap-2">
           <span className="text-sm font-semibold text-[var(--color-text)]">Your Name</span>
           <input
@@ -101,7 +101,7 @@ export function ContactForm({
         <FieldError message={errors.message} />
       </label>
 
-      <div className="flex flex-col gap-3 pt-2">
+      <div className="flex flex-col gap-3 pt-1">
         {errorMessage ? (
           <p
             className="rounded-[1.1rem] border px-4 py-3 text-sm text-[var(--color-text)]"
