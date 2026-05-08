@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { profile } from '../../data/profile'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
-import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { ContactActionCards } from './contact/ContactActionCards'
 import { ContactSectionAccent } from './contact/ContactSectionAccent'
 import { ContactForm, type ContactFormErrors, type ContactFormValues } from './contact/ContactForm'
@@ -55,6 +54,7 @@ function resolveFormEndpoint(recipientEmail: string) {
 export function ContactSection() {
   const { theme } = useTheme()
   const emailLink = profile.contactLinks.find((link) => link.label === 'Email')
+  const githubLink = profile.contactLinks.find((link) => link.label === 'GitHub')
   const linkedinLink = profile.contactLinks.find((link) => link.label === 'LinkedIn')
   const recipientEmail = emailLink?.value ?? 'kaiwang2027@gmail.com'
   const formEndpoint = resolveFormEndpoint(recipientEmail)
@@ -155,13 +155,11 @@ export function ContactSection() {
         id="contact"
         className="relative overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
         style={{
-          background:
-            'linear-gradient(135deg, color-mix(in srgb, var(--color-surface) 92%, transparent), color-mix(in srgb, var(--color-surface-muted) 72%, transparent))',
+          background: 'color-mix(in srgb, var(--color-surface) 94%, transparent)',
           borderColor: 'var(--color-border)',
           boxShadow: 'var(--surface-shadow)',
         }}
       >
-        <ThemeShiftBackdrop />
         <ContactSectionAccent />
 
         <div className="relative z-10 mx-auto max-w-4xl">
@@ -173,19 +171,9 @@ export function ContactSection() {
             className="mt-8 overflow-hidden rounded-[1.9rem] border p-5 sm:p-6"
             style={{
               borderColor: 'var(--color-border)',
-              background:
-                'linear-gradient(135deg, color-mix(in srgb, var(--color-surface) 91%, transparent), color-mix(in srgb, var(--color-surface-muted) 73%, transparent), color-mix(in srgb, var(--color-surface) 89%, transparent))',
+              background: 'color-mix(in srgb, var(--color-surface) 92%, transparent)',
             }}
           >
-            <ThemeShiftBackdrop variant="card" />
-            <div
-              className="sheen-pass"
-              style={{
-                animationDuration: '7.8s',
-                background:
-                  'linear-gradient(90deg, transparent, rgba(255,255,255,0.42), rgba(214,244,255,0.18), transparent)',
-              }}
-            />
             <div className="relative z-10">
               {isSuccess ? (
                 <ContactSuccessState animationData={successAnimationData} onReset={resetForm} />
@@ -203,7 +191,11 @@ export function ContactSection() {
           </div>
 
           <div className="mt-4">
-            <ContactActionCards emailLink={emailLink} linkedinLink={linkedinLink} />
+            <ContactActionCards
+              emailLink={emailLink}
+              githubLink={githubLink}
+              linkedinLink={linkedinLink}
+            />
           </div>
         </div>
       </section>
