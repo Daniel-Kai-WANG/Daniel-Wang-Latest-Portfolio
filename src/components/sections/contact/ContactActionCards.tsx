@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import githubLogo from '../../../assets/logos/github.svg'
 import linkedinLogo from '../../../assets/logos/linkedin.svg'
 import { useTheme } from '../../../hooks/useTheme'
@@ -73,47 +73,58 @@ function ResumeCardIcon(props: SVGProps<SVGSVGElement>) {
 }
 
 function ContactActionBackgroundMotif({ id, theme }: { id: ActionId; theme: ThemeMode }) {
-  const baseClassName =
-    'pointer-events-none absolute bottom-2 right-3 z-[2] rotate-[10deg] overflow-hidden'
-
   if (theme === 'light') {
     if (id === 'email') {
-      return <LeafBudIcon className={`${baseClassName} h-24 w-24 opacity-[0.12]`} />
+      return (
+        <LeafBudIcon className="pointer-events-none absolute bottom-2 right-4 z-[2] h-24 w-24 rotate-[12deg] overflow-hidden opacity-[0.12]" />
+      )
     }
 
     if (id === 'linkedin') {
-      return <SakuraIcon variant="a" className={`${baseClassName} h-24 w-24 opacity-[0.16]`} />
+      return (
+        <SakuraIcon
+          variant="a"
+          className="pointer-events-none absolute bottom-1 right-3 z-[2] h-24 w-24 rotate-[8deg] overflow-hidden opacity-[0.16]"
+        />
+      )
     }
 
     if (id === 'github') {
       return (
         <SnowflakeAssetIcon
           variant="soft"
-          className={`${baseClassName} h-24 w-24 opacity-[0.14]`}
+          className="pointer-events-none absolute bottom-3 right-5 z-[2] h-20 w-20 rotate-[-8deg] overflow-hidden opacity-[0.14]"
         />
       )
     }
 
     return (
       <SunIcon
-        className={`${baseClassName} h-20 w-20 opacity-[0.14]`}
+        className="pointer-events-none absolute bottom-4 right-4 z-[2] h-20 w-20 rotate-[10deg] overflow-hidden opacity-[0.14]"
         style={{ color: '#f4b35d' }}
       />
     )
   }
 
   if (id === 'email') {
-    return <StarfishIcon variant="light" className={`${baseClassName} size-24 opacity-[0.14]`} />
+    return (
+      <StarfishIcon
+        variant="light"
+        className="pointer-events-none absolute bottom-2 right-3 z-[2] size-24 rotate-[8deg] overflow-hidden opacity-[0.14]"
+      />
+    )
   }
 
   if (id === 'linkedin') {
-    return <PearlIcon className={`${baseClassName} h-20 w-20 opacity-[0.14]`} />
+    return (
+      <PearlIcon className="pointer-events-none absolute bottom-5 right-5 z-[2] h-20 w-20 rotate-[3deg] overflow-hidden opacity-[0.14]" />
+    )
   }
 
   if (id === 'github') {
     return (
       <JellyfishIcon
-        className={`${baseClassName} h-24 w-24 opacity-[0.12]`}
+        className="pointer-events-none absolute bottom-3 right-4 z-[2] h-24 w-24 rotate-[6deg] overflow-hidden opacity-[0.12]"
         style={{ color: 'rgba(173, 230, 255, 0.9)' }}
       />
     )
@@ -121,7 +132,7 @@ function ContactActionBackgroundMotif({ id, theme }: { id: ActionId; theme: Them
 
   return (
     <WaveformIcon
-      className={`${baseClassName} h-20 w-24 opacity-[0.13]`}
+      className="pointer-events-none absolute bottom-6 right-3 z-[2] h-20 w-24 rotate-[6deg] overflow-hidden opacity-[0.13]"
       style={{ color: 'rgba(181, 220, 255, 0.82)' }}
     />
   )
@@ -194,6 +205,7 @@ export function ContactActionCards({
   linkedinLink,
 }: ContactActionCardsProps) {
   const { theme } = useTheme()
+  const reduceMotion = useReducedMotion()
   const resumeHref: string | null = null
 
   const actions: ActionCard[] = [
@@ -241,17 +253,31 @@ export function ContactActionCards({
   ]
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="grid gap-4 sm:grid-cols-2 lg:gap-5">
       {actions.map((action, index) => {
+        const layoutClassName =
+          index === 0
+            ? 'lg:mt-4'
+            : index === 1
+              ? 'lg:-mt-1'
+              : index === 2
+                ? 'lg:-mt-2'
+                : 'lg:mt-3'
         const cardClassName =
-          'group relative min-h-[12.5rem] overflow-hidden rounded-[1.75rem] border p-5 text-left transition-transform'
+          `group relative min-h-[12.5rem] overflow-hidden rounded-[1.75rem] border p-5 text-left transition-transform ${layoutClassName}`
 
         const cardBody = (
           <>
             <ThemeShiftBackdrop variant="card" />
             <ContactActionBackgroundMotif id={action.id} theme={theme} />
-            <div className="relative z-10 pt-3">
-              <ContactActionIconBadge badge={action.badge} theme={theme} />
+            <div className="relative z-10 pt-4">
+              <motion.div
+                whileHover={reduceMotion ? undefined : { y: -2 }}
+                transition={{ duration: 0.26, ease: 'easeOut' }}
+                className="inline-flex"
+              >
+                <ContactActionIconBadge badge={action.badge} theme={theme} />
+              </motion.div>
               <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
                 {action.label}
               </p>
@@ -264,16 +290,21 @@ export function ContactActionCards({
 
         if (!action.href) {
           return (
-            <div
+            <motion.div
               key={action.id}
               className={cardClassName}
+              initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.52, delay: index * 0.05 }}
+              whileHover={reduceMotion ? undefined : { y: -5, rotate: -0.2, scale: 1.01 }}
               style={{
                 borderColor: 'var(--color-border)',
                 background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
               }}
             >
               {cardBody}
-            </div>
+            </motion.div>
           )
         }
 
@@ -288,7 +319,7 @@ export function ContactActionCards({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.52, delay: index * 0.05 }}
-            whileHover={{ y: -4 }}
+            whileHover={reduceMotion ? undefined : { y: -5, rotate: 0.2, scale: 1.01 }}
             style={{
               borderColor: 'var(--color-border)',
               background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
