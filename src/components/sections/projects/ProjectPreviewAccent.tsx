@@ -1,8 +1,20 @@
 import { useTheme } from '../../../hooks/useTheme'
-import { SakuraIcon, StarfishIcon } from '../../common/Icons'
+import {
+  JellyfishIcon,
+  LeafBudIcon,
+  PearlIcon,
+  SakuraIcon,
+  SnowCrystalIcon,
+  StarfishIcon,
+} from '../../common/Icons'
 
-export function ProjectPreviewAccent() {
+type ProjectPreviewAccentProps = {
+  accentIndex: number
+}
+
+export function ProjectPreviewAccent({ accentIndex }: ProjectPreviewAccentProps) {
   const { theme } = useTheme()
+  const normalizedIndex = accentIndex % 3
 
   return (
     <div
@@ -17,9 +29,21 @@ export function ProjectPreviewAccent() {
       }}
     >
       {theme === 'light' ? (
-        <SakuraIcon variant="a" className="size-5" />
+        normalizedIndex === 0 ? (
+          <LeafBudIcon className="size-5" />
+        ) : normalizedIndex === 1 ? (
+          <SakuraIcon variant="a" className="size-5" />
+        ) : (
+          <SnowCrystalIcon className="size-5 text-sky-300/85" />
+        )
       ) : (
-        <StarfishIcon variant="light" className="size-5" />
+        normalizedIndex === 0 ? (
+          <JellyfishIcon className="size-5 text-cyan-200/80" />
+        ) : normalizedIndex === 1 ? (
+          <StarfishIcon variant="light" className="size-5" />
+        ) : (
+          <PearlIcon className="size-5 text-slate-100/88" />
+        )
       )}
     </div>
   )

@@ -58,8 +58,10 @@ export function ExperienceJourneyGraph({
   } as const
 
   const sakuraRotationByIndex = [-12, 10, -18, 16, -8] as const
-  const leafRotationByIndex = [-26, -12, 18, 10, -18, 24, 14, 32] as const
+  const leafRotationByIndex = [-45, -40, -65, 48, -8, 78, 70, 24, 14, 32] as const
   const leafSizeByIndex = ['1.18rem', '1.04rem', '1.12rem', '1.16rem'] as const
+  const groundSakuraSizeByIndex = ['0.92rem', '0.84rem', '0.98rem', '0.88rem'] as const
+  const groundLeafSizeByIndex = ['1rem', '0.9rem', '1.06rem', '0.94rem'] as const
 
   return (
     <div className="relative mt-4 h-[24rem] sm:h-[28rem] xl:h-[32rem]">
@@ -332,6 +334,74 @@ export function ExperienceJourneyGraph({
                   rotate: `${leafRotationByIndex[index % leafRotationByIndex.length]}deg`,
                   filter:
                     'drop-shadow(0 2px 8px rgba(194, 227, 147, 0.16)) drop-shadow(0 0 4px rgba(222, 243, 196, 0.14))',
+                }}
+              />
+            </motion.div>
+          ))}
+
+        {isLight &&
+          graph.groundBuds?.map((bud, index) => (
+            <motion.div
+              key={`ground-bud-${bud.x}-${bud.y}`}
+              className="absolute left-0 top-0"
+              initial={{ opacity: 0, scale: 0.72 }}
+              whileInView={{ opacity: 0.92, scale: 1 }}
+              viewport={{ once: true, amount: GRAPH_VIEWPORT_AMOUNT }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.24, delay: 1.12 + index * 0.03, ease: 'easeOut' }
+              }
+              style={{
+                left: `${(bud.x / GRAPH_WIDTH) * 100}%`,
+                top: `${(bud.y / GRAPH_HEIGHT) * 100}%`,
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              <SakuraIcon
+                className="block object-contain"
+                style={{
+                  width: groundSakuraSizeByIndex[index % groundSakuraSizeByIndex.length],
+                  height: groundSakuraSizeByIndex[index % groundSakuraSizeByIndex.length],
+                  rotate: `${sakuraRotationByIndex[index % sakuraRotationByIndex.length]}deg`,
+                  filter: 'drop-shadow(0 2px 6px rgba(244, 114, 182, 0.12))',
+                  opacity: 0.9,
+                }}
+              />
+            </motion.div>
+          ))}
+
+        {isLight &&
+          graph.groundLeafBuds?.map((leaf, index) => (
+            <motion.div
+              key={`ground-leaf-${leaf.x}-${leaf.y}`}
+              className="absolute left-0 top-0"
+              initial={{ opacity: 0, scale: 0.72 }}
+              whileInView={{ opacity: 0.92, scale: 1 }}
+              viewport={{ once: true, amount: GRAPH_VIEWPORT_AMOUNT }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.24, delay: 1.16 + index * 0.03, ease: 'easeOut' }
+              }
+              style={{
+                left: `${(leaf.x / GRAPH_WIDTH) * 100}%`,
+                top: `${(leaf.y / GRAPH_HEIGHT) * 100}%`,
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              <img
+                src={leafBud}
+                alt=""
+                aria-hidden="true"
+                className="block object-contain"
+                style={{
+                  width: groundLeafSizeByIndex[index % groundLeafSizeByIndex.length],
+                  height: groundLeafSizeByIndex[index % groundLeafSizeByIndex.length],
+                  rotate: `${leafRotationByIndex[index % leafRotationByIndex.length]}deg`,
+                  filter:
+                    'drop-shadow(0 2px 6px rgba(194, 227, 147, 0.14)) drop-shadow(0 0 4px rgba(222, 243, 196, 0.12))',
+                  opacity: 0.88,
                 }}
               />
             </motion.div>

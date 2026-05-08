@@ -68,7 +68,7 @@ export function ProjectsSection() {
                     }}
                 />
 
-                <div className="relative z-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+                <div className="relative z-10 grid gap-6">
                   <div className="flex flex-col justify-between gap-6">
                     <div>
                       <div className="flex flex-wrap items-center gap-3">
@@ -213,18 +213,17 @@ export function ProjectsSection() {
                   }}
                 >
                   <ThemeShiftBackdrop variant="card" />
-                  <ProjectPreviewAccent />
+                  <ProjectPreviewAccent accentIndex={index} />
                   <div className="relative z-10">
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
                         <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
                           Click to feature
                         </div>
-                        <h3 className="mt-3 font-display text-[1.55rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)]">
+                        <h3 className="mt-3 font-display text-[1.5rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)]">
                           {project.title}
                         </h3>
                       </div>
-                      <ArrowUpRightIcon className="mt-1 size-4 text-[var(--color-muted)]" />
                     </div>
 
                     <p className="mt-4 text-sm leading-6 text-[var(--color-muted)]">

@@ -85,11 +85,8 @@ export function TablerMoonIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <path
-        d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
+        d="M18.5 14.4a7.4 7.4 0 1 1-8.9-8.9 6.6 6.6 0 1 0 8.9 8.9Z"
+        fill="currentColor"
       />
     </svg>
   )

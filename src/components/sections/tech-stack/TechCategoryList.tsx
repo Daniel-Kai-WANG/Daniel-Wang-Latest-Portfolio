@@ -51,7 +51,7 @@ export function TechCategoryList({
                     className="size-11 rounded-2xl"
                     icon={(props) => <TechCategoryIcon icon={category.icon} {...props} />}
                   />
-                <span className="font-display text-xl font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-[1.75rem]">
+                <span className="font-display text-[1.3rem] font-semibold tracking-[-0.04em] text-[var(--color-text)]">
                   {category.label}
                 </span>
               </div>

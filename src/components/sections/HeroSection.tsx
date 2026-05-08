@@ -6,6 +6,8 @@ import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import {
   ArrowUpRightIcon,
   JellyfishIcon,
+  LeafBudIcon,
+  MoonIcon,
   SakuraIcon,
   SnowCrystalIcon,
   StarfishIcon,
@@ -125,27 +127,60 @@ function WorkflowPanel() {
             </div>
           ))}
 
-          {!reduceMotion && (
-            <motion.div
-              className="pointer-events-none absolute left-8 top-3"
-              animate={
-                theme === 'light'
-                  ? {
-                      x: [0, 14, -6, 10, 0],
-                      y: [0, 34, 88, 138, 168],
-                      rotate: [-10, 16, -18, 10, -8],
-                    }
-                  : { x: [0, 12, -3, 0], y: [0, 34, 88, 144] }
-              }
-              transition={{ duration: 6.6, ease: 'easeInOut', repeat: Infinity }}
-            >
-              {theme === 'light' ? (
-                <SakuraIcon className="size-4" />
-              ) : (
-                <StarfishIcon variant="light" className="size-4 rotate-[14deg]" />
-              )}
-            </motion.div>
-          )}
+          {!reduceMotion &&
+            (theme === 'light' ? (
+              <>
+                <motion.div
+                  className="pointer-events-none absolute left-8 top-3"
+                  animate={{
+                    x: [0, 12, -5, 8, 0],
+                    y: [0, 30, 78, 124, 168],
+                    rotate: [-10, 14, -16, 8, -6],
+                  }}
+                  transition={{ duration: 7.2, ease: 'easeInOut', repeat: Infinity }}
+                >
+                  <SakuraIcon className="size-4" />
+                </motion.div>
+
+                <motion.div
+                  className="pointer-events-none absolute right-10 top-4"
+                  animate={{
+                    x: [0, 10, -8, 6, -4],
+                    y: [0, 54, 132, 212, 292],
+                    rotate: [16, 24, 10, 22, 14],
+                  }}
+                  transition={{ duration: 5.8, ease: 'easeInOut', repeat: Infinity }}
+                >
+                  <LeafBudIcon className="size-4 opacity-90" />
+                </motion.div>
+              </>
+            ) : (
+              <>
+                <motion.div
+                  className="pointer-events-none absolute left-8 top-3"
+                  animate={{
+                    x: [0, 10, -4, 6, 0],
+                    y: [0, 32, 82, 126, 164],
+                    rotate: [14, 20, 8, 18, 14],
+                  }}
+                  transition={{ duration: 7, ease: 'easeInOut', repeat: Infinity }}
+                >
+                  <StarfishIcon variant="light" className="size-4 rotate-[14deg]" />
+                </motion.div>
+
+                <motion.div
+                  className="pointer-events-none absolute right-10 top-4"
+                  animate={{
+                    x: [0, 12, -6, 8, -2],
+                    y: [0, 54, 132, 212, 292],
+                    rotate: [-8, -2, 6, 0, -6],
+                  }}
+                  transition={{ duration: 7.8, ease: 'easeInOut', repeat: Infinity }}
+                >
+                  <MoonIcon className="size-[1.6rem] text-slate-100/88" />
+                </motion.div>
+              </>
+            ))}
         </div>
 
         <div className="mt-7 grid grid-cols-3 gap-3">
