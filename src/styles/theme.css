@@ -79,18 +79,14 @@ body,
 body,
 a,
 button,
-svg,
-div,
-section,
-article,
-span {
+input,
+textarea,
+select {
   transition:
-    background-color 700ms ease,
-    border-color 700ms ease,
-    color 700ms ease,
-    box-shadow 700ms ease,
-    transform 700ms ease,
-    opacity 700ms ease;
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -101,11 +97,9 @@ span {
   body,
   a,
   button,
-  svg,
-  div,
-  section,
-  article,
-  span {
+  input,
+  textarea,
+  select {
     transition-duration: 0ms;
   }
 }
