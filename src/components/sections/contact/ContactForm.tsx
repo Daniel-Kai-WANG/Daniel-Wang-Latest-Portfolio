@@ -1,4 +1,6 @@
 import type { FormEvent } from 'react'
+import { useTheme } from '../../../hooks/useTheme'
+import { getPrimaryCtaStyle } from '../../common/primaryCta'
 
 type ContactFormValues = {
   email: string
@@ -36,6 +38,8 @@ export function ContactForm({
   onSubmit,
   values,
 }: ContactFormProps) {
+  const { theme } = useTheme()
+
   return (
     <form noValidate onSubmit={onSubmit} className="grid gap-4">
       <div className="grid gap-4 md:grid-cols-2">
@@ -116,10 +120,8 @@ export function ContactForm({
 
         <button
           type="submit"
-          className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70"
-          style={{
-            background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
-          }}
+          className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition-[background,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:brightness-[1.03] disabled:cursor-not-allowed disabled:opacity-70"
+          style={getPrimaryCtaStyle(theme)}
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Sending...' : 'Send Inquiry'}
