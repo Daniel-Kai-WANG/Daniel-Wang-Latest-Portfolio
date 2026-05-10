@@ -5,6 +5,7 @@ import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { ArrowUpRightIcon, JellyfishIcon, SnowCrystalIcon, StarfishIcon } from '../common/Icons'
+import { getPrimaryCtaStyle } from '../common/primaryCta'
 import { ProjectPreviewAccent } from './projects/ProjectPreviewAccent'
 
 export function ProjectsSection() {
@@ -128,7 +129,15 @@ export function ProjectsSection() {
                     }}
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <div className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                      <div
+                        className="text-xs font-bold uppercase tracking-[0.22em]"
+                        style={{
+                          color:
+                            theme === 'light'
+                              ? 'color-mix(in srgb, var(--color-text) 54%, #7b95bb)'
+                              : 'color-mix(in srgb, var(--color-text) 76%, #9fbde4)',
+                        }}
+                      >
                         Delivery highlights
                       </div>
                       {theme === 'light' ? (
@@ -141,13 +150,24 @@ export function ProjectsSection() {
                       )}
                     </div>
 
-                    <ul className="mt-5 space-y-3 text-sm leading-6 text-[var(--color-muted)]">
+                    <ul
+                      className="mt-5 space-y-3 text-sm leading-6"
+                      style={{
+                        color:
+                          theme === 'light'
+                            ? 'color-mix(in srgb, var(--color-text) 64%, #89a4c8)'
+                            : 'color-mix(in srgb, var(--color-text) 82%, #95afd7)',
+                      }}
+                    >
                       {activeProject.highlights.map((highlight) => (
                         <li key={highlight} className="flex gap-3">
                           <span
                             className="mt-2 size-2.5 shrink-0 rounded-full"
                             style={{
-                              background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
+                              background:
+                                theme === 'light'
+                                  ? 'linear-gradient(135deg, rgba(255, 216, 165, 0.96), rgba(191, 228, 255, 0.96))'
+                                  : 'linear-gradient(135deg, rgba(109, 190, 255, 0.96), rgba(130, 126, 255, 0.9))',
                             }}
                           />
                           <span>{highlight}</span>
@@ -174,10 +194,8 @@ export function ProjectsSection() {
                     <div className="mt-6">
                       <a
                         href={activeProject.ctaHref}
-                        className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white"
-                        style={{
-                          background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
-                        }}
+                        className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold transition-[background,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:brightness-[1.03]"
+                        style={getPrimaryCtaStyle(theme)}
                       >
                         {activeProject.ctaLabel}
                         <ArrowUpRightIcon className="size-4" />

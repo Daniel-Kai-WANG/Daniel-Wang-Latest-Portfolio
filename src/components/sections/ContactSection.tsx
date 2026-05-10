@@ -164,9 +164,9 @@ export function ContactSection() {
         <ContactSectionAccent />
 
         <div className="relative z-10 mx-auto max-w-4xl">
-          <div className="relative mx-auto max-w-[24rem] px-7 text-center sm:max-w-[30rem] sm:px-8">
+          <div className="relative max-w-[34rem] px-3 sm:max-w-[40rem] sm:px-4 lg:max-w-none">
             <ContactTitleCluster />
-            <h2 className="relative z-10 mx-auto text-center font-display text-[1.9rem] font-bold tracking-[-0.05em] text-[var(--color-text)] sm:text-[2.35rem] lg:text-[2.6rem]">
+            <h2 className="relative z-10 max-w-[26rem] text-left font-display text-[2.05rem] font-bold leading-[0.96] tracking-[-0.055em] text-[var(--color-text)] sm:max-w-[32rem] sm:text-[2.8rem] lg:max-w-none lg:whitespace-nowrap lg:text-[3.2rem]">
               Ready to build a reliable product flow.
             </h2>
           </div>
