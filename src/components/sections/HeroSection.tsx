@@ -1,7 +1,18 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { useState } from 'react'
 import { profile } from '../../data/profile'
 import { useTheme } from '../../hooks/useTheme'
-import { ArrowUpRightIcon, PlaneIcon, SparkIcon } from '../common/Icons'
+import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
+import { WorkflowFloatingMotifs } from './hero/WorkflowFloatingMotifs'
+import {
+  ArrowUpRightIcon,
+  JellyfishIcon,
+  SakuraIcon,
+  SnowCrystalIcon,
+  StarfishIcon,
+  SunLowIcon,
+  TablerMoonIcon,
+} from '../common/Icons'
 
 function WorkflowPanel() {
   const { theme } = useTheme()
@@ -17,6 +28,7 @@ function WorkflowPanel() {
         boxShadow: 'var(--surface-shadow)',
       }}
     >
+      <ThemeShiftBackdrop variant="card" />
       <div className="absolute inset-0 opacity-50 [background-size:24px_24px] bg-hero-grid" />
       <div
         className="absolute right-4 top-4 size-28 rounded-full blur-3xl"
@@ -24,19 +36,19 @@ function WorkflowPanel() {
           background:
             theme === 'light'
               ? 'rgba(56, 189, 248, 0.22)'
-              : 'rgba(255, 79, 216, 0.18)',
+              : 'rgba(128, 199, 255, 0.16)',
         }}
       />
-      <div className="relative">
+      <div className="relative z-10">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-              {theme === 'light' ? 'Sky route map' : 'Stage workflow'}
+              {theme === 'light' ? 'Seasonal workflow' : 'Ocean workflow'}
             </p>
             <h3 className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-text)]">
               {theme === 'light'
-                ? 'From brief to shipped product'
-                : 'A delivery pipeline with rhythm'}
+                ? 'From brief to shipped flow'
+                : 'A delivery pipeline with tidal flow'}
             </h3>
           </div>
           <div
@@ -49,9 +61,12 @@ function WorkflowPanel() {
             }}
           >
             {theme === 'light' ? (
-              <PlaneIcon className="size-5 text-[var(--color-secondary)]" />
+              <div className="relative flex items-center justify-center">
+                <SakuraIcon className="size-5 -rotate-[10deg]" />
+                <SnowCrystalIcon className="absolute -right-2 -top-1 size-3.5" />
+              </div>
             ) : (
-              <SparkIcon className="size-5 text-[var(--color-primary)]" />
+              <StarfishIcon variant="pink" className="size-5 rotate-[10deg]" />
             )}
           </div>
         </div>
@@ -63,7 +78,7 @@ function WorkflowPanel() {
               background:
                 theme === 'light'
                   ? 'linear-gradient(180deg, rgba(37,99,235,0.35), rgba(56,189,248,0.12))'
-                  : 'linear-gradient(180deg, rgba(255,79,216,0.55), rgba(34,211,238,0.18))',
+                  : 'linear-gradient(180deg, rgba(241,154,201,0.3), rgba(133,120,255,0.22))',
             }}
           />
 
@@ -105,29 +120,13 @@ function WorkflowPanel() {
                 <div className="mt-1 text-sm leading-6 text-[var(--color-muted)]">
                   {theme === 'light'
                     ? 'Keep requirements visible, structure the workflow, and reduce delivery friction.'
-                    : 'Translate complex tasks into a precise sequence with product, API, and content alignment.'}
+                    : 'Translate complex tasks into a calm sequence with product, API, and content alignment.'}
                 </div>
               </div>
             </div>
           ))}
 
-          {!reduceMotion && (
-            <motion.div
-              className="pointer-events-none absolute left-8 top-3"
-              animate={
-                theme === 'light'
-                  ? { x: [0, 16, -4, 0], y: [0, 36, 92, 148] }
-                  : { x: [0, 12, -3, 0], y: [0, 34, 88, 144] }
-              }
-              transition={{ duration: 6.6, ease: 'easeInOut', repeat: Infinity }}
-            >
-              {theme === 'light' ? (
-                <PlaneIcon className="size-4 -rotate-12 text-[var(--color-secondary)]" />
-              ) : (
-                <SparkIcon className="size-4 text-[var(--color-primary)]" />
-              )}
-            </motion.div>
-          )}
+          <WorkflowFloatingMotifs reduceMotion={Boolean(reduceMotion)} theme={theme} />
         </div>
 
         <div className="mt-7 grid grid-cols-3 gap-3">
@@ -156,7 +155,7 @@ function WorkflowPanel() {
                       background:
                         theme === 'light'
                           ? 'linear-gradient(180deg, rgba(56,189,248,0.35), rgba(37,99,235,0.75))'
-                          : 'linear-gradient(180deg, rgba(34,211,238,0.5), rgba(255,79,216,0.95))',
+                          : 'linear-gradient(180deg, rgba(128,199,255,0.6), rgba(133,120,255,0.88))',
                     }}
                   />
                 ))}
@@ -178,26 +177,44 @@ function WorkflowPanel() {
 
 export function HeroSection() {
   const { theme } = useTheme()
+  const [glow, setGlow] = useState({ x: 24, y: 20 })
 
   return (
     <section
       className="relative overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
+      onPointerMove={(event) => {
+        const rect = event.currentTarget.getBoundingClientRect()
+        setGlow({
+          x: ((event.clientX - rect.left) / rect.width) * 100,
+          y: ((event.clientY - rect.top) / rect.height) * 100,
+        })
+      }}
       style={{
         background:
           theme === 'light'
-            ? 'linear-gradient(180deg, rgba(255,255,255,0.86), rgba(234,246,255,0.66))'
-            : 'linear-gradient(180deg, rgba(18,19,28,0.86), rgba(15,17,32,0.74))',
+            ? 'linear-gradient(180deg, rgba(248,252,255,0.9), rgba(255,241,247,0.8), rgba(232,245,255,0.76))'
+            : 'linear-gradient(180deg, rgba(8,16,33,0.9), rgba(12,22,47,0.82), rgba(18,20,49,0.78))',
         borderColor: 'var(--color-border)',
         boxShadow: 'var(--surface-shadow)',
       }}
     >
+      <ThemeShiftBackdrop />
+      <div
+        className="absolute inset-0 opacity-90"
+        style={{
+          background:
+            theme === 'light'
+              ? `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(255,214,235,0.28), transparent 34%)`
+              : `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(128,199,255,0.18), rgba(133,120,255,0.1), transparent 34%)`,
+        }}
+      />
       <div
         className="absolute left-[-4rem] top-[-2rem] h-40 w-40 rounded-full blur-3xl"
         style={{
           background:
             theme === 'light'
               ? 'rgba(56, 189, 248, 0.16)'
-              : 'rgba(255, 79, 216, 0.14)',
+              : 'rgba(128, 199, 255, 0.14)',
         }}
       />
       <div
@@ -206,11 +223,35 @@ export function HeroSection() {
           background:
             theme === 'light'
               ? 'rgba(253, 186, 116, 0.16)'
-              : 'rgba(124, 92, 255, 0.18)',
+              : 'rgba(133, 120, 255, 0.16)',
+        }}
+      />
+      <div
+        className="absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            theme === 'light'
+              ? 'linear-gradient(90deg, transparent, rgba(246,168,200,0.8), rgba(186,230,253,0.9), transparent)'
+              : 'linear-gradient(90deg, transparent, rgba(255,178,154,0.54), rgba(128,199,255,0.72), rgba(133,120,255,0.72), transparent)',
         }}
       />
 
-      <div className="relative grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+      {theme === 'light' ? (
+        <>
+          <SakuraIcon className="absolute left-8 top-10 size-7 rotate-[-18deg]" />
+          <SakuraIcon className="absolute right-16 top-20 size-5 rotate-[12deg] opacity-80" />
+          <SnowCrystalIcon className="absolute right-8 top-10 size-5 opacity-80" />
+        </>
+      ) : (
+        <>
+          <TablerMoonIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-slate-100/76" />
+          <StarfishIcon variant="pink" className="absolute right-10 top-16 size-10 rotate-[18deg] opacity-70" />
+          <JellyfishIcon className="absolute bottom-8 right-8 size-12 text-cyan-200/42" />
+          <StarfishIcon variant="light" className="absolute left-8 top-24 size-8 -rotate-[16deg] opacity-65" />
+        </>
+      )}
+
+      <div className="relative z-10 grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div>
           <div
             className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold"
@@ -220,9 +261,27 @@ export function HeroSection() {
               color: 'var(--pill-text)',
             }}
           >
-            <SparkIcon className="size-4" />
+            {theme === 'light' ? (
+              <SunLowIcon className="size-4 text-amber-500" />
+            ) : (
+              <StarfishIcon variant="light" className="size-4 rotate-[10deg]" />
+            )}
             {profile.badge}
           </div>
+
+          <p className="mt-5 flex items-center gap-2 text-sm font-medium text-[var(--color-muted)]">
+            {theme === 'light' ? (
+              <>
+                <SakuraIcon className="size-4" />
+                Spring-sky clarity with sakura drift and ice-light highlights.
+              </>
+            ) : (
+              <>
+                <StarfishIcon variant="pink" className="size-4 rotate-[12deg]" />
+                Moonlit ocean depth with coral glow, tide-light, and drifting reef details.
+              </>
+            )}
+          </p>
 
           <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[0.98] tracking-[-0.06em] text-[var(--color-text)] sm:text-5xl lg:text-[4.3rem]">
             {profile.headline}
@@ -237,10 +296,7 @@ export function HeroSection() {
               href={profile.primaryCta.href}
               className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-soft"
               style={{
-                background:
-                  theme === 'light'
-                    ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                    : 'linear-gradient(135deg, #FF4FD8, #7C5CFF)',
+                background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
               }}
             >
               {profile.primaryCta.label}

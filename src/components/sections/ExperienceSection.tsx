@@ -1,104 +1,174 @@
+import { useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { leafBud } from '../../assets/experience'
 import { experiences } from '../../data/experience'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
-import { SectionHeading } from '../common/SectionHeading'
+import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
+import { SakuraIcon } from '../common/Icons'
+import { CoralDecorPair } from './CoralDecorPair'
+import { ExperienceJourneyGraph } from './ExperienceJourneyGraph'
+
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+function formatExperienceRange(date: string) {
+  const [startRaw, endRaw] = date.split('–').map((value) => value.trim())
+
+  const formatPart = (value: string) => {
+    if (/current/i.test(value)) {
+      return 'Current'
+    }
+
+    const [month, year] = value.split('/')
+    if (!month || !year) {
+      return value
+    }
+
+    const monthLabel = monthNames[Number(month) - 1]
+    return monthLabel ? `${monthLabel} ${year}` : value
+  }
+
+  return `${formatPart(startRaw)} - ${formatPart(endRaw)}`
+}
+
+function getExperiencePhase(date: string) {
+  return /current/i.test(date) ? 'Current' : 'Completed'
+}
 
 export function ExperienceSection() {
   const { theme } = useTheme()
+  const reduceMotion = useReducedMotion() ?? false
+  const [activeFruit, setActiveFruit] = useState(0)
+  const activeExperience = experiences[activeFruit]
+  const isLight = theme === 'light'
 
   return (
     <Reveal>
-      <section id="experience" className="section-frame px-5 py-8 sm:px-8 sm:py-10 lg:px-10">
-        <SectionHeading
-          title="Experience journey"
-          description="A hands-on path through web products, mobile releases, legacy upgrades, CMS implementation, and workflow-heavy delivery."
-        />
+      <section
+        id="experience"
+        className="section-frame relative overflow-visible px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
+      >
+        <ThemeShiftBackdrop />
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-2">
-          {experiences.map((item, index) => (
-            <article
-              key={`${item.company}-${item.date}`}
-              className="relative overflow-hidden rounded-[2rem] border px-5 py-5 sm:px-6"
+        <div className="relative z-10">
+          <div className="relative z-10 max-w-2xl">
+            <h2 className="font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-4xl">
+              Experience journey
+            </h2>
+          </div>
+
+          <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.1fr)] xl:items-start">
+            <motion.article
+              key={`${activeExperience.company}-${theme}`}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.28, ease: 'easeOut' }}
+              className="relative overflow-hidden rounded-[2rem] border p-6 sm:p-7 xl:sticky xl:top-28"
               style={{
                 borderColor: 'var(--color-border)',
-                background:
-                  theme === 'light'
-                    ? 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(240,249,255,0.9))'
-                    : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(124,92,255,0.06))',
+                background: isLight
+                  ? 'linear-gradient(180deg, rgba(255,255,255,0.98), rgba(240,248,255,0.96), rgba(255,242,249,0.97))'
+                  : 'linear-gradient(180deg, rgba(12,18,39,0.98), rgba(10,22,48,0.97), rgba(15,18,43,0.98))',
+                boxShadow: 'var(--surface-shadow)',
               }}
             >
+              <ThemeShiftBackdrop variant="card" />
+
               <div
-                className="absolute right-4 top-4 h-20 w-20 rounded-full blur-2xl"
+                className="absolute inset-x-0 top-0 h-32"
                 style={{
-                  background:
-                    theme === 'light'
-                      ? index % 2 === 0
-                        ? 'rgba(56,189,248,0.18)'
-                        : 'rgba(253,186,116,0.2)'
-                      : index % 2 === 0
-                        ? 'rgba(255,79,216,0.18)'
-                        : 'rgba(34,211,238,0.16)',
+                  background: isLight
+                    ? 'radial-gradient(circle at top left, rgba(244, 186, 218, 0.22), transparent 56%), radial-gradient(circle at top right, rgba(165, 220, 255, 0.24), transparent 58%)'
+                    : 'radial-gradient(circle at top left, rgba(122, 185, 255, 0.16), transparent 50%), radial-gradient(circle at top right, rgba(132, 117, 255, 0.16), transparent 58%)',
                 }}
               />
-              {theme === 'light' ? (
-                <div className="absolute right-6 top-6 flex gap-2 opacity-80">
-                  <div className="size-5 rounded-full bg-white/90" />
-                  <div className="mt-2 size-7 rounded-full bg-sky-100/90" />
-                  <div className="size-4 rounded-full bg-white/80" />
-                </div>
-              ) : (
-                <div className="absolute right-5 top-5 h-24 w-24 rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-fuchsia-400/15 via-transparent to-cyan-300/10" />
-              )}
 
-              <div className="relative">
-                <div className="flex flex-wrap items-start justify-between gap-3">
+              <div className="relative z-10">
+                <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                      {item.date}
+                    <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                      {isLight ? 'Orchard detail' : 'Coral detail'}
                     </p>
-                    <h3 className="mt-3 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-text)]">
-                      {item.role}
-                    </h3>
-                    <p className="mt-1 text-base font-semibold text-[var(--color-text)]">
-                      {item.company}
+                    <p className="mt-3 text-sm font-semibold text-[var(--color-muted)]">
+                      {formatExperienceRange(activeExperience.date)}
                     </p>
-                    <p className="mt-1 text-sm text-[var(--color-muted)]">{item.location}</p>
                   </div>
 
+                  {isLight ? (
+                    <div className="flex items-center gap-2">
+                      <SakuraIcon className="size-7" />
+                      <img
+                        src={leafBud}
+                        alt=""
+                        aria-hidden="true"
+                        className="block size-7 object-contain -rotate-[16deg]"
+                        style={{
+                          filter: 'drop-shadow(0 2px 7px rgba(170, 214, 98, 0.16))',
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <CoralDecorPair starfishVariant="light" />
+                  )}
+                </div>
+
+                <div className="mt-4 flex flex-wrap items-center gap-3">
                   <span
-                    className="inline-flex max-w-[14rem] rounded-full border px-3 py-1 text-right text-xs font-semibold leading-5"
+                    className="inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
                     style={{
-                      borderColor: 'var(--color-border)',
+                      borderColor: 'var(--pill-border)',
                       background: 'var(--pill-background)',
                       color: 'var(--pill-text)',
                     }}
                   >
-                    {item.metric}
+                    {getExperiencePhase(activeExperience.date)}
+                  </span>
+                  <span className="text-sm font-semibold text-[var(--color-muted)]">
+                    {activeExperience.location}
                   </span>
                 </div>
 
-                <ul className="mt-5 space-y-3 text-sm leading-6 text-[var(--color-muted)]">
-                  {item.highlights.map((highlight) => (
-                    <li key={highlight} className="flex gap-3">
+                <h3 className="mt-6 font-display text-[2rem] font-bold leading-[1.02] tracking-[-0.06em] text-[var(--color-text)] sm:text-[2.35rem]">
+                  {activeExperience.role}
+                </h3>
+                <p className="mt-3 text-lg font-semibold text-[var(--color-text)]">
+                  {activeExperience.company}
+                </p>
+
+                <div
+                  className="mt-6 rounded-[1.35rem] border px-4 py-4 text-sm font-semibold leading-7"
+                  style={{
+                    borderColor: 'var(--pill-border)',
+                    background: isLight
+                      ? 'linear-gradient(180deg, rgba(249,252,255,0.94), rgba(255,241,248,0.92))'
+                      : 'linear-gradient(180deg, rgba(255,255,255,0.06), rgba(23,34,68,0.42))',
+                    color: 'var(--pill-text)',
+                  }}
+                >
+                  {activeExperience.metric}
+                </div>
+
+                <div className="mt-6 space-y-3">
+                  {activeExperience.highlights.map((highlight) => (
+                    <div key={highlight} className="flex gap-3 text-sm leading-7 text-[var(--color-muted)]">
                       <span
                         className="mt-2 size-2.5 shrink-0 rounded-full"
                         style={{
-                          background:
-                            theme === 'light'
-                              ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                              : 'linear-gradient(135deg, #FF4FD8, #22D3EE)',
+                          background: isLight
+                            ? 'linear-gradient(90deg, rgba(255, 236, 132, 0.92) 0%, rgba(215, 243, 194, 0.92) 48%, rgba(170, 238, 255, 0.94) 100%)'
+                            : 'linear-gradient(135deg, #7ab9ff, #8275ff)',
                         }}
                       />
                       <span>{highlight}</span>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {item.tech.map((tech) => (
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {activeExperience.tech.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-full border px-3 py-1.5 text-xs font-semibold"
+                      className="rounded-full border px-2.5 py-1 text-[11px] font-semibold"
                       style={{
                         borderColor: 'var(--pill-border)',
                         background: 'var(--pill-background)',
@@ -109,9 +179,44 @@ export function ExperienceSection() {
                     </span>
                   ))}
                 </div>
+
+                <p className="mt-6 text-sm leading-7 text-[var(--color-muted)]">
+                  Use the journey map on the right to move through each role story while the left panel stays fixed.
+                </p>
               </div>
-            </article>
-          ))}
+            </motion.article>
+
+            <div
+              className="relative overflow-hidden rounded-[2rem] border px-4 py-5 sm:px-6 sm:py-6"
+              style={{
+                borderColor: 'var(--color-border)',
+                background: isLight
+                  ? 'linear-gradient(180deg, rgba(247,252,255,0.97), rgba(232,245,255,0.95), rgba(255,245,250,0.98))'
+                  : 'linear-gradient(180deg, rgba(10,18,40,0.98), rgba(8,20,44,0.97), rgba(14,16,36,0.98))',
+                boxShadow: 'var(--surface-shadow)',
+              }}
+            >
+              <ThemeShiftBackdrop variant="card" />
+
+              <div
+                className="absolute inset-x-0 top-0 h-40"
+                style={{
+                  background: isLight
+                    ? 'radial-gradient(circle at top, rgba(143, 214, 255, 0.28), transparent 64%)'
+                    : 'radial-gradient(circle at top, rgba(106, 183, 255, 0.18), transparent 64%)',
+                }}
+              />
+
+              <div className="relative z-10">
+                <ExperienceJourneyGraph
+                  activeIndex={activeFruit}
+                  onSelect={setActiveFruit}
+                  reduceMotion={reduceMotion}
+                  theme={theme}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </Reveal>

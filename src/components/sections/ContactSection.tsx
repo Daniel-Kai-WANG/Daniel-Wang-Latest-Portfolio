@@ -1,98 +1,205 @@
+import type { FormEvent } from 'react'
+import { useEffect, useState } from 'react'
 import { profile } from '../../data/profile'
+import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
-import {
-  ArrowUpRightIcon,
-  LinkIcon,
-  LocationIcon,
-  MailIcon,
-} from '../common/Icons'
+import { ContactActionCards } from './contact/ContactActionCards'
+import { ContactSectionAccent } from './contact/ContactSectionAccent'
+import { ContactForm, type ContactFormErrors, type ContactFormValues } from './contact/ContactForm'
+import { ContactSuccessState } from './contact/ContactSuccessState'
+import { ContactTitleCluster } from './contact/ContactTitleCluster'
+import { loadSuccessAnimation } from './contact/successAnimation'
 
-const iconByLabel = {
-  Email: MailIcon,
-  LinkedIn: LinkIcon,
-  'Portfolio Archive': LinkIcon,
+const initialValues: ContactFormValues = {
+  name: '',
+  email: '',
+  message: '',
+}
+
+type FormSubmitResponse = {
+  message?: string
+  success?: boolean | string
+}
+
+function validateForm(values: ContactFormValues) {
+  const errors: ContactFormErrors = {}
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+  if (!values.name.trim()) {
+    errors.name = 'Please enter your name.'
+  }
+
+  if (!values.email.trim()) {
+    errors.email = 'Please enter your email address.'
+  } else if (!emailPattern.test(values.email.trim())) {
+    errors.email = 'Please enter a valid email address.'
+  }
+
+  if (!values.message.trim()) {
+    errors.message = 'Please add a short message or project inquiry.'
+  }
+
+  return errors
+}
+
+function resolveFormEndpoint(recipientEmail: string) {
+  const envEndpoint = import.meta.env.VITE_FORMSUBMIT_ENDPOINT?.trim()
+
+  if (envEndpoint) {
+    return envEndpoint
+  }
+
+  return `https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`
 }
 
 export function ContactSection() {
+  const { theme } = useTheme()
+  const emailLink = profile.contactLinks.find((link) => link.label === 'Email')
+  const githubLink = profile.contactLinks.find((link) => link.label === 'GitHub')
+  const linkedinLink = profile.contactLinks.find((link) => link.label === 'LinkedIn')
+  const recipientEmail = emailLink?.value ?? 'kaiwang2027@gmail.com'
+  const formEndpoint = resolveFormEndpoint(recipientEmail)
+
+  const [values, setValues] = useState<ContactFormValues>(initialValues)
+  const [errors, setErrors] = useState<ContactFormErrors>({})
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [successAnimationData, setSuccessAnimationData] = useState<object | null>(null)
+
+  useEffect(() => {
+    let isMounted = true
+
+    void loadSuccessAnimation(theme)
+      .then((animation) => {
+        if (isMounted) {
+          setSuccessAnimationData(animation)
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setSuccessAnimationData(null)
+        }
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [theme])
+
+  const updateField = (field: keyof ContactFormValues, value: string) => {
+    setValues((current) => ({ ...current, [field]: value }))
+    setErrors((current) => ({ ...current, [field]: undefined }))
+    setErrorMessage(null)
+  }
+
+  const resetForm = () => {
+    setValues(initialValues)
+    setErrors({})
+    setErrorMessage(null)
+    setIsSuccess(false)
+  }
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const nextErrors = validateForm(values)
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors)
+      return
+    }
+
+    setIsSubmitting(true)
+    setErrorMessage(null)
+
+    try {
+      const formData = new FormData()
+      formData.append('name', values.name.trim())
+      formData.append('email', values.email.trim())
+      formData.append('message', values.message.trim())
+      formData.append('_subject', 'New inquiry from daniel-wang-portfolio')
+      formData.append('_template', 'table')
+      formData.append('_captcha', 'false')
+      formData.append('_replyto', values.email.trim())
+
+      const response = await fetch(formEndpoint, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+        },
+        body: formData,
+      })
+      const result = (await response.json().catch(() => null)) as FormSubmitResponse | null
+      const isSuccessful = result?.success === true || result?.success === 'true'
+
+      if (!response.ok || !isSuccessful) {
+        throw new Error(result?.message || 'The contact request could not be sent.')
+      }
+
+      setIsSuccess(true)
+      setValues(initialValues)
+      setErrors({})
+    } catch (error) {
+      const fallbackMessage =
+        'Something went wrong while sending your message. Please try again in a moment or email me directly.'
+
+      setErrorMessage(error instanceof Error ? error.message || fallbackMessage : fallbackMessage)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <Reveal>
       <section
         id="contact"
-        className="overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
+        className="relative overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
         style={{
-          background:
-            'linear-gradient(135deg, color-mix(in srgb, var(--color-surface) 92%, transparent), color-mix(in srgb, var(--color-surface-muted) 72%, transparent))',
+          background: 'color-mix(in srgb, var(--color-surface) 94%, transparent)',
           borderColor: 'var(--color-border)',
           boxShadow: 'var(--surface-shadow)',
         }}
       >
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-              Contact CTA
-            </p>
-            <h2 className="mt-4 font-display text-3xl font-bold tracking-[-0.05em] text-[var(--color-text)] sm:text-4xl">
+        <ContactSectionAccent />
+
+        <div className="relative z-10 mx-auto max-w-4xl">
+          <div className="relative max-w-[34rem] px-3 sm:max-w-[40rem] sm:px-4 lg:max-w-none">
+            <ContactTitleCluster />
+            <h2 className="relative z-10 max-w-[26rem] text-left font-display text-[2.05rem] font-bold leading-[0.96] tracking-[-0.055em] text-[var(--color-text)] sm:max-w-[32rem] sm:text-[2.8rem] lg:max-w-none lg:whitespace-nowrap lg:text-[3.2rem]">
               Ready to build a reliable product flow.
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-7 text-[var(--color-muted)]">
-              I enjoy turning ambiguous requirements into clear systems across product UI, mobile
-              experiences, backend services, CMS delivery, and AI-assisted workflow design.
-            </p>
+          </div>
 
-            <div className="mt-7 inline-flex items-center gap-3 rounded-full border px-4 py-2 text-sm font-semibold text-[var(--color-text)]">
-              <LocationIcon className="size-4" />
-              {profile.location}
+          <div
+            className="mt-8 overflow-hidden rounded-[1.9rem] border p-5 sm:p-6"
+            style={{
+              borderColor: 'var(--color-border)',
+              background: 'color-mix(in srgb, var(--color-surface) 92%, transparent)',
+            }}
+          >
+            <div className="relative z-10">
+              {isSuccess ? (
+                <ContactSuccessState animationData={successAnimationData} onReset={resetForm} />
+              ) : (
+                <ContactForm
+                  errorMessage={errorMessage}
+                  errors={errors}
+                  isSubmitting={isSubmitting}
+                  onChange={updateField}
+                  onSubmit={handleSubmit}
+                  values={values}
+                />
+              )}
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            {profile.contactLinks.map((link) => {
-              const Icon = iconByLabel[link.label as keyof typeof iconByLabel] ?? LinkIcon
-
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith('http') ? '_blank' : undefined}
-                  rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="group rounded-[1.8rem] border p-5 transition-transform hover:-translate-y-1"
-                  style={{
-                    borderColor: 'var(--color-border)',
-                    background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
-                  }}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex size-11 items-center justify-center rounded-2xl bg-[var(--soft-accent)] text-[var(--color-text)]">
-                      <Icon className="size-5" />
-                    </div>
-                    <ArrowUpRightIcon className="size-4 text-[var(--color-muted)] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </div>
-                  <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                    {link.label}
-                  </p>
-                  <p className="mt-2 text-sm font-semibold leading-6 text-[var(--color-text)]">
-                    {link.value}
-                  </p>
-                </a>
-              )
-            })}
-
-            <div
-              className="rounded-[1.8rem] border p-5 md:col-span-2"
-              style={{
-                borderColor: 'var(--color-border)',
-                background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
-              }}
-            >
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                Best fit
-              </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-text)]">
-                Teams that need a developer who can move between front-end polish, mobile delivery,
-                backend wiring, CMS practicality, and structured AI workflow thinking without losing
-                clarity.
-              </p>
-            </div>
+          <div className="mt-4">
+            <ContactActionCards
+              emailLink={emailLink}
+              githubLink={githubLink}
+              linkedinLink={linkedinLink}
+            />
           </div>
         </div>
       </section>

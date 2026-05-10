@@ -1,7 +1,7 @@
 # WORK_LOG — Daniel Wang Portfolio
 
 ## 1. Project Summary
-Built a single-page portfolio for Daniel Wang positioned as a Full-Stack Developer and AI Workflow Builder. The site uses a dual-theme system: a bright sky mode and a more premium, restrained music-stage dark mode.
+Built a single-page portfolio for Daniel Wang positioned as a Full-Stack Developer and AI Workflow Builder. The site now uses a more personalised dual-theme system that blends K-pop stage energy, sakura softness, and winter-snow atmosphere into both modes while keeping the site professional and recruiter-friendly.
 
 ## 2. Setup Work Completed
 - Created a Vite + React + TypeScript project.
@@ -12,19 +12,31 @@ Built a single-page portfolio for Daniel Wang positioned as a Full-Stack Develop
 - Added the requested folder structure for data, layout, sections, animation, hooks, lib, styles, scripts, docs, and QR output.
 
 ## 3. Branch Workflow Used
-- Planned workflow: `main -> staging -> feature/* -> staging`.
-- Local implementation is prepared to support the requested branch strategy.
+- Local git repository initialized.
+- `main` branch created for the root commit.
+- `staging` branch created as the active follow-up branch.
+- Enhancement work was split into small feature branches from `staging`:
+  - `feature/personal-theme-aura`
+  - `feature/celestial-pull-toggle`
+  - `feature/signature-motion-effects`
+  - `feature/update-work-log`
+  - `feature/pin-floating-nav`
+  - `feature/refresh-theme-motifs`
+  - `feature/3d-toggle-shift-backdrop`
+  - `feature/smooth-sheen-effects`
+  - `feature/sync-theme-docs`
+- Planned ongoing workflow remains `main -> staging -> feature/* -> staging`.
 - Manual GitHub repository creation is still required because GitHub CLI is not installed in this environment.
 
 ## 4. Features Completed
 ### Light Theme Base
-Implemented the page shell, floating navigation, theme tokens, responsive container system, and data-driven content structure.
+Implemented the page shell, fixed floating navigation, theme tokens, responsive container system, and data-driven content structure.
 
 ### Theme Toggle
-Added a sunrise / moonrise slider-style theme toggle with smooth animation and `localStorage` persistence.
+Replaced the earlier toggle with a horizontal 3D capsule switch. Clicking the control rotates the active thumb across the track and flips the mood from dawn to midnight while keeping keyboard support and `localStorage` persistence.
 
 ### Hero Section
-Built the hero with the exact badge, heading, subtitle, stats, CTA links, and a themed workflow panel.
+Built the hero with the exact badge, heading, subtitle, stats, CTA links, and a themed workflow panel. Added a mouse-reactive glow field plus more personal sakura / snow storytelling in light mode and music-note / jellyfish storytelling in dark mode.
 
 ### Experience Journey
 Added all five experience entries from the resume using cloud-like cards in light mode and glossy stage-inspired cards in dark mode.
@@ -43,14 +55,39 @@ Added email, LinkedIn, portfolio archive, and Brisbane location in a responsive 
 
 ### Deployment and QR Code
 Added a GitHub Pages workflow and `scripts/generate-qr.mjs`.
-QR images still need to be generated after the live deployment URL is confirmed.
+Generated provisional QR images for the anticipated GitHub Pages URL:
+`https://daniel-kai-wang.github.io/daniel-ai-workflow-portfolio/`
+
+### Personal Theme Enhancements
+Expanded the visual direction so both themes feel more specific to Daniel instead of generic light/dark styling:
+- Light mode now mixes spring-sky clarity, drifting sakura petals, and crisp snow-light accents.
+- Dark mode now mixes K-pop concert polish, glossy stage lighting, floating music notes, and jellyfish-like midnight drift.
+- Shared atmospheric effects keep both modes visually related rather than feeling like two separate websites.
+
+### Signature Motion Effects
+Added a stronger motion language inspired by high-quality animated portfolio sites while keeping the site readable and performant:
+- a global atmospheric layer with drifting sakura petals and falling snow in light mode
+- floating music notes and jellyfish in dark mode
+- a custom section divider with looping motion
+- mouse-reactive hero lighting
+- sunrise / moonrise transition backdrops behind major blocks during theme switching
+- hover tilt and lift on experience, project, and contact cards
+- lighter CSS-based sweeping highlight passes across premium cards
+- a calmer dark-mode glow treatment to reduce perceived lag
 
 ## 5. Animation / Visual Effects Added
 - Section fade-up reveal on scroll.
 - Gentle workflow motion in the hero panel.
 - Floating sky-mode ambient orbs and soft card depth.
-- Restrained dark-mode glow for a premium stage feel.
-- Hover lift behavior on contact cards.
+- Global sakura drift and snowflake fall through the page shell.
+- Floating music notes and jellyfish drift in dark mode.
+- Mouse-reactive hero glow that follows pointer movement.
+- Horizontal 3D theme toggle.
+- Per-block sunrise / moonrise transition during theme changes.
+- Restrained dark-mode glow and stage-beam atmosphere for a premium stage feel.
+- Hover tilt and lift behavior on experience, project, and contact cards.
+- CSS-based sweep-light passes across premium cards in both light and dark themes.
+- Motion divider band between hero and experience sections.
 - Smooth theme transition timing across surfaces and borders.
 
 ## 6. Third-Party Libraries Used
@@ -65,20 +102,28 @@ QR images still need to be generated after the live deployment URL is confirmed.
 | qrcode | QR generation | Mature QR code package for generating deployment QR images | `npm view qrcode version time.modified description` -> modified `2025-11-13` |
 
 ## 7. Validation Results
-- `npm run typecheck`: pending final verification
-- `npm run build`: pending final verification
-- `npm run lint`: pending final verification
-- Desktop manual check: pending
+- `npm run typecheck`: passed
+- `npm run build`: passed
+- `npm run lint`: passed
+- Desktop manual check: partial
 - Tablet manual check: pending
 - Mobile manual check: pending
-- Theme toggle check: pending
-- QR scan check: pending until deployment URL exists
+- Theme toggle check: partial DOM-level verification in local browser
+- QR scan check: not verified against a live deployed URL yet
 
-## 8. Known Issues
+## 8. Git Reference Pattern Used
+Enhancement commits followed Daniel's preferred short style:
+- `feat: ...` for new visual or interaction additions
+- `fixed: ...` reserved for future repair-only changes
+
+This enhancement round was intentionally broken into smaller commits instead of one large batch commit so the history better reflects real feature delivery.
+
+## 9. Known Issues
 - GitHub repository creation and live deployment were not completed automatically because GitHub CLI is unavailable.
-- QR files are not generated yet because the final live URL has not been confirmed.
+- The generated QR files are based on the expected GitHub Pages URL and still need real deployment verification.
+- Browser-plugin screenshots in Arc did not faithfully show the rendered hero, so visual verification relied partly on DOM inspection rather than a full screenshot pass.
 
-## 9. Next Recommended Steps
+## 10. Next Recommended Steps
 - Run validation commands and browser-based responsive checks.
 - Create the GitHub repository manually and enable GitHub Pages.
 - Run `node scripts/generate-qr.mjs <live-url>` after deployment.

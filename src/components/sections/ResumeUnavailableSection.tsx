@@ -1,15 +1,24 @@
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
-import { PlaneIcon, SparkIcon } from '../common/Icons'
+import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
+import {
+  JellyfishIcon,
+  SakuraIcon,
+  SnowCrystalIcon,
+  StarfishIcon,
+  SunLowIcon,
+  TablerMoonIcon,
+} from '../common/Icons'
 
 export function ResumeUnavailableSection() {
   const { theme } = useTheme()
 
   return (
     <Reveal>
-      <section className="section-frame overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div>
+      <section className="section-frame relative overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10">
+        <ThemeShiftBackdrop />
+        <div className="relative z-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="relative z-10">
             <h2 className="font-display text-3xl font-bold tracking-[-0.05em] text-[var(--color-text)] sm:text-4xl">
               Resume temporarily out of office.
             </h2>
@@ -24,10 +33,7 @@ export function ResumeUnavailableSection() {
                 href="#projects"
                 className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-white"
                 style={{
-                  background:
-                    theme === 'light'
-                      ? 'linear-gradient(135deg, #38BDF8, #2563EB)'
-                      : 'linear-gradient(135deg, #FF4FD8, #7C5CFF)',
+                  background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
                 }}
               >
                 Explore Projects Instead
@@ -53,27 +59,44 @@ export function ResumeUnavailableSection() {
               borderColor: 'var(--color-border)',
               background:
                 theme === 'light'
-                  ? 'linear-gradient(180deg, rgba(255,255,255,0.9), rgba(240,249,255,0.9))'
-                  : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(124,92,255,0.07))',
+                  ? 'linear-gradient(180deg, rgba(248,252,255,0.92), rgba(240,249,255,0.9), rgba(252,242,247,0.88))'
+                  : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(128,199,255,0.08), rgba(133,120,255,0.08))',
             }}
           >
+            <ThemeShiftBackdrop variant="card" />
+            <div
+              className="sheen-pass"
+              style={{
+                animationDuration: theme === 'light' ? '8.6s' : '6.8s',
+                background:
+                  theme === 'light'
+                    ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.52), rgba(214,244,255,0.28), transparent)'
+                    : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.16), rgba(128,199,255,0.1), transparent)',
+              }}
+            />
             <div
               className="absolute right-[-1rem] top-[-1rem] h-24 w-24 rounded-full blur-3xl"
               style={{
                 background:
                   theme === 'light'
                     ? 'rgba(56,189,248,0.18)'
-                    : 'rgba(255,79,216,0.16)',
+                    : 'rgba(133,120,255,0.16)',
               }}
             />
 
             {theme === 'light' ? (
-              <div className="relative space-y-5">
+              <div className="relative z-10 space-y-5">
                 <div className="flex items-center gap-3">
                   <div className="flex gap-2">
-                    <div className="size-10 rounded-full bg-white" />
-                    <div className="mt-3 size-14 rounded-full bg-sky-100" />
-                    <div className="size-9 rounded-full bg-white/90" />
+                    <div className="flex size-10 items-center justify-center rounded-full bg-white">
+                      <SakuraIcon className="size-5" />
+                    </div>
+                    <div className="mt-3 flex size-14 items-center justify-center rounded-full bg-sky-100">
+                      <SnowCrystalIcon className="size-6" />
+                    </div>
+                    <div className="flex size-9 items-center justify-center rounded-full bg-white/90">
+                      <SunLowIcon className="size-4 text-amber-500" />
+                    </div>
                   </div>
                   <div className="rounded-[1.4rem] border border-sky-100 bg-white/90 px-4 py-3 text-sm font-semibold text-sky-700">
                     BRB — polishing resume
@@ -87,27 +110,41 @@ export function ResumeUnavailableSection() {
                     <div className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-slate-800">
                       Work is still very much active.
                     </div>
+                    <div className="mt-3 flex items-center gap-2 text-sm text-slate-500">
+                      <SakuraIcon className="size-4" />
+                      <SnowCrystalIcon className="size-4" />
+                      Sakura breeze outside, shipping energy still on.
+                    </div>
                   </div>
-                  <PlaneIcon className="size-10 rotate-12 text-sky-500" />
+                  <div className="flex items-center gap-2">
+                    <SakuraIcon className="size-6 rotate-[-14deg]" />
+                    <SnowCrystalIcon className="size-5" />
+                  </div>
                 </div>
               </div>
             ) : (
-              <div className="relative space-y-5">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-fuchsia-200">
-                  <SparkIcon className="size-4" />
-                  Resume is backstage — coming back soon
+              <div className="relative z-10 space-y-5">
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#ffd8cb]">
+                  <StarfishIcon variant="pink" className="size-4 rotate-[10deg]" />
+                  Resume is off-shore for a short refresh
                 </div>
                 <div className="rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-white/8 to-transparent px-5 py-6">
                   <div className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">
-                    Backstage pass
+                    Tidal update
                   </div>
                   <div className="mt-3 font-display text-3xl font-bold tracking-[-0.05em] text-white">
                     Temporary hold
                   </div>
                   <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">
-                    The downloadable file is off-stage for cleanup, but the live portfolio still
-                    shows the work, context, and delivery range.
+                    The downloadable file is being refreshed off-shore, but the live portfolio
+                    still shows the work, context, and delivery range.
                   </p>
+                  <div className="mt-4 flex items-center gap-2 text-sm text-[#ffd8cb]/80">
+                    <TablerMoonIcon className="size-4 text-slate-100/84" />
+                    <StarfishIcon variant="light" className="size-4 -rotate-[10deg]" />
+                    <JellyfishIcon className="size-4 text-cyan-200" />
+                    Coral glow outside, the delivery story still fully visible.
+                  </div>
                 </div>
               </div>
             )}

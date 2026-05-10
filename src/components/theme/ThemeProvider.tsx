@@ -1,4 +1,4 @@
-import { startTransition, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { PropsWithChildren } from 'react'
 import type { ThemeMode } from '../../types/content'
 import { ThemeContext } from './theme-context'
@@ -23,9 +23,11 @@ export function ThemeProvider({ children }: PropsWithChildren) {
   }, [theme])
 
   const setTheme = (nextTheme: ThemeMode) => {
-    startTransition(() => {
-      updateTheme(nextTheme)
-    })
+    if (nextTheme === theme) {
+      return
+    }
+
+    updateTheme(nextTheme)
   }
 
   const toggleTheme = () => {
@@ -33,7 +35,16 @@ export function ThemeProvider({ children }: PropsWithChildren) {
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        setTheme,
+        toggleTheme,
+        isThemeShifting: false,
+        themeShiftDirection: null,
+        themeShiftKey: 0,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   )
