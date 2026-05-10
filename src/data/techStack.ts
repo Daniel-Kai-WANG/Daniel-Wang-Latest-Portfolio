@@ -15,6 +15,8 @@ export type TechLogo = {
   logoPath: string
   logoMarkup: string | null
   altText: string
+  artVariant: 'standard' | 'wide' | 'tall'
+  labelVariant: 'default' | 'compact'
   fallbackReason?: string
 }
 

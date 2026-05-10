@@ -11,7 +11,30 @@ const logoMarkupModules = import.meta.glob('../assets/logos/*.svg', {
 
 type CreateTechLogoOptions = {
   altText?: string
+  artVariant?: 'standard' | 'wide' | 'tall'
   fallbackReason?: string
+  labelVariant?: 'default' | 'compact'
+}
+
+function getDefaultPresentation(id: string) {
+  if (id === 'react-native' || id === 'aws' || id === 'aws-cloud' || id === 'github-actions') {
+    return {
+      artVariant: 'wide' as const,
+      labelVariant: 'compact' as const,
+    }
+  }
+
+  if (id === 'workflow-automation' || id === 'prompt-engineering' || id === 'pdf-extraction') {
+    return {
+      artVariant: 'standard' as const,
+      labelVariant: 'compact' as const,
+    }
+  }
+
+  return {
+    artVariant: 'standard' as const,
+    labelVariant: 'default' as const,
+  }
 }
 
 function resolveLogoAsset(fileName: string) {
@@ -31,6 +54,7 @@ export function createTechLogo(
   options: CreateTechLogoOptions = {}
 ) {
   const { logoPath, logoMarkup } = resolveLogoAsset(fileName)
+  const presentation = getDefaultPresentation(id)
 
   return {
     id,
@@ -39,6 +63,8 @@ export function createTechLogo(
     logoPath,
     logoMarkup,
     altText: options.altText ?? `${name} logo`,
+    artVariant: options.artVariant ?? presentation.artVariant,
     fallbackReason: options.fallbackReason,
+    labelVariant: options.labelVariant ?? presentation.labelVariant,
   }
 }

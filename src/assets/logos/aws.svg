@@ -1,7 +1,33 @@
-<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M54 170C84 190 122 202 166 202C193 202 217 197 235 187" stroke="#232F3E" stroke-width="12" stroke-linecap="round"/>
-  <path d="M188 183L234 187L209 221" stroke="#FF9900" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M47 92H81V150H47V92Z" fill="#232F3E"/>
-  <path d="M94 150L117 92H138L161 150H142L137 136H117L113 150H94ZM121 121H133L127 104L121 121Z" fill="#232F3E"/>
-  <path d="M173 92H209C222 92 231 101 231 114C231 124 226 132 218 136C228 140 234 149 234 160C234 175 223 186 206 186H173V92ZM193 109V129H205C211 129 214 125 214 119C214 113 210 109 204 109H193ZM193 146V169H207C214 169 218 164 218 157C218 150 214 146 206 146H193Z" fill="#232F3E"/>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 256 160"
+  fill="none"
+  role="img"
+  aria-labelledby="aws-logo-title"
+>
+  <title id="aws-logo-title">AWS</title>
+  <text
+    x="34"
+    y="82"
+    fill="#232F3E"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="60"
+    font-weight="700"
+    letter-spacing="-3"
+  >
+    aws
+  </text>
+  <path
+    d="M54 102C83 118 122 124 165 122C183 121 201 117 217 110"
+    stroke="#FF9900"
+    stroke-linecap="round"
+    stroke-width="12"
+  />
+  <path
+    d="M195 100L219 110L201 129"
+    stroke="#FF9900"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="12"
+  />
 </svg>
