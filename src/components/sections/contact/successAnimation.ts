@@ -50,7 +50,7 @@ function setLayerStroke(
 }
 
 export async function loadSuccessAnimation(theme: 'light' | 'dark') {
-  const response = await fetch('/animations/success-check.json')
+  const response = await fetch(`${import.meta.env.BASE_URL}animations/success-check.json`)
 
   if (!response.ok) {
     throw new Error('Unable to load success animation.')
