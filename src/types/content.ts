@@ -16,6 +16,13 @@ export type ContactLink = {
   href: string
 }
 
+export type ResumeVariant = {
+  label: string
+  role: string
+  href: string
+  fileName: string
+}
+
 export type Profile = {
   name: string
   badge: string
@@ -30,6 +37,7 @@ export type Profile = {
   primaryCta: NavItem
   secondaryCta: NavItem
   contactLinks: ContactLink[]
+  resumeVariants: ResumeVariant[]
 }
 
 export type ExperienceItem = {

@@ -10,7 +10,7 @@ import {
 } from '../../common/Icons'
 import { ThemeModeTransition } from '../../theme/ThemeModeTransition'
 
-const cornerSizeClass = 'size-8'
+const cornerSizeClass = 'size-7'
 
 export function TechStackCornerAccent() {
   const light = (

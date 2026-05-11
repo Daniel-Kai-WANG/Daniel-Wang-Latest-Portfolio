@@ -1,7 +1,9 @@
-import type { FormEvent } from 'react'
+import type { FormEvent, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { profile } from '../../data/profile'
 import { useTheme } from '../../hooks/useTheme'
+import type { ThemeMode } from '../../types/content'
 import { Reveal } from '../animation/Reveal'
 import { ContactActionCards } from './contact/ContactActionCards'
 import { ContactSectionAccent } from './contact/ContactSectionAccent'
@@ -52,11 +54,75 @@ function resolveFormEndpoint(recipientEmail: string) {
   return `https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`
 }
 
+const CONTACT_HEADING_THEME_STYLES: Record<ThemeMode, { color: string }> = {
+  light: { color: '#18314f' },
+  dark: { color: '#edf4ff' },
+}
+
+const CONTACT_BODY_THEME_STYLES: Record<ThemeMode, { color: string }> = {
+  light: { color: '#5e7696' },
+  dark: { color: '#a8c1dd' },
+}
+
+function ThemeShiftCopy({
+  children,
+}: {
+  children: (themeMode: ThemeMode) => ReactNode
+}) {
+  const { theme, isThemeShifting, themeShiftDirection, themeShiftKey } = useTheme()
+
+  if (!isThemeShifting || themeShiftDirection === null) {
+    return <>{children(theme)}</>
+  }
+
+  const direction = themeShiftDirection === 'light-to-dark' ? 1 : -1
+  const outgoingTheme = themeShiftDirection === 'light-to-dark' ? 'light' : 'dark'
+
+  return (
+    <div className="relative">
+      <motion.div
+        key={`copy-outgoing-${themeShiftKey}`}
+        className="pointer-events-none absolute inset-0"
+        initial={false}
+        animate={{
+          opacity: 0,
+          y: -10 * direction,
+          filter: 'blur(6px)',
+        }}
+        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {children(outgoingTheme)}
+      </motion.div>
+      <motion.div
+        key={`copy-incoming-${themeShiftKey}`}
+        initial={{
+          opacity: 0,
+          y: 14 * direction,
+          filter: 'blur(10px)',
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+        }}
+        transition={{
+          duration: 0.3,
+          delay: 0.05,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
+        {children(theme)}
+      </motion.div>
+    </div>
+  )
+}
+
 export function ContactSection() {
   const { theme } = useTheme()
   const emailLink = profile.contactLinks.find((link) => link.label === 'Email')
   const githubLink = profile.contactLinks.find((link) => link.label === 'GitHub')
   const linkedinLink = profile.contactLinks.find((link) => link.label === 'LinkedIn')
+  const resumeVariants = profile.resumeVariants
   const recipientEmail = emailLink?.value ?? 'kaiwang2027@gmail.com'
   const formEndpoint = resolveFormEndpoint(recipientEmail)
 
@@ -166,9 +232,31 @@ export function ContactSection() {
         <div className="relative z-10 mx-auto max-w-4xl">
           <div className="relative max-w-[34rem] px-3 sm:max-w-[40rem] sm:px-4 lg:max-w-none">
             <ContactTitleCluster />
-            <h2 className="relative z-10 max-w-[26rem] text-left font-display text-[2.05rem] font-bold leading-[0.96] tracking-[-0.055em] text-[var(--color-text)] sm:max-w-[32rem] sm:text-[2.8rem] lg:max-w-none lg:whitespace-nowrap lg:text-[3.2rem]">
-              Ready to build a reliable product flow.
-            </h2>
+            <div className="relative z-10">
+              <ThemeShiftCopy>
+                {(themeMode) => (
+                  <h2
+                    className="max-w-[26rem] text-center font-display text-[2.05rem] font-bold leading-[0.96] tracking-[-0.055em] sm:max-w-[32rem] sm:text-[2.8rem] lg:max-w-none lg:whitespace-nowrap lg:text-[3.2rem]"
+                    style={CONTACT_HEADING_THEME_STYLES[themeMode]}
+                  >
+                    Interested in working together?
+                  </h2>
+                )}
+              </ThemeShiftCopy>
+            </div>
+            <div className="relative z-10 mx-auto mt-4 max-w-3xl">
+              <ThemeShiftCopy>
+                {(themeMode) => (
+                  <p
+                    className="text-center text-sm leading-7 sm:text-base"
+                    style={CONTACT_BODY_THEME_STYLES[themeMode]}
+                  >
+                    I&apos;m open to frontend, full-stack, and web developer opportunities
+                    where I can contribute to reliable, user-focused digital products.
+                  </p>
+                )}
+              </ThemeShiftCopy>
+            </div>
           </div>
 
           <div
@@ -199,6 +287,7 @@ export function ContactSection() {
               emailLink={emailLink}
               githubLink={githubLink}
               linkedinLink={linkedinLink}
+              resumeVariants={resumeVariants}
             />
           </div>
         </div>

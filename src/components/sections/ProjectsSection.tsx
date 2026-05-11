@@ -166,8 +166,8 @@ export function ProjectsSection() {
                             style={{
                               background:
                                 theme === 'light'
-                                  ? 'linear-gradient(135deg, rgba(255, 216, 165, 0.96), rgba(191, 228, 255, 0.96))'
-                                  : 'linear-gradient(135deg, rgba(109, 190, 255, 0.96), rgba(130, 126, 255, 0.9))',
+                                  ? 'linear-gradient(90deg, rgba(255, 236, 132, 0.92) 0%, rgba(215, 243, 194, 0.92) 48%, rgba(170, 238, 255, 0.94) 100%)'
+                                  : 'linear-gradient(135deg, rgba(255, 155, 122, 0.98), rgba(255, 127, 115, 0.94) 46%, rgba(142, 215, 255, 0.9) 82%, rgba(93, 159, 255, 0.86))',
                             }}
                           />
                           <span>{highlight}</span>

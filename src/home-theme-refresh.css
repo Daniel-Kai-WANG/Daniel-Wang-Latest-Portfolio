@@ -1,0 +1,130 @@
+:root {
+  --home-theme-text-duration: 220ms;
+  --home-theme-surface-duration: 280ms;
+  --home-theme-atmosphere-duration: 360ms;
+  --home-theme-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --home-cta-day-gradient: linear-gradient(90deg, #ffe1a8 0%, #f4ead9 46%, #d8eafb 100%);
+  --home-cta-day-text: #1f3b68;
+  --home-cta-day-shadow: 0 16px 34px rgba(176, 199, 223, 0.26);
+}
+
+.home-hero-shell {
+  position: relative;
+  isolation: isolate;
+  transition:
+    border-color var(--home-theme-surface-duration) var(--home-theme-ease),
+    box-shadow var(--home-theme-surface-duration) var(--home-theme-ease),
+    background-color var(--home-theme-surface-duration) var(--home-theme-ease),
+    color var(--home-theme-text-duration) var(--home-theme-ease);
+}
+
+.home-hero-shell::before,
+.home-hero-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+  transition:
+    opacity var(--home-theme-atmosphere-duration) var(--home-theme-ease),
+    transform var(--home-theme-atmosphere-duration) var(--home-theme-ease),
+    filter var(--home-theme-atmosphere-duration) var(--home-theme-ease);
+}
+
+.home-hero-shell::before {
+  opacity: 1;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(255, 226, 177, 0.42), transparent 28%),
+    radial-gradient(circle at 86% 16%, rgba(191, 221, 255, 0.26), transparent 30%),
+    linear-gradient(135deg, rgba(255, 248, 238, 0.76) 0%, rgba(244, 248, 252, 0.54) 46%, rgba(218, 234, 248, 0.28) 100%);
+}
+
+.home-hero-shell::after {
+  opacity: 0;
+  background:
+    radial-gradient(circle at 20% 16%, rgba(86, 132, 214, 0.24), transparent 30%),
+    radial-gradient(circle at 82% 20%, rgba(117, 214, 255, 0.2), transparent 32%),
+    linear-gradient(135deg, rgba(15, 25, 44, 0.62) 0%, rgba(21, 41, 73, 0.46) 48%, rgba(28, 59, 92, 0.3) 100%);
+  transform: translateY(8px) scale(1.01);
+  filter: saturate(1.06);
+}
+
+html[data-theme='dark'] .home-hero-shell::before {
+  opacity: 0;
+  transform: translateY(-6px) scale(0.992);
+  filter: blur(3px);
+}
+
+html[data-theme='dark'] .home-hero-shell::after {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.home-hero-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-hero-atmosphere {
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home-hero-layer,
+.home-hero-shell [style*='background'],
+.home-hero-shell [style*='box-shadow'],
+.home-hero-shell [style*='border-color'] {
+  transition:
+    opacity var(--home-theme-atmosphere-duration) var(--home-theme-ease),
+    transform var(--home-theme-atmosphere-duration) var(--home-theme-ease),
+    filter var(--home-theme-atmosphere-duration) var(--home-theme-ease),
+    box-shadow var(--home-theme-surface-duration) var(--home-theme-ease),
+    border-color var(--home-theme-surface-duration) var(--home-theme-ease),
+    color var(--home-theme-text-duration) var(--home-theme-ease);
+}
+
+.home-hero-shell h1,
+.home-hero-shell h2,
+.home-hero-shell h3,
+.home-hero-shell p,
+.home-hero-shell span,
+.home-hero-shell a,
+.home-hero-shell button,
+.home-hero-shell svg {
+  transition:
+    color var(--home-theme-text-duration) var(--home-theme-ease),
+    opacity var(--home-theme-text-duration) var(--home-theme-ease),
+    transform var(--home-theme-surface-duration) var(--home-theme-ease),
+    fill var(--home-theme-text-duration) var(--home-theme-ease),
+    stroke var(--home-theme-text-duration) var(--home-theme-ease);
+}
+
+.home-hero-cta {
+  transition:
+    color var(--home-theme-text-duration) var(--home-theme-ease),
+    background var(--home-theme-surface-duration) var(--home-theme-ease),
+    box-shadow var(--home-theme-surface-duration) var(--home-theme-ease),
+    border-color var(--home-theme-surface-duration) var(--home-theme-ease),
+    filter var(--home-theme-text-duration) var(--home-theme-ease),
+    transform var(--home-theme-surface-duration) var(--home-theme-ease);
+}
+
+.home-hero-cta:hover {
+  filter: brightness(1.02) saturate(1.02);
+  transform: translateY(-1px);
+}
+
+.home-hero-cta svg {
+  color: currentColor !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-shell,
+  .home-hero-shell::before,
+  .home-hero-shell::after,
+  .home-hero-shell * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

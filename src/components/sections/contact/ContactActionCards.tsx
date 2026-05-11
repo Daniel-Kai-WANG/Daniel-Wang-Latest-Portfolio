@@ -1,10 +1,10 @@
+import { useState } from 'react'
 import type { ReactNode, SVGProps } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useTheme } from '../../../hooks/useTheme'
-import type { ContactLink } from '../../../types/content'
+import type { ContactLink, ResumeVariant } from '../../../types/content'
 import { ThemeShiftBackdrop } from '../../animation/ThemeShiftBackdrop'
 import { StateIconBlock } from '../../common/StateIconBlock'
-import { ThemeModeTransition } from '../../theme/ThemeModeTransition'
 import {
   JellyfishIcon,
   LeafBudIcon,
@@ -20,6 +20,7 @@ type ContactActionCardsProps = {
   emailLink?: ContactLink
   githubLink?: ContactLink
   linkedinLink?: ContactLink
+  resumeVariants?: ResumeVariant[]
 }
 
 type ActionId = 'email' | 'github' | 'linkedin' | 'resume'
@@ -96,44 +97,217 @@ function GitHubCardIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
-function ContactActionBackgroundMotif({ id }: { id: ActionId }) {
-  const baseClassName =
-    'pointer-events-none absolute bottom-2 right-3 z-[2] rotate-[10deg] overflow-hidden'
-
-  const light =
-    id === 'email' ? (
-      <LeafBudIcon className={`${baseClassName} h-16 w-16 opacity-[0.12]`} />
-    ) : id === 'linkedin' ? (
-      <SakuraIcon variant="a" className={`${baseClassName} h-16 w-16 opacity-[0.16]`} />
-    ) : id === 'github' ? (
-      <SnowCrystalIcon className={`${baseClassName} h-16 w-16 opacity-[0.5]`} />
-    ) : (
-      <SunIcon
-        className={`${baseClassName} h-16 w-16 opacity-[0.14]`}
-        style={{ color: '#f4b35d' }}
+function ChevronDownIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="m6 9 6 6 6-6"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
       />
-    )
+    </svg>
+  )
+}
 
-  const dark =
-    id === 'email' ? (
-      <StarfishIcon variant="light" className={`${baseClassName} size-16 opacity-[0.14]`} />
-    ) : id === 'linkedin' ? (
-      <JellyfishIcon
-        className={`${baseClassName} h-20 w-20 opacity-[0.3]`}
-        style={{ color: 'rgba(173, 230, 255, 0.9)' }}
+function FileDownIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
       />
-    ) : id === 'github' ? (
-      <MoonIcon className={`${baseClassName} -right-1 h-[5.5rem] w-[5.5rem] opacity-[0.18]`} />
-    ) : (
-      <StarfishIcon variant="pink" className={`${baseClassName} size-16 opacity-[0.25]`} />
+      <path
+        d="M14 2v5a1 1 0 0 0 1 1h5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+      <path
+        d="M12 18v-6"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+      <path
+        d="m9 15 3 3 3-3"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  )
+}
+
+type MotifSlotProps = {
+  dark: ReactNode
+  darkOffset?: {
+    rotate?: number
+    x?: number
+    y?: number
+  }
+  light: ReactNode
+  lightOffset?: {
+    rotate?: number
+    x?: number
+    y?: number
+  }
+  slotClassName: string
+}
+
+const motifEase: [number, number, number, number] = [0.22, 1, 0.36, 1]
+
+function MotifSlot({
+  dark,
+  darkOffset,
+  light,
+  lightOffset,
+  slotClassName,
+}: MotifSlotProps) {
+  const { theme, isThemeShifting, themeShiftDirection, themeShiftKey } = useTheme()
+
+  const resolvedLightOffset = {
+    x: lightOffset?.x ?? 0,
+    y: lightOffset?.y ?? 0,
+    rotate: lightOffset?.rotate ?? 0,
+  }
+  const resolvedDarkOffset = {
+    x: darkOffset?.x ?? 0,
+    y: darkOffset?.y ?? 0,
+    rotate: darkOffset?.rotate ?? 0,
+  }
+
+  if (!isThemeShifting || themeShiftDirection === null) {
+    return (
+      <div className={slotClassName}>
+        <div
+          className="pointer-events-none absolute inset-0 flex items-center justify-center"
+          style={{
+            transform:
+              theme === 'light'
+                ? `translate3d(${resolvedLightOffset.x}px, ${resolvedLightOffset.y}px, 0) rotate(${resolvedLightOffset.rotate}deg)`
+                : `translate3d(${resolvedDarkOffset.x}px, ${resolvedDarkOffset.y}px, 0) rotate(${resolvedDarkOffset.rotate}deg)`,
+          }}
+        >
+          {theme === 'light' ? light : dark}
+        </div>
+      </div>
     )
+  }
+
+  const outgoing = themeShiftDirection === 'light-to-dark' ? light : dark
+  const incoming = theme === 'light' ? light : dark
+  const direction = themeShiftDirection === 'light-to-dark' ? 1 : -1
+  const outgoingOffset =
+    themeShiftDirection === 'light-to-dark' ? resolvedLightOffset : resolvedDarkOffset
+  const incomingOffset = theme === 'light' ? resolvedLightOffset : resolvedDarkOffset
 
   return (
-    <ThemeModeTransition
-      className="pointer-events-none absolute inset-0 z-[2]"
-      light={light}
-      dark={dark}
-    />
+    <div className={slotClassName}>
+      <motion.div
+        key={`motif-outgoing-${themeShiftKey}`}
+        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+        initial={false}
+        animate={{
+          opacity: 0,
+          x: outgoingOffset.x - 5 * direction,
+          y: outgoingOffset.y - 7 * direction,
+          scale: 0.92,
+          rotate: outgoingOffset.rotate - 4 * direction,
+        }}
+        transition={{ duration: 0.28, ease: motifEase }}
+      >
+        {outgoing}
+      </motion.div>
+      <motion.div
+        key={`motif-incoming-${themeShiftKey}`}
+        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+        initial={{
+          opacity: 0,
+          x: incomingOffset.x + 6 * direction,
+          y: incomingOffset.y + 9 * direction,
+          scale: 1.06,
+          rotate: incomingOffset.rotate + 5 * direction,
+        }}
+        animate={{
+          opacity: 1,
+          x: incomingOffset.x,
+          y: incomingOffset.y,
+          scale: 1,
+          rotate: incomingOffset.rotate,
+        }}
+        transition={{
+          duration: 0.34,
+          delay: 0.05,
+          ease: motifEase,
+        }}
+      >
+        {incoming}
+      </motion.div>
+    </div>
+  )
+}
+
+function ContactActionBackgroundMotif({ id }: { id: ActionId }) {
+  return (
+    <div className="pointer-events-none absolute inset-0 z-[2]">
+      <MotifSlot
+        slotClassName="pointer-events-none absolute bottom-1 right-0 h-20 w-20 overflow-hidden"
+        lightOffset={
+          id === 'email'
+            ? { x: 4, y: 6, rotate: 8 }
+            : id === 'linkedin'
+              ? { x: 5, y: 4, rotate: 6 }
+              : id === 'github'
+                ? { x: 1, y: 2, rotate: 4 }
+                : { x: 5, y: 6, rotate: 2 }
+        }
+        light={
+          id === 'email' ? (
+            <LeafBudIcon className="h-14 w-14 opacity-[0.12]" />
+          ) : id === 'linkedin' ? (
+            <SakuraIcon variant="a" className="h-14 w-14 opacity-[0.16]" />
+          ) : id === 'github' ? (
+            <SnowCrystalIcon className="h-14 w-14 opacity-[0.5]" />
+          ) : (
+            <SunIcon
+              className="h-14 w-14 opacity-[0.14]"
+              style={{ color: '#f4b35d' }}
+            />
+          )
+        }
+        darkOffset={
+          id === 'email'
+            ? { x: 2, y: 6, rotate: 10 }
+            : id === 'linkedin'
+              ? { x: 3, y: 4, rotate: 7 }
+              : id === 'github'
+                ? { x: 0, y: 3, rotate: 5 }
+                : { x: 3, y: 5, rotate: 8 }
+        }
+        dark={
+          id === 'email' ? (
+            <StarfishIcon variant="light" className="size-14 opacity-[0.14]" />
+          ) : id === 'linkedin' ? (
+            <JellyfishIcon
+              className="h-14 w-14 opacity-[0.3]"
+              style={{ color: 'rgba(173, 230, 255, 0.9)' }}
+            />
+          ) : id === 'github' ? (
+            <MoonIcon className="h-14 w-14 opacity-[0.18]" />
+          ) : (
+            <StarfishIcon variant="pink" className="size-14 opacity-[0.25]" />
+          )
+        }
+      />
+    </div>
   )
 }
 
@@ -152,19 +326,20 @@ function ContactActionIconBadge({ badge }: { badge: ActionBadge }) {
 function ContactCardShell({
   action,
   children,
+  className,
   index,
   theme,
 }: {
   action: ActionCard
   children: ReactNode
+  className?: string
   index: number
   theme: ThemeMode
 }) {
   const reduceMotion = useReducedMotion()
 
   const sharedProps = {
-    className:
-      'group relative min-h-[12.5rem] overflow-hidden rounded-[1.75rem] border p-5 text-left transition-transform duration-300 hover:[box-shadow:var(--card-shadow-hover)]',
+    className: `group relative min-h-[12.5rem] overflow-hidden rounded-[1.75rem] border p-5 text-left transition-transform duration-300 hover:[box-shadow:var(--card-shadow-hover)] ${className ?? ''}`,
     initial: { opacity: 0, y: 14 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, amount: 0.2 },
@@ -201,11 +376,24 @@ export function ContactActionCards({
   emailLink,
   githubLink,
   linkedinLink,
+  resumeVariants = [],
 }: ContactActionCardsProps) {
   const { theme } = useTheme()
-  const resumeHref: string | null = null
+  const [isResumeExpanded, setIsResumeExpanded] = useState(false)
 
   const actions: ActionCard[] = [
+    {
+      id: 'github',
+      label: 'GITHUB',
+      value: githubLink?.value ?? 'https://github.com/Daniel-Kai-WANG',
+      href: githubLink?.href ?? 'https://github.com/Daniel-Kai-WANG',
+      badge: {
+        kind: 'svg',
+        icon: GitHubCardIcon,
+        iconWrapperClassName: 'h-[60%] w-[60%]',
+        iconClassName: 'scale-[0.84]',
+      },
+    },
     {
       id: 'email',
       label: 'EMAIL',
@@ -221,56 +409,147 @@ export function ContactActionCards({
       badge: {
         kind: 'svg',
         icon: LinkedInCardIcon,
-        iconWrapperClassName: 'h-[48%] w-[48%]',
+        iconWrapperClassName: 'h-[60%] w-[60%]',
         iconClassName: 'scale-[0.82]',
       },
     },
-    {
-      id: 'github',
-      label: 'GITHUB',
-      value: githubLink?.value ?? 'https://github.com/Daniel-Kai-WANG',
-      href: githubLink?.href ?? 'https://github.com/Daniel-Kai-WANG',
-      badge: {
-        kind: 'svg',
-        icon: GitHubCardIcon,
-        iconWrapperClassName: 'h-[49%] w-[49%]',
-        iconClassName: 'scale-[0.84]',
-      },
-    },
-    {
-      id: 'resume',
-      label: 'RESUME',
-      value: resumeHref ? 'Download current PDF resume' : 'Resume file pending refresh',
-      href: resumeHref ?? undefined,
-      badge: { kind: 'svg', icon: ResumeCardIcon },
-    },
   ]
 
-  return (
-    <div className="grid gap-4 sm:grid-cols-2">
-      {actions.map((action, index) => {
-        const cardBody = (
-          <>
-            <ThemeShiftBackdrop variant="card" />
-            <ContactActionBackgroundMotif id={action.id} />
-            <div className="relative z-10 pt-3">
-              <ContactActionIconBadge badge={action.badge} />
-              <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                {action.label}
-              </p>
-              <p className="mt-2 text-sm font-semibold leading-6 text-[var(--color-text)]">
-                {action.value}
-              </p>
-            </div>
-          </>
-        )
+  const resumeSummary =
+    resumeVariants.length > 0
+      ? `${resumeVariants.length} tailored PDF resumes for web, full stack, front end, CMS, and AI workflow roles.`
+      : 'Resume file pending refresh.'
 
-        return (
-          <ContactCardShell key={action.id} action={action} index={index} theme={theme}>
-            {cardBody}
-          </ContactCardShell>
-        )
-      })}
+  return (
+    <div className="grid gap-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {actions.map((action, index) => {
+          const cardBody = (
+            <>
+              <ThemeShiftBackdrop variant="card" />
+              <ContactActionBackgroundMotif id={action.id} />
+              <div className="relative z-10 pt-3">
+                <ContactActionIconBadge badge={action.badge} />
+                <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                  {action.label}
+                </p>
+                <p className="mt-2 text-sm font-semibold leading-6 text-[var(--color-text)]">
+                  {action.value}
+                </p>
+              </div>
+            </>
+          )
+
+          return (
+            <ContactCardShell key={action.id} action={action} index={index} theme={theme}>
+              {cardBody}
+            </ContactCardShell>
+          )
+        })}
+      </div>
+
+      <ContactCardShell
+        action={{
+          id: 'resume',
+          label: 'RESUME',
+          value: resumeSummary,
+          badge: { kind: 'svg', icon: ResumeCardIcon },
+        }}
+        index={actions.length}
+        theme={theme}
+      >
+        <>
+          <ThemeShiftBackdrop variant="card" />
+          <ContactActionBackgroundMotif id="resume" />
+          <div className="relative z-10 pt-3">
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <ContactActionIconBadge badge={{ kind: 'svg', icon: ResumeCardIcon }} />
+                <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                  RESUME
+                </p>
+                <p className="mt-2 max-w-2xl text-sm font-semibold leading-6 text-[var(--color-text)]">
+                  {resumeSummary}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsResumeExpanded((current) => !current)}
+                aria-expanded={isResumeExpanded}
+                aria-label={isResumeExpanded ? 'Collapse resume list' : 'Expand resume list'}
+                className="inline-flex shrink-0 items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-transform duration-300 hover:-translate-y-0.5"
+                style={{
+                  borderColor: 'var(--pill-border)',
+                  background: 'var(--pill-background)',
+                  color: 'var(--pill-text)',
+                }}
+              >
+                {isResumeExpanded ? 'Hide list' : 'View all'}
+                <ChevronDownIcon
+                  className={`size-4 transition-transform duration-300 ${isResumeExpanded ? 'rotate-180' : ''}`}
+                />
+              </button>
+            </div>
+
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <span
+                className="rounded-full border px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em]"
+                style={{
+                  borderColor: 'var(--pill-border)',
+                  background: 'var(--pill-background)',
+                  color: 'var(--pill-text)',
+                }}
+              >
+                {resumeVariants.length} versions
+              </span>
+              <span className="text-xs leading-6 text-[var(--color-muted)]">
+                Open the role-matched PDF directly from this card.
+              </span>
+            </div>
+
+            <AnimatePresence initial={false}>
+              {isResumeExpanded && resumeVariants.length > 0 ? (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, y: -8 }}
+                  animate={{ opacity: 1, height: 'auto', y: 0 }}
+                  exit={{ opacity: 0, height: 0, y: -8 }}
+                  transition={{ duration: 0.28, ease: 'easeOut' }}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                    {resumeVariants.map((resume) => (
+                      <a
+                        key={resume.href}
+                        href={resume.href}
+                        download={resume.fileName}
+                        className="group/resume flex items-start justify-between gap-3 rounded-[1.25rem] border px-4 py-3 transition-transform duration-300 hover:-translate-y-0.5"
+                        style={{
+                          borderColor: 'var(--pill-border)',
+                          background: 'color-mix(in srgb, var(--color-surface) 90%, transparent)',
+                        }}
+                      >
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold leading-6 text-[var(--color-text)]">
+                            {resume.label}
+                          </p>
+                          <p className="text-xs font-medium leading-5 text-[var(--color-muted)]">
+                            {resume.role}
+                          </p>
+                          <p className="mt-1 truncate text-[11px] leading-5 text-[var(--color-muted)]">
+                            {resume.fileName}
+                          </p>
+                        </div>
+                        <FileDownIcon className="mt-1 size-4 shrink-0 text-[var(--color-muted)] transition-transform duration-300 group-hover/resume:translate-y-0.5" />
+                      </a>
+                    ))}
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+        </>
+      </ContactCardShell>
     </div>
   )
 }

@@ -5,7 +5,7 @@ import { ThemeContext } from './theme-context'
 import type { ThemeShiftDirection } from './theme-context'
 
 const STORAGE_KEY = 'daniel-portfolio-theme'
-const THEME_SHIFT_DURATION_MS = 280
+const THEME_SHIFT_DURATION_MS = 360
 
 function readTheme(): ThemeMode {
   if (typeof window === 'undefined') {
