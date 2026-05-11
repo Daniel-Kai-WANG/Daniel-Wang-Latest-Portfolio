@@ -7,6 +7,8 @@ type StateIconBlockProps = {
   active?: boolean
   className?: string
   icon: IconComponent
+  iconClassName?: string
+  iconWrapperClassName?: string
   interactive?: boolean
   sizeClassName?: string
 }
@@ -45,6 +47,8 @@ export function StateIconBlock({
   active = false,
   className = '',
   icon: Icon,
+  iconClassName = '',
+  iconWrapperClassName = '',
   interactive = false,
   sizeClassName = 'size-12',
 }: StateIconBlockProps) {
@@ -88,10 +92,10 @@ export function StateIconBlock({
         }}
       />
       <div
-        className="relative z-10 flex h-[52%] w-[52%] items-center justify-center"
+        className={`relative z-10 flex h-[52%] w-[52%] items-center justify-center ${iconWrapperClassName}`}
         style={{ color: currentColor, filter: iconGlow }}
       >
-        <Icon className="h-full w-full" />
+        <Icon className={`h-full w-full ${iconClassName}`} />
       </div>
     </div>
   )

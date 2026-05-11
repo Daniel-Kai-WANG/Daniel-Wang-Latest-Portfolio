@@ -12,7 +12,7 @@ export function PageShell({ children }: PropsWithChildren) {
       <AtmosphericAura />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[28rem]">
         <div
-          className="absolute left-[-8%] top-10 h-48 w-48 rounded-full blur-3xl"
+          className="absolute left-[-8%] top-10 h-48 w-48 rounded-full blur-3xl transition-[background] duration-300"
           style={{
             background:
               theme === 'light'
@@ -21,7 +21,7 @@ export function PageShell({ children }: PropsWithChildren) {
           }}
         />
         <div
-          className="absolute right-[-4%] top-16 h-64 w-64 rounded-full blur-3xl"
+          className="absolute right-[-4%] top-16 h-64 w-64 rounded-full blur-3xl transition-[background] duration-300"
           style={{
             background:
               theme === 'light'

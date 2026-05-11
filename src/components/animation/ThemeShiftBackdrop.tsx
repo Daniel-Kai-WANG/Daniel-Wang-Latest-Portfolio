@@ -13,7 +13,7 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
   return (
     <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden" aria-hidden="true">
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 transition-[background] duration-300"
         style={{
           background:
             theme === 'light'
@@ -23,7 +23,7 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
       />
 
       <div
-        className="absolute rounded-full blur-3xl"
+        className="absolute rounded-full blur-3xl transition-[background] duration-300"
         style={{
           right: isCard ? '8%' : '6%',
           top: isCard ? '10%' : '8%',
@@ -37,7 +37,7 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
       />
 
       <div
-        className="absolute rounded-full blur-3xl"
+        className="absolute rounded-full blur-3xl transition-[background] duration-300"
         style={{
           left: isCard ? '-10%' : '-6%',
           bottom: isCard ? '-16%' : '-10%',
@@ -51,7 +51,7 @@ export function ThemeShiftBackdrop({ variant = 'section' }: ThemeShiftBackdropPr
       />
 
       <div
-        className="absolute inset-x-[14%] top-[16%] h-[42%] rounded-full blur-3xl"
+        className="absolute inset-x-[14%] top-[16%] h-[42%] rounded-full blur-3xl transition-[background,opacity] duration-300"
         style={{
           opacity: isCard ? 0.8 : 1,
           background:
