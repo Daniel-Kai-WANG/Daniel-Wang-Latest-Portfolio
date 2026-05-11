@@ -1,5 +1,6 @@
 import { useTheme } from '../../../hooks/useTheme'
 import { SnowflakeAssetIcon, StarfishIcon } from '../../common/Icons'
+import { ThemeModeTransition } from '../../theme/ThemeModeTransition'
 
 export function ContactCardAccent() {
   const { theme } = useTheme()
@@ -16,11 +17,11 @@ export function ContactCardAccent() {
             : 'rgba(255,255,255,0.06)',
       }}
     >
-      {theme === 'light' ? (
-        <SnowflakeAssetIcon variant="cluster" className="size-5" />
-      ) : (
-        <StarfishIcon variant="pink" className="size-5" />
-      )}
+      <ThemeModeTransition
+        className="flex items-center justify-center"
+        light={<SnowflakeAssetIcon variant="cluster" className="size-5" />}
+        dark={<StarfishIcon variant="pink" className="size-5" />}
+      />
     </div>
   )
 }

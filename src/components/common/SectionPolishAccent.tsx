@@ -1,4 +1,5 @@
 import { useTheme } from '../../hooks/useTheme'
+import { ThemeModeTransition } from '../theme/ThemeModeTransition'
 import {
   JellyfishIcon,
   SakuraIcon,
@@ -33,11 +34,11 @@ export function SectionPolishAccent({ className = '' }: SectionPolishAccentProps
                 : 'rgba(255,255,255,0.06)',
           }}
         >
-          {theme === 'light' ? (
-            <SakuraIcon className="size-5" />
-          ) : (
-            <StarfishIcon variant="pink" className="size-4 rotate-[10deg]" />
-          )}
+          <ThemeModeTransition
+            className="flex items-center justify-center"
+            light={<SakuraIcon className="size-5" />}
+            dark={<StarfishIcon variant="pink" className="size-4 rotate-[10deg]" />}
+          />
         </div>
         <div
           className="mt-3 flex size-16 items-center justify-center rounded-full"
@@ -52,11 +53,11 @@ export function SectionPolishAccent({ className = '' }: SectionPolishAccentProps
                 : '0 0 32px rgba(133, 120, 255, 0.16)',
           }}
         >
-          {theme === 'light' ? (
-            <SnowCrystalIcon className="size-5 text-sky-400/85" />
-          ) : (
-            <JellyfishIcon className="size-5 text-cyan-200/70" />
-          )}
+          <ThemeModeTransition
+            className="flex items-center justify-center"
+            light={<SnowCrystalIcon className="size-5 text-sky-400/85" />}
+            dark={<JellyfishIcon className="size-5 text-cyan-200/70" />}
+          />
         </div>
       </div>
 
@@ -71,19 +72,23 @@ export function SectionPolishAccent({ className = '' }: SectionPolishAccentProps
         }}
       >
         <div className="flex items-center gap-2">
-          {theme === 'light' ? (
-            <>
-              <SakuraIcon className="size-4" />
-              <SnowCrystalIcon className="size-4 text-sky-400/70" />
-              <SunLowIcon className="size-3.5 text-amber-500" />
-            </>
-          ) : (
-            <>
-              <StarfishIcon variant="light" className="size-4 -rotate-[10deg]" />
-              <JellyfishIcon className="size-4 text-cyan-200/70" />
-              <TablerMoonIcon className="size-3.5 text-slate-100/80" />
-            </>
-          )}
+          <ThemeModeTransition
+            className="flex items-center gap-2"
+            light={
+              <>
+                <SakuraIcon className="size-4" />
+                <SnowCrystalIcon className="size-4 text-sky-400/70" />
+                <SunLowIcon className="size-3.5 text-amber-500" />
+              </>
+            }
+            dark={
+              <>
+                <StarfishIcon variant="light" className="size-4 -rotate-[10deg]" />
+                <JellyfishIcon className="size-4 text-cyan-200/70" />
+                <TablerMoonIcon className="size-3.5 text-slate-100/80" />
+              </>
+            }
+          />
         </div>
       </div>
 
@@ -98,17 +103,21 @@ export function SectionPolishAccent({ className = '' }: SectionPolishAccentProps
         }}
       >
         <div className="flex items-center gap-2">
-          {theme === 'light' ? (
-            <>
-              <SakuraIcon className="size-4" />
-              <SnowCrystalIcon className="size-4 text-sky-300/80" />
-            </>
-          ) : (
-            <>
-              <StarfishIcon variant="pink" className="size-4 rotate-[10deg]" />
-              <JellyfishIcon className="size-4 text-cyan-200/65" />
-            </>
-          )}
+          <ThemeModeTransition
+            className="flex items-center gap-2"
+            light={
+              <>
+                <SakuraIcon className="size-4" />
+                <SnowCrystalIcon className="size-4 text-sky-300/80" />
+              </>
+            }
+            dark={
+              <>
+                <StarfishIcon variant="pink" className="size-4 rotate-[10deg]" />
+                <JellyfishIcon className="size-4 text-cyan-200/65" />
+              </>
+            }
+          />
           <span
             className="block h-px w-12"
             style={{

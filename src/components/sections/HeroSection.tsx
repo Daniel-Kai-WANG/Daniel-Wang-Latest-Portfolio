@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { profile } from '../../data/profile'
 import { useTheme } from '../../hooks/useTheme'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
+import { getPrimaryCtaStyle } from '../common/primaryCta'
 import { WorkflowFloatingMotifs } from './hero/WorkflowFloatingMotifs'
 import {
   ArrowUpRightIcon,
@@ -11,7 +12,6 @@ import {
   SnowCrystalIcon,
   StarfishIcon,
   SunLowIcon,
-  TablerMoonIcon,
 } from '../common/Icons'
 
 function WorkflowPanel() {
@@ -181,7 +181,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
+      className="home-hero-shell relative overflow-hidden rounded-[2.25rem] border px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
       onPointerMove={(event) => {
         const rect = event.currentTarget.getBoundingClientRect()
         setGlow({
@@ -190,68 +190,95 @@ export function HeroSection() {
         })
       }}
       style={{
-        background:
-          theme === 'light'
-            ? 'linear-gradient(180deg, rgba(248,252,255,0.9), rgba(255,241,247,0.8), rgba(232,245,255,0.76))'
-            : 'linear-gradient(180deg, rgba(8,16,33,0.9), rgba(12,22,47,0.82), rgba(18,20,49,0.78))',
+        backgroundColor:
+          theme === 'light' ? 'rgba(248, 252, 255, 0.76)' : 'rgba(8, 16, 33, 0.72)',
         borderColor: 'var(--color-border)',
         boxShadow: 'var(--surface-shadow)',
       }}
     >
-      <ThemeShiftBackdrop />
-      <div
-        className="absolute inset-0 opacity-90"
-        style={{
-          background:
-            theme === 'light'
-              ? `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(255,214,235,0.28), transparent 34%)`
-              : `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(128,199,255,0.18), rgba(133,120,255,0.1), transparent 34%)`,
-        }}
-      />
-      <div
-        className="absolute left-[-4rem] top-[-2rem] h-40 w-40 rounded-full blur-3xl"
-        style={{
-          background:
-            theme === 'light'
-              ? 'rgba(56, 189, 248, 0.16)'
-              : 'rgba(128, 199, 255, 0.14)',
-        }}
-      />
-      <div
-        className="absolute bottom-[-5rem] right-[-2rem] h-56 w-56 rounded-full blur-3xl"
-        style={{
-          background:
-            theme === 'light'
-              ? 'rgba(253, 186, 116, 0.16)'
-              : 'rgba(133, 120, 255, 0.16)',
-        }}
-      />
-      <div
-        className="absolute inset-x-0 top-0 h-px"
-        style={{
-          background:
-            theme === 'light'
-              ? 'linear-gradient(90deg, transparent, rgba(246,168,200,0.8), rgba(186,230,253,0.9), transparent)'
-              : 'linear-gradient(90deg, transparent, rgba(255,178,154,0.54), rgba(128,199,255,0.72), rgba(133,120,255,0.72), transparent)',
-        }}
-      />
+      <div className="home-hero-atmosphere absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div
+          className="home-hero-layer absolute inset-0 opacity-90"
+          style={{
+            opacity: theme === 'light' ? 1 : 0,
+            background: `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(255,214,235,0.28), transparent 34%)`,
+            transform: theme === 'light' ? 'translateY(0) scale(1)' : 'translateY(-4px) scale(0.995)',
+            filter: theme === 'light' ? 'none' : 'blur(2px)',
+          }}
+        />
+        <div
+          className="home-hero-layer absolute inset-0 opacity-90"
+          style={{
+            opacity: theme === 'dark' ? 1 : 0,
+            background: `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(128,199,255,0.18), rgba(133,120,255,0.1), transparent 34%)`,
+            transform: theme === 'dark' ? 'translateY(0) scale(1)' : 'translateY(8px) scale(1.01)',
+            filter: theme === 'dark' ? 'saturate(1.05)' : 'blur(2px)',
+          }}
+        />
+        <div
+          className="home-hero-layer absolute left-[-4rem] top-[-2rem] h-40 w-40 rounded-full blur-3xl"
+          style={{
+            opacity: theme === 'light' ? 1 : 0,
+            background: 'rgba(56, 189, 248, 0.16)',
+            transform: theme === 'light' ? 'translate3d(0,0,0)' : 'translate3d(-10px,-6px,0)',
+          }}
+        />
+        <div
+          className="home-hero-layer absolute left-[-4rem] top-[-2rem] h-40 w-40 rounded-full blur-3xl"
+          style={{
+            opacity: theme === 'dark' ? 1 : 0,
+            background: 'rgba(128, 199, 255, 0.14)',
+            transform: theme === 'dark' ? 'translate3d(0,0,0)' : 'translate3d(10px,6px,0)',
+          }}
+        />
+        <div
+          className="home-hero-layer absolute bottom-[-5rem] right-[-2rem] h-56 w-56 rounded-full blur-3xl"
+          style={{
+            opacity: theme === 'light' ? 1 : 0,
+            background: 'rgba(253, 186, 116, 0.16)',
+            transform: theme === 'light' ? 'translate3d(0,0,0)' : 'translate3d(10px,8px,0)',
+          }}
+        />
+        <div
+          className="home-hero-layer absolute bottom-[-5rem] right-[-2rem] h-56 w-56 rounded-full blur-3xl"
+          style={{
+            opacity: theme === 'dark' ? 1 : 0,
+            background: 'rgba(133, 120, 255, 0.16)',
+            transform: theme === 'dark' ? 'translate3d(0,0,0)' : 'translate3d(-10px,-8px,0)',
+          }}
+        />
+        <div
+          className="home-hero-layer absolute inset-x-0 top-0 h-px"
+          style={{
+            opacity: theme === 'light' ? 1 : 0,
+            background:
+              'linear-gradient(90deg, transparent, rgba(246,168,200,0.8), rgba(186,230,253,0.9), transparent)',
+          }}
+        />
+        <div
+          className="home-hero-layer absolute inset-x-0 top-0 h-px"
+          style={{
+            opacity: theme === 'dark' ? 1 : 0,
+            background:
+              'linear-gradient(90deg, transparent, rgba(255,178,154,0.54), rgba(128,199,255,0.72), rgba(133,120,255,0.72), transparent)',
+          }}
+        />
+      </div>
 
       {theme === 'light' ? (
         <>
-          <SakuraIcon className="absolute left-8 top-10 size-7 rotate-[-18deg]" />
           <SakuraIcon className="absolute right-16 top-20 size-5 rotate-[12deg] opacity-80" />
-          <SnowCrystalIcon className="absolute right-8 top-10 size-5 opacity-80" />
+          <SakuraIcon className="absolute left-[12px] top-[70px] size-7 rotate-[-18deg]" />
+          <SnowCrystalIcon className="absolute -right-[68.5rem] -top-[4.75rem] size-7 opacity-80" />
         </>
       ) : (
         <>
-          <TablerMoonIcon className="absolute left-8 top-10 size-6 -rotate-[16deg] text-slate-100/76" />
-          <StarfishIcon variant="pink" className="absolute right-10 top-16 size-10 rotate-[18deg] opacity-70" />
-          <JellyfishIcon className="absolute bottom-8 right-8 size-12 text-cyan-200/42" />
-          <StarfishIcon variant="light" className="absolute left-8 top-24 size-8 -rotate-[16deg] opacity-65" />
+          <StarfishIcon variant="pink" className="absolute right-6 top-12 size-10 rotate-[18deg] opacity-70" />
+          <JellyfishIcon className="absolute left-[275px] top-[245px] size-8 -rotate-[16deg] text-cyan-300/65" />
         </>
       )}
 
-      <div className="relative z-10 grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+      <div className="relative z-10 -mt-10 grid gap-8 sm:-mt-12 lg:-mt-16 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
         <div>
           <div
             className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold"
@@ -269,20 +296,6 @@ export function HeroSection() {
             {profile.badge}
           </div>
 
-          <p className="mt-5 flex items-center gap-2 text-sm font-medium text-[var(--color-muted)]">
-            {theme === 'light' ? (
-              <>
-                <SakuraIcon className="size-4" />
-                Spring-sky clarity with sakura drift and ice-light highlights.
-              </>
-            ) : (
-              <>
-                <StarfishIcon variant="pink" className="size-4 rotate-[12deg]" />
-                Moonlit ocean depth with coral glow, tide-light, and drifting reef details.
-              </>
-            )}
-          </p>
-
           <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[0.98] tracking-[-0.06em] text-[var(--color-text)] sm:text-5xl lg:text-[4.3rem]">
             {profile.headline}
           </h1>
@@ -294,10 +307,8 @@ export function HeroSection() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               href={profile.primaryCta.href}
-              className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-soft"
-              style={{
-                background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
-              }}
+              className="home-hero-cta inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold shadow-soft"
+              style={getPrimaryCtaStyle(theme)}
             >
               {profile.primaryCta.label}
               <ArrowUpRightIcon className="size-4" />

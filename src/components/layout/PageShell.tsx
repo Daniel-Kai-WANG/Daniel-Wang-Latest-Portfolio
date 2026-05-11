@@ -12,7 +12,7 @@ export function PageShell({ children }: PropsWithChildren) {
       <AtmosphericAura />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[28rem]">
         <div
-          className="absolute left-[-8%] top-10 h-48 w-48 rounded-full blur-3xl"
+          className="absolute left-[-8%] top-10 h-48 w-48 rounded-full blur-3xl transition-[background] duration-300"
           style={{
             background:
               theme === 'light'
@@ -21,7 +21,7 @@ export function PageShell({ children }: PropsWithChildren) {
           }}
         />
         <div
-          className="absolute right-[-4%] top-16 h-64 w-64 rounded-full blur-3xl"
+          className="absolute right-[-4%] top-16 h-64 w-64 rounded-full blur-3xl transition-[background] duration-300"
           style={{
             background:
               theme === 'light'
@@ -31,9 +31,11 @@ export function PageShell({ children }: PropsWithChildren) {
         />
       </div>
 
-      <div className="mx-auto max-w-[1240px] px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8">
+      <div className="mx-auto max-w-[1240px] px-4 pb-20 sm:px-6 lg:px-8">
         <Navbar />
-        <main className="mt-6 space-y-8 sm:space-y-10 lg:space-y-12">{children}</main>
+        <main className="mt-20 space-y-8 sm:mt-24 sm:space-y-10 lg:mt-28 lg:space-y-12">
+          {children}
+        </main>
       </div>
 
       <BackToTopButton />

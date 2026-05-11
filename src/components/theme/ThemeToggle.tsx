@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { jellyfishGif } from '../../assets/experience'
 import { useTheme } from '../../hooks/useTheme'
 import { SakuraIcon } from '../common/Icons'
+import { ThemeModeTransition } from './ThemeModeTransition'
 
 const LIGHT_DRIFT = {
   x: [-10, 8, -4, 10, -8, -10],
@@ -40,7 +41,7 @@ export function ThemeToggle() {
         aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
         aria-pressed={theme === 'dark'}
         onClick={toggleTheme}
-        className="group relative inline-flex size-[66px] shrink-0 items-center justify-center rounded-full border backdrop-blur-xl transition-transform duration-300 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 sm:size-[70px]"
+        className="group relative inline-flex size-[66px] shrink-0 items-center justify-center rounded-full border backdrop-blur-xl transition-[transform,background,border-color,box-shadow] duration-300 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 sm:size-[70px]"
         style={{
           borderColor: 'var(--color-border)',
           background: isLight
@@ -52,7 +53,7 @@ export function ThemeToggle() {
         }}
       >
         <div
-          className="absolute inset-[4px] rounded-full border"
+          className="absolute inset-[4px] rounded-full border transition-[background,border-color,box-shadow] duration-300"
           style={{
             borderColor: isLight ? 'rgba(182,220,250,0.94)' : 'rgba(163,178,255,0.3)',
             background: isLight
@@ -65,7 +66,7 @@ export function ThemeToggle() {
         />
 
         <div
-          className="absolute inset-[9px] rounded-full p-[5px]"
+          className="absolute inset-[9px] rounded-full p-[5px] transition-[background] duration-300"
           style={{
             background: isLight
               ? 'conic-gradient(from 180deg, rgba(255,255,255,0.18), rgba(215,238,255,0.86), rgba(244,208,229,0.62), rgba(202,232,255,0.9), rgba(235,247,255,0.16))'
@@ -73,7 +74,7 @@ export function ThemeToggle() {
           }}
         >
           <div
-            className="relative h-full w-full overflow-hidden rounded-full"
+            className="relative h-full w-full overflow-hidden rounded-full transition-[background] duration-300"
             style={{
               background: isLight
                 ? 'radial-gradient(circle at 30% 24%, rgba(250,253,255,0.96), rgba(230,244,255,0.9) 46%, rgba(233,239,252,0.84) 100%)'
@@ -81,7 +82,7 @@ export function ThemeToggle() {
             }}
           >
             <div
-              className="absolute inset-0 rounded-full"
+              className="absolute inset-0 rounded-full transition-[background] duration-300"
               style={{
                 background: isLight
                   ? 'radial-gradient(circle at 22% 42%, rgba(196,232,255,0.24), transparent 24%), radial-gradient(circle at 74% 70%, rgba(255,214,233,0.16), transparent 28%), radial-gradient(circle at 64% 28%, rgba(255,255,255,0.24), transparent 18%)'
@@ -111,27 +112,31 @@ export function ThemeToggle() {
                     }
               }
             >
-              {isLight ? (
-                <SakuraIcon className="block size-[18px] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_6px_12px_rgba(244,114,182,0.24)] sm:size-[20px]" />
-              ) : (
-                <div
-                  className="flex h-[34px] w-[28px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-visible rounded-full"
-                  style={{
-                    background:
-                      'radial-gradient(circle at 50% 24%, rgba(203,225,255,0.05), transparent 34%), radial-gradient(circle at 50% 82%, rgba(72,142,230,0.04), transparent 30%)',
-                  }}
-                >
-                  <img
-                    src={jellyfishGif}
-                    alt=""
-                    aria-hidden="true"
-                    className="block h-[30px] w-[24px] object-contain [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform]"
+              <ThemeModeTransition
+                className="-translate-x-1/2 -translate-y-1/2"
+                light={
+                  <SakuraIcon className="block size-[18px] drop-shadow-[0_6px_12px_rgba(244,114,182,0.24)] sm:size-[20px]" />
+                }
+                dark={
+                  <div
+                    className="flex h-[34px] w-[28px] items-center justify-center overflow-visible rounded-full"
                     style={{
-                      filter: 'drop-shadow(0 8px 18px rgba(96,165,250,0.22))',
+                      background:
+                        'radial-gradient(circle at 50% 24%, rgba(203,225,255,0.05), transparent 34%), radial-gradient(circle at 50% 82%, rgba(72,142,230,0.04), transparent 30%)',
                     }}
-                  />
-                </div>
-              )}
+                  >
+                    <img
+                      src={jellyfishGif}
+                      alt=""
+                      aria-hidden="true"
+                      className="block h-[30px] w-[24px] object-contain [backface-visibility:hidden] [transform:translateZ(0)] [will-change:transform]"
+                      style={{
+                        filter: 'drop-shadow(0 8px 18px rgba(96,165,250,0.22))',
+                      }}
+                    />
+                  </div>
+                }
+              />
             </motion.div>
           </div>
         </div>

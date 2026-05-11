@@ -7,6 +7,7 @@ import {
   SnowCrystalIcon,
   StarfishIcon,
 } from '../../common/Icons'
+import { ThemeModeTransition } from '../../theme/ThemeModeTransition'
 
 type ProjectPreviewAccentProps = {
   accentIndex: number
@@ -15,6 +16,22 @@ type ProjectPreviewAccentProps = {
 export function ProjectPreviewAccent({ accentIndex }: ProjectPreviewAccentProps) {
   const { theme } = useTheme()
   const normalizedIndex = accentIndex % 3
+  const light =
+    normalizedIndex === 0 ? (
+      <LeafBudIcon className="size-5" />
+    ) : normalizedIndex === 1 ? (
+      <SakuraIcon variant="a" className="size-5" />
+    ) : (
+      <SnowCrystalIcon className="size-5 text-sky-300/85" />
+    )
+  const dark =
+    normalizedIndex === 0 ? (
+      <JellyfishIcon className="size-5 text-cyan-200/80" />
+    ) : normalizedIndex === 1 ? (
+      <StarfishIcon variant="light" className="size-5" />
+    ) : (
+      <PearlIcon className="size-5 text-slate-100/88" />
+    )
 
   return (
     <div
@@ -28,23 +45,11 @@ export function ProjectPreviewAccent({ accentIndex }: ProjectPreviewAccentProps)
             : 'rgba(255,255,255,0.06)',
       }}
     >
-      {theme === 'light' ? (
-        normalizedIndex === 0 ? (
-          <LeafBudIcon className="size-5" />
-        ) : normalizedIndex === 1 ? (
-          <SakuraIcon variant="a" className="size-5" />
-        ) : (
-          <SnowCrystalIcon className="size-5 text-sky-300/85" />
-        )
-      ) : (
-        normalizedIndex === 0 ? (
-          <JellyfishIcon className="size-5 text-cyan-200/80" />
-        ) : normalizedIndex === 1 ? (
-          <StarfishIcon variant="light" className="size-5" />
-        ) : (
-          <PearlIcon className="size-5 text-slate-100/88" />
-        )
-      )}
+      <ThemeModeTransition
+        className="flex items-center justify-center"
+        light={light}
+        dark={dark}
+      />
     </div>
   )
 }

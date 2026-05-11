@@ -44,7 +44,7 @@ export function ContactForm({
     <form noValidate onSubmit={onSubmit} className="grid gap-4">
       <div className="grid gap-4 md:grid-cols-2">
         <label className="grid gap-2">
-          <span className="text-sm font-semibold text-[var(--color-text)]">Your Name</span>
+          <span className="text-sm font-semibold text-[var(--color-text)]">Your Name or Company</span>
           <input
             className={fieldClassName}
             style={{
@@ -57,7 +57,7 @@ export function ContactForm({
             name="name"
             value={values.name}
             onChange={(event) => onChange('name', event.target.value)}
-            placeholder="John Doe"
+            placeholder="Your Name or Company"
             aria-invalid={Boolean(errors.name)}
           />
           <FieldError message={errors.name} />
@@ -77,7 +77,7 @@ export function ContactForm({
             name="email"
             value={values.email}
             onChange={(event) => onChange('email', event.target.value)}
-            placeholder="john@company.com"
+            placeholder="Your Email"
             aria-invalid={Boolean(errors.email)}
           />
           <FieldError message={errors.email} />
@@ -85,7 +85,7 @@ export function ContactForm({
       </div>
 
       <label className="grid gap-2">
-        <span className="text-sm font-semibold text-[var(--color-text)]">How can I help?</span>
+        <span className="text-sm font-semibold text-[var(--color-text)]">Message</span>
         <textarea
           className={fieldClassName}
           style={{
@@ -99,7 +99,7 @@ export function ContactForm({
           name="message"
           value={values.message}
           onChange={(event) => onChange('message', event.target.value)}
-          placeholder="Tell me about your project goals..."
+          placeholder="Tell me about the role, team, or opportunity..."
           aria-invalid={Boolean(errors.message)}
         />
         <FieldError message={errors.message} />
@@ -124,7 +124,7 @@ export function ContactForm({
           style={getPrimaryCtaStyle(theme)}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Sending...' : 'Send Inquiry'}
+          {isSubmitting ? 'Contacting...' : 'Contact Me'}
         </button>
       </div>
     </form>

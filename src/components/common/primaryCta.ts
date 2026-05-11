@@ -1,10 +1,10 @@
 export function getPrimaryCtaStyle(theme: 'light' | 'dark') {
   if (theme === 'light') {
     return {
-      color: '#183559',
-      background:
-        'linear-gradient(135deg, rgba(255, 224, 178, 0.97), rgba(222, 241, 255, 0.97))',
-      boxShadow: '0 14px 30px rgba(142, 188, 228, 0.22)',
+      color: '#1f3b68',
+      background: 'linear-gradient(90deg, #ffe1a8 0%, #f4ead9 46%, #d8eafb 100%)',
+      boxShadow: '0 16px 34px rgba(176, 199, 223, 0.26)',
+      border: '1px solid rgba(179, 205, 231, 0.72)',
     }
   }
 
