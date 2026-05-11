@@ -4,7 +4,11 @@ import { leafBud, pearl, starfishLight, starfishPink } from '../../assets/experi
 import snowflakeCluster from '../../assets/theme/snowflake-cluster.png'
 import snowflakeSoft from '../../assets/theme/snowflake-soft.png'
 
-const sakuraVariants = ['/seasonal/sakura-a.png', '/seasonal/sakura-b.png'] as const
+const baseUrl = import.meta.env.BASE_URL
+const sakuraVariants = [
+  `${baseUrl}seasonal/sakura-a.png`,
+  `${baseUrl}seasonal/sakura-b.png`,
+] as const
 const snowflakeAssetVariants = [snowflakeSoft, snowflakeCluster] as const
 const starfishVariants = [starfishPink, starfishLight] as const
 
