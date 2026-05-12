@@ -9,7 +9,7 @@ type NavbarProps = {
 }
 
 export function Navbar({ onMobileNavToggle }: NavbarProps) {
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(true)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6 lg:px-8">

@@ -268,7 +268,7 @@ export function HeroSection() {
       {theme === 'light' ? (
         <>
           <SakuraIcon className="absolute right-16 top-20 size-5 rotate-[12deg] opacity-80" />
-          <SnowCrystalIcon className="absolute -right-[68.5rem] -top-[4.75rem] size-7 opacity-80" />
+          <SnowCrystalIcon className="absolute size-7 opacity-80 -top-9 -right-[18.5rem] sm:-right-[68rem] sm:-top-[3.75rem]" />
         </>
       ) : (
         <>
@@ -296,9 +296,9 @@ export function HeroSection() {
 
           <div className="relative mt-6 max-w-3xl">
             {theme === 'light' ? (
-              <SakuraIcon className="absolute -left-2 -top-[4rem] z-0 size-7 rotate-[-18deg] opacity-90 sm:left-8" />
+              <SakuraIcon className="absolute -left-2 -top-[4rem] z-0 size-7 rotate-[-18deg] opacity-90 sm:-left-4" />
             ) : (
-              <JellyfishIcon className="absolute right-2 top-[-3.2rem] z-0 size-8 -rotate-[16deg] text-cyan-300/65 sm:left-10 sm:right-auto" />
+              <JellyfishIcon className="absolute right-2 top-[-3.2rem] z-0 size-8 -rotate-[16deg] text-cyan-300/65 sm:left-[24.5rem]" />
             )}
             <h1 className="relative z-10 font-display text-4xl font-bold leading-[0.98] tracking-[-0.06em] text-[var(--color-text)] sm:text-5xl lg:text-[4.3rem]">
               {profile.headline}
