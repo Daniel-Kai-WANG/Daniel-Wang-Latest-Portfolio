@@ -13,6 +13,8 @@ import {
 } from './techLogoCarouselTimeline'
 import { TechLogoTile } from './TechLogoTile'
 
+const MOBILE_TILE_SCALE = 0.6
+
 function splitIntoRows(logos: TechLogo[], logosPerRow: number) {
   const rows: TechLogo[][] = []
 
@@ -33,6 +35,7 @@ export function TechLogoCarousel({ activeKey, logos }: TechLogoCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [logosPerRow, setLogosPerRow] = useState(4)
   const [elapsedMs, setElapsedMs] = useState(0)
+  const [isCompactMobile, setIsCompactMobile] = useState(false)
 
   useEffect(() => {
     const element = containerRef.current
@@ -43,9 +46,13 @@ export function TechLogoCarousel({ activeKey, logos }: TechLogoCarouselProps) {
 
     const observer = new ResizeObserver(([entry]) => {
       const nextWidth = entry.contentRect.width
+      const compact = window.innerWidth < 640
+      const tileWidth = compact ? LOGO_TILE_WIDTH * MOBILE_TILE_SCALE : LOGO_TILE_WIDTH
+
+      setIsCompactMobile(compact)
       const nextValue = Math.max(
         1,
-        Math.floor((nextWidth + LOGO_GAP) / (LOGO_TILE_WIDTH + LOGO_GAP))
+        Math.floor((nextWidth + LOGO_GAP) / (tileWidth + LOGO_GAP))
       )
 
       setLogosPerRow(nextValue)
@@ -58,14 +65,19 @@ export function TechLogoCarousel({ activeKey, logos }: TechLogoCarouselProps) {
 
   const rows = useMemo(() => splitIntoRows(logos, logosPerRow), [logos, logosPerRow])
   const rowCount = rows.length
+  const tileWidth = isCompactMobile ? LOGO_TILE_WIDTH * MOBILE_TILE_SCALE : LOGO_TILE_WIDTH
+  const tileHeight = isCompactMobile ? LOGO_TILE_HEIGHT * MOBILE_TILE_SCALE : LOGO_TILE_HEIGHT
   const trackWidth =
-    logosPerRow * LOGO_TILE_WIDTH + Math.max(0, logosPerRow - 1) * LOGO_GAP
+    logosPerRow * tileWidth + Math.max(0, logosPerRow - 1) * LOGO_GAP
   const trackHeight =
-    rowCount * LOGO_TILE_HEIGHT + Math.max(0, rowCount - 1) * ROW_GAP
-  const segments = useMemo(() => buildSegments(rowCount, trackWidth), [rowCount, trackWidth])
+    rowCount * tileHeight + Math.max(0, rowCount - 1) * ROW_GAP
+  const segments = useMemo(
+    () => buildSegments(rowCount, trackWidth, { tileHeight, tileWidth }),
+    [rowCount, tileHeight, tileWidth, trackWidth]
+  )
   const cycleDurationMs = getCycleDuration(segments)
   const isAnimated = !reduceMotion && logos.length >= 2 && cycleDurationMs > 0
-  const baseLogoSpacingMs = ((LOGO_TILE_WIDTH + LOGO_GAP) / LOGO_SPEED) * 2000
+  const baseLogoSpacingMs = ((tileWidth + LOGO_GAP) / LOGO_SPEED) * 2000
   const logoSpacingMs = baseLogoSpacingMs / 2
 
   useEffect(() => {
@@ -92,11 +104,11 @@ export function TechLogoCarousel({ activeKey, logos }: TechLogoCarouselProps) {
         ref={containerRef}
         className="grid gap-3"
         style={{
-          gridTemplateColumns: `repeat(${logosPerRow}, minmax(0, ${LOGO_TILE_WIDTH}px))`,
+          gridTemplateColumns: `repeat(${logosPerRow}, minmax(0, ${tileWidth}px))`,
         }}
       >
         {logos.map((logo) => (
-          <TechLogoTile key={`${activeKey}-${logo.id}`} logo={logo} />
+          <TechLogoTile key={`${activeKey}-${logo.id}`} compact={isCompactMobile} logo={logo} />
         ))}
       </div>
     )
@@ -133,7 +145,7 @@ export function TechLogoCarousel({ activeKey, logos }: TechLogoCarouselProps) {
                 willChange: 'transform, opacity',
               }}
             >
-              <TechLogoTile logo={logo} />
+              <TechLogoTile compact={isCompactMobile} logo={logo} />
             </div>
           )
         })}

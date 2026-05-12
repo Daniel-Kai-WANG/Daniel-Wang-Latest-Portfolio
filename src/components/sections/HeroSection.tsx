@@ -40,8 +40,8 @@ function WorkflowPanel() {
         }}
       />
       <div className="relative z-10">
-        <div className="flex items-center justify-between gap-4">
-          <div>
+        <div className="relative flex min-h-[4.5rem] items-start justify-center sm:min-h-0 sm:items-center sm:justify-between sm:gap-4">
+          <div className="mx-auto max-w-[13.5rem] text-center sm:mx-0 sm:max-w-none sm:min-w-0 sm:flex-1 sm:pr-0 sm:text-left">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
               {theme === 'light' ? 'Seasonal workflow' : 'Ocean workflow'}
             </p>
@@ -52,7 +52,7 @@ function WorkflowPanel() {
             </h3>
           </div>
           <div
-            className="flex size-12 items-center justify-center rounded-2xl"
+            className="absolute right-0 top-1 flex size-8 shrink-0 items-center justify-center rounded-2xl sm:static sm:size-12"
             style={{
               background:
                 theme === 'light'
@@ -268,20 +268,18 @@ export function HeroSection() {
       {theme === 'light' ? (
         <>
           <SakuraIcon className="absolute right-16 top-20 size-5 rotate-[12deg] opacity-80" />
-          <SakuraIcon className="absolute left-[12px] top-[70px] size-7 rotate-[-18deg]" />
           <SnowCrystalIcon className="absolute -right-[68.5rem] -top-[4.75rem] size-7 opacity-80" />
         </>
       ) : (
         <>
-          <StarfishIcon variant="pink" className="absolute right-6 top-12 size-10 rotate-[18deg] opacity-70" />
-          <JellyfishIcon className="absolute left-[275px] top-[245px] size-8 -rotate-[16deg] text-cyan-300/65" />
+          <StarfishIcon variant="pink" className="absolute right-4 top-12 size-8 rotate-[18deg] opacity-70 sm:right-6 sm:size-10" />
         </>
       )}
 
       <div className="relative z-10 -mt-10 grid gap-8 sm:-mt-12 lg:-mt-16 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
         <div>
           <div
-            className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold"
+            className="relative z-10 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold sm:text-sm"
             style={{
               borderColor: 'var(--color-border)',
               background: 'var(--pill-background)',
@@ -296,9 +294,16 @@ export function HeroSection() {
             {profile.badge}
           </div>
 
-          <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[0.98] tracking-[-0.06em] text-[var(--color-text)] sm:text-5xl lg:text-[4.3rem]">
-            {profile.headline}
-          </h1>
+          <div className="relative mt-6 max-w-3xl">
+            {theme === 'light' ? (
+              <SakuraIcon className="absolute -left-2 -top-[4rem] z-0 size-7 rotate-[-18deg] opacity-90 sm:left-8" />
+            ) : (
+              <JellyfishIcon className="absolute right-2 top-[-3.2rem] z-0 size-8 -rotate-[16deg] text-cyan-300/65 sm:left-10 sm:right-auto" />
+            )}
+            <h1 className="relative z-10 font-display text-4xl font-bold leading-[0.98] tracking-[-0.06em] text-[var(--color-text)] sm:text-5xl lg:text-[4.3rem]">
+              {profile.headline}
+            </h1>
+          </div>
 
           <p className="mt-6 max-w-2xl text-base leading-7 text-[var(--color-muted)] sm:text-lg">
             {profile.subtitle}

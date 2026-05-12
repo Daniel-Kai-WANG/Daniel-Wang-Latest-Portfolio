@@ -2,6 +2,7 @@ import type { TechLogo } from '../../../data/techStack'
 import { cn } from '../../../lib/cn'
 
 type TechLogoTileProps = {
+  compact?: boolean
   logo: TechLogo
 }
 
@@ -66,28 +67,42 @@ function LogoArt({ logo }: { logo: TechLogo }) {
   return <LogoFallback label={logo.name} />
 }
 
-export function TechLogoTile({ logo }: TechLogoTileProps) {
+export function TechLogoTile({ compact = false, logo }: TechLogoTileProps) {
   return (
     <div
-      className="flex h-[6.85rem] w-24 flex-col items-center rounded-[1.25rem] border px-2.5 pb-2.5 pt-3 text-center"
+      className={cn(
+        'flex flex-col items-center rounded-[1.25rem] border text-center',
+        compact
+          ? 'h-[4.11rem] w-[3.6rem] px-1.5 pb-1.5 pt-[0.45rem]'
+          : 'h-[6.85rem] w-24 px-2.5 pb-2.5 pt-3'
+      )}
       style={{
         borderColor: 'var(--pill-border)',
         background: 'color-mix(in srgb, var(--color-surface) 90%, transparent)',
       }}
     >
       <div
-        className="flex h-11 w-11 items-center justify-center rounded-[1rem] border"
+        className={cn(
+          'flex items-center justify-center border',
+          compact ? 'h-[2.65rem] w-[2.65rem] rounded-[0.8rem]' : 'h-11 w-11 rounded-[1rem]'
+        )}
         style={{
           borderColor: 'color-mix(in srgb, var(--color-primary) 18%, var(--pill-border))',
           background: 'color-mix(in srgb, var(--soft-accent) 68%, white)',
         }}
       >
-        <LogoArt logo={logo} />
+        <div
+          className={cn('flex items-center justify-center', compact && 'scale-[0.6]')}
+          style={compact ? { transformOrigin: 'center center' } : undefined}
+        >
+          <LogoArt logo={logo} />
+        </div>
       </div>
       <p
         className={cn(
-          'mt-2.5 flex min-h-[2.35rem] max-w-[4.75rem] items-start justify-center text-balance px-1 font-semibold text-[var(--color-text)]',
-          getLabelClassName(logo.labelVariant)
+          'flex items-start justify-center text-balance font-semibold text-[var(--color-text)]',
+          compact ? 'mt-1.5 min-h-[1.4rem] max-w-[3rem] px-0.5 text-[8px] leading-[0.72rem]' : 'mt-2.5 min-h-[2.35rem] max-w-[4.75rem] px-1',
+          !compact && getLabelClassName(logo.labelVariant)
         )}
       >
         {logo.name}

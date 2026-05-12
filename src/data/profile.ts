@@ -2,17 +2,17 @@ import type { Profile } from '../types/content'
 
 export const profile: Profile = {
   name: 'Daniel Wang',
-  badge: 'Full-Stack Developer + AI Workflow Builder',
+  badge: 'Full-Stack Developer · CMS Builder · AI Workflow Builder',
   headline: 'I build digital products that think, connect, and automate.',
   subtitle:
-    'I work across web, mobile, backend services, CMS platforms, and AI-assisted workflows to help teams turn complex requirements into reliable digital systems.',
+    'I build across web, mobile, backend APIs, CMS platforms, and AI-assisted workflows, turning complex requirements into reliable, maintainable digital systems.',
   location: 'South Brisbane, QLD',
   summary:
     'Full-stack developer with production experience spanning React, React Native, Node.js, Laravel, CMS implementation, and delivery-focused AI workflow design.',
   heroStats: [
     { value: '2+', label: 'Years Professional Experience' },
-    { value: '15+', label: 'Projects Across Web & Mobile' },
-    { value: '400+', label: 'Users Production Mobile App Served' },
+    { value: '20+', label: 'Production Projects' },
+    { value: '400+', label: 'Active App Users' },
   ],
   navigation: [
     { label: 'Home', href: '#top' },

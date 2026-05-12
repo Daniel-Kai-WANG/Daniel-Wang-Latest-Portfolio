@@ -462,13 +462,13 @@ export function ContactActionCards({
           <ThemeShiftBackdrop variant="card" />
           <ContactActionBackgroundMotif id="resume" />
           <div className="relative z-10 pt-3">
-            <div className="flex items-start justify-between gap-4">
-              <div className="min-w-0">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div className="min-w-0 flex-1">
                 <ContactActionIconBadge badge={{ kind: 'svg', icon: ResumeCardIcon }} />
                 <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-muted)]">
                   RESUME
                 </p>
-                <p className="mt-2 max-w-2xl text-sm font-semibold leading-6 text-[var(--color-text)]">
+                <p className="mt-2 w-full max-w-none text-sm font-semibold leading-6 text-[var(--color-text)] sm:max-w-2xl">
                   {resumeSummary}
                 </p>
               </div>
@@ -478,7 +478,7 @@ export function ContactActionCards({
                 onClick={() => setIsResumeExpanded((current) => !current)}
                 aria-expanded={isResumeExpanded}
                 aria-label={isResumeExpanded ? 'Collapse resume list' : 'Expand resume list'}
-                className="inline-flex shrink-0 items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-transform duration-300 hover:-translate-y-0.5"
+                className="inline-flex w-fit shrink-0 items-center gap-2 self-start rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-transform duration-300 hover:-translate-y-0.5"
                 style={{
                   borderColor: 'var(--pill-border)',
                   background: 'var(--pill-background)',
