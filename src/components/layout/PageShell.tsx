@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react'
+import { useState, type PropsWithChildren } from 'react'
 import { AtmosphericAura } from '../animation/AtmosphericAura'
 import { useTheme } from '../../hooks/useTheme'
 import { BackToTopButton } from './BackToTopButton'
@@ -6,6 +6,7 @@ import { Navbar } from './Navbar'
 
 export function PageShell({ children }: PropsWithChildren) {
   const { theme } = useTheme()
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(true)
 
   return (
     <div id="top" className="relative isolate overflow-hidden">
@@ -32,8 +33,12 @@ export function PageShell({ children }: PropsWithChildren) {
       </div>
 
       <div className="mx-auto max-w-[1240px] px-4 pb-20 sm:px-6 lg:px-8">
-        <Navbar />
-        <main className="mt-20 space-y-8 sm:mt-24 sm:space-y-10 lg:mt-28 lg:space-y-12">
+        <Navbar onMobileNavToggle={setIsMobileNavOpen} />
+        <main
+          className={`space-y-8 transition-[margin-top] duration-300 sm:mt-24 sm:space-y-10 lg:mt-28 lg:space-y-12 ${
+            isMobileNavOpen ? 'mt-[14rem]' : 'mt-[7.5rem]'
+          }`}
+        >
           {children}
         </main>
       </div>

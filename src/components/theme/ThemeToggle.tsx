@@ -27,15 +27,6 @@ export function ThemeToggle() {
 
   return (
     <div className="flex items-center gap-3">
-      <div className="hidden xl:block">
-        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--color-muted)]">
-          Orbit theme
-        </p>
-        <p className="mt-1 max-w-[7.5rem] text-xs leading-5 text-[var(--color-muted)]">
-          Sakura by day, jelly drift by night.
-        </p>
-      </div>
-
       <button
         type="button"
         aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}

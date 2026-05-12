@@ -1,66 +1,115 @@
+import { AnimatePresence, motion } from 'framer-motion'
+import { useState } from 'react'
 import { profile } from '../../data/profile'
 import { ThemeToggle } from '../theme/ThemeToggle'
+import { ChevronRightIcon } from '../sections/SectionIcons'
 
-export function Navbar() {
+type NavbarProps = {
+  onMobileNavToggle?: (isOpen: boolean) => void
+}
+
+export function Navbar({ onMobileNavToggle }: NavbarProps) {
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(true)
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1240px]">
         <div
-          className="flex items-center justify-between gap-4 overflow-hidden rounded-[28px] border px-4 py-3 backdrop-blur-xl sm:px-6"
+          className="overflow-hidden rounded-[28px] border px-4 py-3 backdrop-blur-xl sm:px-6"
           style={{
             background: 'color-mix(in srgb, var(--color-surface) 88%, transparent)',
             borderColor: 'var(--color-border)',
             boxShadow: 'var(--surface-shadow)',
           }}
         >
-          <a href="#top" className="min-w-fit">
-            <div className="font-display text-lg font-bold tracking-[-0.04em] text-[var(--color-text)]">
-              Daniel Wang
-            </div>
-            <div className="text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
-              Full-Stack + AI Workflow
-            </div>
-          </a>
+          <div className="flex items-center justify-between gap-4">
+            <a href="#top" className="min-w-0 flex-1">
+              <div className="font-display text-lg font-bold tracking-[-0.04em] text-[var(--color-text)]">
+                Daniel Wang
+              </div>
+              <div className="text-[10px] uppercase tracking-[0.16em] text-[var(--color-muted)] sm:text-xs sm:tracking-[0.18em]">
+                Full-Stack + AI Workflow
+              </div>
+            </a>
 
-          <nav className="hidden items-center gap-5 lg:flex">
-            {profile.navigation.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-sm font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
+            <nav className="hidden items-center gap-5 lg:flex">
+              {profile.navigation.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() =>
+                  setIsMobileNavOpen((current) => {
+                    const next = !current
+                    onMobileNavToggle?.(next)
+                    return next
+                  })
+                }
+                className="inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text)] transition-colors lg:hidden"
+                style={{
+                  borderColor: 'var(--color-border)',
+                  background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
+                }}
+                aria-expanded={isMobileNavOpen}
+                aria-controls="mobile-nav-links"
               >
-                {item.label}
+                Menu
+                <motion.span
+                  animate={{ rotate: isMobileNavOpen ? 270 : 90 }}
+                  transition={{ duration: 0.22, ease: 'easeOut' }}
+                >
+                  <ChevronRightIcon className="size-4" />
+                </motion.span>
+              </button>
+              <a
+                href="#contact"
+                className="hidden rounded-full border px-4 py-2 text-sm font-semibold text-[var(--color-text)] sm:inline-flex"
+                style={{ borderColor: 'var(--color-border)' }}
+              >
+                Get in touch
               </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <a
-              href="#contact"
-              className="hidden rounded-full border px-4 py-2 text-sm font-semibold text-[var(--color-text)] sm:inline-flex"
-              style={{ borderColor: 'var(--color-border)' }}
-            >
-              Get in touch
-            </a>
-            <ThemeToggle />
+              <ThemeToggle />
+            </div>
           </div>
-        </div>
 
-        <nav className="mt-3 flex gap-2 overflow-x-auto px-1 pb-1 lg:hidden">
-          {profile.navigation.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="rounded-full border px-4 py-2 text-sm font-semibold whitespace-nowrap text-[var(--color-muted)]"
-              style={{
-                borderColor: 'var(--color-border)',
-                background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
-              }}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+          <AnimatePresence initial={false}>
+            {isMobileNavOpen ? (
+              <motion.nav
+                id="mobile-nav-links"
+                className="overflow-hidden lg:hidden"
+                initial={{ height: 0, opacity: 0, y: -10 }}
+                animate={{ height: 'auto', opacity: 1, y: 0 }}
+                exit={{ height: 0, opacity: 0, y: -10 }}
+                transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="mt-3 grid grid-cols-3 gap-2">
+                  {profile.navigation.map((item) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      className="flex min-h-11 items-center justify-center rounded-full border px-3 py-2 text-center text-[13px] font-semibold text-[var(--color-muted)]"
+                      style={{
+                        borderColor: 'var(--color-border)',
+                        background: 'color-mix(in srgb, var(--color-surface) 86%, transparent)',
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </motion.nav>
+            ) : null}
+          </AnimatePresence>
+        </div>
       </div>
     </header>
   )

@@ -21,21 +21,27 @@ type TransferSegment = {
 
 type LogoSegment = TravelSegment | TransferSegment
 
-function buildSegments(rowCount: number, trackWidth: number) {
+type LogoTrackMetrics = {
+  tileHeight: number
+  tileWidth: number
+}
+
+function buildSegments(rowCount: number, trackWidth: number, metrics: LogoTrackMetrics) {
   const segments: LogoSegment[] = []
+  const { tileHeight, tileWidth } = metrics
 
   for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
     const moveRight = rowIndex % 2 === 0
-    const startX = moveRight ? -LOGO_TILE_WIDTH : trackWidth
-    const endX = moveRight ? trackWidth : -LOGO_TILE_WIDTH
+    const startX = moveRight ? -tileWidth : trackWidth
+    const endX = moveRight ? trackWidth : -tileWidth
 
     segments.push({
       type: 'travel',
       rowIndex,
       startX,
       endX,
-      y: rowIndex * (LOGO_TILE_HEIGHT + ROW_GAP),
-      durationMs: ((trackWidth + LOGO_TILE_WIDTH) / LOGO_SPEED) * 1000,
+      y: rowIndex * (tileHeight + ROW_GAP),
+      durationMs: ((trackWidth + tileWidth) / LOGO_SPEED) * 1000,
     })
 
     if (rowIndex < rowCount - 1) {

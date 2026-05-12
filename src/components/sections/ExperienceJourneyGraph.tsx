@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import { motion } from 'framer-motion'
 import { leafBud, sakuraNode } from '../../assets/experience'
 import { SakuraIcon } from '../common/Icons'
@@ -22,6 +23,7 @@ const FINAL_PATH_OVERLAP = 0.08
 
 type ExperienceJourneyGraphProps = {
   activeIndex: number
+  interactive?: boolean
   onSelect: (index: number) => void
   reduceMotion: boolean
   theme: ThemeMode
@@ -29,12 +31,16 @@ type ExperienceJourneyGraphProps = {
 
 export function ExperienceJourneyGraph({
   activeIndex,
+  interactive = true,
   onSelect,
   reduceMotion,
   theme,
 }: ExperienceJourneyGraphProps) {
+  const gradientId = useId().replace(/:/g, '')
   const isLight = theme === 'light'
   const animationCycleKey = `experience-journey-${theme}`
+  const lightWoodGradientId = `journey-light-wood-${gradientId}`
+  const darkCoralGradientId = `journey-dark-coral-${gradientId}`
   const graph = isLight
     ? lightExperienceJourneyGraph
     : darkExperienceJourneyGraph
@@ -64,7 +70,7 @@ export function ExperienceJourneyGraph({
   const groundLeafSizeByIndex = ['1rem', '0.9rem', '1.06rem', '0.94rem'] as const
 
   return (
-    <div className="relative mt-4 h-[24rem] sm:h-[28rem] xl:h-[32rem]">
+    <div className="relative mt-4 h-[18rem] sm:h-[28rem] xl:h-[32rem]">
       <svg
         key={animationCycleKey}
         viewBox={`0 0 ${GRAPH_WIDTH} ${GRAPH_HEIGHT}`}
@@ -74,7 +80,7 @@ export function ExperienceJourneyGraph({
       >
         <defs>
           <linearGradient
-            id="journey-light-wood"
+            id={lightWoodGradientId}
             x1="0%"
             x2="0%"
             y1="0%"
@@ -84,7 +90,7 @@ export function ExperienceJourneyGraph({
             <stop offset="100%" stopColor="#7f5c41" stopOpacity="0.98" />
           </linearGradient>
           <linearGradient
-            id="journey-dark-coral"
+            id={darkCoralGradientId}
             x1="0%"
             x2="100%"
             y1="0%"
@@ -114,7 +120,7 @@ export function ExperienceJourneyGraph({
           d={graph.baseStem}
           fill="none"
           stroke={
-            isLight ? 'url(#journey-light-wood)' : 'url(#journey-dark-coral)'
+            isLight ? `url(#${lightWoodGradientId})` : `url(#${darkCoralGradientId})`
           }
           strokeLinecap="butt"
           strokeWidth={graph.baseStemWidth}
@@ -142,7 +148,7 @@ export function ExperienceJourneyGraph({
           d={graph.baseStem}
           fill="none"
           stroke={
-            isLight ? 'url(#journey-light-wood)' : 'url(#journey-dark-coral)'
+            isLight ? `url(#${lightWoodGradientId})` : `url(#${darkCoralGradientId})`
           }
           strokeLinecap="round"
           strokeWidth={graph.baseStemWidth}
@@ -174,8 +180,8 @@ export function ExperienceJourneyGraph({
                 fill="none"
                 stroke={
                   isLight
-                    ? 'url(#journey-light-wood)'
-                    : 'url(#journey-dark-coral)'
+                    ? `url(#${lightWoodGradientId})`
+                    : `url(#${darkCoralGradientId})`
                 }
                 strokeLinecap="butt"
                 strokeLinejoin="round"
@@ -214,8 +220,8 @@ export function ExperienceJourneyGraph({
                 fill="none"
                 stroke={
                   isLight
-                    ? 'url(#journey-light-wood)'
-                    : 'url(#journey-dark-coral)'
+                    ? `url(#${lightWoodGradientId})`
+                    : `url(#${darkCoralGradientId})`
                 }
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -254,9 +260,12 @@ export function ExperienceJourneyGraph({
             stroke="transparent"
             strokeLinecap="round"
             strokeWidth={Math.max(branch.width + 4.6, 7.2)}
-            onMouseEnter={() => onSelect(index)}
-            onClick={() => onSelect(index)}
-            style={{ cursor: 'pointer', pointerEvents: 'stroke' }}
+            onMouseEnter={interactive ? () => onSelect(index) : undefined}
+            onClick={interactive ? () => onSelect(index) : undefined}
+            style={{
+              cursor: interactive ? 'pointer' : 'default',
+              pointerEvents: interactive ? 'stroke' : 'none',
+            }}
           />
         ))}
       </svg>
@@ -431,15 +440,16 @@ export function ExperienceJourneyGraph({
               type="button"
               aria-label={`${item.company} experience`}
               aria-pressed={isActive}
-              onMouseEnter={() => onSelect(index)}
-              onFocus={() => onSelect(index)}
-              onClick={() => onSelect(index)}
+              onMouseEnter={interactive ? () => onSelect(index) : undefined}
+              onFocus={interactive ? () => onSelect(index) : undefined}
+              onClick={interactive ? () => onSelect(index) : undefined}
               className="absolute z-10 flex size-14 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] sm:size-16"
               style={{
                 top: `${(branch.endpoint.y / GRAPH_HEIGHT) * 100}%`,
                 left: `${(branch.endpoint.x / GRAPH_WIDTH) * 100}%`,
                 transform: `translate(${branch.nodeTranslate.x}%, ${branch.nodeTranslate.y}%)`,
               }}
+              disabled={!interactive}
             >
               <motion.span
                 className="absolute left-1/2 top-1/2 block size-11 -translate-x-1/2 -translate-y-1/2 rounded-full sm:size-12"

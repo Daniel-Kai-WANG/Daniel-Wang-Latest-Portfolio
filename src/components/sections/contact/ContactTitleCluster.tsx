@@ -128,9 +128,9 @@ function slotSurface(theme: ThemeMode) {
 
 export function ContactTitleCluster() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden sm:block">
       <ClusterSlot
-        className="absolute left-[4.5rem] top-0 h-10 w-10 sm:h-11 sm:w-11"
+        className="absolute left-[4.5rem] top-0 h-10 w-10 sm:h-8 sm:w-8"
         lightOffset={{ x: 0, y: -1, rotate: -10 }}
         light={
           <LeafBudIcon

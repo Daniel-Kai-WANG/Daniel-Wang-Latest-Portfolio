@@ -1,15 +1,18 @@
-import { useState } from 'react'
 import { techStackCategories } from '../../data/techStack'
+import { useAutoRotateIndex } from '../../hooks/useAutoRotateIndex'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
+import { CarouselDots } from '../common/CarouselControls'
 import { TechCategoryList } from './tech-stack/TechCategoryList'
 import { TechStackCornerAccent } from './tech-stack/TechStackCornerAccent'
 import { TechDetailCard } from './tech-stack/TechDetailCard'
 
 export function TechStackSection() {
-  const [activeCategoryId, setActiveCategoryId] = useState(techStackCategories[0]?.id ?? '')
-  const activeCategory =
-    techStackCategories.find((category) => category.id === activeCategoryId) ?? techStackCategories[0]
+  const { activeIndex, goToIndex, goToNext, goToPrevious, setActiveIndex } = useAutoRotateIndex(
+    techStackCategories.length,
+    { enabled: false }
+  )
+  const activeCategory = techStackCategories[activeIndex]
 
   if (!activeCategory) {
     return null
@@ -29,7 +32,19 @@ export function TechStackSection() {
             Tech Stack System
           </h2>
 
-          <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1.38fr)_minmax(18rem,0.92fr)] lg:items-stretch">
+          <div className="mt-6 space-y-5 sm:hidden">
+            <CarouselDots
+              activeIndex={activeIndex}
+              items={techStackCategories.map((category) => category.label)}
+              label="stack category"
+              onNext={goToNext}
+              onPrevious={goToPrevious}
+              onSelect={goToIndex}
+            />
+            <TechDetailCard category={activeCategory} />
+          </div>
+
+          <div className="mt-6 hidden gap-5 sm:grid lg:grid-cols-[minmax(0,1.38fr)_minmax(18rem,0.92fr)] lg:items-stretch">
             <div className="order-2 lg:order-1">
               <TechDetailCard category={activeCategory} />
             </div>
@@ -38,7 +53,13 @@ export function TechStackSection() {
               <TechCategoryList
                 activeCategoryId={activeCategory.id}
                 categories={techStackCategories}
-                onChange={setActiveCategoryId}
+                onChange={(categoryId) => {
+                  const nextIndex = techStackCategories.findIndex((category) => category.id === categoryId)
+
+                  if (nextIndex >= 0) {
+                    setActiveIndex(nextIndex)
+                  }
+                }}
               />
             </div>
           </div>

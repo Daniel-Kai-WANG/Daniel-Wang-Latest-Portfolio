@@ -1,16 +1,19 @@
-import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { projects } from '../../data/projects'
+import { useAutoRotateIndex } from '../../hooks/useAutoRotateIndex'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { ArrowUpRightIcon, JellyfishIcon, SnowCrystalIcon, StarfishIcon } from '../common/Icons'
-import { getPrimaryCtaStyle } from '../common/primaryCta'
+import { CarouselDots } from '../common/CarouselControls'
+import { JellyfishIcon, SnowCrystalIcon, StarfishIcon } from '../common/Icons'
 import { ProjectPreviewAccent } from './projects/ProjectPreviewAccent'
 
 export function ProjectsSection() {
   const { theme } = useTheme()
-  const [activeIndex, setActiveIndex] = useState(0)
+  const { activeIndex, goToIndex, goToNext, goToPrevious, setActiveIndex } = useAutoRotateIndex(
+    projects.length,
+    { intervalMs: 8200 }
+  )
   const activeProject = projects[activeIndex]
   const previewProjects = projects
     .map((project, index) => ({ project, index }))
@@ -31,7 +34,18 @@ export function ProjectsSection() {
             </h2>
           </div>
 
-          <div className="mt-8 grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
+          <div className="mt-8 space-y-5 sm:hidden">
+            <CarouselDots
+              activeIndex={activeIndex}
+              items={projects.map((project) => project.title)}
+              label="featured project"
+              onNext={goToNext}
+              onPrevious={goToPrevious}
+              onSelect={goToIndex}
+            />
+          </div>
+
+          <div className="mt-5 grid gap-5 sm:mt-8 xl:grid-cols-[1.1fr_0.9fr]">
             <AnimatePresence mode="wait">
               <motion.article
                 key={activeProject.title}
@@ -88,7 +102,7 @@ export function ProjectsSection() {
                         </span>
                       </div>
 
-                      <h3 className="mt-5 font-display text-[2.2rem] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)] sm:text-[2.6rem]">
+                      <h3 className="mt-5 font-display text-[clamp(1.72rem,7vw,2rem)] font-bold leading-tight tracking-[-0.05em] text-[var(--color-text)] sm:text-[2.6rem]">
                         {activeProject.title}
                       </h3>
                       <p className="mt-4 text-sm leading-7 text-[var(--color-muted)]">
@@ -190,23 +204,12 @@ export function ProjectsSection() {
                         </span>
                       ))}
                     </div>
-
-                    <div className="mt-6">
-                      <a
-                        href={activeProject.ctaHref}
-                        className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold transition-[background,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:brightness-[1.03]"
-                        style={getPrimaryCtaStyle(theme)}
-                      >
-                        {activeProject.ctaLabel}
-                        <ArrowUpRightIcon className="size-4" />
-                      </a>
-                    </div>
                   </div>
                 </div>
               </motion.article>
             </AnimatePresence>
 
-            <motion.div layout className="grid gap-4">
+            <motion.div layout className="hidden gap-4 sm:grid">
               {previewProjects.map(({ project, index }) => (
                 <motion.button
                   key={project.title}
