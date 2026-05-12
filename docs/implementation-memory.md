@@ -128,6 +128,14 @@ Cause: technical environment mismatch rather than product logic.
 7. Open the localhost page once and complete all checks in the same browser session instead of reopening a new page for each test.
 8. Do not mark a branch as complete if it is not clean.
 
+## Workflow preference: commit message format
+
+- For this repository, prefer the Doris-style commit title format when the user requests it:
+  `[<type>](<scope>) <subject>`
+- Keep the commit title lowercase.
+- Use one of the documented lowercase types such as `fix`, `feature`, `improvement`, `style`, `refactor`, `test`, `chore`, or `deps`.
+- Keep the body descriptive, with the first letter capitalized.
+
 ## Fourth correction: ghosting diagnosis, exact corner-element rules, Featured Projects child-block decoration, Contact CTA icon-state rules, and single-session localhost verification
 
 ### Missed requirement: logo ghosting

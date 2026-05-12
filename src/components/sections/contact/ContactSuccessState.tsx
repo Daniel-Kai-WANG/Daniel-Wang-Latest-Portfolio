@@ -32,11 +32,11 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
         borderColor:
           theme === 'light'
             ? 'color-mix(in srgb, #b6d8b3 40%, var(--color-border))'
-            : 'color-mix(in srgb, #7cb58a 24%, var(--color-border))',
+            : 'color-mix(in srgb, rgba(246, 218, 140, 0.58) 46%, var(--color-border))',
         background:
           theme === 'light'
             ? 'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 96%, rgba(233,248,232,0.82)), color-mix(in srgb, var(--color-surface-muted) 54%, rgba(220,242,221,0.54)), color-mix(in srgb, var(--color-surface) 94%, rgba(245,255,245,0.7)))'
-            : 'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 95%, rgba(127,186,142,0.1)), color-mix(in srgb, var(--color-surface-muted) 72%, rgba(91,146,110,0.08)), color-mix(in srgb, var(--color-surface) 96%, rgba(14,26,58,0.24)))',
+            : 'linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 90%, rgba(255, 233, 166, 0.22)), color-mix(in srgb, var(--color-surface-muted) 74%, rgba(246, 212, 116, 0.14)), color-mix(in srgb, var(--color-surface) 92%, rgba(58, 40, 6, 0.18)))',
       }}
     >
       <div
@@ -45,27 +45,17 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
           filter:
             theme === 'light'
               ? 'drop-shadow(0 12px 22px rgba(126, 183, 110, 0.18))'
-              : 'drop-shadow(0 12px 24px rgba(255, 211, 168, 0.14))',
+              : 'drop-shadow(0 14px 28px rgba(245, 211, 114, 0.22))',
         }}
       >
-        <div
-          aria-hidden="true"
-          className="absolute inset-[12%] rounded-full"
-          style={{
-            background:
-              theme === 'light'
-              ? 'radial-gradient(circle at 30% 30%, rgba(115, 190, 145,0.98), rgba(115, 190, 145,0.84) 72%, rgba(115, 190, 145,0.7) 100%)'
-              : 'radial-gradient(circle at 30% 30%, rgba(255, 211, 168,0.3), rgba(255, 211, 168,0.18) 68%, rgba(255, 211, 168,0.1) 100%)',
-          }}
-        />
         <div
           aria-hidden="true"
           className="absolute inset-[2%] rounded-full"
           style={{
             background:
               theme === 'light'
-              ? 'conic-gradient(from 210deg, rgba(142, 210, 161, 0.24), rgba(115, 190, 145, 0.68), rgba(199, 239, 213, 0.28), rgba(142, 210, 161, 0.24))'
-              : 'conic-gradient(from 210deg, rgba(255, 227, 197, 0.22), rgba(255, 211, 168, 0.76), rgba(255, 241, 224, 0.26), rgba(255, 227, 197, 0.22))',
+              ? 'conic-gradient(from 210deg, rgba(34, 166, 110, 0.3), rgba(15, 134, 92, 0.9), rgba(130, 238, 195, 0.46), rgba(34, 166, 110, 0.3))'
+              : 'conic-gradient(from 210deg, rgba(255, 228, 168, 0.28), rgba(244, 196, 74, 0.98), rgba(255, 245, 210, 0.52), rgba(255, 228, 168, 0.28))',
             maskImage:
               'radial-gradient(circle, transparent calc(100% - 8px), black calc(100% - 7px))',
             WebkitMaskImage:
@@ -77,7 +67,7 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
             animationData={animationData}
             loop
             autoplay
-            className="relative z-10 h-[72%] w-[72%]"
+            className="relative z-10 h-[94%] w-[94%]"
           />
         ) : (
           <div
@@ -96,7 +86,7 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
         )}
       </div>
 
-      <h3 className="mx-auto mt-5 max-w-xl font-display text-[1.6rem] font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-[1.8rem]">
+      <h3 className="mx-auto mt-0 max-w-xl font-display text-[1.6rem] font-bold tracking-[-0.04em] text-[var(--color-text)] sm:text-[1.8rem] sm:mt-5">
         Thank you for reaching out.
       </h3>
 
@@ -113,7 +103,7 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
           borderColor:
             theme === 'light'
               ? 'color-mix(in srgb, var(--color-primary) 22%, var(--color-border))'
-              : 'color-mix(in srgb, rgba(255,255,255,0.2) 52%, var(--color-border))',
+              : 'color-mix(in srgb, rgba(244, 202, 96, 0.58) 54%, var(--color-border))',
           background: 'transparent',
         }}
       >

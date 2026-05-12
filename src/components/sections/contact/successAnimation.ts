@@ -11,6 +11,14 @@ type LottieShapeItem = {
       t?: number
     }>
   }
+  s?: {
+    k?: Array<{
+      i?: { x?: number[]; y?: number[] }
+      o?: { x?: number[]; y?: number[] }
+      s?: number[]
+      t?: number
+    }>
+  }
   o?: {
     k?: number
   }
@@ -20,23 +28,38 @@ type LottieShapeItem = {
 }
 
 type LottieLayer = {
+  ind?: number
   nm?: string
+  refId?: string
   shapes?: Array<{
     it?: LottieShapeItem[]
   }>
 }
 
 type LottieAnimation = {
+  assets?: Array<{
+    id?: string
+    layers?: LottieLayer[]
+  }>
   layers?: LottieLayer[]
 }
 
-function setLayerFillOpacity(animation: LottieAnimation, layerName: string, opacity: number) {
-  const layer = animation.layers?.find((item) => item.nm === layerName)
-  const fill = layer?.shapes?.[0]?.it?.find((item) => item.ty === 'fl')
+function findLayer(animation: LottieAnimation, layerName: string) {
+  const rootLayer = animation.layers?.find((item) => item.nm === layerName)
 
-  if (fill?.o?.k !== undefined) {
-    fill.o.k = opacity
+  if (rootLayer) {
+    return rootLayer
   }
+
+  for (const asset of animation.assets ?? []) {
+    const assetLayer = asset.layers?.find((item) => item.nm === layerName)
+
+    if (assetLayer) {
+      return assetLayer
+    }
+  }
+
+  return undefined
 }
 
 function setLayerStroke(
@@ -45,7 +68,7 @@ function setLayerStroke(
   strokeColor: number[],
   strokeWidth?: number
 ) {
-  const layer = animation.layers?.find((item) => item.nm === layerName)
+  const layer = findLayer(animation, layerName)
   const stroke = layer?.shapes?.[0]?.it?.find((item) => item.ty === 'st')
 
   if (stroke?.c?.k) {
@@ -57,21 +80,57 @@ function setLayerStroke(
   }
 }
 
+function setAllMatchingFillColors(animation: LottieAnimation, layerName: string, fillColor: number[]) {
+  const layers = [
+    ...(animation.layers?.filter((item) => item.nm === layerName) ?? []),
+    ...((animation.assets ?? []).flatMap((asset) =>
+      asset.layers?.filter((item) => item.nm === layerName) ?? []
+    )),
+  ]
+
+  for (const layer of layers) {
+    for (const shape of layer.shapes ?? []) {
+      const fill = shape.it?.find((item) => item.ty === 'fl')
+
+      if (fill?.c?.k) {
+        fill.c.k = fillColor
+      }
+    }
+  }
+}
+
+function setLayerFillColor(animation: LottieAnimation, layerName: string, fillColor: number[]) {
+  const layer = findLayer(animation, layerName)
+
+  if (!layer) {
+    return
+  }
+
+  for (const shape of layer.shapes ?? []) {
+    for (const item of shape.it ?? []) {
+      if (item.ty === 'fl' && item.c?.k) {
+        item.c.k = fillColor
+      }
+    }
+  }
+}
+
 function slowCheckAnimation(animation: LottieAnimation, layerName: string) {
-  const layer = animation.layers?.find((item) => item.nm === layerName)
-  const trimPath = layer?.shapes?.[0]?.it?.find((item) => item.ty === 'tm')
-  const keyframes = trimPath?.e?.k
+  const layer = findLayer(animation, layerName)
+  const trimPath = layer?.shapes?.find((shape) => shape.it?.some((item) => item.ty === 'tm'))
+    ?.it?.find((item) => item.ty === 'tm')
+  const keyframes = trimPath?.s?.k
 
   if (!keyframes || keyframes.length < 2) {
     return
   }
 
   if (keyframes[0]?.t !== undefined) {
-    keyframes[0].t = 52
+    keyframes[0].t = 66
   }
 
   if (keyframes[1]?.t !== undefined) {
-    keyframes[1].t = 104
+    keyframes[1].t = 92
   }
 }
 
@@ -83,17 +142,21 @@ export async function loadSuccessAnimation(theme: 'light' | 'dark') {
   }
 
   const animation = (await response.json()) as LottieAnimation
+  const strokeColor =
+    theme === 'dark' ? [1, 0.9216, 0.6941, 1] : [1, 1, 1, 1]
+  const popColor =
+    theme === 'dark' ? [0.9804, 0.6392, 0.2588, 1] : [0.0471, 0.6745, 0.4314, 1]
 
-  setLayerFillOpacity(animation, 'BG', 0)
-  setLayerFillOpacity(animation, 'Shape Layer 2', 0)
-  setLayerFillOpacity(animation, 'Shape Layer 1', 0)
-  slowCheckAnimation(animation, 'check')
-  setLayerStroke(
-    animation,
-    'check',
-    theme === 'dark' ? [1, 0.8275, 0.6588, 1] : [0.4902, 0.7843, 0.5412, 1],
-    34
-  )
+  if (theme === 'dark') {
+    setLayerFillColor(animation, 'Circle', [0.9804, 0.6392, 0.2588, 1])
+    setLayerFillColor(animation, 'Circle 2', [0.9804, 0.6392, 0.2588, 1])
+    setLayerFillColor(animation, 'Circle 3', [0.9804, 0.6392, 0.2588, 1])
+  }
+
+  slowCheckAnimation(animation, 'tick')
+  setLayerStroke(animation, 'tick', strokeColor, 96)
+
+  setAllMatchingFillColors(animation, 'pop', popColor)
 
   return animation
 }
