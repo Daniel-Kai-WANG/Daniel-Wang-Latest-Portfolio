@@ -272,7 +272,7 @@ export function HeroSection() {
         </>
       ) : (
         <>
-          <StarfishIcon variant="pink" className="absolute right-4 top-12 size-8 rotate-[18deg] opacity-70 sm:right-6 sm:size-10" />
+          <StarfishIcon variant="pink" className="absolute right-4 top-12 size-8 rotate-[18deg] opacity-70 sm:size-10 sm:top-7" />
         </>
       )}
 
