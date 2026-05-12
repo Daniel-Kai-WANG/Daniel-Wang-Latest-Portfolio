@@ -3,6 +3,14 @@ type LottieShapeItem = {
   c?: {
     k?: number[]
   }
+  e?: {
+    k?: Array<{
+      i?: { x?: number[]; y?: number[] }
+      o?: { x?: number[]; y?: number[] }
+      s?: number[]
+      t?: number
+    }>
+  }
   o?: {
     k?: number
   }
@@ -22,12 +30,12 @@ type LottieAnimation = {
   layers?: LottieLayer[]
 }
 
-function setLayerFill(animation: LottieAnimation, layerName: string, fillColor: number[]) {
+function setLayerFillOpacity(animation: LottieAnimation, layerName: string, opacity: number) {
   const layer = animation.layers?.find((item) => item.nm === layerName)
   const fill = layer?.shapes?.[0]?.it?.find((item) => item.ty === 'fl')
 
-  if (fill?.c?.k) {
-    fill.c.k = fillColor
+  if (fill?.o?.k !== undefined) {
+    fill.o.k = opacity
   }
 }
 
@@ -49,6 +57,24 @@ function setLayerStroke(
   }
 }
 
+function slowCheckAnimation(animation: LottieAnimation, layerName: string) {
+  const layer = animation.layers?.find((item) => item.nm === layerName)
+  const trimPath = layer?.shapes?.[0]?.it?.find((item) => item.ty === 'tm')
+  const keyframes = trimPath?.e?.k
+
+  if (!keyframes || keyframes.length < 2) {
+    return
+  }
+
+  if (keyframes[0]?.t !== undefined) {
+    keyframes[0].t = 52
+  }
+
+  if (keyframes[1]?.t !== undefined) {
+    keyframes[1].t = 104
+  }
+}
+
 export async function loadSuccessAnimation(theme: 'light' | 'dark') {
   const response = await fetch(`${import.meta.env.BASE_URL}animations/success-check.json`)
 
@@ -58,9 +84,10 @@ export async function loadSuccessAnimation(theme: 'light' | 'dark') {
 
   const animation = (await response.json()) as LottieAnimation
 
-  setLayerFill(animation, 'BG', [0, 0, 0, 0])
-  setLayerFill(animation, 'Shape Layer 2', [0, 0, 0, 0])
-  setLayerFill(animation, 'Shape Layer 1', [0, 0, 0, 0])
+  setLayerFillOpacity(animation, 'BG', 0)
+  setLayerFillOpacity(animation, 'Shape Layer 2', 0)
+  setLayerFillOpacity(animation, 'Shape Layer 1', 0)
+  slowCheckAnimation(animation, 'check')
   setLayerStroke(
     animation,
     'check',

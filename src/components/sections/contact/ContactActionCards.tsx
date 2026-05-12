@@ -515,7 +515,7 @@ export function ContactActionCards({
                   animate={{ opacity: 1, height: 'auto', y: 0 }}
                   exit={{ opacity: 0, height: 0, y: -8 }}
                   transition={{ duration: 0.28, ease: 'easeOut' }}
-                  className="overflow-hidden"
+                  className="overflow-hidden pb-20 sm:pb-0"
                 >
                   <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                     {resumeVariants.map((resume) => (
@@ -523,13 +523,13 @@ export function ContactActionCards({
                         key={resume.href}
                         href={resume.href}
                         download={resume.fileName}
-                        className="group/resume flex items-start justify-between gap-3 rounded-[1.25rem] border px-4 py-3 transition-transform duration-300 hover:-translate-y-0.5"
+                        className="group/resume relative flex w-full min-w-0 items-start justify-between gap-3 rounded-[1.25rem] border px-4 py-3 transition-transform duration-300 hover:-translate-y-0.5"
                         style={{
                           borderColor: 'var(--pill-border)',
                           background: 'color-mix(in srgb, var(--color-surface) 90%, transparent)',
                         }}
                       >
-                        <div className="min-w-0">
+                        <div className="min-w-0 flex-1 pr-8 sm:pr-0">
                           <p className="text-sm font-semibold leading-6 text-[var(--color-text)]">
                             {resume.label}
                           </p>
@@ -540,7 +540,7 @@ export function ContactActionCards({
                             {resume.fileName}
                           </p>
                         </div>
-                        <FileDownIcon className="mt-1 size-4 shrink-0 text-[var(--color-muted)] transition-transform duration-300 group-hover/resume:translate-y-0.5" />
+                        <FileDownIcon className="absolute right-4 top-4 size-4 shrink-0 text-[var(--color-muted)] transition-transform duration-300 group-hover/resume:translate-y-0.5 sm:static sm:mt-1" />
                       </a>
                     ))}
                   </div>

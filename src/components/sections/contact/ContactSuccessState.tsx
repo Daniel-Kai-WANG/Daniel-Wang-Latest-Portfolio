@@ -40,7 +40,7 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
       }}
     >
       <div
-        className="mx-auto flex h-28 w-28 items-center justify-center sm:h-32 sm:w-32"
+        className="relative mx-auto flex h-28 w-28 items-center justify-center sm:h-32 sm:w-32"
         style={{
           filter:
             theme === 'light'
@@ -48,16 +48,40 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
               : 'drop-shadow(0 12px 24px rgba(255, 211, 168, 0.14))',
         }}
       >
+        <div
+          aria-hidden="true"
+          className="absolute inset-[12%] rounded-full"
+          style={{
+            background:
+              theme === 'light'
+              ? 'radial-gradient(circle at 30% 30%, rgba(115, 190, 145,0.98), rgba(115, 190, 145,0.84) 72%, rgba(115, 190, 145,0.7) 100%)'
+              : 'radial-gradient(circle at 30% 30%, rgba(255, 211, 168,0.3), rgba(255, 211, 168,0.18) 68%, rgba(255, 211, 168,0.1) 100%)',
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-[2%] rounded-full"
+          style={{
+            background:
+              theme === 'light'
+              ? 'conic-gradient(from 210deg, rgba(142, 210, 161, 0.24), rgba(115, 190, 145, 0.68), rgba(199, 239, 213, 0.28), rgba(142, 210, 161, 0.24))'
+              : 'conic-gradient(from 210deg, rgba(255, 227, 197, 0.22), rgba(255, 211, 168, 0.76), rgba(255, 241, 224, 0.26), rgba(255, 227, 197, 0.22))',
+            maskImage:
+              'radial-gradient(circle, transparent calc(100% - 8px), black calc(100% - 7px))',
+            WebkitMaskImage:
+              'radial-gradient(circle, transparent calc(100% - 8px), black calc(100% - 7px))',
+          }}
+        />
         {animationData && LottiePlayer ? (
           <LottiePlayer
             animationData={animationData}
-            loop={false}
+            loop
             autoplay
-            className="h-full w-full"
+            className="relative z-10 h-[72%] w-[72%]"
           />
         ) : (
           <div
-            className="h-full w-full animate-pulse"
+            className="relative z-10 h-[72%] w-[72%] animate-pulse"
             style={{
               background:
                 theme === 'light'
