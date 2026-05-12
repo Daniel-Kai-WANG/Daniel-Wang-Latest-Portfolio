@@ -22,12 +22,21 @@ type ContactFormProps = {
 const fieldClassName =
   'w-full rounded-[1.2rem] border px-4 py-3 text-sm text-[var(--color-text)] outline-none transition focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[color:color-mix(in_srgb,var(--color-primary)_22%,transparent)]'
 
+const fieldGroupClassName = 'relative grid gap-2 items-start pb-7'
+
 function FieldError({ message }: { message?: string }) {
   if (!message) {
     return null
   }
 
-  return <p className="text-sm text-[#dc2626]">{message}</p>
+  return (
+    <p
+      aria-live="polite"
+      className="pointer-events-none absolute bottom-0 left-0 text-sm leading-5 text-[#dc2626]"
+    >
+      {message}
+    </p>
+  )
 }
 
 export function ContactForm({
@@ -43,7 +52,7 @@ export function ContactForm({
   return (
     <form noValidate onSubmit={onSubmit} className="grid gap-4">
       <div className="grid gap-4 md:grid-cols-2">
-        <label className="grid gap-2">
+        <label className={fieldGroupClassName}>
           <span className="text-sm font-semibold text-[var(--color-text)]">Your Name or Company</span>
           <input
             className={fieldClassName}
@@ -63,7 +72,7 @@ export function ContactForm({
           <FieldError message={errors.name} />
         </label>
 
-        <label className="grid gap-2">
+        <label className={fieldGroupClassName}>
           <span className="text-sm font-semibold text-[var(--color-text)]">Email Address</span>
           <input
             className={fieldClassName}
@@ -84,7 +93,7 @@ export function ContactForm({
         </label>
       </div>
 
-      <label className="grid gap-2">
+      <label className={fieldGroupClassName}>
         <span className="text-sm font-semibold text-[var(--color-text)]">Message</span>
         <textarea
           className={fieldClassName}

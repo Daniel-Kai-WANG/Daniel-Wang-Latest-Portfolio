@@ -70,13 +70,6 @@ export function Navbar({ onMobileNavToggle }: NavbarProps) {
                   <ChevronRightIcon className="size-4" />
                 </motion.span>
               </button>
-              <a
-                href="#contact"
-                className="hidden rounded-full border px-4 py-2 text-sm font-semibold text-[var(--color-text)] sm:inline-flex"
-                style={{ borderColor: 'var(--color-border)' }}
-              >
-                Get in touch
-              </a>
               <ThemeToggle />
             </div>
           </div>
