@@ -18,6 +18,8 @@ const initialValues: ContactFormValues = {
   message: '',
 }
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 type FormSubmitResponse = {
   message?: string
   success?: boolean | string
@@ -25,7 +27,6 @@ type FormSubmitResponse = {
 
 function validateForm(values: ContactFormValues) {
   const errors: ContactFormErrors = {}
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   if (!values.name.trim()) {
     errors.name = 'Please enter your name.'
@@ -152,6 +153,25 @@ export function ContactSection() {
       isMounted = false
     }
   }, [theme])
+
+  useEffect(() => {
+    const trimmedEmail = values.email.trim()
+
+    if (!trimmedEmail) {
+      return
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setErrors((current) => ({
+        ...current,
+        email: emailPattern.test(trimmedEmail) ? undefined : 'Please enter a valid email address.',
+      }))
+    }, 450)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [values.email])
 
   const updateField = (field: keyof ContactFormValues, value: string) => {
     setValues((current) => ({ ...current, [field]: value }))
