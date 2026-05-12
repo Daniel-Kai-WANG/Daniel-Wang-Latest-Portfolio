@@ -90,13 +90,10 @@ export function ContactSuccessState({ animationData, onReset }: ContactSuccessSt
             theme === 'light'
               ? 'color-mix(in srgb, var(--color-primary) 22%, var(--color-border))'
               : 'color-mix(in srgb, rgba(255,255,255,0.2) 52%, var(--color-border))',
-          background:
-            theme === 'light'
-              ? 'rgba(255,255,255,0.72)'
-              : 'rgba(255,255,255,0.06)',
+          background: 'transparent',
         }}
       >
-        Send another message
+        Send another
       </button>
     </div>
   )

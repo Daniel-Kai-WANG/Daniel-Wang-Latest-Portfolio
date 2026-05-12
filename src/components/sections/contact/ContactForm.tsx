@@ -27,7 +27,7 @@ function FieldError({ message }: { message?: string }) {
     return null
   }
 
-  return <p className="text-sm text-[var(--color-warm)]">{message}</p>
+  return <p className="text-sm text-[#dc2626]">{message}</p>
 }
 
 export function ContactForm({
@@ -124,7 +124,7 @@ export function ContactForm({
           style={getPrimaryCtaStyle(theme)}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Contacting...' : 'Contact Me'}
+          {isSubmitting ? 'Connecting...' : 'Contact Right Now'}
         </button>
       </div>
     </form>
