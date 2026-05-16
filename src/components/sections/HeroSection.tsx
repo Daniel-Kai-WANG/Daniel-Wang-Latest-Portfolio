@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
-import { profile } from '../../data/profile'
+import { profile, profileBadgeRoles } from '../../data/profile'
 import { useTheme } from '../../hooks/useTheme'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { getPrimaryCtaStyle } from '../common/primaryCta'
@@ -234,7 +234,7 @@ export function HeroSection() {
       <div className="relative z-10 -mt-10 grid gap-8 sm:-mt-12 lg:-mt-16 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
         <div>
           <div
-            className="relative z-10 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold sm:text-sm"
+            className="relative z-10 inline-flex items-start gap-2 rounded-full border px-4 py-2 text-xs font-semibold sm:text-sm"
             style={{
               borderColor: 'var(--color-border)',
               background: 'var(--pill-background)',
@@ -246,7 +246,14 @@ export function HeroSection() {
             ) : (
               <StarfishIcon variant="light" className="size-4 rotate-[10deg]" />
             )}
-            {profile.badge}
+            <div className="max-w-[18.5rem] leading-[1.35] sm:max-w-none">
+              <div className="sm:hidden">
+                {profileBadgeRoles[0]} · {profileBadgeRoles[1]} ·
+                <br />
+                {profileBadgeRoles[2]}
+              </div>
+              <div className="hidden sm:block">{profile.badge}</div>
+            </div>
           </div>
 
           <div className="relative mt-6 max-w-3xl">

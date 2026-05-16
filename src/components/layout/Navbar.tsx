@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { useState } from 'react'
-import { profile } from '../../data/profile'
+import { profile, profileBadgeRoles } from '../../data/profile'
 import { ThemeToggle } from '../theme/ThemeToggle'
 import { ChevronRightIcon } from '../sections/SectionIcons'
 
@@ -62,7 +62,12 @@ export function Navbar({ onMobileNavToggle }: NavbarProps) {
               <div className="font-display text-lg font-bold tracking-[-0.04em] text-[var(--color-text)]">
                 Daniel Wang
               </div>
-              <div className="mt-1 text-[9px] uppercase leading-[1.45] tracking-[0.12em] text-[var(--color-muted)] sm:mt-0 sm:text-xs sm:tracking-[0.18em]">
+              <div className="mt-1 space-y-0.5 text-[9px] uppercase leading-[1.45] tracking-[0.12em] text-[var(--color-muted)] sm:hidden">
+                {profileBadgeRoles.map((role) => (
+                  <div key={role}>· {role}</div>
+                ))}
+              </div>
+              <div className="mt-1 hidden text-[9px] uppercase leading-[1.45] tracking-[0.12em] text-[var(--color-muted)] sm:mt-0 sm:block sm:text-xs sm:tracking-[0.18em]">
                 Full-Stack Developer · CMS Builder · AI Workflow Builder
               </div>
             </a>

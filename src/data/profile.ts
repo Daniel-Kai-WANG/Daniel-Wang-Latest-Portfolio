@@ -1,8 +1,10 @@
 import type { Profile } from '../types/content'
 
+export const profileBadgeRoles = ['Full-Stack Developer', 'CMS Builder', 'AI Workflow Builder']
+
 export const profile: Profile = {
   name: 'Daniel Wang',
-  badge: 'Full-Stack Developer · CMS Builder · AI Workflow Builder',
+  badge: profileBadgeRoles.join(' · '),
   headline: 'I build digital products that think, connect, and automate.',
   subtitle:
     'Across web, mobile, backend APIs, CMS platforms, and AI-assisted workflows, I turn complex requirements into reliable, maintainable digital systems.',
