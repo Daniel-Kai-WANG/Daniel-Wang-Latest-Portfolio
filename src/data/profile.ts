@@ -5,7 +5,7 @@ export const profile: Profile = {
   badge: 'Full-Stack Developer · CMS Builder · AI Workflow Builder',
   headline: 'I build digital products that think, connect, and automate.',
   subtitle:
-    'I build across web, mobile, backend APIs, CMS platforms, and AI-assisted workflows, turning complex requirements into reliable, maintainable digital systems.',
+    'Across web, mobile, backend APIs, CMS platforms, and AI-assisted workflows, I turn complex requirements into reliable, maintainable digital systems.',
   location: 'South Brisbane, QLD',
   summary:
     'Full-stack developer with production experience spanning React, React Native, Node.js, Laravel, CMS implementation, and delivery-focused AI workflow design.',
@@ -21,14 +21,13 @@ export const profile: Profile = {
     { label: 'Projects', href: '#projects' },
     { label: 'Contact', href: '#contact' },
   ],
-  workflowLight: [
-    'Business Brief',
-    'Structured Data',
-    'AI Assist',
-    'API / CMS Integration',
-    'Product Delivery',
+  workflow: [
+    { role: 'Web Development', desc: "Responsive websites, CMS-driven pages, API-connected forms, and full stack web features."},
+    { role: 'Full-Stack Development', desc: "Frontend interfaces, backend APIs, Laravel / Node.js services, and integrated workflows."},
+    { role: 'Frontend / App Development', desc: "JavaScript, TypeScript, React, Next.js, React Native, dashboards, forms, and mobile UI."},
+    { role: 'CMS / HubSpot Development', desc: "HubSpot CMS, HubL, HubDB, reusable modules, dynamic pages, and content workflows."},
+    { role:  'AI-Assisted Workflow', desc: "AI tools for requirement breakdown, implementation planning, code review, and repeatable delivery."},
   ],
-  workflowDark: ['Brief', 'Data', 'AI Assist', 'API / CMS', 'Delivery'],
   primaryCta: { label: 'Explore Projects', href: '#projects' },
   secondaryCta: { label: 'See Experience Journey', href: '#experience' },
   contactLinks: [

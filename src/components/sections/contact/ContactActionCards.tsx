@@ -301,7 +301,7 @@ function ContactActionBackgroundMotif({ id }: { id: ActionId }) {
               style={{ color: 'rgba(173, 230, 255, 0.9)' }}
             />
           ) : id === 'github' ? (
-            <MoonIcon className="h-14 w-14 opacity-[0.18]" />
+            <MoonIcon className="h-[4.5rem] w-[4.5rem] opacity-[0.18]" />
           ) : (
             <StarfishIcon variant="pink" className="size-14 opacity-[0.25]" />
           )

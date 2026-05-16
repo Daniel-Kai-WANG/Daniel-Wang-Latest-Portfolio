@@ -28,7 +28,7 @@ export function Navbar({ onMobileNavToggle }: NavbarProps) {
                 Daniel Wang
               </div>
               <div className="text-[10px] uppercase tracking-[0.16em] text-[var(--color-muted)] sm:text-xs sm:tracking-[0.18em]">
-                Full-Stack + AI Workflow
+                Full-Stack Developer · CMS Builder · AI Workflow Builder
               </div>
             </a>
 

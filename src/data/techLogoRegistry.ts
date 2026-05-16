@@ -1,7 +1,10 @@
-const logoPathModules = import.meta.glob('../assets/logos/*.svg', {
+const logoPathModules = import.meta.glob(
+  ['../assets/logos/*.svg', '../assets/logos/*.png', '../assets/logos/*.webp', '../assets/logos/*.jpg', '../assets/logos/*.jpeg'],
+  {
   eager: true,
   import: 'default',
-}) as Record<string, string>
+  }
+) as Record<string, string>
 
 const logoMarkupModules = import.meta.glob('../assets/logos/*.svg', {
   eager: true,
@@ -14,10 +17,18 @@ type CreateTechLogoOptions = {
   artVariant?: 'standard' | 'wide' | 'tall'
   fallbackReason?: string
   labelVariant?: 'default' | 'compact'
+  preferImage?: boolean
 }
 
 function getDefaultPresentation(id: string) {
-  if (id === 'react-native' || id === 'aws' || id === 'aws-cloud' || id === 'github-actions') {
+  if (
+    id === 'react-native' ||
+    id === 'aws' ||
+    id === 'aws-cloud' ||
+    id === 'docker' ||
+    id === 'docker-cloud' ||
+    id === 'github-actions'
+  ) {
     return {
       artVariant: 'wide' as const,
       labelVariant: 'compact' as const,
@@ -61,7 +72,7 @@ export function createTechLogo(
     name,
     categoryId,
     logoPath,
-    logoMarkup,
+    logoMarkup: options.preferImage ? null : logoMarkup,
     altText: options.altText ?? `${name} logo`,
     artVariant: options.artVariant ?? presentation.artVariant,
     fallbackReason: options.fallbackReason,
