@@ -48,8 +48,8 @@ export const profile: Profile = {
     },
     {
       label: 'Portfolio Archive',
-      value: 'daniel-kai-wang.github.io/Daniel-WANG-Portfolio',
-      href: 'https://daniel-kai-wang.github.io/Daniel-WANG-Portfolio/',
+      value: 'daniel-wang.github.io/Daniel-Wang-Latest-Portfolio/?theme=light',
+      href: 'https://daniel-wang.github.io/Daniel-Wang-Latest-Portfolio/?theme=light',
     },
   ],
   resumeVariants: [
