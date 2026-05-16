@@ -30,7 +30,7 @@ export function ExperienceDetailCard({
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={reduceMotion ? { duration: 0 } : { duration: 0.28, ease: 'easeOut' }}
-      className={`relative overflow-hidden rounded-[2rem] border p-6 sm:p-7 ${sticky ? 'xl:sticky xl:top-28' : ''}`}
+      className={`relative h-full overflow-hidden rounded-[2rem] border p-6 sm:p-7 ${sticky ? 'xl:sticky xl:top-28' : ''}`}
       style={{
         borderColor: 'var(--color-border)',
         background: isLight

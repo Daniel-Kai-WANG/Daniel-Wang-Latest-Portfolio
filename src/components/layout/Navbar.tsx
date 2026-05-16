@@ -12,7 +12,7 @@ export function Navbar({ onMobileNavToggle }: NavbarProps) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6 lg:px-8">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6">
       <div className="mx-auto max-w-[1240px]">
         <div
           className="overflow-hidden rounded-[28px] border px-4 py-3 backdrop-blur-xl sm:px-6"
@@ -22,12 +22,12 @@ export function Navbar({ onMobileNavToggle }: NavbarProps) {
             boxShadow: 'var(--surface-shadow)',
           }}
         >
-          <div className="flex items-center justify-between gap-4">
-            <a href="#top" className="min-w-0 flex-1">
+          <div className="flex items-start justify-between gap-3 sm:items-center sm:gap-4">
+            <a href="#top" className="min-w-0 flex-1 pr-2 sm:pr-0">
               <div className="font-display text-lg font-bold tracking-[-0.04em] text-[var(--color-text)]">
                 Daniel Wang
               </div>
-              <div className="text-[10px] uppercase tracking-[0.16em] text-[var(--color-muted)] sm:text-xs sm:tracking-[0.18em]">
+              <div className="mt-1 text-[9px] uppercase leading-[1.45] tracking-[0.12em] text-[var(--color-muted)] sm:mt-0 sm:text-xs sm:tracking-[0.18em]">
                 Full-Stack Developer · CMS Builder · AI Workflow Builder
               </div>
             </a>
@@ -44,7 +44,7 @@ export function Navbar({ onMobileNavToggle }: NavbarProps) {
               ))}
             </nav>
 
-            <div className="flex items-center gap-3">
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
               <button
                 type="button"
                 onClick={() =>
