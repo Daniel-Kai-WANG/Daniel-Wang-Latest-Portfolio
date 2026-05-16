@@ -11,7 +11,7 @@ type TechDetailCardProps = {
 export function TechDetailCard({ category }: TechDetailCardProps) {
   return (
     <article
-      className="relative flex h-full min-h-[28rem] flex-col overflow-hidden rounded-[2rem] border p-5 sm:p-6"
+      className="relative flex h-full min-h-[24rem] flex-col overflow-hidden rounded-[2rem] border p-5 sm:min-h-[28rem] sm:p-6"
       style={{
         borderColor: 'var(--color-border)',
         background:

@@ -1,8 +1,14 @@
-import { useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { experiences } from '../../data/experience'
 import { useAutoRotateIndex } from '../../hooks/useAutoRotateIndex'
+import { useHorizontalSwipe } from '../../hooks/useHorizontalSwipe'
+import { useMeasuredCarouselHeight } from '../../hooks/useMeasuredCarouselHeight'
 import { useTheme } from '../../hooks/useTheme'
 import { Reveal } from '../animation/Reveal'
+import {
+  mobileCarouselPageTransition,
+  mobileCarouselPageVariants,
+} from '../common/mobileCarouselMotion'
 import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
 import { CarouselDots } from '../common/CarouselControls'
 import { ExperienceDetailCard } from './ExperienceDetailCard'
@@ -37,18 +43,25 @@ function getExperiencePhase(date: string) {
 export function ExperienceSection() {
   const { theme } = useTheme()
   const reduceMotion = useReducedMotion() ?? false
-  const { activeIndex, goToIndex, goToNext, goToPrevious, setActiveIndex } = useAutoRotateIndex(
-    experiences.length,
-    { intervalMs: 7600, reduceMotion }
-  )
+  const { activeIndex, direction, goToIndex, goToNext, goToPrevious, setActiveIndex } =
+    useAutoRotateIndex(experiences.length, {
+      intervalMs: 7600,
+      reduceMotion,
+    })
   const activeExperience = experiences[activeIndex]
   const isLight = theme === 'light'
+  const mobileSwipeHandlers = useHorizontalSwipe({
+    onSwipeLeft: goToNext,
+    onSwipeRight: goToPrevious,
+  })
+  const { height: mobileDetailHeight, setNode: setMobileDetailNode } =
+    useMeasuredCarouselHeight<HTMLDivElement>(`${activeIndex}-${theme}`)
 
   return (
     <Reveal>
       <section
         id="experience"
-        className="section-frame relative overflow-visible px-5 py-8 sm:px-8 sm:py-10 lg:px-10"
+        className="section-frame relative overflow-visible px-5 py-8 sm:px-8 sm:pb-10 sm:pt-6 lg:px-10"
       >
         <ThemeShiftBackdrop />
 
@@ -59,7 +72,7 @@ export function ExperienceSection() {
             </h2>
           </div>
 
-          <div className="mt-8 space-y-5 sm:hidden">
+          <div className="mt-8 space-y-5 touch-pan-y sm:hidden" {...mobileSwipeHandlers}>
             <div
               className="relative overflow-hidden rounded-[2rem] border px-4 py-5"
               style={{
@@ -92,17 +105,62 @@ export function ExperienceSection() {
               onSelect={goToIndex}
             />
 
-            <ExperienceDetailCard
-              experience={activeExperience}
-              formatRange={formatExperienceRange}
-              isLight={isLight}
-              phaseLabel={getExperiencePhase(activeExperience.date)}
-              reduceMotion={reduceMotion}
-              theme={theme}
-            />
+            <div
+              className="relative"
+              style={mobileDetailHeight > 0 ? { minHeight: `${mobileDetailHeight}px` } : undefined}
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none invisible absolute inset-x-0 top-0 -z-10"
+              >
+                {experiences.map((experience, index) => (
+                  <div
+                    key={`${experience.company}-measurement`}
+                    ref={(node) => {
+                      setMobileDetailNode(index, node)
+                    }}
+                  >
+                    <ExperienceDetailCard
+                      experience={experience}
+                      formatRange={formatExperienceRange}
+                      isLight={isLight}
+                      phaseLabel={getExperiencePhase(experience.date)}
+                      reduceMotion
+                      theme={theme}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ perspective: '1200px' }}>
+                <AnimatePresence custom={direction} initial={false} mode="wait">
+                  <motion.div
+                    key={`${activeExperience.company}-${theme}`}
+                    custom={direction}
+                    variants={reduceMotion ? undefined : mobileCarouselPageVariants}
+                    initial={reduceMotion ? { opacity: 0 } : 'enter'}
+                    animate={reduceMotion ? { opacity: 1 } : 'center'}
+                    exit={reduceMotion ? { opacity: 0 } : 'exit'}
+                    transition={
+                      reduceMotion ? { duration: 0.18, ease: 'easeOut' } : mobileCarouselPageTransition
+                    }
+                    style={{ transformOrigin: direction >= 0 ? 'right center' : 'left center' }}
+                  >
+                    <ExperienceDetailCard
+                      experience={activeExperience}
+                      formatRange={formatExperienceRange}
+                      isLight={isLight}
+                      phaseLabel={getExperiencePhase(activeExperience.date)}
+                      reduceMotion={reduceMotion}
+                      theme={theme}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
           </div>
 
-          <div className="hidden gap-6 sm:grid xl:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.1fr)] xl:items-start">
+          <div className="hidden gap-6 sm:mt-8 sm:grid xl:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.1fr)] xl:items-start">
             <ExperienceDetailCard
               experience={activeExperience}
               formatRange={formatExperienceRange}
