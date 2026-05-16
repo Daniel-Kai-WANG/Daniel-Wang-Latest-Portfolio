@@ -1,8 +1,8 @@
 import { useId } from 'react'
 import { motion } from 'framer-motion'
-import { leafBud, sakuraNode } from '../../assets/experience'
-import { SakuraIcon } from '../common/Icons'
-import { experiences } from '../../data/experience'
+import { leafBud, sakuraNode } from '@/assets/system'
+import { SakuraIcon } from '@/components/common/Icons'
+import { experiences } from '@/data/experience'
 import {
   darkExperienceJourneyGraph,
   getBranchEndpoint,

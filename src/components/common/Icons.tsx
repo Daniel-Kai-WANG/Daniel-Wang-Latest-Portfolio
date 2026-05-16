@@ -1,10 +1,15 @@
 import { useId } from 'react'
 import type { CSSProperties, SVGProps } from 'react'
-import { leafBud, pearl, starfishLight, starfishPink } from '../../assets/experience'
-import sakuraA from '../../assets/seasonal/sakura-a.png'
-import sakuraB from '../../assets/seasonal/sakura-b.png'
-import snowflakeCluster from '../../assets/theme/snowflake-cluster.png'
-import snowflakeSoft from '../../assets/theme/snowflake-soft.png'
+import {
+  leafBud,
+  pearl,
+  sakuraA,
+  sakuraB,
+  snowflakeCluster,
+  snowflakeSoft,
+  starfishLight,
+  starfishPink,
+} from '@/assets/system'
 
 const sakuraVariants = [sakuraA, sakuraB] as const
 const snowflakeAssetVariants = [snowflakeSoft, snowflakeCluster] as const

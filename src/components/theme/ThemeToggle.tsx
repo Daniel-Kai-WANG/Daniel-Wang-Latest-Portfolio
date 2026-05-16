@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { jellyfishGif } from '../../assets/experience'
-import { useTheme } from '../../hooks/useTheme'
-import { SakuraIcon } from '../common/Icons'
+import { jellyfishGif } from '@/assets/system'
+import { useTheme } from '@/hooks/useTheme'
+import { SakuraIcon } from '@/components/common/Icons'
 import { ThemeModeTransition } from './ThemeModeTransition'
 
 const LIGHT_DRIFT = {

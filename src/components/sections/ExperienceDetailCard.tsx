@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
-import { leafBud } from '../../assets/experience'
-import type { ExperienceItem, ThemeMode } from '../../types/content'
-import { ThemeShiftBackdrop } from '../animation/ThemeShiftBackdrop'
-import { SakuraIcon } from '../common/Icons'
-import { CoralDecorPair } from './CoralDecorPair'
+import { leafBud } from '@/assets/system'
+import type { ExperienceItem, ThemeMode } from '@/types/content'
+import { ThemeShiftBackdrop } from '@/components/animation/ThemeShiftBackdrop'
+import { SakuraIcon } from '@/components/common/Icons'
+import { CoralDecorPair } from '@/components/sections/CoralDecorPair'
 
 type ExperienceDetailCardProps = {
   experience: ExperienceItem
