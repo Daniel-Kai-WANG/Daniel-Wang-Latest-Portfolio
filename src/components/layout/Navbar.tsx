@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import type { MouseEvent } from 'react'
 import { useState } from 'react'
 import { profile } from '../../data/profile'
 import { ThemeToggle } from '../theme/ThemeToggle'
@@ -10,6 +11,40 @@ type NavbarProps = {
 
 export function Navbar({ onMobileNavToggle }: NavbarProps) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+
+  const closeMobileNav = () => {
+    setIsMobileNavOpen(false)
+    onMobileNavToggle?.(false)
+  }
+
+  const handleMobileNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith('#')) {
+      closeMobileNav()
+      return
+    }
+
+    event.preventDefault()
+    closeMobileNav()
+
+    window.setTimeout(() => {
+      if (href === '#top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        const target = document.querySelector<HTMLElement>(href)
+
+        if (!target) {
+          return
+        }
+
+        const top = target.getBoundingClientRect().top + window.scrollY - 104
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+      }
+
+      const nextUrl = new URL(window.location.href)
+      nextUrl.hash = href.slice(1)
+      window.history.replaceState(null, '', nextUrl)
+    }, 180)
+  }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6">
@@ -89,6 +124,7 @@ export function Navbar({ onMobileNavToggle }: NavbarProps) {
                     <a
                       key={item.href}
                       href={item.href}
+                      onClick={(event) => handleMobileNavClick(event, item.href)}
                       className="flex min-h-11 items-center justify-center rounded-full border px-3 py-2 text-center text-[13px] font-semibold text-[var(--color-muted)]"
                       style={{
                         borderColor: 'var(--color-border)',
