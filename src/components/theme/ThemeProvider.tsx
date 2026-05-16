@@ -7,9 +7,44 @@ import type { ThemeShiftDirection } from './theme-context'
 const STORAGE_KEY = 'daniel-portfolio-theme'
 const THEME_SHIFT_DURATION_MS = 360
 
+function syncThemeQuery(theme: ThemeMode) {
+  if (typeof window === 'undefined') {
+    return
+  }
+
+  const currentUrl = new URL(window.location.href)
+
+  if (currentUrl.searchParams.get('theme') === theme) {
+    return
+  }
+
+  currentUrl.searchParams.set('theme', theme)
+  window.history.replaceState({}, '', currentUrl)
+}
+
+function readThemeFromQuery(): ThemeMode | null {
+  if (typeof window === 'undefined') {
+    return null
+  }
+
+  const themeParam = new URLSearchParams(window.location.search).get('theme')
+
+  if (themeParam === 'light' || themeParam === 'dark') {
+    return themeParam
+  }
+
+  return null
+}
+
 function readTheme(): ThemeMode {
   if (typeof window === 'undefined') {
     return 'light'
+  }
+
+  const queryTheme = readThemeFromQuery()
+
+  if (queryTheme) {
+    return queryTheme
   }
 
   const saved = window.localStorage.getItem(STORAGE_KEY)
@@ -27,15 +62,27 @@ export function ThemeProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     window.localStorage.setItem(STORAGE_KEY, theme)
+    syncThemeQuery(theme)
   }, [theme])
 
   useEffect(() => {
+    const handlePopState = () => {
+      const queryTheme = readThemeFromQuery()
+
+      if (queryTheme && queryTheme !== theme) {
+        updateTheme(queryTheme)
+      }
+    }
+
+    window.addEventListener('popstate', handlePopState)
+
     return () => {
+      window.removeEventListener('popstate', handlePopState)
       if (shiftTimeoutRef.current !== null) {
         window.clearTimeout(shiftTimeoutRef.current)
       }
     }
-  }, [])
+  }, [theme])
 
   const setTheme = (nextTheme: ThemeMode) => {
     if (nextTheme === theme) {

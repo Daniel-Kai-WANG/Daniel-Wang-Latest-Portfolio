@@ -62,7 +62,9 @@ export const techStackCategories: TechStackCategory[] = [
     description:
       'Practical full stack experience working with Node.js, Express.js, NestJS, Laravel, PHP, RESTful APIs, and third-party API integrations. Strong in connecting frontend workflows with backend services, restructuring data-fetching logic, and building automation-focused service modules. Experience includes integrating Boond Manager APIs, supporting PDF data extraction workflows, and improving application performance through cleaner backend and API handling.',
     logos: [
-      createTechLogo('nodejs', 'Node.js', backendCategoryId, 'nodejs.svg'),
+      createTechLogo('nodejs', 'Node.js', backendCategoryId, 'nodejs.svg', {
+        preferImage: true,
+      }),
       createTechLogo('express', 'Express.js', backendCategoryId, 'express.svg'),
       createTechLogo('nestjs', 'NestJS', backendCategoryId, 'nestjs.svg'),
       createTechLogo('laravel', 'Laravel', backendCategoryId, 'laravel.svg'),
@@ -84,9 +86,9 @@ export const techStackCategories: TechStackCategory[] = [
       createTechLogo('sql', 'SQL', databaseCategoryId, 'sql.svg', {
         fallbackReason: 'SQL is a standard rather than one official product brand, so a local icon-style asset is used.',
       }),
-      createTechLogo('aws', 'AWS', databaseCategoryId, 'aws.svg'),
-      createTechLogo('docker', 'Docker', databaseCategoryId, 'docker.svg'),
-      createTechLogo('firebase', 'Firebase', databaseCategoryId, 'firebase.svg'),
+      createTechLogo('aws', 'AWS', databaseCategoryId, 'aws.webp'),
+      createTechLogo('docker', 'Docker', databaseCategoryId, 'docker.png'),
+      createTechLogo('firebase', 'Firebase', databaseCategoryId, 'firebase.png'),
     ],
   },
   {
@@ -96,9 +98,9 @@ export const techStackCategories: TechStackCategory[] = [
     description:
       'Practical exposure to AWS, Docker, Firebase, deployment workflows, environment setup, and production-support tasks across web and mobile projects. Comfortable supporting delivery pipelines, debugging environment issues, testing deployed features, and maintaining reliable project setup. Best positioned as a developer with hands-on delivery experience rather than a specialist DevOps engineer.',
     logos: [
-      createTechLogo('aws-cloud', 'AWS', cloudCategoryId, 'aws.svg'),
-      createTechLogo('docker-cloud', 'Docker', cloudCategoryId, 'docker.svg'),
-      createTechLogo('firebase-cloud', 'Firebase', cloudCategoryId, 'firebase.svg'),
+      createTechLogo('aws-cloud', 'AWS', cloudCategoryId, 'aws.webp'),
+      createTechLogo('docker-cloud', 'Docker', cloudCategoryId, 'docker.png'),
+      createTechLogo('firebase-cloud', 'Firebase', cloudCategoryId, 'firebase.png'),
       createTechLogo('github-actions', 'GitHub Actions', cloudCategoryId, 'github-actions.svg'),
     ],
   },
@@ -112,11 +114,11 @@ export const techStackCategories: TechStackCategory[] = [
       createTechLogo('git', 'Git', toolsCategoryId, 'git.svg'),
       createTechLogo('github', 'GitHub', toolsCategoryId, 'github.svg'),
       createTechLogo('gitlab', 'GitLab', toolsCategoryId, 'gitlab.svg'),
-      createTechLogo('jira', 'Jira', toolsCategoryId, 'jira.svg'),
+      createTechLogo('jira', 'Jira', toolsCategoryId, 'jira.png'),
       createTechLogo('postman', 'Postman', toolsCategoryId, 'postman.svg'),
       createTechLogo('figma', 'Figma', toolsCategoryId, 'figma.svg'),
       createTechLogo('android-studio', 'Android Studio', toolsCategoryId, 'android-studio.svg'),
-      createTechLogo('xcode', 'Xcode', toolsCategoryId, 'xcode.svg'),
+      createTechLogo('xcode', 'Xcode', toolsCategoryId, 'xcode.png'),
     ],
   },
   {
@@ -126,7 +128,9 @@ export const techStackCategories: TechStackCategory[] = [
     description:
       'Practical experience applying AI-assisted development and workflow automation to improve delivery clarity, reduce rework, and support structured implementation planning. Experience includes building automation features for PDF data extraction, order-processing workflows, prompt documentation, requirement breakdown, code review preparation, and reusable development notes. Best positioned as a web/full stack developer who can use AI tools effectively to improve delivery, rather than as a machine learning engineer.',
     logos: [
-      createTechLogo('openai', 'OpenAI', aiCategoryId, 'openai.svg'),
+      createTechLogo('openai', 'OpenAI', aiCategoryId, 'openai.jpeg'),
+      createTechLogo('codex', 'Codex', aiCategoryId, 'codex-color.png'),
+      createTechLogo('claude', 'Claude', aiCategoryId, 'claude.svg'),
       createTechLogo('ai-automation', 'AI Automation', aiCategoryId, 'ai-automation.svg', {
         fallbackReason: 'AI Automation is a workflow capability rather than one official product brand, so a local icon-style asset is used.',
       }),

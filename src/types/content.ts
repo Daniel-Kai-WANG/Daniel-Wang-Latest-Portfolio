@@ -32,12 +32,16 @@ export type Profile = {
   summary: string
   heroStats: HeroStat[]
   navigation: NavItem[]
-  workflowLight: string[]
-  workflowDark: string[]
+  workflow: WorkFlow[]
   primaryCta: NavItem
   secondaryCta: NavItem
   contactLinks: ContactLink[]
   resumeVariants: ResumeVariant[]
+}
+
+export type WorkFlow = {
+  role: string
+  desc: string
 }
 
 export type ExperienceItem = {

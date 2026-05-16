@@ -17,7 +17,6 @@ import {
 function WorkflowPanel() {
   const { theme } = useTheme()
   const reduceMotion = useReducedMotion()
-  const steps = theme === 'light' ? profile.workflowLight : profile.workflowDark
 
   return (
     <div
@@ -43,12 +42,12 @@ function WorkflowPanel() {
         <div className="relative flex min-h-[4.5rem] items-start justify-center sm:min-h-0 sm:items-center sm:justify-between sm:gap-4">
           <div className="mx-auto max-w-[13.5rem] text-center sm:mx-0 sm:max-w-none sm:min-w-0 sm:flex-1 sm:pr-0 sm:text-left">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-muted)]">
-              {theme === 'light' ? 'Seasonal workflow' : 'Ocean workflow'}
+              {theme === 'light' ? 'FOCUS AREAS' : 'DEEP FOCUS'}
             </p>
             <h3 className="mt-2 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-text)]">
               {theme === 'light'
-                ? 'From brief to shipped flow'
-                : 'A delivery pipeline with tidal flow'}
+                ? 'Where I can contribute'
+                : 'Built across web, app, CMS, and workflow systems'}
             </h3>
           </div>
           <div
@@ -82,8 +81,8 @@ function WorkflowPanel() {
             }}
           />
 
-          {steps.map((step, index) => (
-            <div key={step} className="relative flex items-start gap-4">
+          {profile.workflow.map(({role, desc}, index) => (
+            <div key={role} className="relative flex items-start gap-4">
               <div
                 className="relative z-10 mt-1 flex size-9 shrink-0 items-center justify-center rounded-full border"
                 style={{
@@ -115,60 +114,16 @@ function WorkflowPanel() {
                 }}
               >
                 <div className="text-sm font-semibold text-[var(--color-text)]">
-                  {step}
+                  {role}
                 </div>
                 <div className="mt-1 text-sm leading-6 text-[var(--color-muted)]">
-                  {theme === 'light'
-                    ? 'Keep requirements visible, structure the workflow, and reduce delivery friction.'
-                    : 'Translate complex tasks into a calm sequence with product, API, and content alignment.'}
+                  {desc}
                 </div>
               </div>
             </div>
           ))}
 
           <WorkflowFloatingMotifs reduceMotion={Boolean(reduceMotion)} theme={theme} />
-        </div>
-
-        <div className="mt-7 grid grid-cols-3 gap-3">
-          {[45, 72, 58].map((value, index) => (
-            <div
-              key={value}
-              className="overflow-hidden rounded-2xl border px-3 py-4"
-              style={{
-                borderColor:
-                  theme === 'light'
-                    ? 'rgba(189,231,255,0.88)'
-                    : 'rgba(255,255,255,0.12)',
-                background:
-                  theme === 'light'
-                    ? 'rgba(255,255,255,0.78)'
-                    : 'rgba(255,255,255,0.05)',
-              }}
-            >
-              <div className="flex h-10 items-end gap-1.5">
-                {[0.42, 0.68, value / 100, 0.82].map((height, barIndex) => (
-                  <div
-                    key={`${value}-${barIndex}`}
-                    className="flex-1 rounded-full"
-                    style={{
-                      height: `${height * 100}%`,
-                      background:
-                        theme === 'light'
-                          ? 'linear-gradient(180deg, rgba(56,189,248,0.35), rgba(37,99,235,0.75))'
-                          : 'linear-gradient(180deg, rgba(128,199,255,0.6), rgba(133,120,255,0.88))',
-                    }}
-                  />
-                ))}
-              </div>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                {index === 0
-                  ? 'Clarity'
-                  : index === 1
-                    ? 'Automation'
-                    : 'Delivery'}
-              </p>
-            </div>
-          ))}
         </div>
       </div>
     </div>

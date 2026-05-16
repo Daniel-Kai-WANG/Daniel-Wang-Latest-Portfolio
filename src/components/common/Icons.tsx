@@ -1,14 +1,12 @@
 import { useId } from 'react'
 import type { CSSProperties, SVGProps } from 'react'
 import { leafBud, pearl, starfishLight, starfishPink } from '../../assets/experience'
+import sakuraA from '../../assets/seasonal/sakura-a.png'
+import sakuraB from '../../assets/seasonal/sakura-b.png'
 import snowflakeCluster from '../../assets/theme/snowflake-cluster.png'
 import snowflakeSoft from '../../assets/theme/snowflake-soft.png'
 
-const publicAssetBase = import.meta.env.BASE_URL
-const sakuraVariants = [
-  `${publicAssetBase}seasonal/sakura-a.png`,
-  `${publicAssetBase}seasonal/sakura-b.png`,
-] as const
+const sakuraVariants = [sakuraA, sakuraB] as const
 const snowflakeAssetVariants = [snowflakeSoft, snowflakeCluster] as const
 const starfishVariants = [starfishPink, starfishLight] as const
 
