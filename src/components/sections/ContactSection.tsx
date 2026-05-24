@@ -19,11 +19,8 @@ const initialValues: ContactFormValues = {
 }
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-type FormSubmitResponse = {
-  message?: string
-  success?: boolean | string
-}
+const CONTACT_SUCCESS_PARAM = 'contact'
+const CONTACT_SUCCESS_VALUE = 'success'
 
 function validateForm(values: ContactFormValues) {
   const errors: ContactFormErrors = {}
@@ -45,14 +42,8 @@ function validateForm(values: ContactFormValues) {
   return errors
 }
 
-function resolveFormEndpoint(recipientEmail: string) {
-  const envEndpoint = import.meta.env.VITE_FORMSUBMIT_ENDPOINT?.trim()
-
-  if (envEndpoint) {
-    return envEndpoint
-  }
-
-  return `https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`
+function resolveFormEndpoint() {
+  return import.meta.env.VITE_CONTACT_FORM_ENDPOINT?.trim() || 'https://api.web3forms.com/submit'
 }
 
 const CONTACT_HEADING_THEME_STYLES: Record<ThemeMode, { color: string }> = {
@@ -124,14 +115,19 @@ export function ContactSection() {
   const githubLink = profile.contactLinks.find((link) => link.label === 'GitHub')
   const linkedinLink = profile.contactLinks.find((link) => link.label === 'LinkedIn')
   const resumeVariants = profile.resumeVariants
-  const recipientEmail = emailLink?.value ?? 'kaiwang2027@gmail.com'
-  const formEndpoint = resolveFormEndpoint(recipientEmail)
+  const formEndpoint = resolveFormEndpoint()
 
   const [values, setValues] = useState<ContactFormValues>(initialValues)
   const [errors, setErrors] = useState<ContactFormErrors>({})
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false
+    }
+
+    return new URLSearchParams(window.location.search).get(CONTACT_SUCCESS_PARAM) === CONTACT_SUCCESS_VALUE
+  })
   const [successAnimationData, setSuccessAnimationData] = useState<object | null>(null)
 
   useEffect(() => {
@@ -173,6 +169,21 @@ export function ContactSection() {
     }
   }, [values.email])
 
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const url = new URL(window.location.href)
+    if (url.searchParams.get(CONTACT_SUCCESS_PARAM) !== CONTACT_SUCCESS_VALUE) {
+      return
+    }
+
+    url.searchParams.delete(CONTACT_SUCCESS_PARAM)
+    const nextPath = `${url.pathname}${url.search}${url.hash}`
+    window.history.replaceState({}, '', nextPath)
+  }, [])
+
   const updateField = (field: keyof ContactFormValues, value: string) => {
     setValues((current) => ({ ...current, [field]: value }))
     setErrors((current) => ({ ...current, [field]: undefined }))
@@ -183,11 +194,16 @@ export function ContactSection() {
     setValues(initialValues)
     setErrors({})
     setErrorMessage(null)
+    setIsSubmitting(false)
     setIsSuccess(false)
   }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    if (isSubmitting) {
+      return
+    }
 
     const nextErrors = validateForm(values)
 
@@ -201,26 +217,21 @@ export function ContactSection() {
 
     try {
       const formData = new FormData()
+      formData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? '')
+      formData.append('subject', 'New inquiry from daniel-wang-portfolio')
       formData.append('name', values.name.trim())
       formData.append('email', values.email.trim())
       formData.append('message', values.message.trim())
-      formData.append('_subject', 'New inquiry from daniel-wang-portfolio')
-      formData.append('_template', 'table')
-      formData.append('_captcha', 'false')
-      formData.append('_replyto', values.email.trim())
 
       const response = await fetch(formEndpoint, {
         method: 'POST',
-        headers: {
-          Accept: 'application/json',
-        },
         body: formData,
       })
-      const result = (await response.json().catch(() => null)) as FormSubmitResponse | null
-      const isSuccessful = result?.success === true || result?.success === 'true'
 
-      if (!response.ok || !isSuccessful) {
-        throw new Error(result?.message || 'The contact request could not be sent.')
+      const result = await response.json() as { success?: boolean; message?: string }
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'The contact request could not be sent.')
       }
 
       setIsSuccess(true)
@@ -291,9 +302,11 @@ export function ContactSection() {
                 <ContactSuccessState animationData={successAnimationData} onReset={resetForm} />
               ) : (
                 <ContactForm
+                  action={formEndpoint}
                   errorMessage={errorMessage}
                   errors={errors}
                   isSubmitting={isSubmitting}
+                  method="post"
                   onChange={updateField}
                   onSubmit={handleSubmit}
                   values={values}

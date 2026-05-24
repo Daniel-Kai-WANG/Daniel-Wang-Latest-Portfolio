@@ -11,9 +11,11 @@ type ContactFormValues = {
 type ContactFormErrors = Partial<Record<keyof ContactFormValues, string>>
 
 type ContactFormProps = {
+  action: string
   errorMessage: string | null
   errors: ContactFormErrors
   isSubmitting: boolean
+  method: 'post'
   onChange: (field: keyof ContactFormValues, value: string) => void
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
   values: ContactFormValues
@@ -40,9 +42,11 @@ function FieldError({ message }: { message?: string }) {
 }
 
 export function ContactForm({
+  action,
   errorMessage,
   errors,
   isSubmitting,
+  method,
   onChange,
   onSubmit,
   values,
@@ -50,7 +54,15 @@ export function ContactForm({
   const { theme } = useTheme()
 
   return (
-    <form noValidate onSubmit={onSubmit} className="grid gap-4">
+    <form
+      noValidate
+      action={action}
+      method={method}
+      onSubmit={onSubmit}
+      className="grid gap-4"
+    >
+      <input type="hidden" name="access_key" value={import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? ''} />
+      <input type="hidden" name="subject" value="New inquiry from daniel-wang-portfolio" />
       <div className="grid gap-4 md:grid-cols-2">
         <label className={fieldGroupClassName}>
           <span className="text-sm font-semibold text-[var(--color-text)]">Your Name or Company</span>
@@ -133,7 +145,7 @@ export function ContactForm({
           style={getPrimaryCtaStyle(theme)}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Connecting...' : 'Contact Right Now'}
+          {isSubmitting ? 'Sending...' : 'Contact Right Now'}
         </button>
       </div>
     </form>
