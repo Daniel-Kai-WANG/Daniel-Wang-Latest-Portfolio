@@ -2,34 +2,37 @@
 
 ## Solution
 
-This portfolio uses the FormSubmit AJAX endpoint so the contact form can send email without redirecting away from the current page.
+This portfolio uses [Web3Forms](https://web3forms.com) for contact form submissions. The form uses a standard HTML form POST with a `redirect` parameter back to the site, so the contact form can send email without requiring a backend.
 
 Default behaviour:
 
-- The app falls back to `https://formsubmit.co/ajax/kaiwang2027@gmail.com`
-- This keeps the current page in place and lets the UI show loading, success, and error states
+- The form posts to `https://api.web3forms.com/submit`
+- After a successful submission, Web3Forms redirects back to the site with `?contact=success#contact`
+- The success state is restored via the URL query parameter
 
-Recommended behaviour:
+Required setup:
 
-1. Create or confirm the FormSubmit destination for `kaiwang2027@gmail.com`.
-2. If FormSubmit gives you a custom endpoint token, add it to a local `.env` file:
+1. Go to [web3forms.com](https://web3forms.com) and create a free account.
+2. Verify your email address and get your access key.
+3. Add the access key to a local `.env` file:
 
 ```bash
-VITE_FORMSUBMIT_ENDPOINT=https://formsubmit.co/ajax/your-formsubmit-endpoint
+VITE_WEB3FORMS_ACCESS_KEY=your-access-key-here
 ```
 
-3. Restart the dev server after updating `.env`.
+4. Restart the dev server after updating `.env`.
 
 ## Notes
 
-- The first live submission to a new FormSubmit destination may require email confirmation.
-- The client checks both the HTTP status and the returned `success` field because FormSubmit can return HTTP `200` with a logical failure message.
+- The free plan allows 250 submissions per month.
+- The form uses a standard browser POST — no CORS issues.
+- The `redirect` parameter tells Web3Forms where to send the user after a successful submission.
+- The access key is public in the client-side bundle (this is expected and safe for Web3Forms).
 - No API keys, private tokens, or secrets are stored in this repo.
-- The recipient email is already public in the portfolio contact section, so the fallback endpoint does not introduce a new secret.
-- Do not point `VITE_FORMSUBMIT_ENDPOINT` at a temporary localhost mock endpoint unless that local service is running. A stale local override will fail in-browser.
 
 ## Updating Later
 
-- To change the destination, update the email entry in [src/data/profile.ts](/Users/danielwang/Projects/code/daniel-wang-workflow-portfolio-ai-tech-contact/src/data/profile.ts).
-- To move away from the fallback email-based endpoint, update `VITE_FORMSUBMIT_ENDPOINT` in your local `.env`.
-- If a resume PDF is added later, replace the placeholder in [src/components/sections/contact/ContactActionCards.tsx](/Users/danielwang/Projects/code/daniel-wang-workflow-portfolio-ai-tech-contact/src/components/sections/contact/ContactActionCards.tsx).
+- To change the Web3Forms endpoint, set `VITE_CONTACT_FORM_ENDPOINT` in your local `.env`.
+- To change the email destination, update your Web3Forms account settings.
+- If a resume PDF is added later, replace the placeholder in `src/components/sections/contact/ContactActionCards.tsx`.
+
