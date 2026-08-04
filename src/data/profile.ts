@@ -2,6 +2,8 @@ import type { Profile } from '../types/content'
 
 export const profileBadgeRoles = ['Full-Stack Developer', 'CMS Builder', 'AI Workflow Builder']
 
+const resumeBaseUrl = `${import.meta.env.BASE_URL}resumes/`
+
 export const profile: Profile = {
   name: 'Daniel Wang',
   badge: profileBadgeRoles.join(' · '),
@@ -58,31 +60,31 @@ export const profile: Profile = {
     {
       label: 'Web Developer',
       role: 'Broader web delivery focus',
-      href: '/resumes/Daniel_Wang_Web_Developer_Resume.pdf',
+      href: `${resumeBaseUrl}Daniel_Wang_Web_Developer_Resume.pdf`,
       fileName: 'Daniel_Wang_Web_Developer_Resume.pdf',
     },
     {
       label: 'Full Stack Developer',
       role: 'End-to-end delivery focus',
-      href: '/resumes/Daniel_Wang_Full_Stack_Developer_Resume.pdf',
+      href: `${resumeBaseUrl}Daniel_Wang_Full_Stack_Developer_Resume.pdf`,
       fileName: 'Daniel_Wang_Full_Stack_Developer_Resume.pdf',
     },
     {
       label: 'Front End Developer',
       role: 'React UI focus',
-      href: '/resumes/Daniel_Wang_Frontend_Developer_Resume.pdf',
+      href: `${resumeBaseUrl}Daniel_Wang_Frontend_Developer_Resume.pdf`,
       fileName: 'Daniel_Wang_Frontend_Developer_Resume.pdf',
     },
     {
       label: 'CMS Developer',
       role: 'HubSpot / CMS implementation focus',
-      href: '/resumes/Daniel_Wang_CMS_HubSpot_Developer_Resume.pdf',
+      href: `${resumeBaseUrl}Daniel_Wang_CMS_HubSpot_Developer_Resume.pdf`,
       fileName: 'Daniel_Wang_CMS_HubSpot_Developer_Resume.pdf',
     },
     {
       label: 'AI Workflow Developer',
       role: 'Automation / integration focus',
-      href: '/resumes/Daniel_Wang_AI_Workflow_Automation_Developer_Resume.pdf',
+      href: `${resumeBaseUrl}Daniel_Wang_AI_Workflow_Automation_Developer_Resume.pdf`,
       fileName: 'Daniel_Wang_AI_Workflow_Automation_Developer_Resume.pdf',
     },
   ],
